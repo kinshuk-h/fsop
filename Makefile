@@ -1,6 +1,7 @@
 TARGET=		fsop.out
-OBJECTS=	$(wildcard *.cpp *.cxx */*.cpp */*.cxx)
-CXXFLAGS=	-std=c++11 -WAll -Wextra -g
+SOURCES=	$(wildcard *.cpp *.cxx */*.cpp */*.cxx)
+OBJECTS=    $(SOURCES:.cpp=.o)
+CXXFLAGS=	-std=c++11 -Wall -Wextra -g
 
 .PHONY: clean
 
