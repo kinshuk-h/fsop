@@ -1,17 +1,27 @@
-TARGET=		fsop.out
-SOURCES=	$(wildcard *.cpp *.cxx */*.cpp */*.cxx)
-OBJECTS=    $(SOURCES:.cpp=.o)
-CXXFLAGS=	-std=c++11 -Wall -Wextra -g
+FIND := F:/msys64/usr/bin/find.exe
+
+TARGET		:=	fsop.out
+SOURCES		:=	$(shell $(FIND) -type f -name "*.cpp")
+INCLUDEDIRS	:=	./include
+LIBDIRS		:=	./lib
+OBJECTS		:=	$(SOURCES:src/%.cpp=lib/%.o)
+CXXFLAGS	:=	-std=c++17 -Wall -Wextra -g
+CC          :=	g++
+
+$(TARGET): $(OBJECTS)
+	@echo -n "[>] "
+	$(CC) $(LIBDIRS:%=-L%) $(LDFLAGS) $^ -o $@
+
+lib/%.o: src/%.cpp $(INCLUDEDIRS)
+	@echo -n "[>] "
+	$(CC) $(CXXFLAGS) $(INCLUDEDIRS:%=-I%) -c $< -o $@
+
+.PHONY: run
+run: $(TARGET)
+	@$(TARGET) $(args)
 
 .PHONY: clean
-
-${TARGET}: ${OBJECTS}
-	${CC} ${LDFLAGS} $^ -o $@
-
-%.o: %.cpp
-	${CC} ${CXXFLAGS} -c $^ -o $@
-
 clean:
-	@echo -n "[>] Removing ${TARGET} & intermediate object files ($(OBJECTS)) ... "
-	@rm -rf ${TARGET} ${OBJECTS}
+	@echo -n "[>] Removing $(TARGET) & intermediate object files ($(OBJECTS)) ... "
+	@rm -rf $(TARGET) $(OBJECTS)
 	@echo "done"
