@@ -13,11 +13,24 @@
   ```
 - Information about usage, flags and options can also be accessed by executing ``` ./fsop --help ``` on a terminal.
 
+## Examples
+
+- Create a new regular file, named `file.txt` (simple creation, no data written)
+
+## System Call Usage
+
+| Task | System Call(s) Used |
+|---|---|
+| Create New Files | `creat`, `mknod` |
+| Access Existing Files | `open`, `read`, `write`, `lseek`, `close` |
+| Manipulate the Inode | `chdir`, `chown`, `chmod`, `stat` |
+| Advanced System Calls | `dup` (`dup2`), `pipe` |
+
 ## Building
 
 - ### Prerequisites
   The following software is required prior compilation of the source:
-  - GNU C++ Compiler (g++), version 4.9 or newer, or any equivalent C++ compiler with support for C++11.
+  - GNU C++ Compiler (g++) version 7 or newer, or any equivalent C++ compiler with support for C++17.
   - GNU Make or equivalent to execute commands from makefiles (optional, recommended). See notes for a workaround for compilation without Make.
 - ### Compilation
   - Prior to compilation, clean up any remaining object and executable files from previously incomplete builds, by running ```make clean```.
