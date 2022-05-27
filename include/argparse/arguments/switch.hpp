@@ -2,6 +2,7 @@
 #define ARGPARSE_SWITCH_HPP_INCLUDED
 
 #include "argparse/common.hpp"
+#include "argparse/arguments/argument.hpp"
 
 namespace argparse
 {
@@ -35,7 +36,9 @@ namespace argparse
             typename DestinationType = std::nullptr_t,
             typename DefaultValueType = std::nullptr_t,
             typename DescriptionType = std::nullptr_t,
-            typename NegatedType = std::nullptr_t
+            typename NegatedType = std::nullptr_t,
+            typename ChoicesType = std::nullptr_t,
+            typename TransformType = std::nullptr_t
         >
         Switch(
             NameType name = nullptr,
@@ -43,8 +46,30 @@ namespace argparse
             DestinationType dest = nullptr,
             DefaultValueType defaults = nullptr,
             DescriptionType help = nullptr,
-            NegatedType negated = nullptr
-        );
+            NegatedType negated = nullptr,
+            ChoicesType choices = nullptr,
+            TransformType transform = nullptr
+        )
+        : argparse::Argument(
+            name, alias, dest, defaults,
+            help, negated, choices, transform
+        )
+        {
+            _negated = pick_if<types::Negated>(
+                arguments::defaults::default_negated,
+                name, alias, dest, defaults, help, negated, choices, transform
+            ).get();
+            _required = false;
+            if(not _defaults.has_value())
+                _defaults = _negated;
+            _arity = 0;
+        }
+
+        std::string usage()  const noexcept override;
+        std::string descriptor()  const noexcept override;
+
+    protected:
+        bool _negated = false;
     };
 }
 

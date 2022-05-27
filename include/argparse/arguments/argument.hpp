@@ -1,6 +1,8 @@
 #ifndef ARGPARSE_ARGUMENT_HPP_INCLUDED
 #define ARGPARSE_ARGUMENT_HPP_INCLUDED
 
+#include <stdexcept> // std::invalid_argument
+
 #include "../common.hpp"
 
 namespace argparse
@@ -30,6 +32,9 @@ namespace argparse
          * @tparam DefaultValueType Placeholder type for named arguments.
          * @tparam DescriptionType Placeholder type for named arguments.
          * @tparam ArityType Placeholder type for named arguments.
+         * @tparam ChoicesType Placeholder type for named arguments.
+         * @tparam TransformType Placeholder type for named arguments.
+         * @tparam RequiredType Placeholder type for named arguments.
          *
          * @param name The name of the argument to display.
          * @param alias Alias for the argument (default="").
@@ -37,6 +42,9 @@ namespace argparse
          * @param defaults Default value for the argument.
          * @param help Brief description about the argument (default="").
          * @param arity Number of values to be stored for the argument (default=1).
+         * @param choices Possible choices for the argument's values.
+         * @param transform Transformation to apply over argument values.
+         * @param required Whether the option is to be enforced as required.
          */
         template<
             typename NameType = std::nullptr_t,
@@ -44,7 +52,10 @@ namespace argparse
             typename DestinationType = std::nullptr_t,
             typename DefaultValueType = std::nullptr_t,
             typename DescriptionType = std::nullptr_t,
-            typename ArityType = std::nullptr_t
+            typename ArityType = std::nullptr_t,
+            typename ChoicesType = std::nullptr_t,
+            typename TransformType = std::nullptr_t,
+            typename RequiredType = std::nullptr_t
         >
         Argument(
             NameType name = nullptr,
@@ -52,15 +63,115 @@ namespace argparse
             DestinationType dest = nullptr,
             DefaultValueType defaults = nullptr,
             DescriptionType help = nullptr,
-            ArityType arity = nullptr
-        );
+            ArityType arity = nullptr,
+            ChoicesType choices = nullptr,
+            TransformType transform = nullptr,
+            RequiredType required = nullptr
+        )
+        {
+            _name = pick_if<types::Name>(
+                arguments::defaults::default_name,
+                name, alias, dest, defaults, help, arity
+            ).get();
+            if(_name.empty())
+                throw std::invalid_argument("Argument::Argument(): missing value for name");
+            _alias = pick_if<types::Alias>(
+                arguments::defaults::default_alias,
+                name, alias, dest, defaults, help,
+                arity, choices, transform, required
+            ).get();
+            _destination = pick_if<types::Destination>(
+                arguments::defaults::default_dest,
+                name, alias, dest, defaults, help,
+                arity, choices, transform, required
+            ).get();
+            if(_destination.empty()) _destination = _name;
+            _defaults = pick_if<types::DefaultValue>(
+                arguments::defaults::default_value,
+                name, alias, dest, defaults, help,
+                arity, choices, transform, required
+            ).get();
+            _description = pick_if<types::Help>(
+                arguments::defaults::default_help,
+                name, alias, dest, defaults, help,
+                arity, choices, transform, required
+            ).get();
+            _arity = pick_if<types::Arity>(
+                arguments::defaults::default_arity,
+                name, alias, dest, defaults, help,
+                arity, choices, transform, required
+            ).get();
+            _choices = pick_if<types::Choices>(
+                arguments::defaults::default_choices,
+                name, alias, dest, defaults, help,
+                arity, choices, transform, required
+            ).get();
+            _transform = pick_if<types::Transform>(
+                arguments::defaults::default_transform,
+                name, alias, dest, defaults, help,
+                arity, choices, transform, required
+            ).get();
+        }
 
+        virtual std::string usage() const noexcept = 0;
+        virtual std::string descriptor() const noexcept = 0;
 
+        virtual ~Argument() {}
 
-    private:
+        // The name of the argument to display.
+        const std::string& name         () const noexcept { return _name ; }
+        // Alias for the argument (default="").
+        const std::string& alias        () const noexcept { return _alias; }
+        // Brief description about the argument (default="").
+        const std::string& help         () const noexcept { return _description; }
+        // Destination name for the argument in the parsed table (default=name).
+        const std::string& destination  () const noexcept { return _destination; }
+        // Number of values to be stored for the argument (default=1).
+        int                arity        () const noexcept { return _arity; }
+        // Default value for the argument.
+        const value_type&  default_value() const noexcept { return _defaults; }
+        // Whether the argument is to be enforced as required.
+        bool               required     () const noexcept { return _required; }
+        // Possible choices for the argument's values.
+        const auto&        choices      () const noexcept { return _choices; }
+        // Transformation to apply over argument values.
+        const auto&        transform    () const noexcept { return _transform; }
+
+        // Sets the name of the argument to display.
+        Argument& name         (const std::string& _name       ) noexcept
+        { this->_name = _name; return *this; }
+        // Sets the alias for the argument.
+        Argument& alias        (const std::string& _alias      ) noexcept
+        { this->_alias = _alias; return *this; }
+        // Sets the brief description about the argument.
+        Argument& help         (const std::string& _description) noexcept
+        { this->_description = _description; return *this; }
+        // Sets the destination name for the argument in the parsed table.
+        Argument& destination  (const std::string& _destination) noexcept
+        { this->_destination = _destination; return *this; }
+        // Sets the number of values to be stored for the argument.
+        Argument& arity        (int                _arity      ) noexcept
+        { this->_arity = _arity; if(_arity == 0) this->required(false); return *this; }
+        // Sets the default value for the argument.
+        Argument& default_value(const value_type&  _defaults   ) noexcept
+        { this->_defaults = _defaults; return *this; }
+        // Sets whether the argument is to be enforced as required.
+        Argument& required     (bool               _required   ) noexcept
+        { this->_required = _required; return *this; }
+        // Sets the possible choices for the argument's values.
+        Argument& choices      (const std::optional<std::vector<std::string_view>>& _choices) noexcept
+        { this->_choices = _choices; return *this; }
+        // Sets the transformation to apply over argument values.
+        Argument& transform    (const std::optional<std::function<std::any(value_type)>>& _transform) noexcept
+        { this->_transform = _transform; return *this; }
+
+        // Whether the argument is a positional argument.
+        const bool positional = false;
+    protected:
         std::string _name, _alias, _description, _destination;
-        int _arity = 0;
-        value_type _defaults;
+        int _arity = 0; value_type _defaults; bool _required;
+        std::optional<std::vector<std::string_view>> _choices;
+        std::optional<std::function<std::any(value_type)>> _transform;
     };
 }
 

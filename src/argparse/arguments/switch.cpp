@@ -1,27 +1,37 @@
 #include "argparse/arguments/switch.hpp"
 
-template<
-    using NameType = std::nullptr_t,
-    using AliasType = std::nullptr_t,
-    using DestinationType = std::nullptr_t,
-    using DefaultValueType = std::nullptr_t,
-    using DescriptionType = std::nullptr_t,
-    using NegatedType = std::nullptr_t
->
-argparse::Switch::Switch(
-    NameType name = nullptr,
-    AliasType alias = nullptr,
-    DestinationType dest = nullptr,
-    DefaultValueType defaults = nullptr,
-    DescriptionType help = nullptr,
-    NegatedType negated = nullptr
-) : argparse::Argument(name, alias, dest, defaults, help, negated)
+#include <cctype>       // std::isalpha
+#include <algorithm>    // std::min, std::swap
+
+std::string argparse::Switch::usage() const noexcept
 {
-    _negated = pick_if<types::Negated>(
-        arguments::defaults::negated,
-        name, alias, dest, defaults, help, negated
-    )
-    if(not _defaults.has_value())
-        _defaults = _negated;
-    _arity = 0;
+    if(not _alias.empty() and _alias.size() < _name.size())
+        return (_alias.size() == 1 ? "[-" : "[--") + _alias + "]";
+    return (_name.size() == 1 ? "[-" : "[--") + _name + "]";
+}
+
+std::string argparse::Switch::descriptor() const noexcept
+{
+    std::string_view nm1 = _name, nm2 = _alias;
+    if(nm1.size() > nm2.size()) std::swap(nm1, nm2);
+
+    std::string _descriptor = "\t";
+    if(not nm1.empty())
+    {
+        _descriptor += (nm1.size() == 1 ? "-" : "--");
+        _descriptor += nm1; _descriptor += " / ";
+    }
+    _descriptor += (nm2.size() == 1 ? "-" : "--");
+    _descriptor += nm2; _descriptor += "\t\t";
+
+    size_t start = 0, end = std::min(40ULL, _description.size());
+    while(start < _description.size())
+    {
+        while(std::isalnum(_description[end])) end--;
+        _descriptor.append(_description, start, end-start+1);
+        _descriptor += "\n\t\t\t\t";
+        start = end+1; end = std::min(end+40, _description.size());
+    }
+
+    return _descriptor;
 }

@@ -15,7 +15,15 @@
 
 ## Examples
 
-- Create a new regular file, named `file.txt` (simple creation, no data written)
+- Create a new regular file, named `file.txt` (simple creation, no data written):
+```bash
+    ./fsop.out create --regular file.txt --perms ugo+rwx
+```
+- Read the contents of the file `myfile.txt` (provided it exists):
+```bash
+    ./fsop.out read myfile.txt
+```
+- 
 
 ## System Call Usage
 
