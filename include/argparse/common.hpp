@@ -23,6 +23,8 @@
 #include <vector>      // std::vector
 #include <memory>      // std::unique_ptr
 #include <ostream>     // std::ostream
+#include <sstream>     // std::stringstream
+#include <iomanip>     // std::setw
 #include <variant>     // std::variant
 #include <optional>    // std::optional
 #include <algorithm>   // std::min, std::swap, std::transform

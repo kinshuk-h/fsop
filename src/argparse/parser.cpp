@@ -11,28 +11,29 @@ std::string argparse::SubparserSet::usage() const noexcept
 
 std::string argparse::SubparserSet::descriptor(int tty_column_count) const noexcept
 {
-    std::string choices;
+    std::stringstream _descriptor; std::string choices;
     for(const auto& [ name, _ ] : _parsers)
     { choices.push_back(','); choices += name; }
     if(not choices.empty()) { choices[0] = '{'; choices.push_back('}'); };
 
-    std::string _descriptor = "\t" + choices;
+    _descriptor << "  " << choices;
     for(const auto& [ name, parser ] : _parsers)
     {
-        _descriptor += "\n\t\t";
-        _descriptor += name + "\t\t";
+        _descriptor << "\n    " << std::setw(tty_column_count / 3) << name << ' ';
+        if(name.size() > (tty_column_count / 3))
+            _descriptor << '\n' << std::setw(tty_column_count / 3) << ' ' << ' ';
         auto _description = parser->description();
-        size_t start = 0, end = std::min(40ULL, _description.size());
+        size_t start = 0, end = std::min((2ULL * tty_column_count) / 3, _description.size()-1);
         while(start < _description.size())
         {
-            while(std::isalnum(_description[end])) end--;
-            _descriptor.append(_description, start, end-start+1);
-            _descriptor += "\n\t\t\t\t";
-            start = end+1; end = std::min(end+40, _description.size());
+            while(end > start and (not std::isspace(_description[end]) or _description[end] != '-')) end--;
+            for(size_t i=start; i<end-start+1; ++i) _descriptor << _description[i];
+            _descriptor << '\n' << std::setw(tty_column_count / 3) << ' ' << ' ';
+            start = end+1; end = std::min(end + (2ULL * tty_column_count) / 3, _description.size()-1);
         }
     }
 
-    return _descriptor;
+    return _descriptor.str();
 }
 
 argparse::Argument::range::iterator argparse::SubparserSet::parse_args(
