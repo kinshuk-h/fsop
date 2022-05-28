@@ -1,11 +1,24 @@
-#ifndef UTILITIES_HPP_INCLUDED
-#define UTILITIES_HPP_INCLUDED
+/**
+ * @file utilities.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines common utility classes and functions, such as those for named arguments.
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
+
+#ifndef ARGPARSE_UTILITIES_HPP_INCLUDED
+#define ARGPARSE_UTILITIES_HPP_INCLUDED
 
 #include <tuple>       // std::make_tuple, std::get
 #include <type_traits> // std::is_disjunction_v
 
 /**
  * @brief Generates Named Types for use in arguments of functions to better elaborate the context.
+ *
+ * For motivation and explanation, refer
+ * @see [the corresponding blog post on FluentCpp](https://www.fluentcpp.com/2016/12/08/strong-types-for-strong-interfaces/)
  *
  * @tparam ValueType The type being wrapped internally.
  * @tparam Descriptor A unique type to disambiguate the type from other types.
@@ -15,8 +28,11 @@ class NamedType
 {
     ValueType value_;
 public:
+    using value_type = ValueType;
+
     constexpr explicit NamedType(ValueType const& value) : value_(value) {}
-    constexpr explicit NamedType(ValueType&& value)      : value_(std::move(value)) {}
+    template<typename VT = ValueType, typename = std::enable_if_t<!std::is_reference_v<VT>, std::nullptr_t>>
+    constexpr explicit NamedType(ValueType&& value) : value_(std::move(value)) {}
     constexpr ValueType&       get()       { return value_; }
     constexpr const ValueType& get() const { return value_; }
 
@@ -84,4 +100,4 @@ constexpr TypeToPick pick_if(const TypeToPick& default_value, Types&&... args)
     return default_value;
 }
 
-#endif // UTILITIES_HPP_INCLUDED
+#endif // ARGPARSE_UTILITIES_HPP_INCLUDED

@@ -1,3 +1,14 @@
+/**
+ * @file switch.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines an argument subtype for switch arguments, which may be used to
+ *        represent flags for boolean or constant values.
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #ifndef ARGPARSE_SWITCH_HPP_INCLUDED
 #define ARGPARSE_SWITCH_HPP_INCLUDED
 
@@ -60,13 +71,30 @@ namespace argparse
                 name, alias, dest, defaults, help, negated, choices, transform
             ).get();
             _required = false;
-            if(not _defaults.has_value())
-                _defaults = _negated;
-            _arity = 0;
+            _defaults = _negated;
+            _arity    = 0;
         }
 
-        std::string usage()  const noexcept override;
-        std::string descriptor()  const noexcept override;
+        // Delete control over optionality of a switch argument.
+        Argument& required(bool _required) noexcept = delete;
+        // Delete control over arity of a switch argument.
+        Argument& arity(int _arity) noexcept = delete;
+        // Delete control over choices of a switch argument.
+        Argument& choices(const std::optional<std::vector<std::string_view>>& _choices) noexcept = delete;
+
+        std::string usage     ()                           const noexcept override;
+        std::string descriptor(int tty_column_count = 60)  const noexcept override;
+        /**
+         * @brief Creates a copy of the argument as a unique_ptr for polymorphic usage.
+         */
+        std::unique_ptr<Argument> clone() const override
+        {
+            return std::make_unique<Switch>(*this);
+        }
+        range::iterator parse_args(
+            range::iterator begin, range::iterator end,
+            types::result_map& values
+        ) const override;
 
     protected:
         bool _negated = false;

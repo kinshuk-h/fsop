@@ -1,3 +1,12 @@
+/**
+ * @file optional.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines an argument subtype for optional arguments.
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
 #ifndef ARGPARSE_OPTIONAL_HPP_INCLUDED
 #define ARGPARSE_OPTIONAL_HPP_INCLUDED
 
@@ -6,7 +15,7 @@
 namespace argparse
 {
     /**
-     * @brief Represents am optional argument, which can have arbitrary arity
+     * @brief Represents an optional argument, which can have arbitrary arity
      *        and is specified with a flag.
      *
      */
@@ -62,15 +71,26 @@ namespace argparse
             arity, choices, transform, required
         )
         {
-            _required = pick_if<types::Required>(
+            this->required ( pick_if<types::Required>(
                 types::Required(false),
                 name, alias, dest, defaults, help,
                 arity, choices, transform, required
-            ).get();
+            ).get() );
         }
 
         std::string usage() const noexcept override;
-        std::string descriptor() const noexcept override;
+        std::string descriptor(int tty_column_count = 60) const noexcept override;
+        /**
+         * @brief Creates a copy of the argument as a unique_ptr for polymorphic usage.
+         */
+        std::unique_ptr<Argument> clone() const override
+        {
+            return std::make_unique<Optional>(*this);
+        }
+        range::iterator parse_args(
+            range::iterator begin, range::iterator end,
+            types::result_map& values
+        ) const override;
     };
 }
 

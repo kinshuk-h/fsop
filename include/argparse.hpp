@@ -1,3 +1,13 @@
+/**
+ * @file argparse.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines a module for parsing command-line arguments.
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #ifndef ARGPARSE_HPP_INCLUDED
 #define ARGPARSE_HPP_INCLUDED
 

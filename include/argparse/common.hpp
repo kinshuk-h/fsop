@@ -1,34 +1,66 @@
+/**
+ * @file common.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines common constants and header includes for use throughout the argparse module.
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #ifndef ARGPARSE_COMMON_HPP_INCLUDED
 #define ARGPARSE_COMMON_HPP_INCLUDED
 
 #include "utilities.hpp"
 
+// Standardized C-Header Units
+#include <cctype>       // std::isalpha, std::toupper
+#include <cstdlib>      // std::exit
+
+// C++ Header Units
 #include <any>         // std::any
 #include <string>      // std::string
 #include <vector>      // std::vector
+#include <memory>      // std::unique_ptr
+#include <ostream>     // std::ostream
 #include <variant>     // std::variant
 #include <optional>    // std::optional
+#include <algorithm>   // std::min, std::swap, std::transform
 #include <functional>  // std::function
 #include <string_view> // std::string_view
 
+/**
+ * @brief Exposes components for parsing command-line arguments.
+ *
+ * This namespace exposes classes for the parser and arguments and their subtypes.
+ * Further it provides constants for emulating named arguments across the constructors
+ * of the respective classes.
+ */
 namespace argparse
 {
     /** @brief Aliases for strong types for arguments. */
     namespace types
     {
-        using ArgValueType = std::optional<std::variant<bool, std::string, std::vector<std::string>>>;
-        using Name         = NamedType<std::string_view,                                     struct NameTag>;
-        using Help         = NamedType<std::string_view,                                     struct HelpTag>;
-        using Alias        = NamedType<std::string_view,                                     struct AliasTag>;
-        using Destination  = NamedType<std::string_view,                                     struct DestinationTag>;
-        using Arity        = NamedType<int,                                                  struct ArityTag>;
-        using DefaultValue = NamedType<ArgValueType,                                         struct DefaultValueTag>;
-        using Choices      = NamedType<std::optional<std::vector<std::string_view>>,         struct ChoicesTag>;
-        using Transform    = NamedType<std::optional<std::function<std::any(ArgValueType)>>, struct TransformTag>;
-        using Required     = NamedType<bool,                                                 struct RequiredTag>;
-        using Negated      = NamedType<bool,                                                 struct NegatedTag>;
-        using Description  = NamedType<std::string_view,                                     struct DescriptionTag>;
-        using Epilog       = NamedType<std::string_view,                                     struct EpilogTag>;
+        // General type for untransformed argument values.
+        using argument_value_type = std::variant<bool, std::string, std::vector<std::string>>;
+        // General type for the argument value transformation functions.
+        using transform_function  = std::function<std::any(const argument_value_type&)>;
+        // Type of the map holding the parsed argument values.
+        using result_map          = std::unordered_map<std::string, std::any>;
+
+        using Name         = NamedType<std::string_view,                             struct NameTag>;
+        using Help         = NamedType<std::string_view,                             struct HelpTag>;
+        using Alias        = NamedType<std::string_view,                             struct AliasTag>;
+        using Destination  = NamedType<std::string_view,                             struct DestinationTag>;
+        using Arity        = NamedType<int,                                          struct ArityTag>;
+        using DefaultValue = NamedType<std::optional<argument_value_type>,           struct DefaultValueTag>;
+        using Choices      = NamedType<std::optional<std::vector<std::string_view>>, struct ChoicesTag>;
+        using Transform    = NamedType<std::optional<transform_function>,            struct TransformTag>;
+        using Required     = NamedType<bool,                                         struct RequiredTag>;
+        using Negated      = NamedType<bool,                                         struct NegatedTag>;
+        using Description  = NamedType<std::string_view,                             struct DescriptionTag>;
+        using Epilog       = NamedType<std::string_view,                             struct EpilogTag>;
+        using OutputStream = NamedType<std::ostream&,                                struct OutputStreamTag>;
     }
 
     /** @brief Argument variables for use as named arguments. */
@@ -58,6 +90,8 @@ namespace argparse
         inline types::Description::Argument description;
         // Text to display after the argument help.
         inline types::Epilog::Argument epilog;
+        // Stream to display help and usage information in.
+        inline types::OutputStream::Argument output_stream;
 
         /** Default values for arguments. */
         namespace defaults
@@ -74,6 +108,32 @@ namespace argparse
             inline auto default_transform = types::Transform(std::nullopt);
             inline auto default_choices   = types::Choices(std::nullopt);
             inline auto default_value     = types::DefaultValue(std::nullopt);
+        }
+    }
+
+    /** @brief Transformation functions for common types. */
+    inline namespace transforms
+    {
+        /**
+         * @brief Maps the variant value to an integral type.
+         *
+         * @tparam Integral Integral type to map to.
+         * @param value Variant value to map from.
+         * @return Integral The integral value post mapping.
+         */
+        template<typename Integral, typename = std::enable_if_t<std::is_integral_v<Integral>, std::nullptr_t>>
+        Integral to_integral(const types::argument_value_type& value)
+        {
+            if(std::is_signed_v<Integral>)
+            {
+                auto numval = std::stoll(std::get<1>(value));
+                return static_cast<Integral>(numval);
+            }
+            else
+            {
+                auto numval = std::stoull(std::get<1>(value));
+                return static_cast<Integral>(numval);
+            }
         }
     }
 }

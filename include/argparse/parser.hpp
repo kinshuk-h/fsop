@@ -1,20 +1,78 @@
 #ifndef ARGPARSE_PARSER_HPP_INCLUDED
 #define ARGPARSE_PARSER_HPP_INCLUDED
 
-#include <memory> // std::unique_ptr
+#include <iostream>                // std::cout
 
-#include "common.hpp"
-#include "arguments/argument.hpp"
-#include "arguments/positional.hpp"
+#include "common.hpp"              // argparse::types, argparse::arguments
+#include "arguments/argument.hpp"  // argparse::Argument
+#include "arguments/switch.hpp"    // argparse::Switch
 
 namespace argparse
 {
+    class Parser;
+
+    /**
+     * @brief Creates an argument type to hold subparsers as a mutually exclusive group.
+     *
+     *      Subparsers allow splitting of arguments and functionality across subcommands.
+     *      Each subparsers is by itself a parser and is allowed to have its own set of argument objects.
+     *
+     *      The parent parser delegates the parsing of remaining options to the subparser whose name
+     *      appears on the command line.
+     */
+    class SubparserSet : public Argument
+    {
+        std::unordered_map<std::string, std::shared_ptr<Parser>> _parsers;
+
+    public:
+        /**
+         * @brief Construct a new Subparser Set object
+         *
+         * @tparam Parsers Types of parser objects.
+         * @param dest Destination name for the value indicating the selected subparser's name in the parsed table.
+         * @param parsers Parsers to add as subparsers.
+         */
+        template<typename... Parsers>
+        SubparserSet(std::string dest, Parsers&... parsers) : Argument(arguments::name = dest, arguments::dest = dest)
+        {
+            ( (_parsers.emplace(parsers.prog(), &parsers)), ... );
+            _required = true; _positional = true;
+        }
+
+        std::string usage     ()                          const noexcept override;
+        std::string descriptor(int tty_column_count = 60) const noexcept override;
+        /**
+         * @brief Creates a copy of the argument as a unique_ptr for polymorphic usage.
+         */
+        std::unique_ptr<Argument> clone() const override
+        {
+            return std::make_unique<SubparserSet>(*this);
+        }
+        range::iterator parse_args(
+            range::iterator begin, range::iterator end,
+            types::result_map& values
+        ) const override;
+    };
+
+    /**
+     * @brief Represents an argument parser, which can parse argument values from arbitrary ranges
+     * using provided argument objects describing parsing information.
+     *
+     * Objects of this type can hold argument objects (switches, optional & positional arguments) as
+     * well as complex structures such as mutually exclusive groups and subparsers.
+     *
+     * The parser can then parse values for specified arguments from any range specified by
+     * its start and end iterators.
+     *
+     * Further, the parser can generate a standard help description compiling descriptions of
+     * various arguments together.
+     */
     class Parser
     {
-    private:
         std::string _name,
                     _description,
                     _epilog;
+        std::ostream& _out_stream;
 
         std::unordered_map<std::string, std::shared_ptr<Argument>> _optionals;
         std::vector<std::unique_ptr<Argument>> _positionals;
@@ -33,27 +91,41 @@ namespace argparse
         template<
             typename NameType = std::nullptr_t,
             typename DescriptionType = std::nullptr_t,
-            typename EpilogType = std::nullptr_t
+            typename EpilogType = std::nullptr_t,
+            typename OutputStreamType = std::nullptr_t
         >
         Parser(
             NameType name = nullptr,
             DescriptionType description = nullptr,
-            EpilogType epilog = nullptr
+            EpilogType epilog = nullptr,
+            OutputStreamType output_stream = nullptr
+        ) : _out_stream(
+            pick_if<types::OutputStream>(
+                types::OutputStream(std::cout),
+                name, description, epilog, output_stream
+            ).get()
         )
         {
             _name        = pick_if<types::Name>(
                 arguments::defaults::default_name,
-                name, description, epilog
+                name, description, epilog, output_stream
             ).get();
             if(_name.empty()) _name = "program";
             _description = pick_if<types::Description>(
                 arguments::defaults::default_description,
-                name, description, epilog
+                name, description, epilog, output_stream
             ).get();
             _epilog      = pick_if<types::Epilog>(
                 arguments::defaults::default_epilog,
-                name, description, epilog
+                name, description, epilog, output_stream
             ).get();
+
+            add_argument(
+                Switch {
+                    arguments::name = "help", arguments::alias = "h",
+                    arguments::help = "show this help message and exit"
+                }
+            );
         }
 
         /**
@@ -67,26 +139,247 @@ namespace argparse
          */
         Parser& add_argument(Argument&& argument);
 
+        /**
+         * @brief Adds multiple arguments to the parser's table of arguments.
+         *
+         * @tparam Arguments Types for individual argument objects.
+         * @param arguments List of arguments to add.
+         * @return {Parser&} A reference to the current parser object, for chaining method calls.
+         */
         template<typename... Arguments>
-        Parser& add_subparsers(Arguments&&... parsers)
+        Parser& add_arguments(Arguments&&... arguments)
         {
+            (add_argument(std::forward<Arguments>(arguments)), ...);
             return *this;
         }
 
-        template<typename InputIter>
-        void parse_args(InputIter begin, InputIter end)
+        /**
+         * @brief Adds subparsers to the parser's table of arguments.
+         *
+         * Subparsers allow splitting of arguments and functionality across subcommands.
+         * Each subparsers is by itself a parser and is allowed to have its own set of argument objects.
+         *
+         * @tparam Parsers Types for individual parser objects.
+         * @param dest Destination name for the value indicating the name of the selected parser.
+         * @param parsers List of parsers to add.
+         * @return {Parser&} A reference to the current parser object, for chaining method calls.
+         */
+        template<typename... Parsers>
+        Parser& add_subparsers(std::string dest, Parsers&&... parsers)
         {
-
+            add_argument(SubparserSet{ dest, std::forward<Parsers>(parsers)... });
+            return *this;
         }
-        void parse_args(int argc, const char** argv);
-        void parse_args(int argc, char** argv);
+
+        /**
+         * @brief Parses arguments from a given range defined by start and end iterators.
+         *
+         *  This function performs the necessary parsing to bind values for arguments.
+         *  The values corresponding to arguments is returned as an `unordered_map`
+         *  mapping destination names to the `std::any` type for holding values of arbitrary types.
+         *
+         *  This function has a signature similar to those of arguments, which makes this overload
+         *  useful for use with subparsers for parsing parent and child arguments.
+         *
+         * @param begin The iterator to the beginning of the range of arguments.
+         * @param end The iterator to the end of the range of arguments.
+         * @param values Result map to store argument values.
+         *
+         * @return {Argument::range::iterator} iterators to the start
+         *      of the remaining sequence.
+         *
+         * @throws {std::invalid_argument} describes inconsistencies present in the range
+         *      corresponding to argument requirements.
+         */
+        Argument::range::iterator parse_args(
+            Argument::range::iterator begin, Argument::range::iterator end,
+            types::result_map& values
+        )
+        {
+            auto positional_iter = _positionals.begin();
+            auto arg_iter = begin;
+
+            for(; arg_iter != end;)
+            {
+                auto arg_value = *arg_iter;
+                if(not arg_value.empty() and arg_value[0] == '-')
+                {
+                    arg_value = arg_value.substr(1);
+                    if(not arg_value.empty() and arg_value[0] == '-')
+                    {
+                        arg_value = arg_value.substr(1);
+                        auto arg_name = std::string { arg_value.data(), arg_value.size() };
+                        if(auto option = _optionals.find(arg_name); option != _optionals.end())
+                        {
+                            auto argument = option->second;
+                            arg_iter = argument->parse_args(arg_iter, end, values);
+                            // Short-circuit when --help flag present.
+                            if(option->second->name() == "help")
+                            {
+                                _out_stream << help() << "\n";
+                                std::exit(EXIT_SUCCESS);
+                                return arg_iter;
+                            }
+                        }
+                        else
+                        {
+                            throw std::invalid_argument
+                            ( "parse_args(): invalid option: '--" +  arg_name + "'" );
+                        }
+                    }
+                    else
+                    {
+                        for(char abbrev : arg_value)
+                        {
+                            auto abbreviation = std::to_string(abbrev);
+                            if(auto option = _optionals.find(abbreviation); option != _optionals.end())
+                            {
+                                auto argument = option->second;
+                                arg_iter = argument->parse_args(arg_iter, end, values);
+                                // Short-circuit when --help flag present.
+                                if(option->second->name() == "help")
+                                {
+                                    _out_stream << help() << "\n";
+                                    std::exit(EXIT_SUCCESS);
+                                    return arg_iter;
+                                }
+                            }
+                            else
+                            {
+                                throw std::invalid_argument
+                                ( "parse_args(): invalid option: '-" + abbreviation + "'" );
+                            }
+                        }
+                    }
+                }
+                else if(positional_iter != _positionals.end())
+                {
+                    arg_iter = (*positional_iter)->parse_args(arg_iter, end, values);
+                    ++ positional_iter;
+                }
+                else arg_iter = std::next(arg_iter); // Silently ignore arguments without a destination.
+            }
+            while(positional_iter != _positionals.end())
+            {
+                if((*positional_iter)->required())
+                    throw std::invalid_argument
+                    (
+                        "parse_args(): missing value for required argument: " +
+                        (*positional_iter)->name()
+                    );
+                else
+                    values[(*positional_iter)->destination()] = (*positional_iter)->default_value();
+            }
+            for(const auto& [ _, option ] : _optionals)
+            {
+                if(values.find(option->destination()) == values.end())
+                {
+                    if(option->required())
+                        throw std::invalid_argument
+                        (
+                            "parse_args(): missing value for required argument: --" +
+                            option->name()
+                        );
+                    else
+                    {
+                        values[option->destination()] = option->default_value();
+                    }
+                }
+            }
+            return arg_iter;
+        }
+        /**
+         * @brief Parses arguments from a given range defined by start and end iterators.
+         *
+         *  This function performs the necessary parsing to bind values for arguments.
+         *  The values corresponding to arguments is returned as an `unordered_map`
+         *  mapping destination names to the `std::any` type for holding values of arbitrary types.
+         *
+         *  This is an alternate variant of the parse_args function where the map is returned instead
+         *  of the data being saved inside an lvalue argument.
+         *
+         * @tparam InputIter Type of the iterator of the collection. Must satisfy requirements for an input iterator.
+         *
+         * @param begin The iterator to the beginning of the range of arguments.
+         * @param end The iterator to the end of the range of arguments.
+         *
+         * @return {types::result_map} map object containing values for parsed arguments.
+         *
+         * @throws {std::invalid_argument} describes inconsistencies present in the range
+         *      corresponding to argument requirements.
+         */
+        template<typename InputIter>
+        types::result_map parse_args(InputIter begin, InputIter end)
+        {
+            types::result_map values;
+            Argument::range argv { begin, end };
+            parse_args(argv.begin(), argv.end(), values);
+            return values;
+        }
+        /**
+         * @brief Parses a set of arguments from a given argument vector referred by the size
+         *        and pointer to the first element of the vector.
+         *
+         *      This function is a wrapper over the general `parse_args` for arbitrary collections,
+         *      for convenience to use with the argument vector parameters accepted by `main` in the C/C++ standard.
+         *
+         * @param argc the argument count: number of arguments to parse.
+         * @param argv the argument vector: collection of arguments (strings).
+         *
+         * @return {types::result_map} map object containing values for parsed arguments.
+         *
+         * @throws {std::invalid_argument} describes inconsistencies present in the range
+         *      corresponding to argument requirements.
+         */
+        types::result_map parse_args(int argc, const char** argv)
+        {
+            return parse_args(argv+1, argv+argc);
+        }
+        /**
+         * @brief Parses a set of arguments from a given argument vector referred by the size
+         *        and pointer to the first element of the vector.
+         *
+         *      This function is a wrapper over the general `parse_args` for arbitrary collections,
+         *      for convenience to use with the argument vector parameters accepted by `main` in the C/C++ standard.
+         *
+         * @param argc the argument count: number of arguments to parse.
+         * @param argv the argument vector: collection of arguments (strings).
+         *
+         * @return {types::result_map} map object containing values for parsed arguments.
+         *
+         * @throws {std::invalid_argument} describes inconsistencies present in the range
+         *      corresponding to argument requirements.
+         */
+        types::result_map parse_args(int argc, char** argv)
+        {
+            return parse_args(argv+1, argv+argc);
+        }
 
         /**
          * @brief Returns a concise help created using argument descriptors.
          *
+         * @param tty_column_count maximum number of terminal columns (characters) to span (default=60).
+         *
          * @return {std::string} The generated help.
          */
-        std::string help() const noexcept;
+        std::string help(int tty_column_count = 60) const noexcept;
+        /**
+         * @brief Returns a concise help created using argument descriptors.
+         *
+         * @param tty_column_count maximum number of terminal columns (characters) to span (default=60).
+         *
+         * @return {std::string} The generated help.
+         */
+        std::string usage(int tty_column_count = 60) const noexcept;
+
+        // Name of the parser/program to display.
+        const std::string& name       () const noexcept { return _name; }
+        // Name of the parser/program to display.
+        const std::string& prog       () const noexcept { return _name; }
+        // Text to display before the argument help.
+        const std::string& description() const noexcept { return _description; }
+        // Text to display after the argument help.
+        const std::string& epilog     () const noexcept { return _epilog; }
     };
 }
 

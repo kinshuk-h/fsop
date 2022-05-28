@@ -1,3 +1,13 @@
+/**
+ * @file positional.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines an argument subtype for positional arguments.
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #ifndef ARGPARSE_POSITIONAL_HPP_INCLUDED
 #define ARGPARSE_POSITIONAL_HPP_INCLUDED
 
@@ -62,16 +72,27 @@ namespace argparse
             arity, choices, transform, required
         )
         {
-            positional = true;
-            _required = pick_if<types::Required>(
+            _positional = true;
+            this->required ( pick_if<types::Required>(
                 types::Required(true),
                 name, alias, dest, defaults, help,
                 arity, choices, transform, required
-            ).get();
+            ).get() );
         }
 
         std::string usage() const noexcept override;
-        std::string descriptor() const noexcept override;
+        std::string descriptor(int tty_column_count = 60) const noexcept override;
+        /**
+         * @brief Creates a copy of the argument as a unique_ptr for polymorphic usage.
+         */
+        std::unique_ptr<Argument> clone() const override
+        {
+            return std::make_unique<Positional>(*this);
+        }
+        range::iterator parse_args(
+            range::iterator begin, range::iterator end,
+            types::result_map& values
+        ) const override;
     };
 }
 
