@@ -16,21 +16,15 @@ std::string argparse::SubparserSet::descriptor(int tty_column_count) const noexc
     { choices.push_back(','); choices += name; }
     if(not choices.empty()) { choices[0] = '{'; choices.push_back('}'); };
 
-    _descriptor << "  " << choices;
+    std::string::size_type spc_w = (tty_column_count / 3), text_w = tty_column_count - spc_w;
+    _descriptor << "  " << choices << std::left;
     for(const auto& [ name, parser ] : _parsers)
     {
-        _descriptor << "\n    " << std::setw(tty_column_count / 3) << name << ' ';
-        if(name.size() > (tty_column_count / 3))
-            _descriptor << '\n' << std::setw(tty_column_count / 3) << ' ' << ' ';
-        auto _description = parser->description();
-        size_t start = 0, end = std::min((2ULL * tty_column_count) / 3, _description.size()-1);
-        while(start < _description.size())
-        {
-            while(end > start and (not std::isspace(_description[end]) or _description[end] != '-')) end--;
-            for(size_t i=start; i<end-start+1; ++i) _descriptor << _description[i];
-            _descriptor << '\n' << std::setw(tty_column_count / 3) << ' ' << ' ';
-            start = end+1; end = std::min(end + (2ULL * tty_column_count) / 3, _description.size()-1);
-        }
+        _descriptor << "\n    " << name;
+        utils::write_description(
+            _descriptor, parser->description(),
+            tty_column_count, name.size()+4
+        );
     }
 
     return _descriptor.str();
@@ -43,7 +37,10 @@ argparse::Argument::range::iterator argparse::SubparserSet::parse_args(
 {
     std::string arg { begin->data(), begin->size() };
     if(auto parser_it = _parsers.find(arg); parser_it != _parsers.end())
+    {
+        values[destination()] = parser_it->first;
         return parser_it->second->parse_args(std::next(begin), end, values);
+    }
     else
     {
         std::string choice_list; auto it = _parsers.begin();
@@ -64,7 +61,7 @@ argparse::Parser& argparse::Parser::add_argument(Argument&& argument)
         _positionals.push_back(argument.clone());
     else
     {
-        std::shared_ptr<Argument> arg_ptr = std::move(argument.clone());
+        std::shared_ptr<Argument> arg_ptr = argument.clone();
         _optionals[argument.name()] = arg_ptr;
         if(not argument.alias().empty())
             _optionals[argument.alias()] = arg_ptr;
@@ -75,7 +72,7 @@ argparse::Parser& argparse::Parser::add_argument(Argument&& argument)
 
 std::string argparse::Parser::help(int tty_column_count) const noexcept
 {
-    std::string usage = "usage: " + _name, positional_args, optional_args;
+    std::string usage = "usage: " + identifier(), positional_args, optional_args;
 
     for(const auto&[ name, option ] : _optionals)
     {

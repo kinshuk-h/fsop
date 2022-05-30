@@ -1,5 +1,7 @@
 #include "argparse/arguments/positional.hpp"
 
+#include <iostream>
+
 std::string argparse::Positional::usage() const noexcept
 {
     auto start = (_arity == Argument::ZERO_OR_MORE or not _required ? "[" : "");
@@ -19,7 +21,10 @@ std::string argparse::Positional::usage() const noexcept
 
 std::string argparse::Positional::descriptor(int tty_column_count) const noexcept
 {
-    std::string _descriptor = "\t", content, choices;
+    std::string::size_type spc_w = (tty_column_count / 3), text_w = tty_column_count - spc_w;
+
+    std::stringstream _descriptor; _descriptor << "  ";
+    std::string content, choices;
 
     if(_choices.has_value())
     {
@@ -28,22 +33,16 @@ std::string argparse::Positional::descriptor(int tty_column_count) const noexcep
         if(not choices.empty()) { choices[0] = '{'; choices.push_back('}'); }
     }
 
+    content += not choices.empty() ? choices : _name;
+
     if(_arity > 1) { content += " x" + std::to_string(_arity); }
     else if(_arity < 0) { content += "..."; }
 
-    _descriptor += not choices.empty() ? choices : _name;
-    _descriptor += "\t\t";
-
-    size_t start = 0, end = std::min(40ULL, _description.size());
-    while(start < _description.size())
-    {
-        while(std::isalnum(_description[end])) end--;
-        _descriptor.append(_description, start, end-start+1);
-        _descriptor += "\n\t\t\t\t";
-        start = end+1; end = std::min(end+40, _description.size());
-    }
-
-    return _descriptor;
+    utils::write_description(
+         _descriptor << content, _description,
+         tty_column_count, _descriptor.str().size()
+    );
+    return _descriptor.str();
 }
 
 argparse::Argument::range::iterator argparse::Positional::parse_args(

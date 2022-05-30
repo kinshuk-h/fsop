@@ -18,18 +18,19 @@
 #include <cstdlib>      // std::exit
 
 // C++ Header Units
-#include <any>         // std::any
-#include <string>      // std::string
-#include <vector>      // std::vector
-#include <memory>      // std::unique_ptr
-#include <ostream>     // std::ostream
-#include <sstream>     // std::stringstream
-#include <iomanip>     // std::setw
-#include <variant>     // std::variant
-#include <optional>    // std::optional
-#include <algorithm>   // std::min, std::swap, std::transform
-#include <functional>  // std::function
-#include <string_view> // std::string_view
+#include <any>           // std::any
+#include <string>        // std::string
+#include <vector>        // std::vector
+#include <memory>        // std::unique_ptr
+#include <ostream>       // std::ostream
+#include <sstream>       // std::stringstream
+#include <iomanip>       // std::setw
+#include <variant>       // std::variant
+#include <optional>      // std::optional
+#include <algorithm>     // std::min, std::swap, std::transform
+#include <functional>    // std::function
+#include <string_view>   // std::string_view
+#include <unordered_map> // std::unordered_map
 
 /**
  * @brief Exposes components for parsing command-line arguments.
@@ -137,6 +138,18 @@ namespace argparse
                 return static_cast<Integral>(numval);
             }
         }
+    }
+
+    /** @brief Utility functions for use across the module. */
+    inline namespace utils
+    {
+        // TODO: Add documentation.
+        std::ostream& write_description(
+            std::ostream& os,
+            std::string_view description,
+            int tty_columns = 60,
+            std::string::size_type consumed = 0
+		);
     }
 }
 

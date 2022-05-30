@@ -24,7 +24,9 @@ std::string argparse::Optional::usage() const noexcept
 
 std::string argparse::Optional::descriptor(int tty_column_count) const noexcept
 {
-    std::string _descriptor = "\t", content, choices;
+	std::string::size_type spc_w = (tty_column_count / 3), text_w = tty_column_count - spc_w;
+    std::stringstream _descriptor; _descriptor << "  ";
+    std::string content, choices;
 
     std::string_view nm1 = _name, nm2 = _alias;
     if(nm1.size() > nm2.size()) std::swap(nm1, nm2);
@@ -43,22 +45,17 @@ std::string argparse::Optional::descriptor(int tty_column_count) const noexcept
 
     if(not nm1.empty())
     {
-        _descriptor += (nm1.size() == 1 ? "-" : "--");
-        _descriptor += nm1; _descriptor += " " + content + ", ";
+        _descriptor << (nm1.size() == 1 ? "-" : "--");
+        _descriptor << nm1 << ' ' << content << ", ";
     }
-    _descriptor += (nm2.size() == 1 ? "-" : "--");
-    _descriptor += nm2; _descriptor += " " + content + "\t\t";
+    _descriptor << (nm2.size() == 1 ? "-" : "--");
+    _descriptor << nm2 << ' ' << content << "";
 
-    size_t start = 0, end = std::min(40ULL, _description.size());
-    while(start < _description.size())
-    {
-        while(std::isalnum(_description[end])) end--;
-        _descriptor.append(_description, start, end-start+1);
-        _descriptor += "\n\t\t\t\t";
-        start = end+1; end = std::min(end+40, _description.size());
-    }
-
-    return _descriptor;
+    utils::write_description(
+         _descriptor, _description,
+         tty_column_count, _descriptor.str().size()
+    );
+    return _descriptor.str();
 }
 
 argparse::Argument::range::iterator argparse::Optional::parse_args(

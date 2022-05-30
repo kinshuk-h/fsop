@@ -7,6 +7,14 @@
 #include "arguments/argument.hpp"  // argparse::Argument
 #include "arguments/switch.hpp"    // argparse::Switch
 
+static bool is_numeric(std::string_view value)
+{
+    return value.empty() or (
+        (value[0] == '-' or std::isdigit(value[0])) and
+        std::all_of(std::next(value.begin()), value.end(), ::isdigit)
+    );
+}
+
 namespace argparse
 {
     class Parser;
@@ -29,13 +37,16 @@ namespace argparse
          * @brief Construct a new Subparser Set object
          *
          * @tparam Parsers Types of parser objects.
+         * @param parent Parent program parser for the subparsers.
          * @param dest Destination name for the value indicating the selected subparser's name in the parsed table.
          * @param parsers Parsers to add as subparsers.
          */
         template<typename... Parsers>
-        SubparserSet(std::string dest, Parsers&... parsers) : Argument(arguments::name = dest, arguments::dest = dest)
+        SubparserSet(Parser& parent, std::string dest, Parsers&&... parsers)
+        : Argument(arguments::name = dest, arguments::dest = dest)
         {
-            ( (_parsers.emplace(parsers.prog(), &parsers)), ... );
+            ( (_parsers.emplace(parsers.prog(), std::make_unique<Parser>(parsers))), ... );
+            ( parsers.parent(parent), ... );
             _required = true; _positional = true;
         }
 
@@ -76,6 +87,8 @@ namespace argparse
 
         std::unordered_map<std::string, std::shared_ptr<Argument>> _optionals;
         std::vector<std::unique_ptr<Argument>> _positionals;
+
+        Parser* _parent = nullptr;
 
     public:
         /**
@@ -128,6 +141,20 @@ namespace argparse
             );
         }
 
+        // TODO: Add documentation
+        Parser(Parser&& parser) = default;
+
+        Parser(const Parser& parser)
+        : _name(parser._name), _description(parser._description),
+          _epilog(parser._epilog), _out_stream(parser._out_stream),
+          _parent(parser._parent)
+        {
+            for(const auto& positional : parser._positionals)
+                _positionals.push_back(positional->clone());
+            for(const auto& [ name, option ] : parser._optionals)
+                _optionals.emplace(name, option->clone());
+        }
+
         /**
          * @brief Adds a new argument to the parser's table of arguments.
          *
@@ -167,7 +194,9 @@ namespace argparse
         template<typename... Parsers>
         Parser& add_subparsers(std::string dest, Parsers&&... parsers)
         {
-            add_argument(SubparserSet{ dest, std::forward<Parsers>(parsers)... });
+            add_argument(
+                SubparserSet{ *this, dest, std::forward<Parsers>(parsers)... }
+            );
             return *this;
         }
 
@@ -202,7 +231,7 @@ namespace argparse
             for(; arg_iter != end;)
             {
                 auto arg_value = *arg_iter;
-                if(not arg_value.empty() and arg_value[0] == '-')
+                if(not arg_value.empty() and arg_value[0] == '-' && not is_numeric(arg_value))
                 {
                     arg_value = arg_value.substr(1);
                     if(not arg_value.empty() and arg_value[0] == '-')
@@ -211,12 +240,12 @@ namespace argparse
                         auto arg_name = std::string { arg_value.data(), arg_value.size() };
                         if(auto option = _optionals.find(arg_name); option != _optionals.end())
                         {
-                            auto argument = option->second;
+                            const auto& argument = option->second;
                             arg_iter = argument->parse_args(arg_iter, end, values);
                             // Short-circuit when --help flag present.
                             if(option->second->name() == "help")
                             {
-                                _out_stream << help() << "\n";
+                                ostream() << help() << "\n\n";
                                 std::exit(EXIT_SUCCESS);
                                 return arg_iter;
                             }
@@ -231,15 +260,15 @@ namespace argparse
                     {
                         for(char abbrev : arg_value)
                         {
-                            auto abbreviation = std::to_string(abbrev);
+                            auto abbreviation = std::string(1, abbrev);
                             if(auto option = _optionals.find(abbreviation); option != _optionals.end())
                             {
-                                auto argument = option->second;
+                                const auto& argument = option->second;
                                 arg_iter = argument->parse_args(arg_iter, end, values);
                                 // Short-circuit when --help flag present.
                                 if(option->second->name() == "help")
                                 {
-                                    _out_stream << help() << "\n";
+                                    ostream() << help() << "\n\n";
                                     std::exit(EXIT_SUCCESS);
                                     return arg_iter;
                                 }
@@ -373,13 +402,25 @@ namespace argparse
         std::string usage(int tty_column_count = 60) const noexcept;
 
         // Name of the parser/program to display.
-        const std::string& name       () const noexcept { return _name; }
+        const std::string&  name       () const noexcept { return _name; }
         // Name of the parser/program to display.
-        const std::string& prog       () const noexcept { return _name; }
+        const std::string&  prog       () const noexcept { return _name; }
         // Text to display before the argument help.
-        const std::string& description() const noexcept { return _description; }
+        const std::string&  description() const noexcept { return _description; }
         // Text to display after the argument help.
-        const std::string& epilog     () const noexcept { return _epilog; }
+        const std::string&  epilog     () const noexcept { return _epilog; }
+        // Output stream to use for operations.
+        std::ostream&       ostream    () const noexcept { return _parent != nullptr ? _parent->ostream() :  _out_stream; }
+        // Identifier of the parser (fully qualified name with the entire hierarchy)
+        std::string         identifier () const noexcept
+        {
+            return (_parent != nullptr ? (_parent->identifier() + " ").c_str() : "") + _name;
+        }
+        auto                parent     () const noexcept { return _parent; }
+
+        // Sets the parent for the parser, for which the current object acts as a subcommand.
+        Parser& parent(Parser& _parent) noexcept
+        { this->_parent = &_parent; return *this; }
     };
 }
 

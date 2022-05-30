@@ -1,5 +1,5 @@
-FIND	:=	F:/msys64/usr/bin/find.exe
-MKDIR	:=	F:/msys64/usr/bin/mkdir.exe
+FIND	:=	find #F:/msys64/usr/bin/find.exe
+MKDIR	:=	mkdir #F:/msys64/usr/bin/mkdir.exe
 
 # Directory containing source files.
 SRCDIR		:=	src
@@ -21,7 +21,7 @@ DEPS		:=	$(SOURCES:$(SRCDIR)/%.cpp=$(DEPDIR)/%.d)
 # C++ flags to use during compilation.
 CXXFLAGS	:=	-std=c++17 -Wall -Wextra -g
 # Preprocessor flags to use during compilation.
-CPPFLAGS    = -MMD -MP -MF $(@:$(LIBDIR)/%.o=$(DEPDIR)/%.d)
+CPPFLAGS	= -MMD -MP -MF $(@:$(LIBDIR)/%.o=$(DEPDIR)/%.d)
 # C++ compiler to use.
 CXX			:=	g++
 
