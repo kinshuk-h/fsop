@@ -143,13 +143,48 @@ namespace argparse
     /** @brief Utility functions for use across the module. */
     inline namespace utils
     {
-        // TODO: Add documentation.
-        std::ostream& write_description(
-            std::ostream& os,
-            std::string_view description,
-            int tty_columns = 60,
-            std::string::size_type consumed = 0
-		);
+        /**
+         * @brief Joins elements of a collection together to a single range.
+         *
+         * @tparam Range Type of the range. Must provide access to begin and end iterators.
+         * @param range The range/collection of elements to join. Elements must be writable
+         *              to streams (provide and overload for operator<<)
+         * @param glue The string to use to join the content.
+         * @return {std::string} The concatenated string.
+         */
+        template<typename Range>
+        std::string join(const Range& range, std::string_view glue = " ")
+        {
+            std::ostringstream oss; auto it = std::begin(range);
+            if(it != std::end(range))
+                { oss << *it; it = std::next(it); }
+            for(; it != std::end(range); it = std::next(it))
+                oss << glue << *it;
+            return oss.str();
+        }
+
+        /**
+         * @brief Joins elements of a collection together to a single range.
+         *
+         * @tparam Range Type of the range. Must provide access to begin and end iterators.
+         * @tparam TransformFunction Transformation function for mapping range elements.
+         *
+         * @param range The range/collection of elements to join. Elements must be writable
+         *              to streams (provide and overload for operator<<)
+         * @param glue The string to use to join the content.
+         * @param transform Unary operation to apply over elements prior to join.
+         * @return {std::string} The concatenated string.
+         */
+        template<typename Range, typename TransformFunction>
+        std::string join(const Range& range, std::string_view glue, TransformFunction transform)
+        {
+            std::ostringstream oss; auto it = std::begin(range);
+            if(it != std::end(range))
+                { oss << transform(*it); it = std::next(it); }
+            for(; it != std::end(range); it = std::next(it))
+                oss << glue << transform(*it);
+            return oss.str();
+        }
     }
 }
 

@@ -1,11 +1,8 @@
-#include "argparse/common.hpp"
+#include "argparse/arguments/argument.hpp"
 
-#include <iostream>
-
-// TODO: CHange tty_column_count type to something else.
-std::ostream& argparse::utils::write_description(
+std::ostream& argparse::Argument::write_description(
     std::ostream& os, std::string_view description,
-    int tty_columns, std::string::size_type consumed
+    unsigned tty_columns, std::string::size_type consumed
 )
 {
     std::string::size_type spc_w = (tty_columns / 3), text_w = tty_columns - spc_w,
@@ -17,9 +14,11 @@ std::ostream& argparse::utils::write_description(
         else
             os << std::setw(spc_w-consumed) << ' ' << ' ';
 
+        // Ensure line break would not break a word midway.
         if(end < description.size())
             while(not std::isspace(description[end]) and description[end] != '-') end--;
-        for(auto i=start; i<end; ++i) os << description[i];
+
+        for(auto i=start; i<end; ++i) os.put(description[i]);
         start = end+1; end = std::min(end + text_w, description.size());
     }
 

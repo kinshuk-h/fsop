@@ -6,43 +6,28 @@ std::string argparse::Optional::usage() const noexcept
     auto end   = (_arity == Argument::ZERO_OR_MORE or not _required ? "]" : "");
 
     std::string_view min_nm = (not _alias.empty() and _alias.size() < _name.size()) ? _alias : _name;
-    std::string name = (min_nm.size() == 1 ? "-" : "--"), content, choices; name += min_nm;
+    std::string name = (min_nm.size() == 1 ? "-" : "--"), content; name += min_nm;
 
-    if(_choices.has_value())
-    {
-        for(const auto& choice : _choices.value())
-        { choices.push_back(','); choices += choice; }
-        if(not choices.empty()) { choices[0] = '{'; choices.push_back('}'); }
-    }
-    if(not choices.empty()) content = choices;
+    if(_choices.has_value()) content = "{"+utils::join(_choices.value(), ",")+"}";
     else std::transform(_name.begin(), _name.end(), std::back_inserter(content), ::toupper);
 
-    if(_arity > 1) { content += " x" + std::to_string(_arity); }
+    if     (_arity > 1) { content += " x" + std::to_string(_arity); }
     else if(_arity < 0) { content += "..."; }
     return start + name + " " + content + end;
 }
 
-std::string argparse::Optional::descriptor(int tty_column_count) const noexcept
+std::string argparse::Optional::descriptor(unsigned tty_columns) const noexcept
 {
-	std::string::size_type spc_w = (tty_column_count / 3), text_w = tty_column_count - spc_w;
-    std::stringstream _descriptor; _descriptor << "  ";
-    std::string content, choices;
-
-    std::string_view nm1 = _name, nm2 = _alias;
+    std::string content; std::string_view nm1 = _name, nm2 = _alias;
     if(nm1.size() > nm2.size()) std::swap(nm1, nm2);
 
-    if(_choices.has_value())
-    {
-        for(const auto& choice : _choices.value())
-        { choices.push_back(','); choices += choice; }
-        if(not choices.empty()) { choices[0] = '{'; choices.push_back('}'); }
-    }
-    if(not choices.empty()) content = choices;
+    if(_choices.has_value()) content = "{"+utils::join(_choices.value(), ",")+"}";
     else std::transform(_name.begin(), _name.end(), std::back_inserter(content), ::toupper);
 
-    if(_arity > 1) { content += " x" + std::to_string(_arity); }
+    if     (_arity > 1) { content += " x" + std::to_string(_arity); }
     else if(_arity < 0) { content += "..."; }
 
+    std::stringstream _descriptor; _descriptor << "  ";
     if(not nm1.empty())
     {
         _descriptor << (nm1.size() == 1 ? "-" : "--");
@@ -51,9 +36,9 @@ std::string argparse::Optional::descriptor(int tty_column_count) const noexcept
     _descriptor << (nm2.size() == 1 ? "-" : "--");
     _descriptor << nm2 << ' ' << content << "";
 
-    utils::write_description(
+    this->write_description(
          _descriptor, _description,
-         tty_column_count, _descriptor.str().size()
+         tty_columns, _descriptor.tellp()
     );
     return _descriptor.str();
 }
@@ -64,7 +49,30 @@ argparse::Argument::range::iterator argparse::Optional::parse_args(
 ) const
 {
     auto arg_it = std::next(begin);
-    if(_arity == 1)
+
+    auto assign_pos = begin->find('=');
+    if(_arity == 1 and assign_pos != std::string_view::npos)
+    {
+        auto arg = begin->substr(assign_pos + 1);
+        if(_choices.has_value())
+        {
+            auto& __choices = _choices.value();
+            if(not std::binary_search(__choices.begin(), __choices.end(), arg))
+            {
+                throw std::invalid_argument
+                (
+                    "parse_args(): invalid choice for --" + _name +
+                    " (choose from " + utils::join(__choices, ", ") + ")"
+                );
+            }
+        }
+        std::string argval { arg.data(), arg.size() };
+        // Add argument value to the values map.
+        if(_transform.has_value())
+            values[destination()] = _transform.value()(argval);
+        else values[destination()] = argval;
+    }
+    else if(_arity == 1)
     {
         if(arg_it == end or (not arg_it->empty() and (*arg_it)[0] == '-'))
         {
@@ -79,16 +87,10 @@ argparse::Argument::range::iterator argparse::Optional::parse_args(
                 auto& __choices = _choices.value();
                 if(not std::binary_search(__choices.begin(), __choices.end(), arg))
                 {
-                    std::string choice_list { __choices[0].data(), __choices[0].size()  };
-                    for(size_t i=1; i<__choices.size(); ++i)
-                    {
-                        choice_list += ", ";
-                        choice_list.append(__choices[i].data(), __choices[i].size());
-                    }
                     throw std::invalid_argument
                     (
                         "parse_args(): invalid choice for --" + _name +
-                        " (choose from " + choice_list + ")"
+                        " (choose from " + utils::join(__choices, ", ") + ")"
                     );
                 }
             }
@@ -111,16 +113,10 @@ argparse::Argument::range::iterator argparse::Optional::parse_args(
                 auto& __choices = _choices.value();
                 if(not std::binary_search(__choices.begin(), __choices.end(), arg))
                 {
-                    std::string choice_list { __choices[0].data(), __choices[0].size()  };
-                    for(size_t i=1; i<__choices.size(); ++i)
-                    {
-                        choice_list += ", ";
-                        choice_list.append(__choices[i].data(), __choices[i].size());
-                    }
                     throw std::invalid_argument
                     (
                         "parse_args(): invalid choice for --" + _name +
-                        " (choose from " + choice_list + ")"
+                        " (choose from " + utils::join(__choices, ", ") + ")"
                     );
                 }
             }

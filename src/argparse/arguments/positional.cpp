@@ -1,46 +1,27 @@
 #include "argparse/arguments/positional.hpp"
 
-#include <iostream>
-
 std::string argparse::Positional::usage() const noexcept
 {
-    auto start = (_arity == Argument::ZERO_OR_MORE or not _required ? "[" : "");
-    auto end   = (_arity == Argument::ZERO_OR_MORE or not _required ? "]" : "");
-    std::string content, choices;
-    if(_choices.has_value())
-    {
-        for(const auto& choice : _choices.value())
-        { choices.push_back(','); choices += choice; }
-        if(not choices.empty()) { choices[0] = '{'; choices.push_back('}'); }
-    }
-    content = not choices.empty() ? choices : _name;
-    if(_arity > 1) { content += " x" + std::to_string(_arity); }
+    auto start   = (_arity == Argument::ZERO_OR_MORE or not _required ? "[" : "");
+    auto end     = (_arity == Argument::ZERO_OR_MORE or not _required ? "]" : "");
+
+    auto content = _choices.has_value() ? "{"+utils::join(_choices.value(), ",")+"}" : _name;
+    if     (_arity > 1) { content += " x" + std::to_string(_arity); }
     else if(_arity < 0) { content += "..."; }
+
     return start + content + end;
 }
 
-std::string argparse::Positional::descriptor(int tty_column_count) const noexcept
+std::string argparse::Positional::descriptor(unsigned tty_columns) const noexcept
 {
-    std::string::size_type spc_w = (tty_column_count / 3), text_w = tty_column_count - spc_w;
-
-    std::stringstream _descriptor; _descriptor << "  ";
-    std::string content, choices;
-
-    if(_choices.has_value())
-    {
-        for(const auto& choice : _choices.value())
-        { choices.push_back(','); choices += choice; }
-        if(not choices.empty()) { choices[0] = '{'; choices.push_back('}'); }
-    }
-
-    content += not choices.empty() ? choices : _name;
-
-    if(_arity > 1) { content += " x" + std::to_string(_arity); }
+    auto content = _choices.has_value() ? "{"+utils::join(_choices.value(), ",")+"}" : _name;
+    if     (_arity > 1) { content += " x" + std::to_string(_arity); }
     else if(_arity < 0) { content += "..."; }
 
-    utils::write_description(
-         _descriptor << content, _description,
-         tty_column_count, _descriptor.str().size()
+    std::stringstream _descriptor;
+    this->write_description(
+         _descriptor << "  " << content, _description,
+         tty_columns, content.size() + 2
     );
     return _descriptor.str();
 }
@@ -66,16 +47,10 @@ argparse::Argument::range::iterator argparse::Positional::parse_args(
                 auto& __choices = _choices.value();
                 if(not std::binary_search(__choices.begin(), __choices.end(), arg))
                 {
-                    std::string choice_list { __choices[0].data(), __choices[0].size()  };
-                    for(size_t i=1; i<__choices.size(); ++i)
-                    {
-                        choice_list += ", ";
-                        choice_list.append(__choices[i].data(), __choices[i].size());
-                    }
                     throw std::invalid_argument
                     (
                         "parse_args(): invalid choice for " + _name +
-                        " (choose from " + choice_list + ")"
+                        " (choose from " + utils::join(__choices, ", ") + ")"
                     );
                 }
             }
@@ -98,16 +73,10 @@ argparse::Argument::range::iterator argparse::Positional::parse_args(
                 auto& __choices = _choices.value();
                 if(not std::binary_search(__choices.begin(), __choices.end(), arg))
                 {
-                    std::string choice_list { __choices[0].data(), __choices[0].size()  };
-                    for(size_t i=1; i<__choices.size(); ++i)
-                    {
-                        choice_list += ", ";
-                        choice_list.append(__choices[i].data(), __choices[i].size());
-                    }
                     throw std::invalid_argument
                     (
                         "parse_args(): invalid choice for " + _name +
-                        " (choose from " + choice_list + ")"
+                        " (choose from " + utils::join(__choices, ", ") + ")"
                     );
                 }
             }

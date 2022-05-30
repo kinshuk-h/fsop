@@ -7,7 +7,7 @@ std::string argparse::Switch::usage() const noexcept
     return (_name.size() == 1 ? "[-" : "[--") + _name + "]";
 }
 
-std::string argparse::Switch::descriptor(int tty_columns) const noexcept
+std::string argparse::Switch::descriptor(unsigned tty_columns) const noexcept
 {
     std::string_view nm1 = _name, nm2 = _alias;
     if(nm1.size() > nm2.size()) std::swap(nm1, nm2);
@@ -21,9 +21,9 @@ std::string argparse::Switch::descriptor(int tty_columns) const noexcept
     _descriptor << (nm2.size() == 1 ? "-" : "--");
     _descriptor << nm2;
 
-    utils::write_description(
+    this->write_description(
          _descriptor, _description,
-         tty_columns, _descriptor.str().size()
+         tty_columns, _descriptor.tellp()
     );
     return _descriptor.str();
 }

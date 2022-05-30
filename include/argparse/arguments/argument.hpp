@@ -31,8 +31,29 @@ namespace argparse
         // Special arity value: allows reading 1 or more values.
         static const int ONE_OR_MORE  = -2;
 
+        // Type of the argument values, as a variant over common argument value types.
         using value_type = types::argument_value_type;
+        // Type of the collection used for storing unparsed and unprocessed arguments.
         using range = std::vector<std::string_view>;
+
+        /**
+         * @brief Writes a formatted description to the given output stream.
+         *
+         * This function is for internal formatting of argument descriptions
+         * (such as when generating the argument help).
+         *
+         * @param os The output stream to write the description to.
+         * @param description The description to write.
+         * @param tty_columns Maximum number of terminal columns/characters to span per line.
+         * @param consumed Number of characters assumed to be present on the first line (consumed character count).
+         * @return std::ostream& Reference to the output stream for cascading operations.
+         */
+        static std::ostream& write_description(
+            std::ostream& os,
+            std::string_view description,
+            unsigned tty_columns = 60,
+            std::string::size_type consumed = 0
+		);
 
         /**
          * @brief Construct a new Argument object
@@ -155,7 +176,7 @@ namespace argparse
         /**
          * @brief Describes the argument along with the provided explanation.
          */
-        virtual std::string descriptor(int tty_column_count = 60) const noexcept = 0;
+        virtual std::string descriptor(unsigned tty_columns = 60) const noexcept = 0;
         /**
          * @brief Creates a copy of the argument as a unique_ptr for polymorphic usage.
          */

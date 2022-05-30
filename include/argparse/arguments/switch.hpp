@@ -83,7 +83,7 @@ namespace argparse
         Argument& choices(const std::optional<std::vector<std::string_view>>& _choices) noexcept = delete;
 
         std::string usage     ()                           const noexcept override;
-        std::string descriptor(int tty_column_count = 60)  const noexcept override;
+        std::string descriptor(unsigned tty_columns = 60)  const noexcept override;
         /**
          * @brief Creates a copy of the argument as a unique_ptr for polymorphic usage.
          */

@@ -165,10 +165,10 @@ int main(int argc, const char** argv)
     {
         auto args = parser.parse_args(argc, argv);
 
-        // for(const auto& [ name, value ] : args)
-        // {
-        //     std::cout << "args[" << name << "] = " << value.type().name() << "\n";
-        // }
+        for(const auto& [ name, value ] : args)
+        {
+            std::cout << "args[" << name << "] = " << value.type().name() << "\n";
+        }
         auto action = std::any_cast<std::string>(args["action"]);
         if(action == "create")
         {

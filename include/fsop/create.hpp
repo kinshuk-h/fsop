@@ -4,9 +4,13 @@
 #include <string_view>  // std::string_view
 #include <system_error> // std::system_error
 
-#include <cerrno>    // errno, strerror
-#include <unistd.h>  // creat, mode_t
-#include <fcntl.h>
+#include <cerrno>    // errno, errno macros
+#include <cstring>   // std::strerror
+
+#include <fcntl.h>      // creat, mknod
+#include <unistd.h>     // creat, mode_t
+#include <sys/stat.h>   // S_* constant macros
+#include <sys/types.h>  // mode_t
 
 namespace fsop
 {

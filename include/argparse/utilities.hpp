@@ -82,7 +82,8 @@ public:
 #endif
 
 /**
- * @brief Selects the first argument from a set of variadic arguments which matches a given strong type.
+ * @brief Selects the first argument from a set of variadic arguments
+ *        which matches a given strong type.
  *
  * @tparam TypeToPick The type of the variable to choose.
  * @tparam Types The Types to select from, usually deduced from the parameters.

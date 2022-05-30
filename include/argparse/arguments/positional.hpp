@@ -81,7 +81,7 @@ namespace argparse
         }
 
         std::string usage() const noexcept override;
-        std::string descriptor(int tty_column_count = 60) const noexcept override;
+        std::string descriptor(unsigned tty_columns = 60) const noexcept override;
         /**
          * @brief Creates a copy of the argument as a unique_ptr for polymorphic usage.
          */

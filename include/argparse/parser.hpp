@@ -7,14 +7,6 @@
 #include "arguments/argument.hpp"  // argparse::Argument
 #include "arguments/switch.hpp"    // argparse::Switch
 
-static bool is_numeric(std::string_view value)
-{
-    return value.empty() or (
-        (value[0] == '-' or std::isdigit(value[0])) and
-        std::all_of(std::next(value.begin()), value.end(), ::isdigit)
-    );
-}
-
 namespace argparse
 {
     class Parser;
@@ -51,7 +43,7 @@ namespace argparse
         }
 
         std::string usage     ()                          const noexcept override;
-        std::string descriptor(int tty_column_count = 60) const noexcept override;
+        std::string descriptor(unsigned tty_columns = 60) const noexcept override;
         /**
          * @brief Creates a copy of the argument as a unique_ptr for polymorphic usage.
          */
@@ -141,9 +133,24 @@ namespace argparse
             );
         }
 
-        // TODO: Add documentation
+        /**
+         * @brief Construct a new Parser object (move construct).
+         * This constructor moves content off the rvalue reference, effectively
+         * saving on allocations (only copying of pointers and other internal
+         * references is performed).
+         *
+         * @param parser Temporary parser object to move content from.
+         */
         Parser(Parser&& parser) = default;
 
+        /**
+         * @brief Construct a new Parser object (copy construct).
+         * This constructor performs a deep copy of the given lvalue reference,
+         * by creating copies of all arguments and other members, which performs
+         * multiple allaocations as required.
+         *
+         * @param parser Parser object to copy content from.
+         */
         Parser(const Parser& parser)
         : _name(parser._name), _description(parser._description),
           _epilog(parser._epilog), _out_stream(parser._out_stream),
@@ -223,100 +230,7 @@ namespace argparse
         Argument::range::iterator parse_args(
             Argument::range::iterator begin, Argument::range::iterator end,
             types::result_map& values
-        )
-        {
-            auto positional_iter = _positionals.begin();
-            auto arg_iter = begin;
-
-            for(; arg_iter != end;)
-            {
-                auto arg_value = *arg_iter;
-                if(not arg_value.empty() and arg_value[0] == '-' && not is_numeric(arg_value))
-                {
-                    arg_value = arg_value.substr(1);
-                    if(not arg_value.empty() and arg_value[0] == '-')
-                    {
-                        arg_value = arg_value.substr(1);
-                        auto arg_name = std::string { arg_value.data(), arg_value.size() };
-                        if(auto option = _optionals.find(arg_name); option != _optionals.end())
-                        {
-                            const auto& argument = option->second;
-                            arg_iter = argument->parse_args(arg_iter, end, values);
-                            // Short-circuit when --help flag present.
-                            if(option->second->name() == "help")
-                            {
-                                ostream() << help() << "\n\n";
-                                std::exit(EXIT_SUCCESS);
-                                return arg_iter;
-                            }
-                        }
-                        else
-                        {
-                            throw std::invalid_argument
-                            ( "parse_args(): invalid option: '--" +  arg_name + "'" );
-                        }
-                    }
-                    else
-                    {
-                        for(char abbrev : arg_value)
-                        {
-                            auto abbreviation = std::string(1, abbrev);
-                            if(auto option = _optionals.find(abbreviation); option != _optionals.end())
-                            {
-                                const auto& argument = option->second;
-                                arg_iter = argument->parse_args(arg_iter, end, values);
-                                // Short-circuit when --help flag present.
-                                if(option->second->name() == "help")
-                                {
-                                    ostream() << help() << "\n\n";
-                                    std::exit(EXIT_SUCCESS);
-                                    return arg_iter;
-                                }
-                            }
-                            else
-                            {
-                                throw std::invalid_argument
-                                ( "parse_args(): invalid option: '-" + abbreviation + "'" );
-                            }
-                        }
-                    }
-                }
-                else if(positional_iter != _positionals.end())
-                {
-                    arg_iter = (*positional_iter)->parse_args(arg_iter, end, values);
-                    ++ positional_iter;
-                }
-                else arg_iter = std::next(arg_iter); // Silently ignore arguments without a destination.
-            }
-            while(positional_iter != _positionals.end())
-            {
-                if((*positional_iter)->required())
-                    throw std::invalid_argument
-                    (
-                        "parse_args(): missing value for required argument: " +
-                        (*positional_iter)->name()
-                    );
-                else
-                    values[(*positional_iter)->destination()] = (*positional_iter)->default_value();
-            }
-            for(const auto& [ _, option ] : _optionals)
-            {
-                if(values.find(option->destination()) == values.end())
-                {
-                    if(option->required())
-                        throw std::invalid_argument
-                        (
-                            "parse_args(): missing value for required argument: --" +
-                            option->name()
-                        );
-                    else
-                    {
-                        values[option->destination()] = option->default_value();
-                    }
-                }
-            }
-            return arg_iter;
-        }
+        );
         /**
          * @brief Parses arguments from a given range defined by start and end iterators.
          *
@@ -387,19 +301,19 @@ namespace argparse
         /**
          * @brief Returns a concise help created using argument descriptors.
          *
-         * @param tty_column_count maximum number of terminal columns (characters) to span (default=60).
+         * @param tty_columns maximum number of terminal columns (characters) to span (default=60).
          *
          * @return {std::string} The generated help.
          */
-        std::string help(int tty_column_count = 60) const noexcept;
+        std::string help(unsigned tty_columns = 60) const noexcept;
         /**
          * @brief Returns a concise help created using argument descriptors.
          *
-         * @param tty_column_count maximum number of terminal columns (characters) to span (default=60).
+         * @param tty_columns maximum number of terminal columns (characters) to span (default=60).
          *
          * @return {std::string} The generated help.
          */
-        std::string usage(int tty_column_count = 60) const noexcept;
+        std::string usage(unsigned tty_columns = 60) const noexcept;
 
         // Name of the parser/program to display.
         const std::string&  name       () const noexcept { return _name; }

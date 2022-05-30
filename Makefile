@@ -1,5 +1,10 @@
-FIND	:=	find #F:/msys64/usr/bin/find.exe
-MKDIR	:=	mkdir #F:/msys64/usr/bin/mkdir.exe
+ifeq ($(OS),Windows_NT)
+	FIND	+=	F:/msys64/usr/bin/find.exe
+	MKDIR	+=	F:/msys64/usr/bin/mkdir.exe
+else
+	FIND	+=	find
+	MKDIR	+=	mkdir
+endif
 
 # Directory containing source files.
 SRCDIR		:=	src
