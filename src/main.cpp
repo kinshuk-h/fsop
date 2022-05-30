@@ -90,7 +90,7 @@ int main(int argc, const char** argv)
         },
         argparse::Optional
         {
-            name = "offset_base", alias = "B", default_value = "SET",
+            name = "offset-base", alias = "B", default_value = "SET",
             help = "offset base to start offset movement from",
             choices = std::vector<std::string_view> { "SET", "CUR", "END" },
             transform = [](const argparse::Optional::value_type& value) {
@@ -99,6 +99,12 @@ int main(int argc, const char** argv)
                 else if(valstr == "CUR") return SEEK_CUR;
                 else return SEEK_END;
             }
+        },
+        argparse::Optional
+        {
+            name = "byte-count", alias = "c", default_value = "-1",
+            help = "number of bytes to read",
+            transform = argparse::transforms::to_integral<off_t>,
         }
     );
 
@@ -135,7 +141,7 @@ int main(int argc, const char** argv)
         },
         argparse::Optional
         {
-            name = "offset_base", alias = "B", default_value = "SET",
+            name = "offset-base", alias = "B", default_value = "SET",
             help = "offset base to start offset movement from",
             choices = std::vector<std::string_view> { "SET", "CUR", "END" },
             transform = [](const argparse::Optional::value_type& value) {
@@ -152,17 +158,18 @@ int main(int argc, const char** argv)
         }
     );
 
+    // Register different subparsers for actions.
     parser.add_subparsers("action", create_parser, read_parser, write_parser);
 
     try
     {
         auto args = parser.parse_args(argc, argv);
 
-        for(const auto& [ name, value ] : args)
-        {
-            std::cout << "args[" << name << "] = " << value.type().name() << "\n"; //<< std::any_cast<std::string>(value) << "\n";
-        }
-        const std::string action = "create";
+        // for(const auto& [ name, value ] : args)
+        // {
+        //     std::cout << "args[" << name << "] = " << value.type().name() << "\n";
+        // }
+        auto action = std::any_cast<std::string>(args["action"]);
         if(action == "create")
         {
             auto perms = std::any_cast<mode_t>     (args["perms"]);
@@ -171,11 +178,11 @@ int main(int argc, const char** argv)
             auto type_name = (type == "regular" ? "regular file" : "named pipe");
 
             std::cout << parser.prog() << ": creating '" << path << "' as a " << type_name
-                      << " and with permissions " << fsop::utils::to_permissions(perms) << "\n";
+                      << " and with permissions '" << fsop::utils::to_permissions(perms) << "' ...\n";
             if(type == "regular") fsop::create_file(path, perms);
-            // else                  fsop::create_pipe(path, perms);
+            else                  fsop::create_pipe(path, perms);
             std::cout << parser.prog() << ": successfully created "
-                      << type_name << " '" << path << "'\n";
+                      << type_name << " '" << path << "'.\n";
             return EXIT_SUCCESS;
         }
     }

@@ -1,5 +1,7 @@
 #include "fsop/utilities.hpp"
 
+#include <iostream>
+
 mode_t fsop::utils::parse_permissions(std::string_view perms)
 {
     mode_t permissions = 0;
@@ -99,7 +101,7 @@ mode_t fsop::utils::parse_permissions(std::string_view perms)
 
 std::string fsop::utils::to_permissions(mode_t permissions)
 {
-    std::string perms { 9ULL, '-' };
+    std::string perms ( 9ULL, '-' );
     if(permissions & S_IXOTH) perms[8] = 'x';
     if(permissions & S_IWOTH) perms[7] = 'w';
     if(permissions & S_IROTH) perms[6] = 'r';
@@ -108,6 +110,6 @@ std::string fsop::utils::to_permissions(mode_t permissions)
     if(permissions & S_IRGRP) perms[3] = 'r';
     if(permissions & S_IXUSR) perms[2] = 'x';
     if(permissions & S_IWUSR) perms[1] = 'w';
-    if(permissions & S_IRUSR) perms[0] = 'w';
+    if(permissions & S_IRUSR) perms[0] = 'r';
     return perms;
 }

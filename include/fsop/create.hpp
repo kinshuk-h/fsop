@@ -6,6 +6,7 @@
 
 #include <cerrno>    // errno, strerror
 #include <unistd.h>  // creat, mode_t
+#include <fcntl.h>
 
 namespace fsop
 {
