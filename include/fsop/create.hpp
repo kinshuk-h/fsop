@@ -4,12 +4,12 @@
 #include <string_view>  // std::string_view
 #include <system_error> // std::system_error
 
-#include <cerrno>    // errno, errno macros
-#include <cstring>   // std::strerror
+#include <cerrno>       // errno, errno macros
+#include <cstring>      // std::strerror
 
-#include <fcntl.h>      // creat, mknod
-#include <unistd.h>     // creat, mode_t
-#include <sys/stat.h>   // S_* constant macros
+#include <fcntl.h>      // creat (Android)
+#include <unistd.h>     // creat (MinGW), mode_t
+#include <sys/stat.h>   // S_* constant macros, mknod (Android), chmod (Android)
 #include <sys/types.h>  // mode_t
 
 namespace fsop

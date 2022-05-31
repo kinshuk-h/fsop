@@ -66,7 +66,7 @@ void fsop::create_file(std::string_view path, mode_t permissions)
         );
     }
     // Fix permissions.
-    if(inode_data.st_mode != permissions)
+    if((inode_data.st_mode & (S_IRWXU | S_IRWXG | S_IRWXO)) != permissions)
     {
         status = fchmod(fd, permissions);
         if(status == -1)
