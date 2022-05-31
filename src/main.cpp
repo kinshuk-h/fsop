@@ -3,6 +3,7 @@
 #include "argparse.hpp"
 
 #include "fsop/create.hpp"
+#include "fsop/inspect.hpp"
 #include "fsop/utilities.hpp"
 
 using namespace argparse::arguments;
@@ -19,20 +20,21 @@ int main(int argc, const char** argv)
         )
     };
 
+    parser.add_argument(
+        argparse::Optional
+        {
+            name = "directory", alias = "d",
+            help = "working directory for the process to use",
+            default_value = ""
+        }
+    );
+
     // Parser to handle the create subcommand.
     argparse::Parser create_parser {
         name = "create",
         description = "create regular files or named pipes"
     };
     create_parser.add_arguments(
-        argparse::Switch
-        {
-            name = "debug", alias = "d", negated = true,
-            help = (
-                "enable debug mode for systems, effectively enabling logging "
-                "and display of other verbose information"
-            )
-        },
         argparse::Positional
         {
             name = "path",
@@ -158,18 +160,34 @@ int main(int argc, const char** argv)
         }
     );
 
+    // Parser to handle the inspect subcommand.
+    argparse::Parser inspect_parser {
+        name = "inspect",
+        description = "inspect and retrieve information about files"
+    };
+    inspect_parser.add_arguments(
+        argparse::Positional
+        {
+            name = "path",
+            help = "path of the file to inspect"
+        },
+    );
+
     // Register different subparsers for actions.
-    parser.add_subparsers("action", create_parser, read_parser, write_parser);
+    parser.add_subparsers(
+        "action", create_parser, read_parser, write_parser, inspect_parser
+    );
 
     try
     {
         auto args = parser.parse_args(argc, argv);
 
-        for(const auto& [ name, value ] : args)
-        {
-            std::cout << "args[" << name << "] = " << value.type().name() << "\n";
-        }
+        // for(const auto& [ name, value ] : args)
+        // {
+        //     std::cout << "args[" << name << "] = " << value.type().name() << "\n";
+        // }
         auto action = std::any_cast<std::string>(args["action"]);
+
         if(action == "create")
         {
             auto perms = std::any_cast<mode_t>     (args["perms"]);
@@ -185,15 +203,18 @@ int main(int argc, const char** argv)
                       << type_name << " '" << path << "'.\n";
             return EXIT_SUCCESS;
         }
+
+        else if(action == "inspect")
+        {
+            auto path  = std::any_cast<std::string>(args["path"]);
+            std::cout << parser.prog() << ": trying to inspect '" << path << "' ...\n";
+            auto information = fsop::inspect_file(path);
+            fsop::print_stat_info(std::cout, information);
+        }
     }
     catch(std::exception& error)
     {
-        std::cerr << argv[0] << ": " << error.what() << '\n';
+        std::cerr << parser.prog() << ": error: " << error.what() << '\n';
         return EXIT_FAILURE;
     }
-
-    // std::cout << creat("f1.txt", 0764) << "\n";
-    // std::cout << chmod("f1.txt", 0764) << "\n";
-
-    //std::cout << args << "\n";
 }

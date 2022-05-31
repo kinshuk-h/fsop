@@ -1,6 +1,7 @@
 #ifndef FSOP_INSPECT_HPP_INCLUDED
 #define FSOP_INSPECT_HPP_INCLUDED
 
+#include <ostream>      // std::ostream
 #include <variant>      // std::variant
 #include <string_view>  // std::string_view
 #include <system_error> // std::system_error
@@ -8,12 +9,19 @@
 #include <cerrno>       // errno, errno macros
 #include <cstring>      // std::strerror
 
-#include <sys/stat.h>   // stat, struct stat
-#include <sys/types.h>  // 
+#include <pwd.h>           // getpwuid
+#include <group.h>         // getgrgid
+#include <sys/stat.h>      // stat, struct stat
+#include <sys/types.h>     // 
+// #include <sys/sysmacros.h> // major, minor
 
 namespace fsop
 {
-    // A variant over stat structures to hold inode information depending on the size requirement.
+    /**
+     * @brief A variant over stat structures to hold inode
+     *  information depending on the size requirement.
+     *
+     */
     using stat_info = std::variant<struct stat, struct stat64>;
 
     /**
@@ -27,6 +35,17 @@ namespace fsop
      *                     in a structure large enough to hold it.
      */
     stat_info inspect_file(std::string_view path);
+
+    /**
+     * @brief Prints information received by a call to {inspect_file}
+     *  to a given output stream. Displayed information is presented
+     *  in a user friendly manner.
+     *
+     * @param os The output stream to write content to.
+     * @param info The structure object containing information to display.
+     * @return {std::ostream&} Reference to the output stream for cascading operations.
+     */
+    std::ostream& print_stat_info(std::ostream& os, const stat_info& info);
 }
 
 #endif // FSOP_INSPECT_HPP_INCLUDED
