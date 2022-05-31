@@ -37,8 +37,7 @@ namespace argparse
         SubparserSet(Parser& parent, std::string dest, Parsers&&... parsers)
         : Argument(arguments::name = dest, arguments::dest = dest)
         {
-            ( (_parsers.emplace(parsers.prog(), std::make_unique<Parser>(parsers))), ... );
-            ( parsers.parent(parent), ... );
+            ( _parsers.emplace(parsers.prog(), std::make_unique<Parser>(parsers.parent(parent))), ... );
             _required = true; _positional = true;
         }
 
