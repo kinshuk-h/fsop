@@ -1,6 +1,7 @@
 #ifndef FSOP_UTILITIES_HPP_INCLUDED
 #define FSOP_UTILITIES_HPP_INCLUDED
 
+#include <tuple>       // std::make_tuple
 #include <string>      // std::to_string
 #include <stdexcept>   // std::invalid_argument
 #include <string_view> // std::string_view
@@ -36,9 +37,24 @@ namespace fsop::utils
      */
     std::string to_permissions(mode_t permissions);
 
+    /**
+     * @brief IEC unit prefixes for file sizes, in order of increasing size by power of 2s.
+     */
     static constexpr const char* filesize_units[7] = { "", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei" };
 
-    // TODO: Add docs
+    /**
+     * @brief Converts a given file size in bytes to a human readable form.
+     *
+     * This function performs successive division of the file size until a
+     * normal value is obtained, and returns a tuple of the reduced size, the
+     * rounded off fractional size component and the unit prefix to use.
+     *
+     * @tparam Integral Type representing an integral value.
+     *
+     * @param byte_size Integral file size, in bytes.
+     * @return {auto} tuple of 3 values: the reduced size, the rounded off fractional
+     *      component and the unit prefix.
+     */
     template<
         typename Integral,
         typename = std::enable_if_t<std::is_integral_v<Integral>, std::nullptr_t>
@@ -58,9 +74,21 @@ namespace fsop::utils
         return std::make_tuple(size, fraction, filesize_units[index]);
     }
 
-    
+    /**
+     * @brief Returns the current working directory of the process.
+     * Internally invokes the `getcwd()` syscall.
+     *
+     * @return {std::string} The current working directory.
+     * @throws {std::system_error} Describes the reason for failure.
+     */
     std::string current_directory();
-    
+    /**
+     * @brief Sets the current working directory to the path indicated
+     * by the given argument. Internally invokes the `chdir` syscall.
+     *
+     * @param path New path to use as the current working directories.
+     * @throws {std::system_error} Describes the reason for failure.
+     */
     void change_directory(std::string_view path);
 }
 

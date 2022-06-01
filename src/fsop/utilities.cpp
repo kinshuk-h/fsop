@@ -1,5 +1,7 @@
 #include "fsop/utilities.hpp"
 
+#include <cstring>      // strlen
+
 #include <unistd.h>     // chdir
 #include <system_error> // std::system_error
 

@@ -83,20 +83,6 @@ std::ostream& fsop::print_stat_info(std::ostream& os, const fsop::stat_info& inf
     }
     else fileinfo = std::get<struct stat64>(info);
 
-        /*
-           printf("File type:                ");
-
-           switch (sb.st_mode & S_IFMT) {
-           case S_IFBLK:  printf("block device\n");            break;
-           case S_IFCHR:  printf("character device\n");        break;
-           case S_IFDIR:  printf("directory\n");               break;
-           case S_IFIFO:  printf("FIFO/pipe\n");               break;
-           case S_IFLNK:  printf("symlink\n");                 break;
-           case S_IFREG:  printf("regular file\n");            break;
-           case S_IFSOCK: printf("socket\n");                  break;
-           default:       printf("unknown?\n");                break;
-           }
-        */
     os << std::setw(spc_w) << "Inode number"             << " │ " << fileinfo.st_ino << '\n';
     os << std::setw(spc_w) << "Inode link count"         << " │ " << fileinfo.st_nlink << '\n';
 
