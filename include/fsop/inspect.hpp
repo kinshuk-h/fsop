@@ -1,8 +1,9 @@
 #ifndef FSOP_INSPECT_HPP_INCLUDED
 #define FSOP_INSPECT_HPP_INCLUDED
 
-#include <ostream>      // std::ostream
 #include <variant>      // std::variant
+#include <iomanip>      // std::put_time
+#include <iostream>     // std::ostream, std::cout
 #include <string_view>  // std::string_view
 #include <system_error> // std::system_error
 
@@ -10,7 +11,7 @@
 #include <cstring>      // std::strerror
 
 #include <pwd.h>           // getpwuid
-#include <group.h>         // getgrgid
+//#include <group.h>         // getgrgid
 #include <sys/stat.h>      // stat, struct stat
 #include <sys/types.h>     // 
 // #include <sys/sysmacros.h> // major, minor

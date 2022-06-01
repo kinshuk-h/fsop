@@ -1,6 +1,7 @@
 #include "fsop/utilities.hpp"
 
-#include <iostream>
+#include <unistd.h>     // chdir
+#include <system_error> // std::system_error
 
 mode_t fsop::utils::parse_permissions(std::string_view perms)
 {
@@ -112,4 +113,32 @@ std::string fsop::utils::to_permissions(mode_t permissions)
     if(permissions & S_IWUSR) perms[1] = 'w';
     if(permissions & S_IRUSR) perms[0] = 'r';
     return perms;
+}
+
+std::string fsop::utils::current_directory()
+{
+    std::string current_path ( 1024ULL, '\0' );
+    while(not getcwd(current_path.data(), current_path.size()))
+    {
+        if(errno == ERANGE)
+            current_path.resize(current_path.size() << 1);
+        else
+            throw std::system_error
+            (
+                errno, std::generic_category(),
+                "current_directory(): failed to retrieve current working directory"
+            );
+    }
+    current_path.resize(strlen(current_path.c_str()));
+    return current_path;
+}
+void fsop::utils::change_directory(std::string_view path)
+{
+    int status = chdir(path.data());
+    if(status == -1)
+        throw std::system_error
+        (
+            errno, std::generic_category(),
+            "change_directory(): failed to change current working directory"
+        );
 }

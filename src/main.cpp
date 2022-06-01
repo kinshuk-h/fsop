@@ -2,13 +2,13 @@
 
 #include "argparse.hpp"
 
+// #include "fsop/read.hpp"
+// #include "fsop/write.hpp"
 #include "fsop/create.hpp"
 #include "fsop/inspect.hpp"
 #include "fsop/utilities.hpp"
 
 using namespace argparse::arguments;
-
-#include <bitset>
 
 int main(int argc, const char** argv)
 {
@@ -168,9 +168,9 @@ int main(int argc, const char** argv)
     inspect_parser.add_arguments(
         argparse::Positional
         {
-            name = "path",
-            help = "path of the file to inspect"
-        },
+            name = "path", arity = argparse::Argument::ONE_OR_MORE,
+            help = "paths of files to inspect"
+        }
     );
 
     // Register different subparsers for actions.
@@ -186,7 +186,14 @@ int main(int argc, const char** argv)
         // {
         //     std::cout << "args[" << name << "] = " << value.type().name() << "\n";
         // }
-        auto action = std::any_cast<std::string>(args["action"]);
+        auto action  = std::any_cast<std::string>(args["action"]);
+        auto workdir = std::any_cast<std::string>(args["directory"]);
+
+        if(not workdir.empty())
+            fsop::utils::change_directory(workdir);
+
+        std::cout << parser.prog() << ": current working directory: "
+                  << fsop::utils::current_directory() << "\n\n";
 
         if(action == "create")
         {
@@ -206,10 +213,22 @@ int main(int argc, const char** argv)
 
         else if(action == "inspect")
         {
-            auto path  = std::any_cast<std::string>(args["path"]);
-            std::cout << parser.prog() << ": trying to inspect '" << path << "' ...\n";
-            auto information = fsop::inspect_file(path);
-            fsop::print_stat_info(std::cout, information);
+            auto paths  = std::any_cast<std::vector<std::string>>(args["path"]);
+            for(const auto& path : paths)
+            {
+                try
+                {
+                    std::cout << parser.prog() << ": trying to inspect '" << path << "' ... ";
+                    auto information = fsop::inspect_file(path); std::cout << "done\n";
+                    fsop::print_stat_info(std::cout, information) << '\n';
+                }
+                catch(std::system_error& error)
+                {
+                    std::cout << "error\n";
+                    std::cerr << parser.prog() << ": error: " << error.what() << "\n\n";
+                    return EXIT_FAILURE;
+                }
+            }
         }
     }
     catch(std::exception& error)

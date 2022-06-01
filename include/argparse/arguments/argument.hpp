@@ -350,6 +350,9 @@ namespace argparse
         types::Choices::value_type _choices;
         types::Transform::value_type _transform;
     };
+
+    inline const int Argument::ZERO_OR_MORE;
+    inline const int Argument::ONE_OR_MORE ;
 }
 
 #endif // ARGPARSE_ARGUMENT_HPP_INCLUDED

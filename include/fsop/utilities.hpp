@@ -35,6 +35,33 @@ namespace fsop::utils
      * @return {std::string} The 9-letter string representation of the permissions.
      */
     std::string to_permissions(mode_t permissions);
+
+    static constexpr const char* filesize_units[7] = { "", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei" };
+
+    // TODO: Add docs
+    template<
+        typename Integral,
+        typename = std::enable_if_t<std::is_integral_v<Integral>, std::nullptr_t>
+    >
+    auto to_human_readable_size(Integral byte_size)
+    {
+        unsigned index = 0; Integral power = 0;
+        while((byte_size >> power) > 512) { power += 10; ++index; }
+
+        Integral size = (byte_size >> power), fraction = (byte_size & ((1 << power) - 1));
+        fraction = (fraction * 1000) >> power;
+
+        int dgt = fraction % 10; fraction /= 10;
+        if(dgt > 4) { ++fraction; }
+        if(fraction > 99) { fraction = 0; ++size; }
+
+        return std::make_tuple(size, fraction, filesize_units[index]);
+    }
+
+    
+    std::string current_directory();
+    
+    void change_directory(std::string_view path);
 }
 
 #endif // FSOP_UTILITIES_HPP_INCLUDED

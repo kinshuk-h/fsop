@@ -120,6 +120,7 @@ argparse::Argument::range::iterator argparse::Optional::parse_args(
                     );
                 }
             }
+            argvals.emplace_back(arg.data(), arg.size());
         }
         if(_arity > 1 and argvals.size() != static_cast<size_t>(_arity))
         {
