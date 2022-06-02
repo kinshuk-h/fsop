@@ -15,6 +15,9 @@
 
 #include "../common.hpp"
 
+// TODO: Remove
+#include <iostream>
+
 namespace argparse
 {
     /**
@@ -216,13 +219,11 @@ namespace argparse
                 return _transform.value()(_defaults.value());
             else
             {
-                auto& __default = _defaults.value();
-                if(std::holds_alternative<bool>(__default))
-                    return std::get<0>(__default);
-                else if(std::holds_alternative<std::string>(__default))
-                    return std::get<1>(__default);
-                else
-                    return std::get<2>(__default);
+                return std::visit
+                (
+                    [](const auto& value) -> std::any { return value; },
+                    _defaults.value()
+                );
             }
         }
         // Whether the argument is a positional argument.
@@ -294,16 +295,17 @@ namespace argparse
          */
         Argument& default_value(const types::DefaultValue::value_type&  _defaults   ) noexcept
         {
-            this->_defaults = _defaults;
             if(_defaults.has_value())
             {
+                this->_defaults = _defaults.value();
                 _required = false;
-                if(std::holds_alternative<std::vector<std::string>>(_defaults.value()))
+                if(_defaults.value().index() == 2)
                 {
                     auto& __defaults = std::get<2>(this->_defaults.value());
                     std::sort(__defaults.begin(), __defaults.end());
                 }
             }
+            else this->_defaults = std::nullopt;
             return *this;
         }
         /**
@@ -315,7 +317,7 @@ namespace argparse
         Argument& required     (bool               _required   ) noexcept
         {
             this->_required = _required;
-            if(not _defaults.has_value()) this->_required = true;
+            // if(not _defaults.has_value()) this->_required = true;
             return *this;
         }
         /**

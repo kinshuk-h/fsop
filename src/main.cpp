@@ -8,6 +8,7 @@
 #include "fsop/inspect.hpp"
 #include "fsop/utilities.hpp"
 
+using namespace std::string_literals;
 using namespace argparse::arguments;
 
 int main(int argc, const char** argv)
@@ -25,7 +26,7 @@ int main(int argc, const char** argv)
         {
             name = "directory", alias = "d",
             help = "working directory for the process to use",
-            default_value = ""
+            default_value = ""s
         }
     );
 
@@ -47,11 +48,11 @@ int main(int argc, const char** argv)
         {
             name = "type", alias = "t", help = "type of file to create",
             choices = std::vector <std::string_view> { "regular", "pipe" },
-            default_value = "regular"
+            default_value = "regular"s
         },
         argparse::Optional
         {
-            name = "perms", alias = "p", default_value = "rw-rw-rw-",
+            name = "perms", alias = "p", default_value = "rw-rw-rw-"s,
             help = "permissions to set for the file",
             transform = [](const argparse::Optional::value_type& value) {
                 return fsop::utils::parse_permissions(std::get<1>(value));
@@ -74,11 +75,11 @@ int main(int argc, const char** argv)
         {
             name = "type", alias = "t", help = "type of file being read (overridden if file name given)",
             choices = std::vector <std::string_view> { "regular", "pipe" },
-            default_value = "regular"
+            default_value = "regular"s
         },
         argparse::Optional
         {
-            name = "perms", alias = "p", default_value = "0000",
+            name = "perms", alias = "p", default_value = "0000"s,
             help = "permissions to set for the file prior to read (using chmod)",
             transform = [](const argparse::Optional::value_type& value) {
                 return fsop::utils::parse_permissions(std::get<1>(value));
@@ -86,13 +87,13 @@ int main(int argc, const char** argv)
         },
         argparse::Optional
         {
-            name = "offset", alias = "b", default_value = "0",
+            name = "offset", alias = "b", default_value = "0"s,
             help = "read content from specified byte offset",
             transform = argparse::transforms::to_integral<off_t>
         },
         argparse::Optional
         {
-            name = "offset-base", alias = "B", default_value = "SET",
+            name = "offset-base", alias = "B", default_value = "SET"s,
             help = "offset base to start offset movement from",
             choices = std::vector<std::string_view> { "SET", "CUR", "END" },
             transform = [](const argparse::Optional::value_type& value) {
@@ -104,7 +105,7 @@ int main(int argc, const char** argv)
         },
         argparse::Optional
         {
-            name = "byte-count", alias = "c", default_value = "-1",
+            name = "byte-count", alias = "c", default_value = "-1"s,
             help = "number of bytes to read",
             transform = argparse::transforms::to_integral<off_t>,
         }
@@ -125,11 +126,11 @@ int main(int argc, const char** argv)
         {
             name = "type", alias = "t", help = "type of file being read (overridden if file name given)",
             choices = std::vector <std::string_view> { "regular", "pipe" },
-            default_value = "regular"
+            default_value = "regular"s
         },
         argparse::Optional
         {
-            name = "perms", alias = "p", default_value = "0000",
+            name = "perms", alias = "p", default_value = "0000"s,
             help = "permissions to set for the file prior to write (using chmod)",
             transform = [](const argparse::Optional::value_type& value) {
                 return fsop::utils::parse_permissions(std::get<1>(value));
@@ -137,13 +138,13 @@ int main(int argc, const char** argv)
         },
         argparse::Optional
         {
-            name = "offset", alias = "b", default_value = "0",
+            name = "offset", alias = "b", default_value = "0"s,
             help = "read content from specified byte offset",
             transform = argparse::transforms::to_integral<off_t>
         },
         argparse::Optional
         {
-            name = "offset-base", alias = "B", default_value = "SET",
+            name = "offset-base", alias = "B", default_value = "SET"s,
             help = "offset base to start offset movement from",
             choices = std::vector<std::string_view> { "SET", "CUR", "END" },
             transform = [](const argparse::Optional::value_type& value) {
@@ -207,7 +208,7 @@ int main(int argc, const char** argv)
             if(type == "regular") fsop::create_file(path, perms);
             else                  fsop::create_pipe(path, perms);
             std::cout << parser.prog() << ": successfully created "
-                      << type_name << " '" << path << "'.\n";
+                      << type_name << " '" << path << "'.\n\n";
             return EXIT_SUCCESS;
         }
 
@@ -233,7 +234,7 @@ int main(int argc, const char** argv)
     }
     catch(std::exception& error)
     {
-        std::cerr << parser.prog() << ": error: " << error.what() << '\n';
+        std::cerr << parser.prog() << ": error: " << error.what() << "\n\n";
         return EXIT_FAILURE;
     }
 }

@@ -184,6 +184,48 @@ auto argparse::Parser::parse_args(
     return arg_iter;
 }
 
+std::string argparse::Parser::usage(unsigned tty_columns) const noexcept
+{
+    std::ostringstream content; content << "usage: " + identifier();
+    std::string::size_type cursor = 0, spc_w = content.tellp(),
+                           text_w = tty_columns - spc_w;
+
+    for(const auto&[ name, option ] : _optionals)
+    {
+        if(option->name() != name) continue;
+
+        auto arg_usage = option->usage();
+        if(cursor > 0 and (cursor + arg_usage.size() + 1) > text_w)
+        {
+            content << '\n' << std::setw(spc_w) << ' '
+                    << ' ' << arg_usage;
+            cursor = 1 + arg_usage.size();
+        }
+        else
+        {
+            content << ' ' << arg_usage;
+            cursor += 1 + arg_usage.size();
+        }
+    }
+    for(const auto& positional : _positionals)
+    {
+        auto arg_usage = positional->usage();
+        if(cursor > 0 and (cursor +  + 1) > text_w)
+        {
+            content << '\n' << std::setw(spc_w) << ' '
+                    << ' ' << arg_usage;
+            cursor = 1 + arg_usage.size();
+        }
+        else
+        {
+            content << ' ' << arg_usage;
+            cursor += 1 + arg_usage.size();
+        }
+    }
+
+    return content.str();
+}
+
 std::string argparse::Parser::help(unsigned tty_columns) const noexcept
 {
     std::ostringstream content; content << "usage: " + identifier();
