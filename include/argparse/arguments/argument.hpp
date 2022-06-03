@@ -317,7 +317,14 @@ namespace argparse
         Argument& required     (bool               _required   ) noexcept
         {
             this->_required = _required;
-            // if(not _defaults.has_value()) this->_required = true;
+            if(not _required and not _defaults.has_value())
+            {
+                if(_arity == 1) _defaults = std::string();
+                else if(_arity > 1)
+                    _defaults = std::vector<std::string>(_arity);
+                else if(_arity < 0)
+                    _defaults = std::vector<std::string>(-_arity-1);
+            }
             return *this;
         }
         /**
