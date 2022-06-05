@@ -29,7 +29,7 @@ std::string argparse::Switch::descriptor(unsigned tty_columns) const noexcept
 }
 
 argparse::Argument::range::iterator argparse::Switch::parse_args(
-    range::iterator begin, range::iterator end,
+    range::iterator begin, [[maybe_unused]] range::iterator end,
     types::result_map& values
 ) const
 {

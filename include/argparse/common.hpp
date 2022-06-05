@@ -41,6 +41,21 @@
  */
 namespace argparse
 {
+    /**
+     * @brief Exception subtype to convey parse errors.
+     */
+    struct parse_error : public std::exception
+    {
+        parse_error(std::string_view message, std::string_view usage)
+        : std::exception(), _parser_usage(usage), _message(message) {}
+
+        const std::string& parser_usage() const noexcept { return _parser_usage; }
+
+        virtual const char* what() const noexcept override { return _message.c_str(); }
+    private:
+        std::string _parser_usage, _message;
+    };
+
     /** @brief Aliases for strong types for arguments. */
     namespace types
     {
@@ -125,18 +140,41 @@ namespace argparse
          * @return Integral The integral value post mapping.
          */
         template<typename Integral, typename = std::enable_if_t<std::is_integral_v<Integral>, std::nullptr_t>>
-        Integral to_integral(const types::argument_value_type& value)
+        std::vector<Integral> to_integral(const types::argument_value_type& value)
         {
-            if(std::is_signed_v<Integral>)
+            std::vector<Integral> numvals;
+            switch (value.index())
             {
-                auto numval = std::stoll(std::get<1>(value));
-                return static_cast<Integral>(numval);
+            case 1:
+                if constexpr (std::is_signed_v<Integral>)
+                {
+                    auto numval = std::stoll(std::get<1>(value));
+                    numvals.push_back(static_cast<Integral>(numval));
+                }
+                else
+                {
+                    auto numval = std::stoull(std::get<1>(value));
+                    numvals.push_back(static_cast<Integral>(numval));
+                }
+                break;
+            case 2:
+                const auto& strvals = std::get<2>(value);
+                numvals.reserve(strvals.size());
+                for(const auto& strval : strvals)
+                {
+                    if constexpr (std::is_signed_v<Integral>)
+                    {
+                        auto numval = std::stoll(strval);
+                        numvals.push_back(static_cast<Integral>(numval));
+                    }
+                    else
+                    {
+                        auto numval = std::stoull(strval);
+                        numvals.push_back(static_cast<Integral>(numval));
+                    }
+                }
             }
-            else
-            {
-                auto numval = std::stoull(std::get<1>(value));
-                return static_cast<Integral>(numval);
-            }
+            return numvals;
         }
     }
 
@@ -184,6 +222,19 @@ namespace argparse
             for(; it != std::end(range); it = std::next(it))
                 oss << glue << transform(*it);
             return oss.str();
+        }
+
+        /**
+         * @brief Checks if a given string encapsulates a numeric integral value.
+         *
+         * @param value The string to check.
+         */
+        inline bool is_numeric(std::string_view value)
+        {
+            return value.empty() or (
+                (value[0] == '-' or value[0] == '+' or std::isdigit(value[0])) and
+                std::all_of(std::next(value.begin()), value.end(), ::isdigit)
+            );
         }
     }
 }

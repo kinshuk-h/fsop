@@ -223,7 +223,7 @@ namespace argparse
          * @return {Argument::range::iterator} iterators to the start
          *      of the remaining sequence.
          *
-         * @throws {std::invalid_argument} describes inconsistencies present in the range
+         * @throws {parse_error} describes inconsistencies present in the range
          *      corresponding to argument requirements.
          */
         Argument::range::iterator parse_args(
@@ -247,7 +247,7 @@ namespace argparse
          *
          * @return {types::result_map} map object containing values for parsed arguments.
          *
-         * @throws {std::invalid_argument} describes inconsistencies present in the range
+         * @throws {parse_error} describes inconsistencies present in the range
          *      corresponding to argument requirements.
          */
         template<typename InputIter>
@@ -270,7 +270,7 @@ namespace argparse
          *
          * @return {types::result_map} map object containing values for parsed arguments.
          *
-         * @throws {std::invalid_argument} describes inconsistencies present in the range
+         * @throws {parse_error} describes inconsistencies present in the range
          *      corresponding to argument requirements.
          */
         types::result_map parse_args(int argc, const char** argv)
@@ -289,7 +289,7 @@ namespace argparse
          *
          * @return {types::result_map} map object containing values for parsed arguments.
          *
-         * @throws {std::invalid_argument} describes inconsistencies present in the range
+         * @throws {parse_error} describes inconsistencies present in the range
          *      corresponding to argument requirements.
          */
         types::result_map parse_args(int argc, char** argv)

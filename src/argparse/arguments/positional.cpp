@@ -34,7 +34,7 @@ argparse::Argument::range::iterator argparse::Positional::parse_args(
     auto arg_it = begin;
     if(_arity == 1)
     {
-        if(arg_it == end or (not arg_it->empty() and (*arg_it)[0] == '-'))
+        if(arg_it == end or (not arg_it->empty() and (*arg_it)[0] == '-' and not is_numeric(*arg_it)))
         {
             throw std::invalid_argument
             ( "parse_args(): expected one argument for " + _name );
@@ -65,7 +65,7 @@ argparse::Argument::range::iterator argparse::Positional::parse_args(
     {
         std::vector<std::string> argvals;
         // Read off arguments until the next optional flag or the end of the range.
-        while(arg_it != end and (arg_it->empty() or (*arg_it)[0] != '-'))
+        while(arg_it != end and (arg_it->empty() or (*arg_it)[0] != '-' or is_numeric(*arg_it)))
         {
             auto arg = *arg_it; arg_it = std::next(arg_it);
             if(_choices.has_value())

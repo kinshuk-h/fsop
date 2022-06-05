@@ -1,18 +1,5 @@
 #include "argparse/parser.hpp"
 
-/**
- * @brief Checks if a given string encapsulates a numeric value.
- *
- * @param value The string to check.
- */
-bool is_numeric(std::string_view value)
-{
-    return value.empty() or (
-        (value[0] == '-' or std::isdigit(value[0])) and
-        std::all_of(std::next(value.begin()), value.end(), ::isdigit)
-    );
-}
-
 // Selects the first element of a pair object.
 constexpr auto select_first = [](const auto& x) -> auto& { return x.first; };
 
@@ -85,7 +72,7 @@ auto argparse::Parser::parse_args(
     for(; arg_iter != end;)
     {
         auto arg_value = *arg_iter;
-        if(not arg_value.empty() and arg_value[0] == '-' && not is_numeric(arg_value))
+        if(not arg_value.empty() and arg_value[0] == '-' and not utils::is_numeric(arg_value))
         {
             arg_value = arg_value.substr(1);
             if(not arg_value.empty() and arg_value[0] == '-')
@@ -95,7 +82,14 @@ auto argparse::Parser::parse_args(
                 if(auto option = _optionals.find(arg_name); option != _optionals.end())
                 {
                     const auto& argument = option->second;
-                    arg_iter = argument->parse_args(arg_iter, end, values);
+                    try
+                    {
+                        arg_iter = argument->parse_args(arg_iter, end, values);
+                    }
+                    catch(std::invalid_argument& error)
+                    {
+                        throw argparse::parse_error(error.what(), usage());
+                    }
 
                     // Short-circuit when --help flag present.
                     if(option->second->name() == "help")
@@ -106,8 +100,8 @@ auto argparse::Parser::parse_args(
                 }
                 else
                 {
-                    throw std::invalid_argument
-                    ( "parse_args(): invalid option: '--" +  arg_name + "'" );
+                    throw argparse::parse_error
+                    ( "parse_args(): invalid option: '--" +  arg_name + "'", usage() );
                 }
             }
             else
@@ -120,16 +114,30 @@ auto argparse::Parser::parse_args(
                         const auto& argument = option->second;
                         if(argument->arity() != 0 and i < arg_value.size()-1)
                         {
-                            throw std::invalid_argument
+                            throw argparse::parse_error
                             (
                                 "parse_args(): optional argument with non-zero arity can"
-                                "only be present at the end of the short flag list"
+                                "only be present at the end of the short flag list", usage()
                             );
                         }
                         else if(i == arg_value.size()-1)
-                            arg_iter = argument->parse_args(arg_iter, end, values);
+                            try
+                            {
+                                arg_iter = argument->parse_args(arg_iter, end, values);
+                            }
+                            catch(std::invalid_argument& error)
+                            {
+                                throw argparse::parse_error(error.what(), usage());
+                            }
                         else if(argument->arity() == 0)
-                            argument->parse_args(arg_iter, end, values);
+                            try
+                            {
+                                argument->parse_args(arg_iter, end, values);
+                            }
+                            catch(std::invalid_argument& error)
+                            {
+                                throw argparse::parse_error(error.what(), usage());
+                            }
 
                         // Short-circuit when --help flag present.
                         if(option->second->name() == "help")
@@ -140,15 +148,22 @@ auto argparse::Parser::parse_args(
                     }
                     else
                     {
-                        throw std::invalid_argument
-                        ( "parse_args(): invalid option: '-" + abbreviation + "'" );
+                        throw argparse::parse_error
+                        ( "parse_args(): invalid option: '-" + abbreviation + "'", usage() );
                     }
                 }
             }
         }
         else if(positional_iter != _positionals.end())
         {
-            arg_iter = (*positional_iter)->parse_args(arg_iter, end, values);
+            try
+            {
+                arg_iter = (*positional_iter)->parse_args(arg_iter, end, values);
+            }
+            catch(std::invalid_argument& error)
+            {
+                throw argparse::parse_error(error.what(), usage());
+            }
             ++ positional_iter;
         }
         // Silently ignore arguments without a destination.
@@ -157,23 +172,24 @@ auto argparse::Parser::parse_args(
     while(positional_iter != _positionals.end())
     {
         if((*positional_iter)->required())
-            throw std::invalid_argument
+            throw argparse::parse_error
             (
                 "parse_args(): missing value for required argument: " +
-                (*positional_iter)->name()
+                (*positional_iter)->name(), usage()
             );
         else
             values[(*positional_iter)->destination()] = (*positional_iter)->default_value();
+        ++ positional_iter;
     }
     for(const auto& [ _, option ] : _optionals)
     {
         if(values.find(option->destination()) == values.end())
         {
             if(option->required())
-                throw std::invalid_argument
+                throw argparse::parse_error
                 (
                     "parse_args(): missing value for required argument: --" +
-                    option->name()
+                    option->name(), usage()
                 );
             else
             {
