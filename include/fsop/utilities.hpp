@@ -1,13 +1,19 @@
+/**
+ * @file utilities.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines utility functions for use with the fsop module's functions.
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #ifndef FSOP_UTILITIES_HPP_INCLUDED
 #define FSOP_UTILITIES_HPP_INCLUDED
 
 #include <tuple>       // std::make_tuple
 #include <string>      // std::to_string
-#include <stdexcept>   // std::invalid_argument
 #include <string_view> // std::string_view
-
-#include <sys/stat.h>  // S_I* constants.
-#include <sys/types.h> // mode_t
 
 /**
  * @brief Defines common utilities for use with filesystem operations.
@@ -36,6 +42,23 @@ namespace fsop::utils
      * @return {std::string} The 9-letter string representation of the permissions.
      */
     std::string to_permissions(mode_t permissions);
+
+    /**
+     * @brief Parses the value of whence for offset movement.
+     *
+     * @param whence String containing the relative offset base.
+     * @return int Numeric constant corresponding to the given whence.
+     */
+    int parse_seek_whence(std::string_view whence);
+
+    /**
+     * @brief Returns the name of the file type corresponding to
+     *        the file type number stored in the inode.
+     *
+     * @param type Type number of the file, from the inode.
+     * @return {std::string} Name of the type.
+     */
+    std::string to_type(mode_t type);
 
     /**
      * @brief IEC unit prefixes for file sizes, in order of increasing size by power of 2s.

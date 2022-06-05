@@ -2,8 +2,12 @@
 
 #include <cstring>      // strlen
 
-#include <unistd.h>     // chdir
+#include <stdexcept>    // std::invalid_argument
 #include <system_error> // std::system_error
+
+#include <unistd.h>     // chdir
+#include <sys/stat.h>   // S_I* constants.
+#include <sys/types.h>  // mode_t
 
 mode_t fsop::utils::parse_permissions(std::string_view perms)
 {
@@ -115,6 +119,28 @@ std::string fsop::utils::to_permissions(mode_t permissions)
     if(permissions & S_IWUSR) perms[1] = 'w';
     if(permissions & S_IRUSR) perms[0] = 'r';
     return perms;
+}
+
+int fsop::utils::parse_seek_whence(std::string_view whence)
+{
+    if     (whence == "SET") return SEEK_SET;
+    else if(whence == "CUR") return SEEK_CUR;
+    else                     return SEEK_END;
+}
+
+std::string fsop::utils::to_type(mode_t type)
+{
+    switch(type & S_IFMT)
+    {
+        case S_IFBLK : return "block device";
+        case S_IFCHR : return "character device";
+        case S_IFDIR : return "directory";
+        case S_IFIFO : return "named pipe";
+        case S_IFLNK : return "symbolic link";
+        case S_IFREG : return "regular file";
+        case S_IFSOCK: return "socket";
+        default:       return "unknown";
+    }
 }
 
 std::string fsop::utils::current_directory()
