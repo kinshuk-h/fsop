@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "argparse.hpp"
+#include "argparse.hpp" // Module for argument parsing.
+#include "fsop_cli.hpp" // Functions implementing CLI actions.
 
-// #include "fsop/read.hpp"
-// #include "fsop/write.hpp"
+#include "fsop/file.hpp"
 #include "fsop/create.hpp"
 #include "fsop/inspect.hpp"
 #include "fsop/utilities.hpp"
@@ -13,6 +13,14 @@ using namespace argparse::arguments;
 
 int main(int argc, const char** argv)
 {
+    auto to_seek_whences = [](const argparse::Optional::value_type& value) {
+        const auto& _values = std::get<2>(value);
+        std::vector<int> whences; whences.reserve(_values.size());
+        for(const auto& valstr : _values)
+            whences.push_back(fsop::utils::parse_seek_whence(valstr));
+        return whences;
+    };
+
     argparse::Parser parser {
         name = argv[0],
         description = (
@@ -21,7 +29,12 @@ int main(int argc, const char** argv)
         )
     };
 
-    parser.add_argument(
+    parser.add_arguments(
+        argparse::Switch
+        {
+            name = "quiet", alias = "q",
+            help = "suppress informational and logging messages on STDOUT"
+        },
         argparse::Optional
         {
             name = "directory", alias = "d",
@@ -50,6 +63,11 @@ int main(int argc, const char** argv)
             choices = std::vector <std::string_view> { "regular", "pipe" },
             default_value = "regular"s
         },
+        argparse::Switch
+        {
+            name = "overwrite", alias = "o",
+            help = "if file exists, truncate file contents (effectively recreating the file)"
+        },
         argparse::Optional
         {
             name = "perms", alias = "p", default_value = "rw-rw-rw-"s,
@@ -71,43 +89,30 @@ int main(int argc, const char** argv)
             name = "path", required = false,
             help = "path of the file to read"
         },
-        argparse::Optional
+        argparse::Switch
         {
-            name = "type", alias = "t", help = "type of file being read (overridden if file name given)",
-            choices = std::vector <std::string_view> { "regular", "pipe" },
-            default_value = "regular"s
+            name = "pipe", alias = "p",
+            help = "read (and write?) content from a pipe (possibly unnamed)",
         },
         argparse::Optional
         {
-            name = "perms", alias = "p", default_value = "0000"s,
-            help = "permissions to set for the file prior to read (using chmod)",
-            transform = [](const argparse::Optional::value_type& value) {
-                return fsop::utils::parse_permissions(std::get<1>(value));
-            }
-        },
-        argparse::Optional
-        {
-            name = "offset", alias = "b", default_value = "0"s,
+            name = "offset", alias = "b", arity = argparse::Argument::ZERO_OR_MORE,
             help = "read content from specified byte offset",
-            transform = argparse::transforms::to_integral<off_t>
+            transform = argparse::transforms::to_integral<off64_t>
         },
         argparse::Optional
         {
-            name = "offset-base", alias = "B", default_value = "SET"s,
+            name = "offset-base", alias = "B", arity = argparse::Argument::ZERO_OR_MORE,
             help = "offset base to start offset movement from",
             choices = std::vector<std::string_view> { "SET", "CUR", "END" },
-            transform = [](const argparse::Optional::value_type& value) {
-                auto valstr = std::get<1>(value);
-                if(valstr == "SET") return SEEK_SET;
-                else if(valstr == "CUR") return SEEK_CUR;
-                else return SEEK_END;
-            }
+            transform = to_seek_whences
         },
         argparse::Optional
         {
-            name = "byte-count", alias = "c", default_value = "-1"s,
+            name = "byte-count", alias = "c",
+            arity = argparse::Argument::ZERO_OR_MORE,
             help = "number of bytes to read",
-            transform = argparse::transforms::to_integral<off_t>,
+            transform = argparse::transforms::to_integral<size_t>,
         }
     );
 
@@ -122,42 +127,38 @@ int main(int argc, const char** argv)
             name = "path", required = false,
             help = "path of the file to write"
         },
-        argparse::Optional
+        argparse::Switch
         {
-            name = "type", alias = "t", help = "type of file being read (overridden if file name given)",
-            choices = std::vector <std::string_view> { "regular", "pipe" },
-            default_value = "regular"s
+            name = "pipe", alias = "p",
+            help = "write (and read?) content to a pipe (possibly unnamed)",
+        },
+        argparse::Switch
+        {
+            name = "line-buffered", alias = "lbuf",
+            help = "read STDIN in line-buffered manner",
         },
         argparse::Optional
         {
-            name = "perms", alias = "p", default_value = "0000"s,
-            help = "permissions to set for the file prior to write (using chmod)",
-            transform = [](const argparse::Optional::value_type& value) {
-                return fsop::utils::parse_permissions(std::get<1>(value));
-            }
-        },
-        argparse::Optional
-        {
-            name = "offset", alias = "b", default_value = "0"s,
+            name = "offset", alias = "b", arity = argparse::Argument::ZERO_OR_MORE,
             help = "read content from specified byte offset",
-            transform = argparse::transforms::to_integral<off_t>
+            transform = argparse::transforms::to_integral<off64_t>
         },
         argparse::Optional
         {
-            name = "offset-base", alias = "B", default_value = "SET"s,
+            name = "offset-base", alias = "B", arity = argparse::Argument::ZERO_OR_MORE,
             help = "offset base to start offset movement from",
             choices = std::vector<std::string_view> { "SET", "CUR", "END" },
-            transform = [](const argparse::Optional::value_type& value) {
-                auto valstr = std::get<1>(value);
-                if(valstr == "SET") return SEEK_SET;
-                else if(valstr == "CUR") return SEEK_CUR;
-                else return SEEK_END;
-            }
+            transform = to_seek_whences
         },
         argparse::Switch
         {
             name = "append", alias = "A",
             help = "open file in append mode (all write operations start from the end)"
+        },
+        argparse::Switch
+        {
+            name = "truncate", alias = "t",
+            help = "truncate file contents prior to writing"
         }
     );
 
@@ -176,61 +177,40 @@ int main(int argc, const char** argv)
 
     // Register different subparsers for actions.
     parser.add_subparsers(
-        "action", create_parser, read_parser, write_parser, inspect_parser
+        "action",
+        create_parser, read_parser,
+        write_parser, inspect_parser
     );
 
     try
     {
         auto args = parser.parse_args(argc, argv);
 
-        // for(const auto& [ name, value ] : args)
-        // {
-        //     std::cout << "args[" << name << "] = " << value.type().name() << "\n";
-        // }
-        auto action  = std::any_cast<std::string>(args["action"]);
-        auto workdir = std::any_cast<std::string>(args["directory"]);
+        auto action  = std::any_cast<std::string>(args.at("action"));
+        auto workdir = std::any_cast<std::string>(args.at("directory"));
+        auto quiet   = std::any_cast<bool>       (args.at("quiet"));
 
         if(not workdir.empty())
             fsop::utils::change_directory(workdir);
 
-        std::cout << parser.prog() << ": current working directory: "
-                  << fsop::utils::current_directory() << "\n\n";
+        if(not quiet)
+            std::cout << parser.prog() << ": current working directory: "
+                      << fsop::utils::current_directory() << "\n\n";
 
-        if(action == "create")
-        {
-            auto perms = std::any_cast<mode_t>     (args["perms"]);
-            auto path  = std::any_cast<std::string>(args["path"]);
-            auto type  = std::any_cast<std::string>(args["type"]);
-            auto type_name = (type == "regular" ? "regular file" : "named pipe");
-
-            std::cout << parser.prog() << ": creating '" << path << "' as a " << type_name
-                      << " and with permissions '" << fsop::utils::to_permissions(perms) << "' ...\n";
-            if(type == "regular") fsop::create_file(path, perms);
-            else                  fsop::create_pipe(path, perms);
-            std::cout << parser.prog() << ": successfully created "
-                      << type_name << " '" << path << "'.\n\n";
-            return EXIT_SUCCESS;
-        }
-
+        if     (action == "create" )
+            return fsop_cli::create (args, parser.prog());
+        else if(action == "read"   )
+            return fsop_cli::read   (args, parser.prog());
+        else if(action == "write"  )
+            return fsop_cli::write  (args, parser.prog());
         else if(action == "inspect")
-        {
-            auto paths  = std::any_cast<std::vector<std::string>>(args["path"]);
-            for(const auto& path : paths)
-            {
-                try
-                {
-                    std::cout << parser.prog() << ": trying to inspect '" << path << "' ... ";
-                    auto information = fsop::inspect_file(path); std::cout << "done\n";
-                    fsop::print_stat_info(std::cout, information) << '\n';
-                }
-                catch(std::system_error& error)
-                {
-                    std::cout << "error\n";
-                    std::cerr << parser.prog() << ": error: " << error.what() << "\n\n";
-                    return EXIT_FAILURE;
-                }
-            }
-        }
+            return fsop_cli::inspect(args, parser.prog());
+    }
+    catch(argparse::parse_error& error)
+    {
+        std::cerr << error.parser_usage() << '\n';
+        std::cerr << "error: " << error.what() << "\n\n";
+        return EXIT_FAILURE;
     }
     catch(std::exception& error)
     {
