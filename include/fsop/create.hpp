@@ -2,14 +2,7 @@
 #define FSOP_CREATE_HPP_INCLUDED
 
 #include <string_view>  // std::string_view
-#include <system_error> // std::system_error
 
-#include <cerrno>       // errno, errno macros
-#include <cstring>      // std::strerror
-
-#include <fcntl.h>      // creat (Android)
-#include <unistd.h>     // creat (MinGW), mode_t
-#include <sys/stat.h>   // S_* constant macros, mknod (Android), chmod (Android)
 #include <sys/types.h>  // mode_t
 
 namespace fsop
@@ -23,10 +16,11 @@ namespace fsop
      *
      * @param path The path at which the file must be created.
      * @param permissions The permissions to associate with the file.
+     * @param overwrite If true, recreates the file, effectively truncating previous content.
      *
      * @throws {std::system_error} reason for failure of operation.
      */
-    void create_file(std::string_view path, mode_t permissions);
+    void create_file(std::string_view path, mode_t permissions, bool overwrite = false);
 
     /**
      * @brief Creates a new named pipe (FIFO file) in the filesystem.
@@ -37,10 +31,11 @@ namespace fsop
      *
      * @param path The path at which the file must be created.
      * @param permissions The permissions to associate with the file.
+     * @param overwrite If true, recreates the file, effectively truncating previous content.
      *
      * @throws {std::system_error} reason for failure of operation.
      */
-    void create_pipe(std::string_view path, mode_t permissions);
+    void create_pipe(std::string_view path, mode_t permissions, bool overwrite = false);
 }
 
 #endif // FSOP_CREATE_HPP_INCLUDED
