@@ -1,3 +1,13 @@
+/**
+ * @file file.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines a structure for abstracting I/O operations via system calls.
+ * @version 1.0
+ * @date 2022-06-03
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #ifndef FSOP_FILE_HPP_INCLUDED
 #define FSOP_FILE_HPP_INCLUDED
 
@@ -23,7 +33,9 @@ namespace fsop
      */
     struct File
     {
+        /** Constant to represent an invalid file descriptor. */
         static constexpr int    invalid_descriptor = -1;
+        /** Constant to specify infinite byte count (read until end of file) */
         static constexpr size_t bytes_till_end     = -1ULL;
 
         /**
@@ -38,7 +50,7 @@ namespace fsop
          *
          * @param descriptor File descriptor to maintain to refer a global file table entry
          *                   corresponding to an open file.
-         * @param inode_data File data as available from a call to stat.
+         * @param inode_info File data as available from a call to stat.
          */
         File(int descriptor, struct stat64 inode_info)
         : _descriptor(descriptor), _info(inode_info), _info_set(true) {}
@@ -156,11 +168,14 @@ namespace fsop
          */
         static std::pair<File, File> create_unnamed_pipe();
 
-        // Implicit casting operator: determines truthness based on the descriptor.
+        /** Implicit casting operator: determines truthness based on the descriptor. */
         operator bool() { return _descriptor != invalid_descriptor; }
     private:
+        /** Internal descriptor maintained by the object. */
         int _descriptor = -1;
+        /** Cached file information (inode data). */
         struct stat64 _info;
+        /** Indicates whether the file data was cached */
         bool _info_set = false;
     };
 

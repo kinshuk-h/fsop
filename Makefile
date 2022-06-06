@@ -51,6 +51,10 @@ $(LIBDIR)/%.o: $(SRCDIR)/%.cpp
 run: $(TARGET)
 	@$(TARGET) $(args)
 
+.PHONY: docs
+docs:
+	@doxygen Doxyfile
+
 # Phony rule: Clean build files for a fresh build.
 .PHONY: clean
 clean:

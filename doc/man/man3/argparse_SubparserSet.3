@@ -1,0 +1,122 @@
+.TH "argparse::SubparserSet" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+argparse::SubparserSet \- Creates an argument type to hold subparsers as a mutually exclusive group\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <parser\&.hpp>\fP
+.PP
+Inherits \fBargparse::Argument\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename\&.\&.\&. Parsers> \fBSubparserSet\fP (\fBParser\fP &parent, std::string \fBdest\fP, Parsers &&\&.\&.\&. parsers)"
+.br
+.RI "Construct a new Subparser Set object\&. "
+.ti -1c
+.RI "std::string \fBusage\fP () const noexcept override"
+.br
+.RI "Describes the usage of the argument through a returned string\&. "
+.ti -1c
+.RI "std::string \fBdescriptor\fP (unsigned tty_columns=60) const noexcept override"
+.br
+.RI "Describes the argument along with the provided explanation\&. "
+.ti -1c
+.RI "std::unique_ptr< \fBArgument\fP > \fBclone\fP () const override"
+.br
+.RI "Creates a copy of the argument as a unique_ptr for polymorphic usage\&. "
+.ti -1c
+.RI "range::iterator \fBparse_args\fP (range::iterator begin, range::iterator end, \fBtypes::result_map\fP &values) const override"
+.br
+.RI "Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators\&. "
+.in -1c
+.SS "Additional Inherited Members"
+.SH "Detailed Description"
+.PP 
+Creates an argument type to hold subparsers as a mutually exclusive group\&. 
+
+
+.PP
+.nf
+ Subparsers allow splitting of arguments and functionality across subcommands\&.
+ Each subparsers is by itself a parser and is allowed to have its own set of argument objects\&.
+
+ The parent parser delegates the parsing of remaining options to the subparser whose name
+ appears on the command line\&.
+
+.fi
+.PP
+ 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename\&.\&.\&. Parsers> argparse::SubparserSet::SubparserSet (\fBParser\fP & parent, std::string dest, Parsers &&\&.\&.\&. parsers)\fC [inline]\fP"
+
+.PP
+Construct a new Subparser Set object\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIParsers\fP Types of parser objects\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIparent\fP Parent program parser for the subparsers\&. 
+.br
+\fIdest\fP Destination name for the value indicating the selected subparser's name in the parsed table\&. 
+.br
+\fIparsers\fP Parsers to add as subparsers\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "std::unique_ptr< \fBArgument\fP > argparse::SubparserSet::clone () const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Creates a copy of the argument as a unique_ptr for polymorphic usage\&. 
+.PP
+Implements \fBargparse::Argument\fP\&.
+.SS "std::string argparse::SubparserSet::descriptor (unsigned tty_columns = \fC60\fP) const\fC [override]\fP, \fC [virtual]\fP, \fC [noexcept]\fP"
+
+.PP
+Describes the argument along with the provided explanation\&. 
+.PP
+Implements \fBargparse::Argument\fP\&.
+.SS "argparse::Argument::range::iterator argparse::SubparserSet::parse_args (range::iterator begin, range::iterator end, \fBtypes::result_map\fP & values) const\fC [override]\fP, \fC [virtual]\fP"
+
+.PP
+Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbegin\fP iterator pointing to the beginning of the argument value range\&. 
+.br
+\fIend\fP iterator pointing to the end of the argument value range\&. 
+.br
+\fIvalues\fP map (hash table) to store parsed valued for the argument\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{range::iterator} iterator pointing to the next argument value unused by the current argument\&. 
+.RE
+.PP
+
+.PP
+Implements \fBargparse::Argument\fP\&.
+.SS "std::string argparse::SubparserSet::usage () const\fC [override]\fP, \fC [virtual]\fP, \fC [noexcept]\fP"
+
+.PP
+Describes the usage of the argument through a returned string\&. 
+.PP
+Implements \fBargparse::Argument\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

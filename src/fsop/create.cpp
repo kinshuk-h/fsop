@@ -1,3 +1,13 @@
+/**
+ * @file create.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file implementing the functions defined in fsop/create.hpp
+ * @version 1.0
+ * @date 2022-05-30
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "fsop/create.hpp"
 
 #include <cerrno>       // errno, errno macros
@@ -76,6 +86,7 @@ void fsop::create_file(std::string_view path, mode_t permissions, bool overwrite
     status = fstat(fd, &inode_data);
     if(status == -1)
     {
+        close(fd);
         throw std::system_error
         (
             errno, std::generic_category(),
@@ -88,6 +99,7 @@ void fsop::create_file(std::string_view path, mode_t permissions, bool overwrite
         status = fchmod(fd, permissions);
         if(status == -1)
         {
+            close(fd);
             throw std::system_error
             (
                 errno, std::generic_category(),

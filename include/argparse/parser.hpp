@@ -1,3 +1,13 @@
+/**
+ * @file parser.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines the parser class which performs argument parsing using registered arguments.
+ * @version 1.0
+ * @date 2022-05-28
+ * 
+ * @copyright Copyright (c) 2022
+ */
+
 #ifndef ARGPARSE_PARSER_HPP_INCLUDED
 #define ARGPARSE_PARSER_HPP_INCLUDED
 
@@ -71,26 +81,31 @@ namespace argparse
      */
     class Parser
     {
-        std::string _name,
-                    _description,
-                    _epilog;
-        std::ostream& _out_stream;
+        std::string _name, /**< Name of the parser/program to display. */
+                    _description, /**< Text to display before the argument help. */
+                    _epilog; /**< Text to display after the argument help. */
+        std::ostream& _out_stream; /**< Output stream to use for operations. */
 
+        /** Hash Table (unordered_map) of optional arguments to be parsed. */
         std::unordered_map<std::string, std::shared_ptr<Argument>> _optionals;
+        /** Vector of positional arguments to be parsed. */
         std::vector<std::unique_ptr<Argument>> _positionals;
 
-        Parser* _parent = nullptr;
+        Parser* _parent = nullptr; /**< Parent parser for the parser. */
 
     public:
         /**
          * @brief Construct a new Parser object
          *
+         * @tparam NameType Placeholder type for a named argument.
          * @tparam DescriptionType Placeholder type for a named argument.
          * @tparam EpilogType Placeholder type for a named argument.
+         * @tparam OutputStreamType Placeholder type for a named argument.
          *
          * @param name Name of the parser to display (default = "program").
          * @param description Text to display before the argument help (default = "").
          * @param epilog Text to display after the argument help (default = "").
+         * @param output_stream Stream to use for parser output (default = std::cout).
          */
         template<
             typename NameType = std::nullptr_t,
@@ -314,24 +329,25 @@ namespace argparse
          */
         std::string usage(unsigned tty_columns = 60) const noexcept;
 
-        // Name of the parser/program to display.
+        /** Name of the parser/program to display. */
         const std::string&  name       () const noexcept { return _name; }
-        // Name of the parser/program to display.
+        /** Name of the parser/program to display. */
         const std::string&  prog       () const noexcept { return _name; }
-        // Text to display before the argument help.
+        /** Text to display before the argument help. */
         const std::string&  description() const noexcept { return _description; }
-        // Text to display after the argument help.
+        /** Text to display after the argument help. */
         const std::string&  epilog     () const noexcept { return _epilog; }
-        // Output stream to use for operations.
+        /** Output stream to use for operations. */
         std::ostream&       ostream    () const noexcept { return _parent != nullptr ? _parent->ostream() :  _out_stream; }
-        // Identifier of the parser (fully qualified name with the entire hierarchy)
+        /** Identifier of the parser (fully qualified name with the entire hierarchy) */
         std::string         identifier () const noexcept
         {
             return (_parent != nullptr ? (_parent->identifier() + " ").c_str() : "") + _name;
         }
+        /** Parent parser for the parser. */
         auto                parent     () const noexcept { return _parent; }
 
-        // Sets the parent for the parser, for which the current object acts as a subcommand.
+        /** Sets the parent for the parser, for which the current object acts as a subcommand. */
         Parser& parent(Parser& _parent) noexcept
         { this->_parent = &_parent; return *this; }
     };

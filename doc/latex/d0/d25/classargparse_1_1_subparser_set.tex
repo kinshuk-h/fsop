@@ -1,0 +1,147 @@
+\hypertarget{classargparse_1_1_subparser_set}{}\doxysection{argparse\+::Subparser\+Set Class Reference}
+\label{classargparse_1_1_subparser_set}\index{argparse::SubparserSet@{argparse::SubparserSet}}
+
+
+Creates an argument type to hold subparsers as a mutually exclusive group.  
+
+
+
+
+{\ttfamily \#include $<$parser.\+hpp$>$}
+
+Inheritance diagram for argparse\+::Subparser\+Set\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d0/d25/classargparse_1_1_subparser_set}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename... Parsers$>$ }\\\mbox{\hyperlink{classargparse_1_1_subparser_set_a9e7cc243dfbfcbf7480f2d20f9ae6166}{Subparser\+Set}} (\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \&parent, std\+::string \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, Parsers \&\&... parsers)
+\begin{DoxyCompactList}\small\item\em Construct a new Subparser Set object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classargparse_1_1_subparser_set_aef6da4333e3dc829e0bc289e2306da57}{usage}} () const noexcept override
+\begin{DoxyCompactList}\small\item\em Describes the usage of the argument through a returned string. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classargparse_1_1_subparser_set_a827286e1d83e7c0ca3fb24a04918e805}{descriptor}} (unsigned tty\+\_\+columns=60) const noexcept override
+\begin{DoxyCompactList}\small\item\em Describes the argument along with the provided explanation. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} $>$ \mbox{\hyperlink{classargparse_1_1_subparser_set_ac9f7c3bba1b409a1be12f610b941f4fa}{clone}} () const override
+\begin{DoxyCompactList}\small\item\em Creates a copy of the argument as a unique\+\_\+ptr for polymorphic usage. \end{DoxyCompactList}\item 
+range\+::iterator \mbox{\hyperlink{classargparse_1_1_subparser_set_a42621882fb54334f38233144f61215b3}{parse\+\_\+args}} (range\+::iterator begin, range\+::iterator end, \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \&values) const override
+\begin{DoxyCompactList}\small\item\em Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Creates an argument type to hold subparsers as a mutually exclusive group. 
+
+\begin{DoxyVerb} Subparsers allow splitting of arguments and functionality across subcommands.
+ Each subparsers is by itself a parser and is allowed to have its own set of argument objects.
+
+ The parent parser delegates the parsing of remaining options to the subparser whose name
+ appears on the command line.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classargparse_1_1_subparser_set_a9e7cc243dfbfcbf7480f2d20f9ae6166}\label{classargparse_1_1_subparser_set_a9e7cc243dfbfcbf7480f2d20f9ae6166}} 
+\index{argparse::SubparserSet@{argparse::SubparserSet}!SubparserSet@{SubparserSet}}
+\index{SubparserSet@{SubparserSet}!argparse::SubparserSet@{argparse::SubparserSet}}
+\doxysubsubsection{\texorpdfstring{SubparserSet()}{SubparserSet()}}
+{\footnotesize\ttfamily template$<$typename... Parsers$>$ \\
+argparse\+::\+Subparser\+Set\+::\+Subparser\+Set (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \&}]{parent,  }\item[{std\+::string}]{dest,  }\item[{Parsers \&\&...}]{parsers }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new Subparser Set object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Parsers} & Types of parser objects. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & Parent program parser for the subparsers. \\
+\hline
+{\em dest} & Destination name for the value indicating the selected subparser\textquotesingle{}s name in the parsed table. \\
+\hline
+{\em parsers} & Parsers to add as subparsers. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classargparse_1_1_subparser_set_ac9f7c3bba1b409a1be12f610b941f4fa}\label{classargparse_1_1_subparser_set_ac9f7c3bba1b409a1be12f610b941f4fa}} 
+\index{argparse::SubparserSet@{argparse::SubparserSet}!clone@{clone}}
+\index{clone@{clone}!argparse::SubparserSet@{argparse::SubparserSet}}
+\doxysubsubsection{\texorpdfstring{clone()}{clone()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} $>$ argparse\+::\+Subparser\+Set\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Creates a copy of the argument as a unique\+\_\+ptr for polymorphic usage. 
+
+
+
+Implements \mbox{\hyperlink{structargparse_1_1_argument_aaf88c843fcd0d01a798cfab5727c5df7}{argparse\+::\+Argument}}.
+
+\mbox{\Hypertarget{classargparse_1_1_subparser_set_a827286e1d83e7c0ca3fb24a04918e805}\label{classargparse_1_1_subparser_set_a827286e1d83e7c0ca3fb24a04918e805}} 
+\index{argparse::SubparserSet@{argparse::SubparserSet}!descriptor@{descriptor}}
+\index{descriptor@{descriptor}!argparse::SubparserSet@{argparse::SubparserSet}}
+\doxysubsubsection{\texorpdfstring{descriptor()}{descriptor()}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Subparser\+Set\+::descriptor (\begin{DoxyParamCaption}\item[{unsigned}]{tty\+\_\+columns = {\ttfamily 60} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Describes the argument along with the provided explanation. 
+
+
+
+Implements \mbox{\hyperlink{structargparse_1_1_argument_af6797371a2a13c03dd0ffcc316d9b392}{argparse\+::\+Argument}}.
+
+\mbox{\Hypertarget{classargparse_1_1_subparser_set_a42621882fb54334f38233144f61215b3}\label{classargparse_1_1_subparser_set_a42621882fb54334f38233144f61215b3}} 
+\index{argparse::SubparserSet@{argparse::SubparserSet}!parse\_args@{parse\_args}}
+\index{parse\_args@{parse\_args}!argparse::SubparserSet@{argparse::SubparserSet}}
+\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}}
+{\footnotesize\ttfamily argparse\+::\+Argument\+::range\+::iterator argparse\+::\+Subparser\+Set\+::parse\+\_\+args (\begin{DoxyParamCaption}\item[{range\+::iterator}]{begin,  }\item[{range\+::iterator}]{end,  }\item[{\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \&}]{values }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & iterator pointing to the beginning of the argument value range. \\
+\hline
+{\em end} & iterator pointing to the end of the argument value range. \\
+\hline
+{\em values} & map (hash table) to store parsed valued for the argument.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{range\+::iterator\} iterator pointing to the next argument value unused by the current argument. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{structargparse_1_1_argument_ace25829c581cf63b33bb2feb58677ae6}{argparse\+::\+Argument}}.
+
+\mbox{\Hypertarget{classargparse_1_1_subparser_set_aef6da4333e3dc829e0bc289e2306da57}\label{classargparse_1_1_subparser_set_aef6da4333e3dc829e0bc289e2306da57}} 
+\index{argparse::SubparserSet@{argparse::SubparserSet}!usage@{usage}}
+\index{usage@{usage}!argparse::SubparserSet@{argparse::SubparserSet}}
+\doxysubsubsection{\texorpdfstring{usage()}{usage()}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Subparser\+Set\+::usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Describes the usage of the argument through a returned string. 
+
+
+
+Implements \mbox{\hyperlink{structargparse_1_1_argument_a72fa41e32edbaa04f7ac3f4076a8c600}{argparse\+::\+Argument}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/argparse/\mbox{\hyperlink{parser_8hpp}{parser.\+hpp}}\item 
+src/argparse/parser.\+cpp\end{DoxyCompactItemize}

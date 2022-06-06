@@ -15,9 +15,6 @@
 
 #include "../common.hpp"
 
-// TODO: Remove
-#include <iostream>
-
 namespace argparse
 {
     /**
@@ -29,14 +26,14 @@ namespace argparse
      */
     struct Argument
     {
-        // Special arity value: allows reading 0 or more values.
+        /** Special arity value: allows reading 0 or more values. */
         static const int ZERO_OR_MORE = -1;
-        // Special arity value: allows reading 1 or more values.
+        /** Special arity value: allows reading 1 or more values. */
         static const int ONE_OR_MORE  = -2;
 
-        // Type of the argument values, as a variant over common argument value types.
+        /** Type of the argument values, as a variant over common argument value types. */
         using value_type = types::argument_value_type;
-        // Type of the collection used for storing unparsed and unprocessed arguments.
+        /** Type of the collection used for storing unparsed and unprocessed arguments. */
         using range = std::vector<std::string_view>;
 
         /**
@@ -202,17 +199,17 @@ namespace argparse
 
         virtual ~Argument() {}
 
-        // The name of the argument to display.
+        /** The name of the argument to display. */
         const std::string& name         () const noexcept { return _name ; }
-        // Alias for the argument (default="").
+        /** Alias for the argument (default=""). */
         const std::string& alias        () const noexcept { return _alias; }
-        // Brief description about the argument (default="").
+        /** Brief description about the argument (default=""). */
         const std::string& help         () const noexcept { return _description; }
-        // Destination name for the argument in the parsed table (default=name).
+        /** Destination name for the argument in the parsed table (default=name). */
         const std::string& destination  () const noexcept { return _destination.empty() ? _name : _destination; }
-        // Number of values to be stored for the argument (default=1).
+        /** Number of values to be stored for the argument (default=1). */
         int                arity        () const noexcept { return _arity; }
-        // Default value for the argument.
+        /** Default value for the argument. */
         std::any           default_value() const
         {
             if(_transform.has_value())
@@ -226,13 +223,13 @@ namespace argparse
                 );
             }
         }
-        // Whether the argument is a positional argument.
+        /** Whether the argument is a positional argument. */
         bool               positional   () const noexcept { return _positional; }
-        // Whether the argument is to be enforced as required.
+        /** Whether the argument is to be enforced as required. */
         bool               required     () const noexcept { return _required; }
-        // Possible choices for the argument's values.
+        /** Possible choices for the argument's values. */
         const auto&        choices      () const noexcept { return _choices; }
-        // Transformation to apply over argument values.
+        /** Transformation to apply over argument values. */
         const auto&        transform    () const noexcept { return _transform; }
 
         /**
@@ -353,11 +350,16 @@ namespace argparse
         { this->_transform = _transform; return *this; }
 
     protected:
-        std::string _name, _alias, _description, _destination;
-        int _arity = 0; bool _required, _positional = false;
-        types::DefaultValue::value_type _defaults;
-        types::Choices::value_type _choices;
-        types::Transform::value_type _transform;
+        std::string _name, /**< The name of the argument to display. */
+                _alias, /**< Alias for the argument (default=""). */
+                _description, /**< Brief description about the argument (default=""). */
+                _destination; /**< Destination name for the argument in the parsed table (default=name). */
+        int _arity = 0; /**< Number of values to be stored for the argument (default=1). */
+        bool _required, /**< Whether the argument is to be enforced as required. */
+            _positional = false; /**< Whether the argument is a positional argument. */
+        types::DefaultValue::value_type _defaults; /**< Default value for the argument. */
+        types::Choices::value_type _choices; /**< Possible choices for the argument's values. */
+        types::Transform::value_type _transform; /**< Transformation to apply over argument values. */
     };
 
     inline const int Argument::ZERO_OR_MORE;

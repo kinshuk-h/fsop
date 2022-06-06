@@ -1,0 +1,90 @@
+\hypertarget{inspect_8hpp}{}\doxysection{include/fsop/inspect.hpp File Reference}
+\label{inspect_8hpp}\index{include/fsop/inspect.hpp@{include/fsop/inspect.hpp}}
+
+
+Defines functions for abstracting system calls for viewing file information.  
+
+
+{\ttfamily \#include $<$variant$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string\+\_\+view$>$}\newline
+{\ttfamily \#include $<$system\+\_\+error$>$}\newline
+{\ttfamily \#include $<$cerrno$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$pwd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{inspect_8hpp_a604b8c2e98860f3d8f83e6eb77347da1}\label{inspect_8hpp_a604b8c2e98860f3d8f83e6eb77347da1}} 
+using {\bfseries fsop\+::stat\+\_\+info} = std\+::variant$<$ struct stat, struct stat64 $>$
+\begin{DoxyCompactList}\small\item\em A variant over stat structures to hold inode information depending on the size requirement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+stat\+\_\+info \mbox{\hyperlink{inspect_8hpp_a90a9ddb257701d70b5aa41cde328ce1d}{fsop\+::inspect\+\_\+file}} (std\+::string\+\_\+view path)
+\begin{DoxyCompactList}\small\item\em Inspect the inode of a file, via the stat system call. \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{inspect_8hpp_a544dbd1a0a6e99e73f914bc4f01ce6e6}{fsop\+::print\+\_\+stat\+\_\+info}} (std\+::ostream \&os, const stat\+\_\+info \&info)
+\begin{DoxyCompactList}\small\item\em Prints information received by a call to \{inspect\+\_\+file\} to a given output stream. Displayed information is presented in a user friendly manner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines functions for abstracting system calls for viewing file information. 
+
+\begin{DoxyAuthor}{Author}
+Kinshuk Vasisht (\href{mailto:kinshuk.mcs21@cs.du.ac.in}{\texttt{ kinshuk.\+mcs21@cs.\+du.\+ac.\+in}}, RN\+: 19) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/05-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{inspect_8hpp_a90a9ddb257701d70b5aa41cde328ce1d}\label{inspect_8hpp_a90a9ddb257701d70b5aa41cde328ce1d}} 
+\index{inspect.hpp@{inspect.hpp}!inspect\_file@{inspect\_file}}
+\index{inspect\_file@{inspect\_file}!inspect.hpp@{inspect.hpp}}
+\doxysubsubsection{\texorpdfstring{inspect\_file()}{inspect\_file()}}
+{\footnotesize\ttfamily auto fsop\+::inspect\+\_\+file (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{path }\end{DoxyParamCaption})}
+
+
+
+Inspect the inode of a file, via the stat system call. 
+
+This function summarizes available data in the inode, as returned by the stat system call and returns the data as a stat object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the file to inspect. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{stat\+\_\+info\} Information related to the file, in a structure large enough to hold it. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{inspect_8hpp_a544dbd1a0a6e99e73f914bc4f01ce6e6}\label{inspect_8hpp_a544dbd1a0a6e99e73f914bc4f01ce6e6}} 
+\index{inspect.hpp@{inspect.hpp}!print\_stat\_info@{print\_stat\_info}}
+\index{print\_stat\_info@{print\_stat\_info}!inspect.hpp@{inspect.hpp}}
+\doxysubsubsection{\texorpdfstring{print\_stat\_info()}{print\_stat\_info()}}
+{\footnotesize\ttfamily std\+::ostream \& fsop\+::print\+\_\+stat\+\_\+info (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{inspect_8hpp_a604b8c2e98860f3d8f83e6eb77347da1}{stat\+\_\+info}} \&}]{info }\end{DoxyParamCaption})}
+
+
+
+Prints information received by a call to \{inspect\+\_\+file\} to a given output stream. Displayed information is presented in a user friendly manner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & The output stream to write content to. \\
+\hline
+{\em info} & The structure object containing information to display. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{std\+::ostream\&\} Reference to the output stream for cascading operations. 
+\end{DoxyReturn}

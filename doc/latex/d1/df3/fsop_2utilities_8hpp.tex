@@ -1,0 +1,49 @@
+\hypertarget{fsop_2utilities_8hpp}{}\doxysection{include/fsop/utilities.hpp File Reference}
+\label{fsop_2utilities_8hpp}\index{include/fsop/utilities.hpp@{include/fsop/utilities.hpp}}
+
+
+Defines utility functions for use with the fsop module\textquotesingle{}s functions.  
+
+
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$string\+\_\+view$>$}\newline
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacefsop_1_1utils}{fsop\+::utils}}
+\begin{DoxyCompactList}\small\item\em Defines common utilities for use with filesystem operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+mode\+\_\+t \mbox{\hyperlink{namespacefsop_1_1utils_a964515decd69a30025527c60ae9a4db7}{fsop\+::utils\+::parse\+\_\+permissions}} (std\+::string\+\_\+view perms)
+\begin{DoxyCompactList}\small\item\em Parses a given permission string into an integral value with bits set as per given permissions. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacefsop_1_1utils_a37dc160d5e6abecfafff4f0678b5aa78}{fsop\+::utils\+::to\+\_\+permissions}} (mode\+\_\+t permissions)
+\begin{DoxyCompactList}\small\item\em Returns a parseable string representation of a given numerical permissions entry. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacefsop_1_1utils_acdf39669a2f32b83a055251bc76ac410}{fsop\+::utils\+::parse\+\_\+seek\+\_\+whence}} (std\+::string\+\_\+view whence)
+\begin{DoxyCompactList}\small\item\em Parses the value of whence for offset movement. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacefsop_1_1utils_a4d4690b2e165af406b18438aef8201af}{fsop\+::utils\+::to\+\_\+type}} (mode\+\_\+t type)
+\begin{DoxyCompactList}\small\item\em Returns the name of the file type corresponding to the file type number stored in the inode. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Integral , typename  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+integral\+\_\+v$<$\+Integral$>$, std\+::nullptr\+\_\+t$>$$>$ }\\auto \mbox{\hyperlink{namespacefsop_1_1utils_a1999ccb2c6acd6c8b5ff9c52817bf0d1}{fsop\+::utils\+::to\+\_\+human\+\_\+readable\+\_\+size}} (Integral byte\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Converts a given file size in bytes to a human readable form. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacefsop_1_1utils_a7db1ad8ccebbaae8d081383c6660cc7a}{fsop\+::utils\+::current\+\_\+directory}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current working directory of the process. Internally invokes the {\ttfamily getcwd()} syscall. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacefsop_1_1utils_a7d33b16ea364c25ca23847c5bf9b2bcc}{fsop\+::utils\+::change\+\_\+directory}} (std\+::string\+\_\+view path)
+\begin{DoxyCompactList}\small\item\em Sets the current working directory to the path indicated by the given argument. Internally invokes the {\ttfamily chdir} syscall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines utility functions for use with the fsop module\textquotesingle{}s functions. 
+
+\begin{DoxyAuthor}{Author}
+Kinshuk Vasisht (\href{mailto:kinshuk.mcs21@cs.du.ac.in}{\texttt{ kinshuk.\+mcs21@cs.\+du.\+ac.\+in}}, RN\+: 19) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/05-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}

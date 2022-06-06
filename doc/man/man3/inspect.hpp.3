@@ -1,0 +1,116 @@
+.TH "include/fsop/inspect.hpp" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/fsop/inspect.hpp \- Defines functions for abstracting system calls for viewing file information\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <variant>\fP
+.br
+\fC#include <iomanip>\fP
+.br
+\fC#include <iostream>\fP
+.br
+\fC#include <string_view>\fP
+.br
+\fC#include <system_error>\fP
+.br
+\fC#include <cerrno>\fP
+.br
+\fC#include <cstring>\fP
+.br
+\fC#include <pwd\&.h>\fP
+.br
+\fC#include <sys/stat\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBfsop::stat_info\fP = std::variant< struct stat, struct stat64 >"
+.br
+.RI "A variant over stat structures to hold inode information depending on the size requirement\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "stat_info \fBfsop::inspect_file\fP (std::string_view path)"
+.br
+.RI "Inspect the inode of a file, via the stat system call\&. "
+.ti -1c
+.RI "std::ostream & \fBfsop::print_stat_info\fP (std::ostream &os, const stat_info &info)"
+.br
+.RI "Prints information received by a call to {inspect_file} to a given output stream\&. Displayed information is presented in a user friendly manner\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines functions for abstracting system calls for viewing file information\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19) 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+1\&.0 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2022-05-28
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2022 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "auto fsop::inspect_file (std::string_view path)"
+
+.PP
+Inspect the inode of a file, via the stat system call\&. This function summarizes available data in the inode, as returned by the stat system call and returns the data as a stat object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP Path to the file to inspect\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{stat_info} Information related to the file, in a structure large enough to hold it\&. 
+.RE
+.PP
+
+.SS "std::ostream & fsop::print_stat_info (std::ostream & os, const \fBstat_info\fP & info)"
+
+.PP
+Prints information received by a call to {inspect_file} to a given output stream\&. Displayed information is presented in a user friendly manner\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIos\fP The output stream to write content to\&. 
+.br
+\fIinfo\fP The structure object containing information to display\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{std::ostream&} Reference to the output stream for cascading operations\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

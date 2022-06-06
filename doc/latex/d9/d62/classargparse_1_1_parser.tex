@@ -1,0 +1,414 @@
+\hypertarget{classargparse_1_1_parser}{}\doxysection{argparse\+::Parser Class Reference}
+\label{classargparse_1_1_parser}\index{argparse::Parser@{argparse::Parser}}
+
+
+Represents an argument parser, which can parse argument values from arbitrary ranges using provided argument objects describing parsing information.  
+
+
+
+
+{\ttfamily \#include $<$parser.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Name\+Type  = std\+::nullptr\+\_\+t, typename Description\+Type  = std\+::nullptr\+\_\+t, typename Epilog\+Type  = std\+::nullptr\+\_\+t, typename Output\+Stream\+Type  = std\+::nullptr\+\_\+t$>$ }\\\mbox{\hyperlink{classargparse_1_1_parser_ab7304d4049c806610e182e7cff8bbc04}{Parser}} (Name\+Type \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}=nullptr, Description\+Type \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}=nullptr, Epilog\+Type \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}=nullptr, Output\+Stream\+Type \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\+\_\+stream}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classargparse_1_1_parser_aa8da38f154db3563e8b3000afbbcd479}{Parser}} (\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \&\&parser)=default
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} object (move construct). This constructor moves content off the rvalue reference, effectively saving on allocations (only copying of pointers and other internal references is performed). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classargparse_1_1_parser_a3ade6aa7970b5a07d48e745e5327f417}{Parser}} (const \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \&parser)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} object (copy construct). This constructor performs a deep copy of the given lvalue reference, by creating copies of all arguments and other members, which performs multiple allaocations as required. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \& \mbox{\hyperlink{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}{add\+\_\+argument}} (\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \&\&argument)
+\begin{DoxyCompactList}\small\item\em Adds a new argument to the parser\textquotesingle{}s table of arguments. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Arguments$>$ }\\\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \& \mbox{\hyperlink{classargparse_1_1_parser_ae91d0284b0868d1bc0430129273b8af8}{add\+\_\+arguments}} (Arguments \&\&... arguments)
+\begin{DoxyCompactList}\small\item\em Adds multiple arguments to the parser\textquotesingle{}s table of arguments. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Parsers$>$ }\\\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \& \mbox{\hyperlink{classargparse_1_1_parser_a5713730520dfe2725d1a03eed03ffde3}{add\+\_\+subparsers}} (std\+::string \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, Parsers \&\&... parsers)
+\begin{DoxyCompactList}\small\item\em Adds subparsers to the parser\textquotesingle{}s table of arguments. \end{DoxyCompactList}\item 
+Argument\+::range\+::iterator \mbox{\hyperlink{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}{parse\+\_\+args}} (Argument\+::range\+::iterator begin, Argument\+::range\+::iterator end, \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \&values)
+\begin{DoxyCompactList}\small\item\em Parses arguments from a given range defined by start and end iterators. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Input\+Iter $>$ }\\\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \mbox{\hyperlink{classargparse_1_1_parser_aa826b287cbc4475fe787d25daba10972}{parse\+\_\+args}} (Input\+Iter begin, Input\+Iter end)
+\begin{DoxyCompactList}\small\item\em Parses arguments from a given range defined by start and end iterators. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \mbox{\hyperlink{classargparse_1_1_parser_a0c2521f21dcf5765d5bf380eed466aae}{parse\+\_\+args}} (int argc, const char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Parses a set of arguments from a given argument vector referred by the size and pointer to the first element of the vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \mbox{\hyperlink{classargparse_1_1_parser_a20de3dcec529713f4ae764b25985b5c9}{parse\+\_\+args}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Parses a set of arguments from a given argument vector referred by the size and pointer to the first element of the vector. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classargparse_1_1_parser_a891dbd3d2d08bb4f3a36a90be080206b}{help}} (unsigned tty\+\_\+columns=60) const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a concise help created using argument descriptors. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classargparse_1_1_parser_aa713e74712cd45c2b728121c0470afd2}{usage}} (unsigned tty\+\_\+columns=60) const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a concise help created using argument descriptors. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}} () const noexcept
+\item 
+const std\+::string \& \mbox{\hyperlink{classargparse_1_1_parser_af97fbb2257d687e2dc64c23323d0a7ba}{prog}} () const noexcept
+\item 
+const std\+::string \& \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}} () const noexcept
+\item 
+const std\+::string \& \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}} () const noexcept
+\item 
+std\+::ostream \& \mbox{\hyperlink{classargparse_1_1_parser_a8cd8d80a2474196cd2c4eceab69b1a4c}{ostream}} () const noexcept
+\item 
+std\+::string \mbox{\hyperlink{classargparse_1_1_parser_a57cfcee5165736f6dad20bbb9359dee2}{identifier}} () const noexcept
+\item 
+auto \mbox{\hyperlink{classargparse_1_1_parser_a392a5b9ba09e0acdf09cc7cc4b78f75c}{parent}} () const noexcept
+\item 
+\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \& \mbox{\hyperlink{classargparse_1_1_parser_a8915fdcdf1880d3a85e4272797d0f4eb}{parent}} (\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \&\+\_\+parent) noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an argument parser, which can parse argument values from arbitrary ranges using provided argument objects describing parsing information. 
+
+Objects of this type can hold argument objects (switches, optional \& positional arguments) as well as complex structures such as mutually exclusive groups and subparsers.
+
+The parser can then parse values for specified arguments from any range specified by its start and end iterators.
+
+Further, the parser can generate a standard help description compiling descriptions of various arguments together. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classargparse_1_1_parser_ab7304d4049c806610e182e7cff8bbc04}\label{classargparse_1_1_parser_ab7304d4049c806610e182e7cff8bbc04}} 
+\index{argparse::Parser@{argparse::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Name\+Type  = std\+::nullptr\+\_\+t, typename Description\+Type  = std\+::nullptr\+\_\+t, typename Epilog\+Type  = std\+::nullptr\+\_\+t, typename Output\+Stream\+Type  = std\+::nullptr\+\_\+t$>$ \\
+argparse\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{Name\+Type}]{name = {\ttfamily nullptr},  }\item[{Description\+Type}]{description = {\ttfamily nullptr},  }\item[{Epilog\+Type}]{epilog = {\ttfamily nullptr},  }\item[{Output\+Stream\+Type}]{output\+\_\+stream = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Name\+Type} & Placeholder type for a named argument. \\
+\hline
+{\em Description\+Type} & Placeholder type for a named argument. \\
+\hline
+{\em Epilog\+Type} & Placeholder type for a named argument. \\
+\hline
+{\em Output\+Stream\+Type} & Placeholder type for a named argument.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of the parser to display (default = \char`\"{}program\char`\"{}). \\
+\hline
+{\em description} & Text to display before the argument help (default = \char`\"{}\char`\"{}). \\
+\hline
+{\em epilog} & Text to display after the argument help (default = \char`\"{}\char`\"{}). \\
+\hline
+{\em output\+\_\+stream} & Stream to use for parser output (default = std\+::cout). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classargparse_1_1_parser_aa8da38f154db3563e8b3000afbbcd479}\label{classargparse_1_1_parser_aa8da38f154db3563e8b3000afbbcd479}} 
+\index{argparse::Parser@{argparse::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily argparse\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \&\&}]{parser }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Construct a new \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} object (move construct). This constructor moves content off the rvalue reference, effectively saving on allocations (only copying of pointers and other internal references is performed). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parser} & Temporary parser object to move content from. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classargparse_1_1_parser_a3ade6aa7970b5a07d48e745e5327f417}\label{classargparse_1_1_parser_a3ade6aa7970b5a07d48e745e5327f417}} 
+\index{argparse::Parser@{argparse::Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{Parser()}{Parser()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily argparse\+::\+Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \&}]{parser }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} object (copy construct). This constructor performs a deep copy of the given lvalue reference, by creating copies of all arguments and other members, which performs multiple allaocations as required. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parser} & \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} object to copy content from. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}\label{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}} 
+\index{argparse::Parser@{argparse::Parser}!add\_argument@{add\_argument}}
+\index{add\_argument@{add\_argument}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{add\_argument()}{add\_argument()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classargparse_1_1_parser}{argparse\+::\+Parser}} \& argparse\+::\+Parser\+::add\+\_\+argument (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \&\&}]{argument }\end{DoxyParamCaption})}
+
+
+
+Adds a new argument to the parser\textquotesingle{}s table of arguments. 
+
+The argument parser can then parse a given argument vector for matching arguments and return a mapping of processed values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argument} & The argument to add to the parser table. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\&\} A reference to the current parser object, for chaining method calls. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classargparse_1_1_parser_ae91d0284b0868d1bc0430129273b8af8}\label{classargparse_1_1_parser_ae91d0284b0868d1bc0430129273b8af8}} 
+\index{argparse::Parser@{argparse::Parser}!add\_arguments@{add\_arguments}}
+\index{add\_arguments@{add\_arguments}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{add\_arguments()}{add\_arguments()}}
+{\footnotesize\ttfamily template$<$typename... Arguments$>$ \\
+\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \& argparse\+::\+Parser\+::add\+\_\+arguments (\begin{DoxyParamCaption}\item[{Arguments \&\&...}]{arguments }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds multiple arguments to the parser\textquotesingle{}s table of arguments. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Arguments} & Types for individual argument objects. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em arguments} & List of arguments to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\&\} A reference to the current parser object, for chaining method calls. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classargparse_1_1_parser_a5713730520dfe2725d1a03eed03ffde3}\label{classargparse_1_1_parser_a5713730520dfe2725d1a03eed03ffde3}} 
+\index{argparse::Parser@{argparse::Parser}!add\_subparsers@{add\_subparsers}}
+\index{add\_subparsers@{add\_subparsers}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{add\_subparsers()}{add\_subparsers()}}
+{\footnotesize\ttfamily template$<$typename... Parsers$>$ \\
+\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \& argparse\+::\+Parser\+::add\+\_\+subparsers (\begin{DoxyParamCaption}\item[{std\+::string}]{dest,  }\item[{Parsers \&\&...}]{parsers }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds subparsers to the parser\textquotesingle{}s table of arguments. 
+
+Subparsers allow splitting of arguments and functionality across subcommands. Each subparsers is by itself a parser and is allowed to have its own set of argument objects.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Parsers} & Types for individual parser objects. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em dest} & Destination name for the value indicating the name of the selected parser. \\
+\hline
+{\em parsers} & List of parsers to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\&\} A reference to the current parser object, for chaining method calls. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}\label{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}} 
+\index{argparse::Parser@{argparse::Parser}!description@{description}}
+\index{description@{description}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{description()}{description()}}
+{\footnotesize\ttfamily const std\+::string \& argparse\+::\+Parser\+::description (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Text to display before the argument help. \mbox{\Hypertarget{classargparse_1_1_parser_af4364831bdf36b665467000855436532}\label{classargparse_1_1_parser_af4364831bdf36b665467000855436532}} 
+\index{argparse::Parser@{argparse::Parser}!epilog@{epilog}}
+\index{epilog@{epilog}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{epilog()}{epilog()}}
+{\footnotesize\ttfamily const std\+::string \& argparse\+::\+Parser\+::epilog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Text to display after the argument help. \mbox{\Hypertarget{classargparse_1_1_parser_a891dbd3d2d08bb4f3a36a90be080206b}\label{classargparse_1_1_parser_a891dbd3d2d08bb4f3a36a90be080206b}} 
+\index{argparse::Parser@{argparse::Parser}!help@{help}}
+\index{help@{help}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{help()}{help()}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Parser\+::help (\begin{DoxyParamCaption}\item[{unsigned}]{tty\+\_\+columns = {\ttfamily 60} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Returns a concise help created using argument descriptors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tty\+\_\+columns} & maximum number of terminal columns (characters) to span (default=60).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{std\+::string\} The generated help. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classargparse_1_1_parser_a57cfcee5165736f6dad20bbb9359dee2}\label{classargparse_1_1_parser_a57cfcee5165736f6dad20bbb9359dee2}} 
+\index{argparse::Parser@{argparse::Parser}!identifier@{identifier}}
+\index{identifier@{identifier}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{identifier()}{identifier()}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Parser\+::identifier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Identifier of the parser (fully qualified name with the entire hierarchy) \mbox{\Hypertarget{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}\label{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}} 
+\index{argparse::Parser@{argparse::Parser}!name@{name}}
+\index{name@{name}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily const std\+::string \& argparse\+::\+Parser\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Name of the parser/program to display. \mbox{\Hypertarget{classargparse_1_1_parser_a8cd8d80a2474196cd2c4eceab69b1a4c}\label{classargparse_1_1_parser_a8cd8d80a2474196cd2c4eceab69b1a4c}} 
+\index{argparse::Parser@{argparse::Parser}!ostream@{ostream}}
+\index{ostream@{ostream}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{ostream()}{ostream()}}
+{\footnotesize\ttfamily std\+::ostream \& argparse\+::\+Parser\+::ostream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Output stream to use for operations. \mbox{\Hypertarget{classargparse_1_1_parser_a392a5b9ba09e0acdf09cc7cc4b78f75c}\label{classargparse_1_1_parser_a392a5b9ba09e0acdf09cc7cc4b78f75c}} 
+\index{argparse::Parser@{argparse::Parser}!parent@{parent}}
+\index{parent@{parent}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{parent()}{parent()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto argparse\+::\+Parser\+::parent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Parent parser for the parser. \mbox{\Hypertarget{classargparse_1_1_parser_a8915fdcdf1880d3a85e4272797d0f4eb}\label{classargparse_1_1_parser_a8915fdcdf1880d3a85e4272797d0f4eb}} 
+\index{argparse::Parser@{argparse::Parser}!parent@{parent}}
+\index{parent@{parent}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{parent()}{parent()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \& argparse\+::\+Parser\+::parent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \&}]{\+\_\+parent }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Sets the parent for the parser, for which the current object acts as a subcommand. \mbox{\Hypertarget{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}\label{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}} 
+\index{argparse::Parser@{argparse::Parser}!parse\_args@{parse\_args}}
+\index{parse\_args@{parse\_args}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily auto argparse\+::\+Parser\+::parse\+\_\+args (\begin{DoxyParamCaption}\item[{Argument\+::range\+::iterator}]{begin,  }\item[{Argument\+::range\+::iterator}]{end,  }\item[{\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \&}]{values }\end{DoxyParamCaption})}
+
+
+
+Parses arguments from a given range defined by start and end iterators. 
+
+This function performs the necessary parsing to bind values for arguments. The values corresponding to arguments is returned as an {\ttfamily unordered\+\_\+map} mapping destination names to the {\ttfamily std\+::any} type for holding values of arbitrary types.
+
+This function has a signature similar to those of arguments, which makes this overload useful for use with subparsers for parsing parent and child arguments.
+
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & The iterator to the beginning of the range of arguments. \\
+\hline
+{\em end} & The iterator to the end of the range of arguments. \\
+\hline
+{\em values} & Result map to store argument values.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{Argument\+::range\+::iterator\} iterators to the start of the remaining sequence.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{parse\+\_\+error\}} & describes inconsistencies present in the range corresponding to argument requirements. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classargparse_1_1_parser_aa826b287cbc4475fe787d25daba10972}\label{classargparse_1_1_parser_aa826b287cbc4475fe787d25daba10972}} 
+\index{argparse::Parser@{argparse::Parser}!parse\_args@{parse\_args}}
+\index{parse\_args@{parse\_args}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename Input\+Iter $>$ \\
+\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} argparse\+::\+Parser\+::parse\+\_\+args (\begin{DoxyParamCaption}\item[{Input\+Iter}]{begin,  }\item[{Input\+Iter}]{end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parses arguments from a given range defined by start and end iterators. 
+
+This function performs the necessary parsing to bind values for arguments. The values corresponding to arguments is returned as an {\ttfamily unordered\+\_\+map} mapping destination names to the {\ttfamily std\+::any} type for holding values of arbitrary types.
+
+This is an alternate variant of the parse\+\_\+args function where the map is returned instead of the data being saved inside an lvalue argument.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Input\+Iter} & Type of the iterator of the collection. Must satisfy requirements for an input iterator.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & The iterator to the beginning of the range of arguments. \\
+\hline
+{\em end} & The iterator to the end of the range of arguments.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}}\} map object containing values for parsed arguments.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{parse\+\_\+error\}} & describes inconsistencies present in the range corresponding to argument requirements. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classargparse_1_1_parser_a20de3dcec529713f4ae764b25985b5c9}\label{classargparse_1_1_parser_a20de3dcec529713f4ae764b25985b5c9}} 
+\index{argparse::Parser@{argparse::Parser}!parse\_args@{parse\_args}}
+\index{parse\_args@{parse\_args}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} argparse\+::\+Parser\+::parse\+\_\+args (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parses a set of arguments from a given argument vector referred by the size and pointer to the first element of the vector. 
+
+This function is a wrapper over the general {\ttfamily parse\+\_\+args} for arbitrary collections, for convenience to use with the argument vector parameters accepted by {\ttfamily main} in the C/\+C++ standard.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & the argument count\+: number of arguments to parse. \\
+\hline
+{\em argv} & the argument vector\+: collection of arguments (strings).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}}\} map object containing values for parsed arguments.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{parse\+\_\+error\}} & describes inconsistencies present in the range corresponding to argument requirements. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classargparse_1_1_parser_a0c2521f21dcf5765d5bf380eed466aae}\label{classargparse_1_1_parser_a0c2521f21dcf5765d5bf380eed466aae}} 
+\index{argparse::Parser@{argparse::Parser}!parse\_args@{parse\_args}}
+\index{parse\_args@{parse\_args}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} argparse\+::\+Parser\+::parse\+\_\+args (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{const char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Parses a set of arguments from a given argument vector referred by the size and pointer to the first element of the vector. 
+
+This function is a wrapper over the general {\ttfamily parse\+\_\+args} for arbitrary collections, for convenience to use with the argument vector parameters accepted by {\ttfamily main} in the C/\+C++ standard.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & the argument count\+: number of arguments to parse. \\
+\hline
+{\em argv} & the argument vector\+: collection of arguments (strings).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}}\} map object containing values for parsed arguments.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{parse\+\_\+error\}} & describes inconsistencies present in the range corresponding to argument requirements. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{classargparse_1_1_parser_af97fbb2257d687e2dc64c23323d0a7ba}\label{classargparse_1_1_parser_af97fbb2257d687e2dc64c23323d0a7ba}} 
+\index{argparse::Parser@{argparse::Parser}!prog@{prog}}
+\index{prog@{prog}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{prog()}{prog()}}
+{\footnotesize\ttfamily const std\+::string \& argparse\+::\+Parser\+::prog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Name of the parser/program to display. \mbox{\Hypertarget{classargparse_1_1_parser_aa713e74712cd45c2b728121c0470afd2}\label{classargparse_1_1_parser_aa713e74712cd45c2b728121c0470afd2}} 
+\index{argparse::Parser@{argparse::Parser}!usage@{usage}}
+\index{usage@{usage}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{usage()}{usage()}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Parser\+::usage (\begin{DoxyParamCaption}\item[{unsigned}]{tty\+\_\+columns = {\ttfamily 60} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Returns a concise help created using argument descriptors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tty\+\_\+columns} & maximum number of terminal columns (characters) to span (default=60).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{std\+::string\} The generated help. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/argparse/\mbox{\hyperlink{parser_8hpp}{parser.\+hpp}}\item 
+src/argparse/parser.\+cpp\end{DoxyCompactItemize}

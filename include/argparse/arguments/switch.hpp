@@ -33,6 +33,8 @@ namespace argparse
          * @tparam DefaultValueType Placeholder type for named arguments.
          * @tparam DescriptionType Placeholder type for named arguments.
          * @tparam NegatedType Placeholder type for named arguments.
+         * @tparam ChoicesType Placeholder type for named arguments.
+         * @tparam TransformType Placeholder type for named arguments.
          *
          * @param name The name of the argument to display.
          * @param alias Alias for the argument (default="").
@@ -40,6 +42,8 @@ namespace argparse
          * @param defaults Default value for the argument.
          * @param help Brief description about the argument (default="").
          * @param negated Treat flag presence as falsy.
+         * @param choices Possible choices for the argument's values.
+         * @param transform Transformation to apply over argument values.
          */
         template<
             typename NameType = std::nullptr_t,
@@ -97,6 +101,7 @@ namespace argparse
         ) const override;
 
     protected:
+        /** Treat flag presence as falsy. */
         bool _negated = false;
     };
 }

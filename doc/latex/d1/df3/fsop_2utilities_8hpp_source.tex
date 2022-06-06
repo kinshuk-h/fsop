@@ -1,0 +1,50 @@
+\hypertarget{fsop_2utilities_8hpp_source}{}\doxysection{utilities.\+hpp}
+\label{fsop_2utilities_8hpp_source}\index{include/fsop/utilities.hpp@{include/fsop/utilities.hpp}}
+\mbox{\hyperlink{fsop_2utilities_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef FSOP\_UTILITIES\_HPP\_INCLUDED}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define FSOP\_UTILITIES\_HPP\_INCLUDED}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <tuple>}       \textcolor{comment}{// std::make\_tuple}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <string>}      \textcolor{comment}{// std::to\_string}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <string\_view>} \textcolor{comment}{// std::string\_view}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{22 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespacefsop_1_1utils}{fsop::utils}}}
+\DoxyCodeLine{23 \{}
+\DoxyCodeLine{36     mode\_t \mbox{\hyperlink{namespacefsop_1_1utils_a964515decd69a30025527c60ae9a4db7}{parse\_permissions}}(std::string\_view perms);}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{44     std::string \mbox{\hyperlink{namespacefsop_1_1utils_a37dc160d5e6abecfafff4f0678b5aa78}{to\_permissions}}(mode\_t permissions);}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{52     \textcolor{keywordtype}{int} \mbox{\hyperlink{namespacefsop_1_1utils_acdf39669a2f32b83a055251bc76ac410}{parse\_seek\_whence}}(std::string\_view whence);}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{61     std::string \mbox{\hyperlink{namespacefsop_1_1utils_a4d4690b2e165af406b18438aef8201af}{to\_type}}(mode\_t type);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{66     \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* filesize\_units[7] = \{ \textcolor{stringliteral}{"{}"{}}, \textcolor{stringliteral}{"{}Ki"{}}, \textcolor{stringliteral}{"{}Mi"{}}, \textcolor{stringliteral}{"{}Gi"{}}, \textcolor{stringliteral}{"{}Ti"{}}, \textcolor{stringliteral}{"{}Pi"{}}, \textcolor{stringliteral}{"{}Ei"{}} \};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{81     \textcolor{keyword}{template}<}
+\DoxyCodeLine{82         \textcolor{keyword}{typename} Integral,}
+\DoxyCodeLine{83         \textcolor{keyword}{typename} = std::enable\_if\_t<std::is\_integral\_v<Integral>, std::nullptr\_t>}
+\DoxyCodeLine{84     >}
+\DoxyCodeLine{85     \textcolor{keyword}{auto} \mbox{\hyperlink{namespacefsop_1_1utils_a1999ccb2c6acd6c8b5ff9c52817bf0d1}{to\_human\_readable\_size}}(Integral byte\_size)}
+\DoxyCodeLine{86     \{}
+\DoxyCodeLine{87         \textcolor{keywordtype}{unsigned} index = 0; Integral power = 0;}
+\DoxyCodeLine{88         \textcolor{keywordflow}{while}((byte\_size >> power) > 512) \{ power += 10; ++index; \}}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         Integral size = (byte\_size >> power), fraction = (byte\_size \& ((1 << power) -\/ 1));}
+\DoxyCodeLine{91         fraction = (fraction * 1000) >> power;}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93         \textcolor{keywordtype}{int} dgt = fraction \% 10; fraction /= 10;}
+\DoxyCodeLine{94         \textcolor{keywordflow}{if}(dgt > 4) \{ ++fraction; \}}
+\DoxyCodeLine{95         \textcolor{keywordflow}{if}(fraction > 99) \{ fraction = 0; ++size; \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \textcolor{keywordflow}{return} std::make\_tuple(size, fraction, filesize\_units[index]);}
+\DoxyCodeLine{98     \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{107     std::string \mbox{\hyperlink{namespacefsop_1_1utils_a7db1ad8ccebbaae8d081383c6660cc7a}{current\_directory}}();}
+\DoxyCodeLine{115     \textcolor{keywordtype}{void} \mbox{\hyperlink{namespacefsop_1_1utils_a7d33b16ea364c25ca23847c5bf9b2bcc}{change\_directory}}(std::string\_view path);}
+\DoxyCodeLine{116 \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// FSOP\_UTILITIES\_HPP\_INCLUDED}}
+
+\end{DoxyCode}

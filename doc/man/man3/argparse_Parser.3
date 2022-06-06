@@ -1,0 +1,365 @@
+.TH "argparse::Parser" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+argparse::Parser \- Represents an argument parser, which can parse argument values from arbitrary ranges using provided argument objects describing parsing information\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <parser\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename NameType  = std::nullptr_t, typename DescriptionType  = std::nullptr_t, typename EpilogType  = std::nullptr_t, typename OutputStreamType  = std::nullptr_t> \fBParser\fP (NameType \fBname\fP=nullptr, DescriptionType \fBdescription\fP=nullptr, EpilogType \fBepilog\fP=nullptr, OutputStreamType \fBoutput_stream\fP=nullptr)"
+.br
+.RI "Construct a new \fBParser\fP object\&. "
+.ti -1c
+.RI "\fBParser\fP (\fBParser\fP &&parser)=default"
+.br
+.RI "Construct a new \fBParser\fP object (move construct)\&. This constructor moves content off the rvalue reference, effectively saving on allocations (only copying of pointers and other internal references is performed)\&. "
+.ti -1c
+.RI "\fBParser\fP (const \fBParser\fP &parser)"
+.br
+.RI "Construct a new \fBParser\fP object (copy construct)\&. This constructor performs a deep copy of the given lvalue reference, by creating copies of all arguments and other members, which performs multiple allaocations as required\&. "
+.ti -1c
+.RI "\fBParser\fP & \fBadd_argument\fP (\fBArgument\fP &&argument)"
+.br
+.RI "Adds a new argument to the parser's table of arguments\&. "
+.ti -1c
+.RI "template<typename\&.\&.\&. Arguments> \fBParser\fP & \fBadd_arguments\fP (Arguments &&\&.\&.\&. arguments)"
+.br
+.RI "Adds multiple arguments to the parser's table of arguments\&. "
+.ti -1c
+.RI "template<typename\&.\&.\&. Parsers> \fBParser\fP & \fBadd_subparsers\fP (std::string \fBdest\fP, Parsers &&\&.\&.\&. parsers)"
+.br
+.RI "Adds subparsers to the parser's table of arguments\&. "
+.ti -1c
+.RI "Argument::range::iterator \fBparse_args\fP (Argument::range::iterator begin, Argument::range::iterator end, \fBtypes::result_map\fP &values)"
+.br
+.RI "Parses arguments from a given range defined by start and end iterators\&. "
+.ti -1c
+.RI "template<typename InputIter > \fBtypes::result_map\fP \fBparse_args\fP (InputIter begin, InputIter end)"
+.br
+.RI "Parses arguments from a given range defined by start and end iterators\&. "
+.ti -1c
+.RI "\fBtypes::result_map\fP \fBparse_args\fP (int argc, const char **argv)"
+.br
+.RI "Parses a set of arguments from a given argument vector referred by the size and pointer to the first element of the vector\&. "
+.ti -1c
+.RI "\fBtypes::result_map\fP \fBparse_args\fP (int argc, char **argv)"
+.br
+.RI "Parses a set of arguments from a given argument vector referred by the size and pointer to the first element of the vector\&. "
+.ti -1c
+.RI "std::string \fBhelp\fP (unsigned tty_columns=60) const noexcept"
+.br
+.RI "Returns a concise help created using argument descriptors\&. "
+.ti -1c
+.RI "std::string \fBusage\fP (unsigned tty_columns=60) const noexcept"
+.br
+.RI "Returns a concise help created using argument descriptors\&. "
+.ti -1c
+.RI "const std::string & \fBname\fP () const noexcept"
+.br
+.ti -1c
+.RI "const std::string & \fBprog\fP () const noexcept"
+.br
+.ti -1c
+.RI "const std::string & \fBdescription\fP () const noexcept"
+.br
+.ti -1c
+.RI "const std::string & \fBepilog\fP () const noexcept"
+.br
+.ti -1c
+.RI "std::ostream & \fBostream\fP () const noexcept"
+.br
+.ti -1c
+.RI "std::string \fBidentifier\fP () const noexcept"
+.br
+.ti -1c
+.RI "auto \fBparent\fP () const noexcept"
+.br
+.ti -1c
+.RI "\fBParser\fP & \fBparent\fP (\fBParser\fP &_parent) noexcept"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents an argument parser, which can parse argument values from arbitrary ranges using provided argument objects describing parsing information\&. 
+
+Objects of this type can hold argument objects (switches, optional & positional arguments) as well as complex structures such as mutually exclusive groups and subparsers\&.
+.PP
+The parser can then parse values for specified arguments from any range specified by its start and end iterators\&.
+.PP
+Further, the parser can generate a standard help description compiling descriptions of various arguments together\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename NameType  = std::nullptr_t, typename DescriptionType  = std::nullptr_t, typename EpilogType  = std::nullptr_t, typename OutputStreamType  = std::nullptr_t> argparse::Parser::Parser (NameType name = \fCnullptr\fP, DescriptionType description = \fCnullptr\fP, EpilogType epilog = \fCnullptr\fP, OutputStreamType output_stream = \fCnullptr\fP)\fC [inline]\fP"
+
+.PP
+Construct a new \fBParser\fP object\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fINameType\fP Placeholder type for a named argument\&. 
+.br
+\fIDescriptionType\fP Placeholder type for a named argument\&. 
+.br
+\fIEpilogType\fP Placeholder type for a named argument\&. 
+.br
+\fIOutputStreamType\fP Placeholder type for a named argument\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP Name of the parser to display (default = 'program')\&. 
+.br
+\fIdescription\fP Text to display before the argument help (default = '')\&. 
+.br
+\fIepilog\fP Text to display after the argument help (default = '')\&. 
+.br
+\fIoutput_stream\fP Stream to use for parser output (default = std::cout)\&. 
+.RE
+.PP
+
+.SS "argparse::Parser::Parser (\fBParser\fP && parser)\fC [default]\fP"
+
+.PP
+Construct a new \fBParser\fP object (move construct)\&. This constructor moves content off the rvalue reference, effectively saving on allocations (only copying of pointers and other internal references is performed)\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIparser\fP Temporary parser object to move content from\&. 
+.RE
+.PP
+
+.SS "argparse::Parser::Parser (const \fBParser\fP & parser)\fC [inline]\fP"
+
+.PP
+Construct a new \fBParser\fP object (copy construct)\&. This constructor performs a deep copy of the given lvalue reference, by creating copies of all arguments and other members, which performs multiple allaocations as required\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIparser\fP \fBParser\fP object to copy content from\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "\fBargparse::Parser\fP & argparse::Parser::add_argument (\fBArgument\fP && argument)"
+
+.PP
+Adds a new argument to the parser's table of arguments\&. The argument parser can then parse a given argument vector for matching arguments and return a mapping of processed values\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIargument\fP The argument to add to the parser table\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBParser\fP&} A reference to the current parser object, for chaining method calls\&. 
+.RE
+.PP
+
+.SS "template<typename\&.\&.\&. Arguments> \fBParser\fP & argparse::Parser::add_arguments (Arguments &&\&.\&.\&. arguments)\fC [inline]\fP"
+
+.PP
+Adds multiple arguments to the parser's table of arguments\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIArguments\fP Types for individual argument objects\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIarguments\fP List of arguments to add\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBParser\fP&} A reference to the current parser object, for chaining method calls\&. 
+.RE
+.PP
+
+.SS "template<typename\&.\&.\&. Parsers> \fBParser\fP & argparse::Parser::add_subparsers (std::string dest, Parsers &&\&.\&.\&. parsers)\fC [inline]\fP"
+
+.PP
+Adds subparsers to the parser's table of arguments\&. Subparsers allow splitting of arguments and functionality across subcommands\&. Each subparsers is by itself a parser and is allowed to have its own set of argument objects\&.
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIParsers\fP Types for individual parser objects\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIdest\fP Destination name for the value indicating the name of the selected parser\&. 
+.br
+\fIparsers\fP List of parsers to add\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBParser\fP&} A reference to the current parser object, for chaining method calls\&. 
+.RE
+.PP
+
+.SS "const std::string & argparse::Parser::description () const\fC [inline]\fP, \fC [noexcept]\fP"
+Text to display before the argument help\&. 
+.SS "const std::string & argparse::Parser::epilog () const\fC [inline]\fP, \fC [noexcept]\fP"
+Text to display after the argument help\&. 
+.SS "std::string argparse::Parser::help (unsigned tty_columns = \fC60\fP) const\fC [noexcept]\fP"
+
+.PP
+Returns a concise help created using argument descriptors\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItty_columns\fP maximum number of terminal columns (characters) to span (default=60)\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{std::string} The generated help\&. 
+.RE
+.PP
+
+.SS "std::string argparse::Parser::identifier () const\fC [inline]\fP, \fC [noexcept]\fP"
+Identifier of the parser (fully qualified name with the entire hierarchy) 
+.SS "const std::string & argparse::Parser::name () const\fC [inline]\fP, \fC [noexcept]\fP"
+Name of the parser/program to display\&. 
+.SS "std::ostream & argparse::Parser::ostream () const\fC [inline]\fP, \fC [noexcept]\fP"
+Output stream to use for operations\&. 
+.SS "auto argparse::Parser::parent () const\fC [inline]\fP, \fC [noexcept]\fP"
+Parent parser for the parser\&. 
+.SS "\fBParser\fP & argparse::Parser::parent (\fBParser\fP & _parent)\fC [inline]\fP, \fC [noexcept]\fP"
+Sets the parent for the parser, for which the current object acts as a subcommand\&. 
+.SS "auto argparse::Parser::parse_args (Argument::range::iterator begin, Argument::range::iterator end, \fBtypes::result_map\fP & values)"
+
+.PP
+Parses arguments from a given range defined by start and end iterators\&. This function performs the necessary parsing to bind values for arguments\&. The values corresponding to arguments is returned as an \fCunordered_map\fP mapping destination names to the \fCstd::any\fP type for holding values of arbitrary types\&.
+.PP
+This function has a signature similar to those of arguments, which makes this overload useful for use with subparsers for parsing parent and child arguments\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIbegin\fP The iterator to the beginning of the range of arguments\&. 
+.br
+\fIend\fP The iterator to the end of the range of arguments\&. 
+.br
+\fIvalues\fP Result map to store argument values\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{Argument::range::iterator} iterators to the start of the remaining sequence\&.
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{parse_error}\fP describes inconsistencies present in the range corresponding to argument requirements\&. 
+.RE
+.PP
+
+.SS "template<typename InputIter > \fBtypes::result_map\fP argparse::Parser::parse_args (InputIter begin, InputIter end)\fC [inline]\fP"
+
+.PP
+Parses arguments from a given range defined by start and end iterators\&. This function performs the necessary parsing to bind values for arguments\&. The values corresponding to arguments is returned as an \fCunordered_map\fP mapping destination names to the \fCstd::any\fP type for holding values of arbitrary types\&.
+.PP
+This is an alternate variant of the parse_args function where the map is returned instead of the data being saved inside an lvalue argument\&.
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIInputIter\fP Type of the iterator of the collection\&. Must satisfy requirements for an input iterator\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIbegin\fP The iterator to the beginning of the range of arguments\&. 
+.br
+\fIend\fP The iterator to the end of the range of arguments\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBtypes::result_map\fP} map object containing values for parsed arguments\&.
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{parse_error}\fP describes inconsistencies present in the range corresponding to argument requirements\&. 
+.RE
+.PP
+
+.SS "\fBtypes::result_map\fP argparse::Parser::parse_args (int argc, char ** argv)\fC [inline]\fP"
+
+.PP
+Parses a set of arguments from a given argument vector referred by the size and pointer to the first element of the vector\&. This function is a wrapper over the general \fCparse_args\fP for arbitrary collections, for convenience to use with the argument vector parameters accepted by \fCmain\fP in the C/C++ standard\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIargc\fP the argument count: number of arguments to parse\&. 
+.br
+\fIargv\fP the argument vector: collection of arguments (strings)\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBtypes::result_map\fP} map object containing values for parsed arguments\&.
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{parse_error}\fP describes inconsistencies present in the range corresponding to argument requirements\&. 
+.RE
+.PP
+
+.SS "\fBtypes::result_map\fP argparse::Parser::parse_args (int argc, const char ** argv)\fC [inline]\fP"
+
+.PP
+Parses a set of arguments from a given argument vector referred by the size and pointer to the first element of the vector\&. This function is a wrapper over the general \fCparse_args\fP for arbitrary collections, for convenience to use with the argument vector parameters accepted by \fCmain\fP in the C/C++ standard\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIargc\fP the argument count: number of arguments to parse\&. 
+.br
+\fIargv\fP the argument vector: collection of arguments (strings)\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBtypes::result_map\fP} map object containing values for parsed arguments\&.
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{parse_error}\fP describes inconsistencies present in the range corresponding to argument requirements\&. 
+.RE
+.PP
+
+.SS "const std::string & argparse::Parser::prog () const\fC [inline]\fP, \fC [noexcept]\fP"
+Name of the parser/program to display\&. 
+.SS "std::string argparse::Parser::usage (unsigned tty_columns = \fC60\fP) const\fC [noexcept]\fP"
+
+.PP
+Returns a concise help created using argument descriptors\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItty_columns\fP maximum number of terminal columns (characters) to span (default=60)\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{std::string} The generated help\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

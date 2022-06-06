@@ -1,0 +1,74 @@
+.TH "include/fsop_cli.hpp" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/fsop_cli.hpp \- Defines functions for use with the CLI\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'argparse\&.hpp'\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBfsop_cli\fP"
+.br
+.RI "Defines functions performing operations offered by the CLI application\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBfsop_cli::create\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the create subcommand for the CLI application\&. "
+.ti -1c
+.RI "int \fBfsop_cli::pipe_io\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the pipe_io subcommand for the CLI application (redirected to internally by read and write)\&. "
+.ti -1c
+.RI "int \fBfsop_cli::read\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the read subcommand for the CLI application\&. "
+.ti -1c
+.RI "int \fBfsop_cli::write\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the write subcommand for the CLI application\&. "
+.ti -1c
+.RI "int \fBfsop_cli::inspect\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the inspect subcommand for the CLI application\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines functions for use with the CLI\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19) 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+1\&.0 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2022-06-03
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2022 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

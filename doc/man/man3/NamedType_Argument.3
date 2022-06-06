@@ -1,0 +1,89 @@
+.TH "NamedType< ValueType, Descriptor >::Argument" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+NamedType< ValueType, Descriptor >::Argument \- Type for representing variables usable for named arguments in functions\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <utilities\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBArgument\fP ()=default"
+.br
+.RI "Construct a new \fBArgument\fP object\&. "
+.ti -1c
+.RI "\fBArgument\fP (const \fBArgument\fP &)=delete"
+.br
+.RI "Disallow creation via copy constructor\&. "
+.ti -1c
+.RI "\fBArgument\fP (\fBArgument\fP &&)=delete"
+.br
+.RI "Disallow creation via move constructor\&. "
+.ti -1c
+.RI "\fBArgument\fP & \fBoperator=\fP (const \fBArgument\fP &)=delete"
+.br
+.ti -1c
+.RI "\fBArgument\fP & \fBoperator=\fP (\fBArgument\fP &&)=delete"
+.br
+.ti -1c
+.RI "template<typename UnderlyingType > \fBNamedType\fP \fBoperator=\fP (UnderlyingType &&value) const"
+.br
+.RI "Return a \fBNamedType\fP object encapsulating the assigned underlying value\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename ValueType, typename Descriptor>
+.br
+struct NamedType< ValueType, Descriptor >::Argument"Type for representing variables usable for named arguments in functions\&. 
+
+Variables of this type upon assignment returns a \fC\fBNamedType\fP\fP object, which allows for syntax similar to the following:
+.PP
+.PP
+.nf
+using Size = NamedType<int, struct SizeTag>;
+Size::Argument size;
+void init_window(Size size);
+
+\&.\&.\&.
+
+init_window(size = 100);
+.fi
+.PP
+ 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename ValueType , typename Descriptor > \fBArgument\fP & \fBNamedType\fP< ValueType, Descriptor >::Argument::operator= (\fBArgument\fP &&)\fC [delete]\fP"
+Disallow move assignment of objects\&. 
+.SS "template<typename ValueType , typename Descriptor > \fBArgument\fP & \fBNamedType\fP< ValueType, Descriptor >::Argument::operator= (const \fBArgument\fP &)\fC [delete]\fP"
+Disallow copy assignment of objects\&. 
+.SS "template<typename ValueType , typename Descriptor > template<typename UnderlyingType > \fBNamedType\fP \fBNamedType\fP< ValueType, Descriptor >::Argument::operator= (UnderlyingType && value) const\fC [inline]\fP"
+
+.PP
+Return a \fBNamedType\fP object encapsulating the assigned underlying value\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIUnderlyingType\fP Type of the raw value being assigned\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP Value to encapsulate\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+\fBNamedType\fP Object wrapping the value as a strong typed argument\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

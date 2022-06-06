@@ -1,0 +1,42 @@
+\hypertarget{namespaceargparse_1_1transforms}{}\doxysection{argparse\+::transforms Namespace Reference}
+\label{namespaceargparse_1_1transforms}\index{argparse::transforms@{argparse::transforms}}
+
+
+Transformation functions for common types.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Integral , typename  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+integral\+\_\+v$<$\+Integral$>$, std\+::nullptr\+\_\+t$>$$>$ }\\std\+::vector$<$ Integral $>$ \mbox{\hyperlink{namespaceargparse_1_1transforms_a8d1939740f039bc7af67feb17e373590}{to\+\_\+integral}} (const \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{types\+::argument\+\_\+value\+\_\+type}} \&value)
+\begin{DoxyCompactList}\small\item\em Maps the variant value to an integral type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Transformation functions for common types. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceargparse_1_1transforms_a8d1939740f039bc7af67feb17e373590}\label{namespaceargparse_1_1transforms_a8d1939740f039bc7af67feb17e373590}} 
+\index{argparse::transforms@{argparse::transforms}!to\_integral@{to\_integral}}
+\index{to\_integral@{to\_integral}!argparse::transforms@{argparse::transforms}}
+\doxysubsubsection{\texorpdfstring{to\_integral()}{to\_integral()}}
+{\footnotesize\ttfamily template$<$typename Integral , typename  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+integral\+\_\+v$<$\+Integral$>$, std\+::nullptr\+\_\+t$>$$>$ \\
+std\+::vector$<$ Integral $>$ argparse\+::transforms\+::to\+\_\+integral (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{types\+::argument\+\_\+value\+\_\+type}} \&}]{value }\end{DoxyParamCaption})}
+
+
+
+Maps the variant value to an integral type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Integral} & Integral type to map to. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Variant value to map from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Integral The integral value post mapping. 
+\end{DoxyReturn}

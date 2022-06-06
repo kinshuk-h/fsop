@@ -1,0 +1,75 @@
+\hypertarget{switch_8hpp_source}{}\doxysection{switch.\+hpp}
+\label{switch_8hpp_source}\index{include/argparse/arguments/switch.hpp@{include/argparse/arguments/switch.hpp}}
+\mbox{\hyperlink{switch_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifndef ARGPARSE\_SWITCH\_HPP\_INCLUDED}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define ARGPARSE\_SWITCH\_HPP\_INCLUDED}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{common_8hpp}{argparse/common.hpp}}"{}}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{argument_8hpp}{argparse/arguments/argument.hpp}}"{}}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceargparse}{argparse}}}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{25     \textcolor{keyword}{struct }\mbox{\hyperlink{structargparse_1_1_switch}{Switch}} : \textcolor{keyword}{public} \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}}
+\DoxyCodeLine{26     \{}
+\DoxyCodeLine{48         \textcolor{keyword}{template}<}
+\DoxyCodeLine{49             \textcolor{keyword}{typename} NameType = std::nullptr\_t,}
+\DoxyCodeLine{50             \textcolor{keyword}{typename} AliasType = std::nullptr\_t,}
+\DoxyCodeLine{51             \textcolor{keyword}{typename} DestinationType = std::nullptr\_t,}
+\DoxyCodeLine{52             \textcolor{keyword}{typename} DefaultValueType = std::nullptr\_t,}
+\DoxyCodeLine{53             \textcolor{keyword}{typename} DescriptionType = std::nullptr\_t,}
+\DoxyCodeLine{54             \textcolor{keyword}{typename} NegatedType = std::nullptr\_t,}
+\DoxyCodeLine{55             \textcolor{keyword}{typename} ChoicesType = std::nullptr\_t,}
+\DoxyCodeLine{56             \textcolor{keyword}{typename} TransformType = std::nullptr\_t}
+\DoxyCodeLine{57         >}
+\DoxyCodeLine{58         \mbox{\hyperlink{structargparse_1_1_switch_ae0bd4b7f9fccbacb8948b9f46d645292}{Switch}}(}
+\DoxyCodeLine{59             NameType \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{60             AliasType \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{61             DestinationType \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{62             DefaultValueType defaults = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{63             DescriptionType \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{64             NegatedType \mbox{\hyperlink{namespaceargparse_1_1arguments_af06ab33095e2b84e1dbec367bd9deddd}{negated}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{65             ChoicesType \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{66             TransformType \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}} = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{67         )}
+\DoxyCodeLine{68         : \mbox{\hyperlink{namespaceargparse}{argparse}}::\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}(}
+\DoxyCodeLine{69             \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults,}
+\DoxyCodeLine{70             \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_af06ab33095e2b84e1dbec367bd9deddd}{negated}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}}
+\DoxyCodeLine{71         )}
+\DoxyCodeLine{72         \{}
+\DoxyCodeLine{73             \mbox{\hyperlink{structargparse_1_1_switch_a82854f9ac61dfdf808a2d5093619fc78}{\_negated}} = pick\_if<types::Negated>(}
+\DoxyCodeLine{74                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_ad128e323fdb2755a28bece955e27dc0a}{arguments::defaults::default\_negated}},}
+\DoxyCodeLine{75                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_af06ab33095e2b84e1dbec367bd9deddd}{negated}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}}
+\DoxyCodeLine{76             ).get();}
+\DoxyCodeLine{77             \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\_required}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{78             \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}} = \mbox{\hyperlink{structargparse_1_1_switch_a82854f9ac61dfdf808a2d5093619fc78}{\_negated}};}
+\DoxyCodeLine{79             \mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}}    = 0;}
+\DoxyCodeLine{80         \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82         \textcolor{comment}{// Delete control over optionality of a switch argument.}}
+\DoxyCodeLine{83         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}(\textcolor{keywordtype}{bool} \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\_required}}) \textcolor{keyword}{noexcept} = \textcolor{keyword}{delete};}
+\DoxyCodeLine{84         \textcolor{comment}{// Delete control over arity of a switch argument.}}
+\DoxyCodeLine{85         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}}) \textcolor{keyword}{noexcept} = \textcolor{keyword}{delete};}
+\DoxyCodeLine{86         \textcolor{comment}{// Delete control over choices of a switch argument.}}
+\DoxyCodeLine{87         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}(\textcolor{keyword}{const} std::optional<std::vector<std::string\_view>>\& \mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}}) \textcolor{keyword}{noexcept} = \textcolor{keyword}{delete};}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89         std::string \mbox{\hyperlink{structargparse_1_1_switch_add2887233ad2ec5402d81173be364d19}{usage}}     ()                           const noexcept override;}
+\DoxyCodeLine{90         std::\textcolor{keywordtype}{string} \mbox{\hyperlink{structargparse_1_1_switch_acaf4f7816e7293d87054266c4d163b31}{descriptor}}(\textcolor{keywordtype}{unsigned} tty\_columns = 60)  const noexcept override;}
+\DoxyCodeLine{94         std::unique\_ptr<\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}> \mbox{\hyperlink{structargparse_1_1_switch_ab06f9e6ebebe88d3a7ec65bab1e636ae}{clone}}()\textcolor{keyword}{ const override}}
+\DoxyCodeLine{95 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{96             \textcolor{keywordflow}{return} std::make\_unique<Switch>(*\textcolor{keyword}{this});}
+\DoxyCodeLine{97         \}}
+\DoxyCodeLine{98         range::iterator \mbox{\hyperlink{structargparse_1_1_switch_a603415fc3a5c46238b517995a7ba8711}{parse\_args}}(}
+\DoxyCodeLine{99             range::iterator begin, range::iterator end,}
+\DoxyCodeLine{100             \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}}\& values}
+\DoxyCodeLine{101         ) \textcolor{keyword}{const override};}
+\DoxyCodeLine{102 }
+\DoxyCodeLine{103     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{105         \textcolor{keywordtype}{bool} \mbox{\hyperlink{structargparse_1_1_switch_a82854f9ac61dfdf808a2d5093619fc78}{\_negated}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{106     \};}
+\DoxyCodeLine{107 \}}
+\DoxyCodeLine{108 }
+\DoxyCodeLine{109 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ARGPARSE\_SWITCH\_HPP\_INCLUDED}}
+
+\end{DoxyCode}

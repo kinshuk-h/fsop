@@ -1,3 +1,13 @@
+/**
+ * @file create.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines functions for abstracting system calls for creating files and pipes.
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #ifndef FSOP_CREATE_HPP_INCLUDED
 #define FSOP_CREATE_HPP_INCLUDED
 

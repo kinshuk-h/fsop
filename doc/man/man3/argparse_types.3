@@ -1,0 +1,103 @@
+.TH "argparse::types" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+argparse::types \- Aliases for strong types for arguments\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBargument_value_type\fP = std::variant< bool, std::string, std::vector< std::string > >"
+.br
+.ti -1c
+.RI "using \fBtransform_function\fP = std::function< std::any(const \fBargument_value_type\fP &)>"
+.br
+.ti -1c
+.RI "using \fBresult_map\fP = std::unordered_map< std::string, std::any >"
+.br
+.ti -1c
+.RI "using \fBName\fP = \fBNamedType\fP< std::string_view, struct NameTag >"
+.br
+.ti -1c
+.RI "using \fBHelp\fP = \fBNamedType\fP< std::string_view, struct HelpTag >"
+.br
+.ti -1c
+.RI "using \fBAlias\fP = \fBNamedType\fP< std::string_view, struct AliasTag >"
+.br
+.ti -1c
+.RI "using \fBDestination\fP = \fBNamedType\fP< std::string_view, struct DestinationTag >"
+.br
+.ti -1c
+.RI "using \fBArity\fP = \fBNamedType\fP< int, struct ArityTag >"
+.br
+.ti -1c
+.RI "using \fBDefaultValue\fP = \fBNamedType\fP< std::optional< \fBargument_value_type\fP >, struct DefaultValueTag >"
+.br
+.ti -1c
+.RI "using \fBChoices\fP = \fBNamedType\fP< std::optional< std::vector< std::string_view > >, struct ChoicesTag >"
+.br
+.ti -1c
+.RI "using \fBTransform\fP = \fBNamedType\fP< std::optional< \fBtransform_function\fP >, struct TransformTag >"
+.br
+.ti -1c
+.RI "using \fBRequired\fP = \fBNamedType\fP< bool, struct RequiredTag >"
+.br
+.ti -1c
+.RI "using \fBNegated\fP = \fBNamedType\fP< bool, struct NegatedTag >"
+.br
+.ti -1c
+.RI "using \fBDescription\fP = \fBNamedType\fP< std::string_view, struct DescriptionTag >"
+.br
+.ti -1c
+.RI "using \fBEpilog\fP = \fBNamedType\fP< std::string_view, struct EpilogTag >"
+.br
+.ti -1c
+.RI "using \fBOutputStream\fP = \fBNamedType\fP< std::ostream &, struct OutputStreamTag >"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Aliases for strong types for arguments\&. 
+
+This namespace defines type aliases for strong types to be used for parameters of the argparse classes' constructors\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBargparse::types::Alias\fP = typedef \fBNamedType\fP<std::string_view, struct AliasTag>"
+Type for alias name of the arguments\&. 
+.SS "using \fBargparse::types::argument_value_type\fP = typedef std::variant<bool, std::string, std::vector<std::string> >"
+General type for untransformed argument values\&. 
+.SS "using \fBargparse::types::Arity\fP = typedef \fBNamedType\fP<int, struct ArityTag>"
+Type for arity of the argument (numeric value)\&. 
+.SS "using \fBargparse::types::Choices\fP = typedef \fBNamedType\fP<std::optional<std::vector<std::string_view> >, struct ChoicesTag>"
+Type for possible choices for the argument\&. 
+.SS "using \fBargparse::types::DefaultValue\fP = typedef \fBNamedType\fP<std::optional<\fBargument_value_type\fP>, struct DefaultValueTag>"
+Type for default value of the argument (either a bool, string or vector)\&. 
+.SS "using \fBargparse::types::Description\fP = typedef \fBNamedType\fP<std::string_view, struct DescriptionTag>"
+Type for description of the parser/program\&. 
+.SS "using \fBargparse::types::Destination\fP = typedef \fBNamedType\fP<std::string_view, struct DestinationTag>"
+Type for destination name for the argument\&. 
+.SS "using \fBargparse::types::Epilog\fP = typedef \fBNamedType\fP<std::string_view, struct EpilogTag>"
+Type for epilog description of the parser/program\&. 
+.SS "using \fBargparse::types::Help\fP = typedef \fBNamedType\fP<std::string_view, struct HelpTag>"
+Type for help description of the arguments\&. 
+.SS "using \fBargparse::types::Name\fP = typedef \fBNamedType\fP<std::string_view, struct NameTag>"
+Type for name of the program and argument\&. 
+.SS "using \fBargparse::types::Negated\fP = typedef \fBNamedType\fP<bool, struct NegatedTag>"
+Type for the negated status for the argument\&. 
+.SS "using \fBargparse::types::OutputStream\fP = typedef \fBNamedType\fP<std::ostream&, struct OutputStreamTag>"
+Type for output stream of the parser/program\&. 
+.SS "using \fBargparse::types::Required\fP = typedef \fBNamedType\fP<bool, struct RequiredTag>"
+Type for the required status for the argument\&. 
+.SS "using \fBargparse::types::result_map\fP = typedef std::unordered_map<std::string, std::any>"
+Type of the map holding the parsed argument values\&. 
+.SS "using \fBargparse::types::Transform\fP = typedef \fBNamedType\fP<std::optional<\fBtransform_function\fP>, struct TransformTag>"
+Type for transformation function for the argument\&. 
+.SS "using \fBargparse::types::transform_function\fP = typedef std::function<std::any(const \fBargument_value_type\fP&)>"
+General type for the argument value transformation functions\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

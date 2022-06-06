@@ -1,0 +1,167 @@
+\hypertarget{structargparse_1_1_positional}{}\doxysection{argparse\+::Positional Struct Reference}
+\label{structargparse_1_1_positional}\index{argparse::Positional@{argparse::Positional}}
+
+
+Represents a positional argument, which must be specified in the exact position it is declared in.  
+
+
+
+
+{\ttfamily \#include $<$positional.\+hpp$>$}
+
+Inheritance diagram for argparse\+::Positional\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{df/d02/structargparse_1_1_positional}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Name\+Type  = std\+::nullptr\+\_\+t, typename Alias\+Type  = std\+::nullptr\+\_\+t, typename Destination\+Type  = std\+::nullptr\+\_\+t, typename Default\+Value\+Type  = std\+::nullptr\+\_\+t, typename Description\+Type  = std\+::nullptr\+\_\+t, typename Arity\+Type  = std\+::nullptr\+\_\+t, typename Choices\+Type  = std\+::nullptr\+\_\+t, typename Transform\+Type  = std\+::nullptr\+\_\+t, typename Required\+Type  = std\+::nullptr\+\_\+t$>$ }\\\mbox{\hyperlink{structargparse_1_1_positional_ad10f45f1d2f962eb40b9d6e04b112491}{Positional}} (Name\+Type \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}=nullptr, Alias\+Type \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}=nullptr, Destination\+Type \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}=nullptr, Default\+Value\+Type defaults=nullptr, Description\+Type \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}}=nullptr, Arity\+Type \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}=nullptr, Choices\+Type \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}=nullptr, Transform\+Type \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}=nullptr, Required\+Type \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{structargparse_1_1_positional}{Positional}} object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structargparse_1_1_positional_ae5864240613752148966c9c9bf9bb262}{usage}} () const noexcept override
+\begin{DoxyCompactList}\small\item\em Describes the usage of the argument through a returned string. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structargparse_1_1_positional_abfabaf32ce199803b0d9f614160c0e0e}{descriptor}} (unsigned tty\+\_\+columns=60) const noexcept override
+\begin{DoxyCompactList}\small\item\em Describes the argument along with the provided explanation. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} $>$ \mbox{\hyperlink{structargparse_1_1_positional_a307489f777a2986e84e6f44c1b90a989}{clone}} () const override
+\begin{DoxyCompactList}\small\item\em Creates a copy of the argument as a unique\+\_\+ptr for polymorphic usage. \end{DoxyCompactList}\item 
+range\+::iterator \mbox{\hyperlink{structargparse_1_1_positional_ac1c4eab0669b9b23f40c3c4e07d2cabf}{parse\+\_\+args}} (range\+::iterator begin, range\+::iterator end, \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \&values) const override
+\begin{DoxyCompactList}\small\item\em Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Represents a positional argument, which must be specified in the exact position it is declared in. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structargparse_1_1_positional_ad10f45f1d2f962eb40b9d6e04b112491}\label{structargparse_1_1_positional_ad10f45f1d2f962eb40b9d6e04b112491}} 
+\index{argparse::Positional@{argparse::Positional}!Positional@{Positional}}
+\index{Positional@{Positional}!argparse::Positional@{argparse::Positional}}
+\doxysubsubsection{\texorpdfstring{Positional()}{Positional()}}
+{\footnotesize\ttfamily template$<$typename Name\+Type  = std\+::nullptr\+\_\+t, typename Alias\+Type  = std\+::nullptr\+\_\+t, typename Destination\+Type  = std\+::nullptr\+\_\+t, typename Default\+Value\+Type  = std\+::nullptr\+\_\+t, typename Description\+Type  = std\+::nullptr\+\_\+t, typename Arity\+Type  = std\+::nullptr\+\_\+t, typename Choices\+Type  = std\+::nullptr\+\_\+t, typename Transform\+Type  = std\+::nullptr\+\_\+t, typename Required\+Type  = std\+::nullptr\+\_\+t$>$ \\
+argparse\+::\+Positional\+::\+Positional (\begin{DoxyParamCaption}\item[{Name\+Type}]{name = {\ttfamily nullptr},  }\item[{Alias\+Type}]{alias = {\ttfamily nullptr},  }\item[{Destination\+Type}]{dest = {\ttfamily nullptr},  }\item[{Default\+Value\+Type}]{defaults = {\ttfamily nullptr},  }\item[{Description\+Type}]{help = {\ttfamily nullptr},  }\item[{Arity\+Type}]{arity = {\ttfamily nullptr},  }\item[{Choices\+Type}]{choices = {\ttfamily nullptr},  }\item[{Transform\+Type}]{transform = {\ttfamily nullptr},  }\item[{Required\+Type}]{required = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{structargparse_1_1_positional}{Positional}} object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Name\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Alias\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Destination\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Default\+Value\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Description\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Arity\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Choices\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Transform\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Required\+Type} & Placeholder type for named arguments.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the argument to display. \\
+\hline
+{\em alias} & Alias for the argument (default=\char`\"{}\char`\"{}). \\
+\hline
+{\em dest} & Destination name for the argument in the parsed table (default=name). \\
+\hline
+{\em defaults} & Default value for the argument. \\
+\hline
+{\em help} & Brief description about the argument (default=\char`\"{}\char`\"{}). \\
+\hline
+{\em arity} & Number of values to be stored for the argument (default=1). \\
+\hline
+{\em choices} & Possible choices for the argument\textquotesingle{}s values. \\
+\hline
+{\em transform} & Transformation to apply over argument values. \\
+\hline
+{\em required} & Whether the option is to be enforced as required. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structargparse_1_1_positional_a307489f777a2986e84e6f44c1b90a989}\label{structargparse_1_1_positional_a307489f777a2986e84e6f44c1b90a989}} 
+\index{argparse::Positional@{argparse::Positional}!clone@{clone}}
+\index{clone@{clone}!argparse::Positional@{argparse::Positional}}
+\doxysubsubsection{\texorpdfstring{clone()}{clone()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} $>$ argparse\+::\+Positional\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Creates a copy of the argument as a unique\+\_\+ptr for polymorphic usage. 
+
+
+
+Implements \mbox{\hyperlink{structargparse_1_1_argument_aaf88c843fcd0d01a798cfab5727c5df7}{argparse\+::\+Argument}}.
+
+\mbox{\Hypertarget{structargparse_1_1_positional_abfabaf32ce199803b0d9f614160c0e0e}\label{structargparse_1_1_positional_abfabaf32ce199803b0d9f614160c0e0e}} 
+\index{argparse::Positional@{argparse::Positional}!descriptor@{descriptor}}
+\index{descriptor@{descriptor}!argparse::Positional@{argparse::Positional}}
+\doxysubsubsection{\texorpdfstring{descriptor()}{descriptor()}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Positional\+::descriptor (\begin{DoxyParamCaption}\item[{unsigned}]{tty\+\_\+columns = {\ttfamily 60} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Describes the argument along with the provided explanation. 
+
+
+
+Implements \mbox{\hyperlink{structargparse_1_1_argument_af6797371a2a13c03dd0ffcc316d9b392}{argparse\+::\+Argument}}.
+
+\mbox{\Hypertarget{structargparse_1_1_positional_ac1c4eab0669b9b23f40c3c4e07d2cabf}\label{structargparse_1_1_positional_ac1c4eab0669b9b23f40c3c4e07d2cabf}} 
+\index{argparse::Positional@{argparse::Positional}!parse\_args@{parse\_args}}
+\index{parse\_args@{parse\_args}!argparse::Positional@{argparse::Positional}}
+\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}}
+{\footnotesize\ttfamily argparse\+::\+Argument\+::range\+::iterator argparse\+::\+Positional\+::parse\+\_\+args (\begin{DoxyParamCaption}\item[{range\+::iterator}]{begin,  }\item[{range\+::iterator}]{end,  }\item[{\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \&}]{values }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & iterator pointing to the beginning of the argument value range. \\
+\hline
+{\em end} & iterator pointing to the end of the argument value range. \\
+\hline
+{\em values} & map (hash table) to store parsed valued for the argument.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{range\+::iterator\} iterator pointing to the next argument value unused by the current argument. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{structargparse_1_1_argument_ace25829c581cf63b33bb2feb58677ae6}{argparse\+::\+Argument}}.
+
+\mbox{\Hypertarget{structargparse_1_1_positional_ae5864240613752148966c9c9bf9bb262}\label{structargparse_1_1_positional_ae5864240613752148966c9c9bf9bb262}} 
+\index{argparse::Positional@{argparse::Positional}!usage@{usage}}
+\index{usage@{usage}!argparse::Positional@{argparse::Positional}}
+\doxysubsubsection{\texorpdfstring{usage()}{usage()}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Positional\+::usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Describes the usage of the argument through a returned string. 
+
+
+
+Implements \mbox{\hyperlink{structargparse_1_1_argument_a72fa41e32edbaa04f7ac3f4076a8c600}{argparse\+::\+Argument}}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/argparse/arguments/\mbox{\hyperlink{positional_8hpp}{positional.\+hpp}}\item 
+src/argparse/arguments/positional.\+cpp\end{DoxyCompactItemize}

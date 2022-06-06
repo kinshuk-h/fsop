@@ -1,0 +1,286 @@
+\hypertarget{structfsop_1_1_file}{}\doxysection{fsop\+::File Struct Reference}
+\label{structfsop_1_1_file}\index{fsop::File@{fsop::File}}
+
+
+Defines a structure for abstracting I/O operations via system calls.  
+
+
+
+
+{\ttfamily \#include $<$file.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structfsop_1_1_file_aec51f74577294b3d78746b22d3a9f1b5}{File}} (int descriptor)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{structfsop_1_1_file}{File}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfsop_1_1_file_af1f94b8eaef073fa7ad4aabad484116b}{File}} (int descriptor, struct stat64 inode\+\_\+info)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{structfsop_1_1_file}{File}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfsop_1_1_file_a0a48c73b009a3ef2212d3a2ec2229151}{File}} (const \mbox{\hyperlink{structfsop_1_1_file}{File}} \&file\+\_\+ref)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{structfsop_1_1_file}{File}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfsop_1_1_file_a223ab9134e7ec5fb2669eeb0e0e11fee}{File}} (\mbox{\hyperlink{structfsop_1_1_file}{File}} \&\&tmp\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{structfsop_1_1_file}{File}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structfsop_1_1_file_a3bea866e8f4b9f72871a3b2a32b13405}\label{structfsop_1_1_file_a3bea866e8f4b9f72871a3b2a32b13405}} 
+{\bfseries $\sim$\+File} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \mbox{\hyperlink{structfsop_1_1_file}{File}} object, after closing the associated file descriptor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfsop_1_1_file}{File}} \& \mbox{\hyperlink{structfsop_1_1_file_add5d9942c1c56fc53acf29d4042b3f30}{operator=}} (const \mbox{\hyperlink{structfsop_1_1_file}{File}} \&file\+\_\+ref)
+\begin{DoxyCompactList}\small\item\em Copy assignment\+: Copies (dupes) the file object\textquotesingle{}s descriptor to the current object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfsop_1_1_file}{File}} \& \mbox{\hyperlink{structfsop_1_1_file_aa5d1e829b56d7cb8df7b534dedb9e7c1}{operator=}} (\mbox{\hyperlink{structfsop_1_1_file}{File}} \&\&tmp\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Move assignment\+: Moves the file descriptor, effectively transferring ownership. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structfsop_1_1_file_ac4f8944bacec9af4421204de531fa6ff}{read}} (size\+\_\+t nbytes=\mbox{\hyperlink{structfsop_1_1_file_a34f642bd3fbec1a98dba4e9a086eb357}{bytes\+\_\+till\+\_\+end}}, off64\+\_\+t offset=0, int whence=SEEK\+\_\+\+CUR)
+\begin{DoxyCompactList}\small\item\em Reads data as a sequence of characters from the file referenced by the object. Bytes are read as-\/is, so some bytes may not be valid printable characters, depending on the nature of the file content. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{structfsop_1_1_file_a0abe39049b5181802881572ae9024b84}{write}} (std\+::string\+\_\+view data, off64\+\_\+t offset=0, int whence=SEEK\+\_\+\+CUR)
+\begin{DoxyCompactList}\small\item\em Writes byte data to the file referenced by the object, optionally at the specified offset location. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structfsop_1_1_file_a947769028786f20e1798d2e242de237b}\label{structfsop_1_1_file_a947769028786f20e1798d2e242de237b}} 
+void {\bfseries close} () noexcept
+\begin{DoxyCompactList}\small\item\em Closes the file referenced by the internal descriptor, thereby moving it to an invalid state for future read and write operations. \end{DoxyCompactList}\item 
+struct stat64 \mbox{\hyperlink{structfsop_1_1_file_a54d1b7e96f21454727eb3d813a8b4db4}{stat}} ()
+\begin{DoxyCompactList}\small\item\em Returns information about the file as available in the file\textquotesingle{}s inode. Internally calls fstat and caches the result. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structfsop_1_1_file_a1a154c896749437712907731355b28f3}\label{structfsop_1_1_file_a1a154c896749437712907731355b28f3}} 
+void {\bfseries invalidate\+\_\+cache} ()
+\begin{DoxyCompactList}\small\item\em Invalidates the cached file information, forcing a stat call. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfsop_1_1_file_a0ed1bda86bd6a6f1d84c910f7ad0906e}{operator bool}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structfsop_1_1_file}{File}} \mbox{\hyperlink{structfsop_1_1_file_a1da083bab6718fd938060d5e83b603c2}{open\+\_\+file}} (std\+::string\+\_\+view path, int open\+\_\+options=O\+\_\+\+RDONLY)
+\begin{DoxyCompactList}\small\item\em Opens a file for performing I/O. \end{DoxyCompactList}\item 
+static std\+::pair$<$ \mbox{\hyperlink{structfsop_1_1_file}{File}}, \mbox{\hyperlink{structfsop_1_1_file}{File}} $>$ \mbox{\hyperlink{structfsop_1_1_file_a17a4edb41321b1d6ad51c587bb06fa66}{create\+\_\+unnamed\+\_\+pipe}} ()
+\begin{DoxyCompactList}\small\item\em Creates a temporary, process-\/specific, unnamed pipe for performing I/O. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int \mbox{\hyperlink{structfsop_1_1_file_aaabcc9dc7dd27b6e198d67d807cc90e8}{invalid\+\_\+descriptor}} = -\/1
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{structfsop_1_1_file_a34f642bd3fbec1a98dba4e9a086eb357}{bytes\+\_\+till\+\_\+end}} = -\/1ULL
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines a structure for abstracting I/O operations via system calls. 
+
+\mbox{\hyperlink{structfsop_1_1_file}{File}} objects work over a file descriptor referencing a global file table entry maintaining I/O mode and offset. They follow the RAII idiom and perform auto-\/closing of the file table entry when the corresponding object runs out of scope. Descriptor ownership can however be transferred to other objects through move construction or move assignment. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structfsop_1_1_file_aec51f74577294b3d78746b22d3a9f1b5}\label{structfsop_1_1_file_aec51f74577294b3d78746b22d3a9f1b5}} 
+\index{fsop::File@{fsop::File}!File@{File}}
+\index{File@{File}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{File()}{File()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily fsop\+::\+File\+::\+File (\begin{DoxyParamCaption}\item[{int}]{descriptor }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{structfsop_1_1_file}{File}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em descriptor} & \mbox{\hyperlink{structfsop_1_1_file}{File}} descriptor to maintain to refer a global file table entry corresponding to an open file. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structfsop_1_1_file_af1f94b8eaef073fa7ad4aabad484116b}\label{structfsop_1_1_file_af1f94b8eaef073fa7ad4aabad484116b}} 
+\index{fsop::File@{fsop::File}!File@{File}}
+\index{File@{File}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{File()}{File()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily fsop\+::\+File\+::\+File (\begin{DoxyParamCaption}\item[{int}]{descriptor,  }\item[{struct stat64}]{inode\+\_\+info }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{structfsop_1_1_file}{File}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em descriptor} & \mbox{\hyperlink{structfsop_1_1_file}{File}} descriptor to maintain to refer a global file table entry corresponding to an open file. \\
+\hline
+{\em inode\+\_\+info} & \mbox{\hyperlink{structfsop_1_1_file}{File}} data as available from a call to stat. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structfsop_1_1_file_a0a48c73b009a3ef2212d3a2ec2229151}\label{structfsop_1_1_file_a0a48c73b009a3ef2212d3a2ec2229151}} 
+\index{fsop::File@{fsop::File}!File@{File}}
+\index{File@{File}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{File()}{File()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily fsop\+::\+File\+::\+File (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structfsop_1_1_file}{File}} \&}]{file\+\_\+ref }\end{DoxyParamCaption})}
+
+
+
+Construct a new \mbox{\hyperlink{structfsop_1_1_file}{File}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+ref} & \mbox{\hyperlink{structfsop_1_1_file}{File}} object reference maintaining a file descriptor. The descriptor is duped to increase the effective reference count of the global file table entry. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{structfsop_1_1_file_a223ab9134e7ec5fb2669eeb0e0e11fee}\label{structfsop_1_1_file_a223ab9134e7ec5fb2669eeb0e0e11fee}} 
+\index{fsop::File@{fsop::File}!File@{File}}
+\index{File@{File}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{File()}{File()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily fsop\+::\+File\+::\+File (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfsop_1_1_file}{File}} \&\&}]{tmp\+\_\+file }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{structfsop_1_1_file}{File}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tmp\+\_\+file} & Temporary file object holding an active file descriptor. State is transferred to the current object without affecting reference counts of the file table entry. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structfsop_1_1_file_a17a4edb41321b1d6ad51c587bb06fa66}\label{structfsop_1_1_file_a17a4edb41321b1d6ad51c587bb06fa66}} 
+\index{fsop::File@{fsop::File}!create\_unnamed\_pipe@{create\_unnamed\_pipe}}
+\index{create\_unnamed\_pipe@{create\_unnamed\_pipe}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{create\_unnamed\_pipe()}{create\_unnamed\_pipe()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{structfsop_1_1_file}{fsop\+::\+File}}, \mbox{\hyperlink{structfsop_1_1_file}{fsop\+::\+File}} $>$ fsop\+::\+File\+::create\+\_\+unnamed\+\_\+pipe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a temporary, process-\/specific, unnamed pipe for performing I/O. 
+
+Unnamed pipes allow for sequential streaming of data in a first-\/in, first-\/out manner, from a writer to a reader. This is useful for communication between processes.
+
+\begin{DoxyReturn}{Returns}
+\{std\+::pair$<$\+File, File$>$\} Pair of \mbox{\hyperlink{structfsop_1_1_file}{File}} instances corresponding to the reader and writer respectively. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structfsop_1_1_file_a1da083bab6718fd938060d5e83b603c2}\label{structfsop_1_1_file_a1da083bab6718fd938060d5e83b603c2}} 
+\index{fsop::File@{fsop::File}!open\_file@{open\_file}}
+\index{open\_file@{open\_file}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{open\_file()}{open\_file()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfsop_1_1_file}{fsop\+::\+File}} fsop\+::\+File\+::open\+\_\+file (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{path,  }\item[{int}]{open\+\_\+options = {\ttfamily O\+\_\+RDONLY} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Opens a file for performing I/O. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the file to open. \\
+\hline
+{\em open\+\_\+options} & Options to specify how to open the file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structfsop_1_1_file}{File}}\} The reference to the file descriptor, wrapped in an auto-\/closeable \mbox{\hyperlink{structfsop_1_1_file}{File}} object. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structfsop_1_1_file_a0ed1bda86bd6a6f1d84c910f7ad0906e}\label{structfsop_1_1_file_a0ed1bda86bd6a6f1d84c910f7ad0906e}} 
+\index{fsop::File@{fsop::File}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily fsop\+::\+File\+::operator bool (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Implicit casting operator\+: determines truthness based on the descriptor. \mbox{\Hypertarget{structfsop_1_1_file_add5d9942c1c56fc53acf29d4042b3f30}\label{structfsop_1_1_file_add5d9942c1c56fc53acf29d4042b3f30}} 
+\index{fsop::File@{fsop::File}!operator=@{operator=}}
+\index{operator=@{operator=}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfsop_1_1_file}{fsop\+::\+File}} \& fsop\+::\+File\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structfsop_1_1_file}{File}} \&}]{file\+\_\+ref }\end{DoxyParamCaption})}
+
+
+
+Copy assignment\+: Copies (dupes) the file object\textquotesingle{}s descriptor to the current object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+ref} & \mbox{\hyperlink{structfsop_1_1_file}{File}} object reference maintaining a file descriptor. The descriptor is duped to increase the effective reference count of the global file table entry. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structfsop_1_1_file}{File}}\&\} Reference to the current object, for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structfsop_1_1_file_aa5d1e829b56d7cb8df7b534dedb9e7c1}\label{structfsop_1_1_file_aa5d1e829b56d7cb8df7b534dedb9e7c1}} 
+\index{fsop::File@{fsop::File}!operator=@{operator=}}
+\index{operator=@{operator=}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfsop_1_1_file}{fsop\+::\+File}} \& fsop\+::\+File\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfsop_1_1_file}{File}} \&\&}]{tmp\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Move assignment\+: Moves the file descriptor, effectively transferring ownership. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tmp\+\_\+file} & Temporary file object holding an active file descriptor. State is transferred to the current object without affecting reference counts of the file table entry. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structfsop_1_1_file}{File}}\&\} Reference to the current object, for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structfsop_1_1_file_ac4f8944bacec9af4421204de531fa6ff}\label{structfsop_1_1_file_ac4f8944bacec9af4421204de531fa6ff}} 
+\index{fsop::File@{fsop::File}!read@{read}}
+\index{read@{read}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily std\+::string fsop\+::\+File\+::read (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nbytes = {\ttfamily \mbox{\hyperlink{structfsop_1_1_file_a34f642bd3fbec1a98dba4e9a086eb357}{bytes\+\_\+till\+\_\+end}}},  }\item[{off64\+\_\+t}]{offset = {\ttfamily 0},  }\item[{int}]{whence = {\ttfamily SEEK\+\_\+CUR} }\end{DoxyParamCaption})}
+
+
+
+Reads data as a sequence of characters from the file referenced by the object. Bytes are read as-\/is, so some bytes may not be valid printable characters, depending on the nature of the file content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nbytes} & Number of bytes to read, defaulting to the index of the last byte of the file. \\
+\hline
+{\em offset} & Byte offset to begin reading content from (default=0). \\
+\hline
+{\em whence} & Offset base for movement reference along the file, can be one of SEEK\+\_\+\+SET, SEEK\+\_\+\+CUR or SEEK\+\_\+\+END (default=SEEK\+\_\+\+CUR).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{std\+::string\} A string containing the read content. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structfsop_1_1_file_a54d1b7e96f21454727eb3d813a8b4db4}\label{structfsop_1_1_file_a54d1b7e96f21454727eb3d813a8b4db4}} 
+\index{fsop::File@{fsop::File}!stat@{stat}}
+\index{stat@{stat}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{stat()}{stat()}}
+{\footnotesize\ttfamily struct stat64 fsop\+::\+File\+::stat (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns information about the file as available in the file\textquotesingle{}s inode. Internally calls fstat and caches the result. 
+
+\begin{DoxyReturn}{Returns}
+\{struct stat64\} Object describing the file information, possibly cached. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structfsop_1_1_file_a0abe39049b5181802881572ae9024b84}\label{structfsop_1_1_file_a0abe39049b5181802881572ae9024b84}} 
+\index{fsop::File@{fsop::File}!write@{write}}
+\index{write@{write}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily size\+\_\+t fsop\+::\+File\+::write (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{data,  }\item[{off64\+\_\+t}]{offset = {\ttfamily 0},  }\item[{int}]{whence = {\ttfamily SEEK\+\_\+CUR} }\end{DoxyParamCaption})}
+
+
+
+Writes byte data to the file referenced by the object, optionally at the specified offset location. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Data to write, can be a std\+::string or a c-\/string (any type convertible to std\+::string\+\_\+view). \\
+\hline
+{\em offset} & Byte offset to begin writing content to (default=0). \\
+\hline
+{\em whence} & Offset base for movement reference along the file, can be one of SEEK\+\_\+\+SET, SEEK\+\_\+\+CUR or SEEK\+\_\+\+END (default=SEEK\+\_\+\+CUR). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{size\+\_\+t\} Number of bytes actually written to the file. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structfsop_1_1_file_a34f642bd3fbec1a98dba4e9a086eb357}\label{structfsop_1_1_file_a34f642bd3fbec1a98dba4e9a086eb357}} 
+\index{fsop::File@{fsop::File}!bytes\_till\_end@{bytes\_till\_end}}
+\index{bytes\_till\_end@{bytes\_till\_end}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{bytes\_till\_end}{bytes\_till\_end}}
+{\footnotesize\ttfamily constexpr size\+\_\+t fsop\+::\+File\+::bytes\+\_\+till\+\_\+end = -\/1ULL\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+Constant to specify infinite byte count (read until end of file) \mbox{\Hypertarget{structfsop_1_1_file_aaabcc9dc7dd27b6e198d67d807cc90e8}\label{structfsop_1_1_file_aaabcc9dc7dd27b6e198d67d807cc90e8}} 
+\index{fsop::File@{fsop::File}!invalid\_descriptor@{invalid\_descriptor}}
+\index{invalid\_descriptor@{invalid\_descriptor}!fsop::File@{fsop::File}}
+\doxysubsubsection{\texorpdfstring{invalid\_descriptor}{invalid\_descriptor}}
+{\footnotesize\ttfamily constexpr int fsop\+::\+File\+::invalid\+\_\+descriptor = -\/1\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+Constant to represent an invalid file descriptor. 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/fsop/\mbox{\hyperlink{file_8hpp}{file.\+hpp}}\item 
+src/fsop/file.\+cpp\item 
+src/fsop/open.\+cpp\end{DoxyCompactItemize}

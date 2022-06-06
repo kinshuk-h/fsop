@@ -1,0 +1,135 @@
+.TH "argparse" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+argparse \- Exposes components for parsing command-line arguments\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBarguments\fP"
+.br
+.RI "\fBArgument\fP variables for use as named arguments\&. "
+.ti -1c
+.RI "namespace \fBdefaults\fP"
+.br
+.ti -1c
+.RI "namespace \fBtransforms\fP"
+.br
+.RI "Transformation functions for common types\&. "
+.ti -1c
+.RI "namespace \fBtypes\fP"
+.br
+.RI "Aliases for strong types for arguments\&. "
+.ti -1c
+.RI "namespace \fButils\fP"
+.br
+.RI "Utility functions for use across the module\&. "
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBArgument\fP"
+.br
+.RI "Represents a base type to store argument description and parsing information\&. "
+.ti -1c
+.RI "struct \fBOptional\fP"
+.br
+.RI "Represents an optional argument, which can have arbitrary arity and is specified with a flag\&. "
+.ti -1c
+.RI "struct \fBparse_error\fP"
+.br
+.RI "Exception subtype to convey parse errors\&. "
+.ti -1c
+.RI "class \fBParser\fP"
+.br
+.RI "Represents an argument parser, which can parse argument values from arbitrary ranges using provided argument objects describing parsing information\&. "
+.ti -1c
+.RI "struct \fBPositional\fP"
+.br
+.RI "Represents a positional argument, which must be specified in the exact position it is declared in\&. "
+.ti -1c
+.RI "class \fBSubparserSet\fP"
+.br
+.RI "Creates an argument type to hold subparsers as a mutually exclusive group\&. "
+.ti -1c
+.RI "struct \fBSwitch\fP"
+.br
+.RI "Represents a switch/flag argument, which has no arity and is used to store a boolean or a constant upon presence or absence\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename Integral , typename  = std::enable_if_t<std::is_integral_v<Integral>, std::nullptr_t>> std::vector< Integral > \fBto_integral\fP (const \fBtypes::argument_value_type\fP &value)"
+.br
+.RI "Maps the variant value to an integral type\&. "
+.ti -1c
+.RI "template<typename Range > std::string \fBjoin\fP (const Range &range, std::string_view glue=' ')"
+.br
+.RI "Joins elements of a collection together to a single range\&. "
+.ti -1c
+.RI "template<typename Range , typename TransformFunction > std::string \fBjoin\fP (const Range &range, std::string_view glue, TransformFunction \fBtransform\fP)"
+.br
+.RI "Joins elements of a collection together to a single range\&. "
+.ti -1c
+.RI "bool \fBis_numeric\fP (std::string_view value)"
+.br
+.RI "Checks if a given string encapsulates a numeric integral value\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBtypes::Name::Argument\fP \fBname\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Help::Argument\fP \fBhelp\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Alias::Argument\fP \fBalias\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Destination::Argument\fP \fBdest\fP"
+.br
+.ti -1c
+.RI "\fBtypes::DefaultValue::Argument\fP \fBdefault_value\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Arity::Argument\fP \fBarity\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Choices::Argument\fP \fBchoices\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Transform::Argument\fP \fBtransform\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Required::Argument\fP \fBrequired\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Negated::Argument\fP \fBnegated\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Description::Argument\fP \fBdescription\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Epilog::Argument\fP \fBepilog\fP"
+.br
+.ti -1c
+.RI "\fBtypes::OutputStream::Argument\fP \fBoutput_stream\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Exposes components for parsing command-line arguments\&. 
+
+This namespace exposes classes for the parser and arguments and their subtypes\&. Further it provides constants for emulating named arguments across the constructors of the respective classes\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

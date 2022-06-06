@@ -14,26 +14,6 @@
 #include <tuple>       // std::make_tuple, std::get
 #include <type_traits> // std::is_disjunction_v
 
-// TODO: Remove
-#include <string>
-#include <cstdlib>
-#include <memory>
-#include <cxxabi.h>
-
-inline std::string demangle(const char* name)
-{
-
-    int status = -4; // some arbitrary value to eliminate the compiler warning
-
-    // enable c++11 by passing the flag -std=c++11 to g++
-    std::unique_ptr<char, void(*)(void*)> res {
-        abi::__cxa_demangle(name, NULL, NULL, &status),
-        std::free
-    };
-
-    return (status==0) ? res.get() : name ;
-}
-
 /**
  * @brief Generates Named Types for use in arguments of functions to better elaborate the context.
  *
@@ -48,12 +28,39 @@ class NamedType
 {
     ValueType value_;
 public:
+    /** Alias for the type of the value being represented. */
     using value_type = ValueType;
 
+    /**
+     * @brief Creates a named type object from value of the underlying type.
+     *
+     * @param value Value to hold.
+     */
     constexpr explicit NamedType(ValueType const& value) : value_(value) {}
+    /**
+     * @brief Creates a named type object from a forwarded reference to a value of the underlying type.
+     *
+     * @tparam VT Alias to the value type (indicates lvalue or rvalue)
+     * @tparam typename Checks if the value is a proper rvalue reference.
+     */
     template<typename VT = ValueType, typename = std::enable_if_t<!std::is_reference_v<VT>, std::nullptr_t>>
+    /**
+     * @brief Creates a named type object from a forwarded reference to a value of the underlying type.
+     * This constructor expects pnly an rvalue reference.
+     *
+     */
     constexpr explicit NamedType(ValueType&& value) : value_(std::move(value)) {}
+    /**
+     * @brief Returns a mutable reference to the held value.
+     *
+     * @return constexpr ValueType& Lvalue reference to the underlying value.
+     */
     constexpr ValueType&       get()       { return value_; }
+    /**
+     * @brief Returns a non-mutable reference to the held value.
+     * 
+     * @return constexpr const ValueType& constant Lvalue reference to the underlying value.
+     */
     constexpr const ValueType& get() const { return value_; }
 
     /**
@@ -74,13 +81,34 @@ public:
      */
     struct Argument
     {
+        /**
+         * @brief Construct a new Argument object
+         *
+         */
         Argument() = default;
+        /**
+         * @brief Disallow creation via copy constructor.
+         *
+         */
         Argument(const Argument&) = delete;
+        /**
+         * @brief Disallow creation via move constructor.
+         *
+         */
         Argument(Argument&&)      = delete;
 
+        /** Disallow copy assignment of objects. */
         Argument& operator=(const Argument&) = delete;
+        /** Disallow move assignment of objects.*/
         Argument& operator=(Argument&&)      = delete;
 
+        /**
+         * @brief Return a NamedType object encapsulating the assigned underlying value.
+         *
+         * @tparam UnderlyingType Type of the raw value being assigned.
+         * @param value Value to encapsulate.
+         * @return NamedType Object wrapping the value as a strong typed argument.
+         */
         template<typename UnderlyingType>
         NamedType operator=(UnderlyingType&& value) const
         {
@@ -90,13 +118,29 @@ public:
 };
 
 #if __cplusplus < 202000
+    /**
+     * @brief Removes const-volatile and reference specifiers from a type.
+     *
+     * @tparam T Type to remove const, volatile and reference from.
+     */
     template< class T >
     struct remove_cvref {
+        /** CV-reference removed type. */
         typedef std::remove_cv_t<std::remove_reference_t<T>> type;
     };
+    /**
+     * @brief Alias over remove_cvref<T>::type
+     *
+     * @tparam T Type to remove const, volatile and reference from.
+     */
     template< class T >
     using remove_cvref_t = typename remove_cvref<T>::type;
 #else
+    /**
+     * @brief Removes const-volatile and reference specifiers from a type.
+     *
+     * @tparam T Type to remove const, volatile and reference from.
+     */
     template< class T >
     using remove_cvref_t = std::remove_cvref_t<T>;
 #endif

@@ -1,0 +1,172 @@
+\hypertarget{namespacefsop_1_1utils}{}\doxysection{fsop\+::utils Namespace Reference}
+\label{namespacefsop_1_1utils}\index{fsop::utils@{fsop::utils}}
+
+
+Defines common utilities for use with filesystem operations.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+mode\+\_\+t \mbox{\hyperlink{namespacefsop_1_1utils_a964515decd69a30025527c60ae9a4db7}{parse\+\_\+permissions}} (std\+::string\+\_\+view perms)
+\begin{DoxyCompactList}\small\item\em Parses a given permission string into an integral value with bits set as per given permissions. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacefsop_1_1utils_a37dc160d5e6abecfafff4f0678b5aa78}{to\+\_\+permissions}} (mode\+\_\+t permissions)
+\begin{DoxyCompactList}\small\item\em Returns a parseable string representation of a given numerical permissions entry. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacefsop_1_1utils_acdf39669a2f32b83a055251bc76ac410}{parse\+\_\+seek\+\_\+whence}} (std\+::string\+\_\+view whence)
+\begin{DoxyCompactList}\small\item\em Parses the value of whence for offset movement. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacefsop_1_1utils_a4d4690b2e165af406b18438aef8201af}{to\+\_\+type}} (mode\+\_\+t type)
+\begin{DoxyCompactList}\small\item\em Returns the name of the file type corresponding to the file type number stored in the inode. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Integral , typename  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+integral\+\_\+v$<$\+Integral$>$, std\+::nullptr\+\_\+t$>$$>$ }\\auto \mbox{\hyperlink{namespacefsop_1_1utils_a1999ccb2c6acd6c8b5ff9c52817bf0d1}{to\+\_\+human\+\_\+readable\+\_\+size}} (Integral byte\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Converts a given file size in bytes to a human readable form. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespacefsop_1_1utils_a7db1ad8ccebbaae8d081383c6660cc7a}{current\+\_\+directory}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current working directory of the process. Internally invokes the {\ttfamily getcwd()} syscall. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacefsop_1_1utils_a7d33b16ea364c25ca23847c5bf9b2bcc}{change\+\_\+directory}} (std\+::string\+\_\+view path)
+\begin{DoxyCompactList}\small\item\em Sets the current working directory to the path indicated by the given argument. Internally invokes the {\ttfamily chdir} syscall. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines common utilities for use with filesystem operations. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacefsop_1_1utils_a7d33b16ea364c25ca23847c5bf9b2bcc}\label{namespacefsop_1_1utils_a7d33b16ea364c25ca23847c5bf9b2bcc}} 
+\index{fsop::utils@{fsop::utils}!change\_directory@{change\_directory}}
+\index{change\_directory@{change\_directory}!fsop::utils@{fsop::utils}}
+\doxysubsubsection{\texorpdfstring{change\_directory()}{change\_directory()}}
+{\footnotesize\ttfamily void fsop\+::utils\+::change\+\_\+directory (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{path }\end{DoxyParamCaption})}
+
+
+
+Sets the current working directory to the path indicated by the given argument. Internally invokes the {\ttfamily chdir} syscall. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & New path to use as the current working directories. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{std\+::system\+\_\+error\}} & Describes the reason for failure. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{namespacefsop_1_1utils_a7db1ad8ccebbaae8d081383c6660cc7a}\label{namespacefsop_1_1utils_a7db1ad8ccebbaae8d081383c6660cc7a}} 
+\index{fsop::utils@{fsop::utils}!current\_directory@{current\_directory}}
+\index{current\_directory@{current\_directory}!fsop::utils@{fsop::utils}}
+\doxysubsubsection{\texorpdfstring{current\_directory()}{current\_directory()}}
+{\footnotesize\ttfamily std\+::string fsop\+::utils\+::current\+\_\+directory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns the current working directory of the process. Internally invokes the {\ttfamily getcwd()} syscall. 
+
+\begin{DoxyReturn}{Returns}
+\{std\+::string\} The current working directory. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{std\+::system\+\_\+error\}} & Describes the reason for failure. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{namespacefsop_1_1utils_a964515decd69a30025527c60ae9a4db7}\label{namespacefsop_1_1utils_a964515decd69a30025527c60ae9a4db7}} 
+\index{fsop::utils@{fsop::utils}!parse\_permissions@{parse\_permissions}}
+\index{parse\_permissions@{parse\_permissions}!fsop::utils@{fsop::utils}}
+\doxysubsubsection{\texorpdfstring{parse\_permissions()}{parse\_permissions()}}
+{\footnotesize\ttfamily mode\+\_\+t fsop\+::utils\+::parse\+\_\+permissions (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{perms }\end{DoxyParamCaption})}
+
+
+
+Parses a given permission string into an integral value with bits set as per given permissions. 
+
+\begin{DoxyVerb} This function allows parsing strings of the following forms:
+ - Octal 3-digit number beginning with 0 and digits indicating set bits.
+ - Combination of letters indicating permission groups (u,g,o for user, group and others), with 
+ letters r,w & x for permissions, separated by +.
+ - 9 letter string containing r,w,x or - values denoting read, write and execute permissions.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}{Parameters}
+{\em perms} & The string containing permissions to be parsed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+mode\+\_\+t The permission bits indicating requested permissions. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefsop_1_1utils_acdf39669a2f32b83a055251bc76ac410}\label{namespacefsop_1_1utils_acdf39669a2f32b83a055251bc76ac410}} 
+\index{fsop::utils@{fsop::utils}!parse\_seek\_whence@{parse\_seek\_whence}}
+\index{parse\_seek\_whence@{parse\_seek\_whence}!fsop::utils@{fsop::utils}}
+\doxysubsubsection{\texorpdfstring{parse\_seek\_whence()}{parse\_seek\_whence()}}
+{\footnotesize\ttfamily int fsop\+::utils\+::parse\+\_\+seek\+\_\+whence (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{whence }\end{DoxyParamCaption})}
+
+
+
+Parses the value of whence for offset movement. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em whence} & String containing the relative offset base. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Numeric constant corresponding to the given whence. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefsop_1_1utils_a1999ccb2c6acd6c8b5ff9c52817bf0d1}\label{namespacefsop_1_1utils_a1999ccb2c6acd6c8b5ff9c52817bf0d1}} 
+\index{fsop::utils@{fsop::utils}!to\_human\_readable\_size@{to\_human\_readable\_size}}
+\index{to\_human\_readable\_size@{to\_human\_readable\_size}!fsop::utils@{fsop::utils}}
+\doxysubsubsection{\texorpdfstring{to\_human\_readable\_size()}{to\_human\_readable\_size()}}
+{\footnotesize\ttfamily template$<$typename Integral , typename  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+integral\+\_\+v$<$\+Integral$>$, std\+::nullptr\+\_\+t$>$$>$ \\
+auto fsop\+::utils\+::to\+\_\+human\+\_\+readable\+\_\+size (\begin{DoxyParamCaption}\item[{Integral}]{byte\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Converts a given file size in bytes to a human readable form. 
+
+This function performs successive division of the file size until a normal value is obtained, and returns a tuple of the reduced size, the rounded off fractional size component and the unit prefix to use.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Integral} & Type representing an integral value.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em byte\+\_\+size} & Integral file size, in bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{auto\} tuple of 3 values\+: the reduced size, the rounded off fractional component and the unit prefix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefsop_1_1utils_a37dc160d5e6abecfafff4f0678b5aa78}\label{namespacefsop_1_1utils_a37dc160d5e6abecfafff4f0678b5aa78}} 
+\index{fsop::utils@{fsop::utils}!to\_permissions@{to\_permissions}}
+\index{to\_permissions@{to\_permissions}!fsop::utils@{fsop::utils}}
+\doxysubsubsection{\texorpdfstring{to\_permissions()}{to\_permissions()}}
+{\footnotesize\ttfamily std\+::string fsop\+::utils\+::to\+\_\+permissions (\begin{DoxyParamCaption}\item[{mode\+\_\+t}]{permissions }\end{DoxyParamCaption})}
+
+
+
+Returns a parseable string representation of a given numerical permissions entry. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em permissions} & The numeric permissions (as a mode\+\_\+t variable). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{std\+::string\} The 9-\/letter string representation of the permissions. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefsop_1_1utils_a4d4690b2e165af406b18438aef8201af}\label{namespacefsop_1_1utils_a4d4690b2e165af406b18438aef8201af}} 
+\index{fsop::utils@{fsop::utils}!to\_type@{to\_type}}
+\index{to\_type@{to\_type}!fsop::utils@{fsop::utils}}
+\doxysubsubsection{\texorpdfstring{to\_type()}{to\_type()}}
+{\footnotesize\ttfamily std\+::string fsop\+::utils\+::to\+\_\+type (\begin{DoxyParamCaption}\item[{mode\+\_\+t}]{type }\end{DoxyParamCaption})}
+
+
+
+Returns the name of the file type corresponding to the file type number stored in the inode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & Type number of the file, from the inode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{std\+::string\} Name of the type. 
+\end{DoxyReturn}

@@ -1,0 +1,255 @@
+.TH "include/argparse/common.hpp" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/argparse/common.hpp \- Defines common constants and header includes for use throughout the argparse module\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'utilities\&.hpp'\fP
+.br
+\fC#include <cctype>\fP
+.br
+\fC#include <cstdlib>\fP
+.br
+\fC#include <any>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <vector>\fP
+.br
+\fC#include <memory>\fP
+.br
+\fC#include <ostream>\fP
+.br
+\fC#include <sstream>\fP
+.br
+\fC#include <iomanip>\fP
+.br
+\fC#include <variant>\fP
+.br
+\fC#include <optional>\fP
+.br
+\fC#include <algorithm>\fP
+.br
+\fC#include <functional>\fP
+.br
+\fC#include <string_view>\fP
+.br
+\fC#include <unordered_map>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBargparse::parse_error\fP"
+.br
+.RI "Exception subtype to convey parse errors\&. "
+.in -1c
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBargparse\fP"
+.br
+.RI "Exposes components for parsing command-line arguments\&. "
+.ti -1c
+.RI "namespace \fBargparse::types\fP"
+.br
+.RI "Aliases for strong types for arguments\&. "
+.ti -1c
+.RI "namespace \fBargparse::arguments\fP"
+.br
+.RI "\fBArgument\fP variables for use as named arguments\&. "
+.ti -1c
+.RI "namespace \fBargparse::arguments::defaults\fP"
+.br
+.ti -1c
+.RI "namespace \fBargparse::transforms\fP"
+.br
+.RI "Transformation functions for common types\&. "
+.ti -1c
+.RI "namespace \fBargparse::utils\fP"
+.br
+.RI "Utility functions for use across the module\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBargparse::types::argument_value_type\fP = std::variant< bool, std::string, std::vector< std::string > >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::transform_function\fP = std::function< std::any(const argument_value_type &)>"
+.br
+.ti -1c
+.RI "using \fBargparse::types::result_map\fP = std::unordered_map< std::string, std::any >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Name\fP = \fBNamedType\fP< std::string_view, struct NameTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Help\fP = \fBNamedType\fP< std::string_view, struct HelpTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Alias\fP = \fBNamedType\fP< std::string_view, struct AliasTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Destination\fP = \fBNamedType\fP< std::string_view, struct DestinationTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Arity\fP = \fBNamedType\fP< int, struct ArityTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::DefaultValue\fP = \fBNamedType\fP< std::optional< argument_value_type >, struct DefaultValueTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Choices\fP = \fBNamedType\fP< std::optional< std::vector< std::string_view > >, struct ChoicesTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Transform\fP = \fBNamedType\fP< std::optional< transform_function >, struct TransformTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Required\fP = \fBNamedType\fP< bool, struct RequiredTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Negated\fP = \fBNamedType\fP< bool, struct NegatedTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Description\fP = \fBNamedType\fP< std::string_view, struct DescriptionTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::Epilog\fP = \fBNamedType\fP< std::string_view, struct EpilogTag >"
+.br
+.ti -1c
+.RI "using \fBargparse::types::OutputStream\fP = \fBNamedType\fP< std::ostream &, struct OutputStreamTag >"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename Integral , typename  = std::enable_if_t<std::is_integral_v<Integral>, std::nullptr_t>> std::vector< Integral > \fBargparse::transforms::to_integral\fP (const types::argument_value_type &value)"
+.br
+.RI "Maps the variant value to an integral type\&. "
+.ti -1c
+.RI "template<typename Range > std::string \fBargparse::utils::join\fP (const Range &range, std::string_view glue=' ')"
+.br
+.RI "Joins elements of a collection together to a single range\&. "
+.ti -1c
+.RI "template<typename Range , typename TransformFunction > std::string \fBargparse::utils::join\fP (const Range &range, std::string_view glue, TransformFunction transform)"
+.br
+.RI "Joins elements of a collection together to a single range\&. "
+.ti -1c
+.RI "bool \fBargparse::utils::is_numeric\fP (std::string_view value)"
+.br
+.RI "Checks if a given string encapsulates a numeric integral value\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "types::Name::Argument \fBargparse::arguments::name\fP"
+.br
+.ti -1c
+.RI "types::Help::Argument \fBargparse::arguments::help\fP"
+.br
+.ti -1c
+.RI "types::Alias::Argument \fBargparse::arguments::alias\fP"
+.br
+.ti -1c
+.RI "types::Destination::Argument \fBargparse::arguments::dest\fP"
+.br
+.ti -1c
+.RI "types::DefaultValue::Argument \fBargparse::arguments::default_value\fP"
+.br
+.ti -1c
+.RI "types::Arity::Argument \fBargparse::arguments::arity\fP"
+.br
+.ti -1c
+.RI "types::Choices::Argument \fBargparse::arguments::choices\fP"
+.br
+.ti -1c
+.RI "types::Transform::Argument \fBargparse::arguments::transform\fP"
+.br
+.ti -1c
+.RI "types::Required::Argument \fBargparse::arguments::required\fP"
+.br
+.ti -1c
+.RI "types::Negated::Argument \fBargparse::arguments::negated\fP"
+.br
+.ti -1c
+.RI "types::Description::Argument \fBargparse::arguments::description\fP"
+.br
+.ti -1c
+.RI "types::Epilog::Argument \fBargparse::arguments::epilog\fP"
+.br
+.ti -1c
+.RI "types::OutputStream::Argument \fBargparse::arguments::output_stream\fP"
+.br
+.ti -1c
+.RI "constexpr auto \fBargparse::arguments::defaults::default_name\fP = types::Name('')"
+.br
+.ti -1c
+.RI "constexpr auto \fBargparse::arguments::defaults::default_help\fP = types::Help('')"
+.br
+.ti -1c
+.RI "constexpr auto \fBargparse::arguments::defaults::default_alias\fP = types::Alias('')"
+.br
+.ti -1c
+.RI "constexpr auto \fBargparse::arguments::defaults::default_dest\fP = types::Destination('')"
+.br
+.ti -1c
+.RI "constexpr auto \fBargparse::arguments::defaults::default_arity\fP = types::Arity(1)"
+.br
+.ti -1c
+.RI "constexpr auto \fBargparse::arguments::defaults::default_negated\fP = types::Negated(false)"
+.br
+.ti -1c
+.RI "constexpr auto \fBargparse::arguments::defaults::default_description\fP = types::Description('')"
+.br
+.ti -1c
+.RI "constexpr auto \fBargparse::arguments::defaults::default_epilog\fP = types::Epilog('')"
+.br
+.ti -1c
+.RI "auto \fBargparse::arguments::defaults::default_transform\fP = types::Transform(std::nullopt)"
+.br
+.ti -1c
+.RI "auto \fBargparse::arguments::defaults::default_choices\fP = types::Choices(std::nullopt)"
+.br
+.ti -1c
+.RI "auto \fBargparse::arguments::defaults::default_value\fP = types::DefaultValue(std::nullopt)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines common constants and header includes for use throughout the argparse module\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19) 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+1\&.0 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2022-05-28
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2022 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

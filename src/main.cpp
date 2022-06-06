@@ -92,7 +92,9 @@ int main(int argc, const char** argv)
         name = "read",
         description = "read content off regular files or pipes (named/unnamed)",
         epilog = (
-            "read allows reading arbitrary bytes of data from "
+            "read allows reading arbitrary bytes of data from a regular file or named pipe\n\n"
+            "read performs read operations in batches, where each batch can include a start offset, a whence value and bytes to be read\n\n"
+            "bytes to read can be -1 to specify reading till the end of the file."
         )
     };
     read_parser.add_arguments(
@@ -131,7 +133,12 @@ int main(int argc, const char** argv)
     // Parser to handle the write subcommand.
     argparse::Parser write_parser {
         name = "write",
-        description = "write content to regular files or pipes (named/unnamed)"
+        description = "write content to regular files or pipes (named/unnamed)",
+        epilog = (
+            "write allows writing arbitrary bytes of data to a regular file or named pipe\n\n"
+            "write performs write operations in batches, where each batch can include a start offset and a whence value\n\n"
+            "Data to be written is read from STDIN, and can be entered in line-buffered (--lbuf) or EOF (normal) mode."
+        )
     };
     write_parser.add_arguments(
         argparse::Positional
@@ -177,7 +184,7 @@ int main(int argc, const char** argv)
     // Parser to handle the inspect subcommand.
     argparse::Parser inspect_parser {
         name = "inspect",
-        description = "inspect and retrieve information about files"
+        description = "inspect and retrieve information about files",
     };
     inspect_parser.add_arguments(
         argparse::Positional

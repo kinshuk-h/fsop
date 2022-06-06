@@ -1,3 +1,13 @@
+/**
+ * @file inspect.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file for implementation of fsop::inspect_file.
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "fsop/inspect.hpp"
 #include "fsop/utilities.hpp"
 

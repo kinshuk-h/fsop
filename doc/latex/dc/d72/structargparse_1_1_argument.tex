@@ -1,0 +1,586 @@
+\hypertarget{structargparse_1_1_argument}{}\doxysection{argparse\+::Argument Struct Reference}
+\label{structargparse_1_1_argument}\index{argparse::Argument@{argparse::Argument}}
+
+
+Represents a base type to store argument description and parsing information.  
+
+
+
+
+{\ttfamily \#include $<$argument.\+hpp$>$}
+
+Inheritance diagram for argparse\+::Argument\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.818182cm]{dc/d72/structargparse_1_1_argument}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{structargparse_1_1_argument_abb828c53c1c354f50d80ad2b622eab41}{value\+\_\+type}} = \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{types\+::argument\+\_\+value\+\_\+type}}
+\item 
+using \mbox{\hyperlink{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}{range}} = std\+::vector$<$ std\+::string\+\_\+view $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Name\+Type  = std\+::nullptr\+\_\+t, typename Alias\+Type  = std\+::nullptr\+\_\+t, typename Destination\+Type  = std\+::nullptr\+\_\+t, typename Default\+Value\+Type  = std\+::nullptr\+\_\+t, typename Description\+Type  = std\+::nullptr\+\_\+t, typename Arity\+Type  = std\+::nullptr\+\_\+t, typename Choices\+Type  = std\+::nullptr\+\_\+t, typename Transform\+Type  = std\+::nullptr\+\_\+t, typename Required\+Type  = std\+::nullptr\+\_\+t$>$ }\\\mbox{\hyperlink{structargparse_1_1_argument_ac8d6d16755ae0418976c985525b84b99}{Argument}} (Name\+Type \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}=nullptr, Alias\+Type \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}=nullptr, Destination\+Type \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}=nullptr, Default\+Value\+Type defaults=nullptr, Description\+Type \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}}=nullptr, Arity\+Type \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}=nullptr, Choices\+Type \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}=nullptr, Transform\+Type \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}=nullptr, Required\+Type \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} object. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{structargparse_1_1_argument_a72fa41e32edbaa04f7ac3f4076a8c600}{usage}} () const noexcept=0
+\begin{DoxyCompactList}\small\item\em Describes the usage of the argument through a returned string. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{structargparse_1_1_argument_af6797371a2a13c03dd0ffcc316d9b392}{descriptor}} (unsigned tty\+\_\+columns=60) const noexcept=0
+\begin{DoxyCompactList}\small\item\em Describes the argument along with the provided explanation. \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} $>$ \mbox{\hyperlink{structargparse_1_1_argument_aaf88c843fcd0d01a798cfab5727c5df7}{clone}} () const =0
+\begin{DoxyCompactList}\small\item\em Creates a copy of the argument as a unique\+\_\+ptr for polymorphic usage. \end{DoxyCompactList}\item 
+virtual range\+::iterator \mbox{\hyperlink{structargparse_1_1_argument_ace25829c581cf63b33bb2feb58677ae6}{parse\+\_\+args}} (range\+::iterator begin, range\+::iterator end, \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \&values) const =0
+\begin{DoxyCompactList}\small\item\em Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}} () const noexcept
+\item 
+const std\+::string \& \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}} () const noexcept
+\item 
+const std\+::string \& \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}} () const noexcept
+\item 
+const std\+::string \& \mbox{\hyperlink{structargparse_1_1_argument_a2805c8b70fb219ebc6d35c47d913b9c0}{destination}} () const noexcept
+\item 
+int \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}} () const noexcept
+\item 
+std\+::any \mbox{\hyperlink{structargparse_1_1_argument_a97be0735c02849e53c7617d577c0c646}{default\+\_\+value}} () const
+\item 
+bool \mbox{\hyperlink{structargparse_1_1_argument_abbf7fa57b13cb71ca6c6f0b2cd6a67b6}{positional}} () const noexcept
+\item 
+bool \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}} () const noexcept
+\item 
+const auto \& \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}} () const noexcept
+\item 
+const auto \& \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}} () const noexcept
+\item 
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& \mbox{\hyperlink{structargparse_1_1_argument_a88f8c5a4fd6ee9783f67f6f8d4ea1459}{name}} (std\+::string\+\_\+view \mbox{\hyperlink{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}{\+\_\+name}})
+\begin{DoxyCompactList}\small\item\em Sets the name of the argument to display. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& \mbox{\hyperlink{structargparse_1_1_argument_a2e9d37ac6687d476b6d0cc9927d5846a}{alias}} (std\+::string\+\_\+view \mbox{\hyperlink{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}{\+\_\+alias}}) noexcept
+\begin{DoxyCompactList}\small\item\em Sets the alias for the argument. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& \mbox{\hyperlink{structargparse_1_1_argument_a70211d729954ec30d908ef23df9d22d7}{help}} (std\+::string\+\_\+view \mbox{\hyperlink{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}{\+\_\+description}}) noexcept
+\begin{DoxyCompactList}\small\item\em Sets the brief description about the argument. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& \mbox{\hyperlink{structargparse_1_1_argument_a6fe70055c03ec9cb5647246ab2df7815}{destination}} (std\+::string\+\_\+view \mbox{\hyperlink{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}{\+\_\+destination}}) noexcept
+\begin{DoxyCompactList}\small\item\em Sets the destination name for the argument in the parsed table. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& \mbox{\hyperlink{structargparse_1_1_argument_ad88b7350acb9ef36eead3ebc11fa53d8}{arity}} (int \mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\+\_\+arity}}) noexcept
+\begin{DoxyCompactList}\small\item\em Sets the number of values to be stored for the argument. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& \mbox{\hyperlink{structargparse_1_1_argument_ab206ac3204f55942d67a85fc1855ef38}{default\+\_\+value}} (const \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Default\+Value\+::value\+\_\+type}} \&\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\+\_\+defaults}}) noexcept
+\begin{DoxyCompactList}\small\item\em Sets the default value for the argument. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& \mbox{\hyperlink{structargparse_1_1_argument_a8b5c3e89cad741ba813cb956b61e56da}{required}} (bool \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\+\_\+required}}) noexcept
+\begin{DoxyCompactList}\small\item\em Sets whether the argument is to be enforced as required. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& \mbox{\hyperlink{structargparse_1_1_argument_ab9f08ae9e44a4e48c430b23aa5bb4af3}{choices}} (const \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Choices\+::value\+\_\+type}} \&\mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\+\_\+choices}}) noexcept
+\begin{DoxyCompactList}\small\item\em Sets the possible choices for the argument\textquotesingle{}s values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& \mbox{\hyperlink{structargparse_1_1_argument_a895bf42ebd577a99597abecaa362de54}{transform}} (const \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Transform\+::value\+\_\+type}} \&\mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\+\_\+transform}}) noexcept
+\begin{DoxyCompactList}\small\item\em Sets the transformation to apply over argument values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::ostream \& \mbox{\hyperlink{structargparse_1_1_argument_aa2eb8e91cf7c6faf1330dd992d6aee5c}{write\+\_\+description}} (std\+::ostream \&os, std\+::string\+\_\+view \mbox{\hyperlink{namespaceargparse_1_1arguments_a8c46810bbdb6b399f602f6a40113e98d}{description}}, unsigned tty\+\_\+columns=60, std\+::string\+::size\+\_\+type consumed=0)
+\begin{DoxyCompactList}\small\item\em Writes a formatted description to the given output stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const int \mbox{\hyperlink{structargparse_1_1_argument_ac8e932b78791fd44a5303073807b1a6c}{ZERO\+\_\+\+OR\+\_\+\+MORE}} = -\/1
+\item 
+static const int \mbox{\hyperlink{structargparse_1_1_argument_a84e1070e0cd82b79abfe6e94134446a5}{ONE\+\_\+\+OR\+\_\+\+MORE}} = -\/2
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}{\+\_\+name}}
+\item 
+std\+::string \mbox{\hyperlink{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}{\+\_\+alias}}
+\item 
+std\+::string \mbox{\hyperlink{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}{\+\_\+description}}
+\item 
+std\+::string \mbox{\hyperlink{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}{\+\_\+destination}}
+\item 
+int \mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\+\_\+arity}} = 0
+\item 
+bool \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\+\_\+required}}
+\item 
+bool \mbox{\hyperlink{structargparse_1_1_argument_a7999e2b65a8db4149ca4818a08ada1a1}{\+\_\+positional}} = false
+\item 
+\mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Default\+Value\+::value\+\_\+type}} \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\+\_\+defaults}}
+\item 
+\mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Choices\+::value\+\_\+type}} \mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\+\_\+choices}}
+\item 
+\mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Transform\+::value\+\_\+type}} \mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\+\_\+transform}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a base type to store argument description and parsing information. 
+
+\mbox{\hyperlink{structargparse_1_1_argument}{Argument}} objects maintain information about command-\/line arguments for effective parsing. Further, the provided data aids in providing a concise description to the user. 
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}\label{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}} 
+\index{argparse::Argument@{argparse::Argument}!range@{range}}
+\index{range@{range}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{range}{range}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}{argparse\+::\+Argument\+::range}} =  std\+::vector$<$std\+::string\+\_\+view$>$}
+
+Type of the collection used for storing unparsed and unprocessed arguments. \mbox{\Hypertarget{structargparse_1_1_argument_abb828c53c1c354f50d80ad2b622eab41}\label{structargparse_1_1_argument_abb828c53c1c354f50d80ad2b622eab41}} 
+\index{argparse::Argument@{argparse::Argument}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structargparse_1_1_argument_abb828c53c1c354f50d80ad2b622eab41}{argparse\+::\+Argument\+::value\+\_\+type}} =  \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{types\+::argument\+\_\+value\+\_\+type}}}
+
+Type of the argument values, as a variant over common argument value types. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structargparse_1_1_argument_ac8d6d16755ae0418976c985525b84b99}\label{structargparse_1_1_argument_ac8d6d16755ae0418976c985525b84b99}} 
+\index{argparse::Argument@{argparse::Argument}!Argument@{Argument}}
+\index{Argument@{Argument}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{Argument()}{Argument()}}
+{\footnotesize\ttfamily template$<$typename Name\+Type  = std\+::nullptr\+\_\+t, typename Alias\+Type  = std\+::nullptr\+\_\+t, typename Destination\+Type  = std\+::nullptr\+\_\+t, typename Default\+Value\+Type  = std\+::nullptr\+\_\+t, typename Description\+Type  = std\+::nullptr\+\_\+t, typename Arity\+Type  = std\+::nullptr\+\_\+t, typename Choices\+Type  = std\+::nullptr\+\_\+t, typename Transform\+Type  = std\+::nullptr\+\_\+t, typename Required\+Type  = std\+::nullptr\+\_\+t$>$ \\
+argparse\+::\+Argument\+::\+Argument (\begin{DoxyParamCaption}\item[{Name\+Type}]{name = {\ttfamily nullptr},  }\item[{Alias\+Type}]{alias = {\ttfamily nullptr},  }\item[{Destination\+Type}]{dest = {\ttfamily nullptr},  }\item[{Default\+Value\+Type}]{defaults = {\ttfamily nullptr},  }\item[{Description\+Type}]{help = {\ttfamily nullptr},  }\item[{Arity\+Type}]{arity = {\ttfamily nullptr},  }\item[{Choices\+Type}]{choices = {\ttfamily nullptr},  }\item[{Transform\+Type}]{transform = {\ttfamily nullptr},  }\item[{Required\+Type}]{required = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Name\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Alias\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Destination\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Default\+Value\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Description\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Arity\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Choices\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Transform\+Type} & Placeholder type for named arguments. \\
+\hline
+{\em Required\+Type} & Placeholder type for named arguments.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the argument to display. \\
+\hline
+{\em alias} & Alias for the argument (default=\char`\"{}\char`\"{}). \\
+\hline
+{\em dest} & Destination name for the argument in the parsed table (default=name). \\
+\hline
+{\em defaults} & Default value for the argument. \\
+\hline
+{\em help} & Brief description about the argument (default=\char`\"{}\char`\"{}). \\
+\hline
+{\em arity} & Number of values to be stored for the argument (default=1). \\
+\hline
+{\em choices} & Possible choices for the argument\textquotesingle{}s values. \\
+\hline
+{\em transform} & Transformation to apply over argument values. \\
+\hline
+{\em required} & Whether the option is to be enforced as required. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}\label{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}} 
+\index{argparse::Argument@{argparse::Argument}!alias@{alias}}
+\index{alias@{alias}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{alias()}{alias()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const std\+::string \& argparse\+::\+Argument\+::alias (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Alias for the argument (default=\char`\"{}\char`\"{}). \mbox{\Hypertarget{structargparse_1_1_argument_a2e9d37ac6687d476b6d0cc9927d5846a}\label{structargparse_1_1_argument_a2e9d37ac6687d476b6d0cc9927d5846a}} 
+\index{argparse::Argument@{argparse::Argument}!alias@{alias}}
+\index{alias@{alias}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{alias()}{alias()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& argparse\+::\+Argument\+::alias (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{\+\_\+alias }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Sets the alias for the argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+alias} & New value for the alias for the argument. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\} Reference to the current object for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}\label{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}} 
+\index{argparse::Argument@{argparse::Argument}!arity@{arity}}
+\index{arity@{arity}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{arity()}{arity()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int argparse\+::\+Argument\+::arity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Number of values to be stored for the argument (default=1). \mbox{\Hypertarget{structargparse_1_1_argument_ad88b7350acb9ef36eead3ebc11fa53d8}\label{structargparse_1_1_argument_ad88b7350acb9ef36eead3ebc11fa53d8}} 
+\index{argparse::Argument@{argparse::Argument}!arity@{arity}}
+\index{arity@{arity}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{arity()}{arity()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& argparse\+::\+Argument\+::arity (\begin{DoxyParamCaption}\item[{int}]{\+\_\+arity }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Sets the number of values to be stored for the argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+arity} & New value for the number of values to be stored for the argument. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\} Reference to the current object for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}\label{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}} 
+\index{argparse::Argument@{argparse::Argument}!choices@{choices}}
+\index{choices@{choices}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{choices()}{choices()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const auto \& argparse\+::\+Argument\+::choices (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Possible choices for the argument\textquotesingle{}s values. \mbox{\Hypertarget{structargparse_1_1_argument_ab9f08ae9e44a4e48c430b23aa5bb4af3}\label{structargparse_1_1_argument_ab9f08ae9e44a4e48c430b23aa5bb4af3}} 
+\index{argparse::Argument@{argparse::Argument}!choices@{choices}}
+\index{choices@{choices}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{choices()}{choices()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& argparse\+::\+Argument\+::choices (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Choices\+::value\+\_\+type}} \&}]{\+\_\+choices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Sets the possible choices for the argument\textquotesingle{}s values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+choices} & New value for the possible choices for the argument\textquotesingle{}s values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\} Reference to the current object for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1_argument_aaf88c843fcd0d01a798cfab5727c5df7}\label{structargparse_1_1_argument_aaf88c843fcd0d01a798cfab5727c5df7}} 
+\index{argparse::Argument@{argparse::Argument}!clone@{clone}}
+\index{clone@{clone}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{clone()}{clone()}}
+{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} $>$ argparse\+::\+Argument\+::clone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Creates a copy of the argument as a unique\+\_\+ptr for polymorphic usage. 
+
+
+
+Implemented in \mbox{\hyperlink{structargparse_1_1_optional_ac57560884eb78168c37446d1687df9e2}{argparse\+::\+Optional}}, \mbox{\hyperlink{structargparse_1_1_positional_a307489f777a2986e84e6f44c1b90a989}{argparse\+::\+Positional}}, \mbox{\hyperlink{structargparse_1_1_switch_ab06f9e6ebebe88d3a7ec65bab1e636ae}{argparse\+::\+Switch}}, and \mbox{\hyperlink{classargparse_1_1_subparser_set_ac9f7c3bba1b409a1be12f610b941f4fa}{argparse\+::\+Subparser\+Set}}.
+
+\mbox{\Hypertarget{structargparse_1_1_argument_a97be0735c02849e53c7617d577c0c646}\label{structargparse_1_1_argument_a97be0735c02849e53c7617d577c0c646}} 
+\index{argparse::Argument@{argparse::Argument}!default\_value@{default\_value}}
+\index{default\_value@{default\_value}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{default\_value()}{default\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily std\+::any argparse\+::\+Argument\+::default\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Default value for the argument. \mbox{\Hypertarget{structargparse_1_1_argument_ab206ac3204f55942d67a85fc1855ef38}\label{structargparse_1_1_argument_ab206ac3204f55942d67a85fc1855ef38}} 
+\index{argparse::Argument@{argparse::Argument}!default\_value@{default\_value}}
+\index{default\_value@{default\_value}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{default\_value()}{default\_value()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& argparse\+::\+Argument\+::default\+\_\+value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Default\+Value\+::value\+\_\+type}} \&}]{\+\_\+defaults }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Sets the default value for the argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+defaults} & New value for the default value for the argument. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\} Reference to the current object for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1_argument_af6797371a2a13c03dd0ffcc316d9b392}\label{structargparse_1_1_argument_af6797371a2a13c03dd0ffcc316d9b392}} 
+\index{argparse::Argument@{argparse::Argument}!descriptor@{descriptor}}
+\index{descriptor@{descriptor}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{descriptor()}{descriptor()}}
+{\footnotesize\ttfamily virtual std\+::string argparse\+::\+Argument\+::descriptor (\begin{DoxyParamCaption}\item[{unsigned}]{tty\+\_\+columns = {\ttfamily 60} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Describes the argument along with the provided explanation. 
+
+
+
+Implemented in \mbox{\hyperlink{structargparse_1_1_optional_ae9f1800fee057af753870ce5ce2aeb89}{argparse\+::\+Optional}}, \mbox{\hyperlink{structargparse_1_1_positional_abfabaf32ce199803b0d9f614160c0e0e}{argparse\+::\+Positional}}, \mbox{\hyperlink{structargparse_1_1_switch_acaf4f7816e7293d87054266c4d163b31}{argparse\+::\+Switch}}, and \mbox{\hyperlink{classargparse_1_1_subparser_set_a827286e1d83e7c0ca3fb24a04918e805}{argparse\+::\+Subparser\+Set}}.
+
+\mbox{\Hypertarget{structargparse_1_1_argument_a2805c8b70fb219ebc6d35c47d913b9c0}\label{structargparse_1_1_argument_a2805c8b70fb219ebc6d35c47d913b9c0}} 
+\index{argparse::Argument@{argparse::Argument}!destination@{destination}}
+\index{destination@{destination}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{destination()}{destination()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const std\+::string \& argparse\+::\+Argument\+::destination (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Destination name for the argument in the parsed table (default=name). \mbox{\Hypertarget{structargparse_1_1_argument_a6fe70055c03ec9cb5647246ab2df7815}\label{structargparse_1_1_argument_a6fe70055c03ec9cb5647246ab2df7815}} 
+\index{argparse::Argument@{argparse::Argument}!destination@{destination}}
+\index{destination@{destination}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{destination()}{destination()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& argparse\+::\+Argument\+::destination (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{\+\_\+destination }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Sets the destination name for the argument in the parsed table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+destination} & New value for the destination name for the argument in the parsed table. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\} Reference to the current object for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}\label{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}} 
+\index{argparse::Argument@{argparse::Argument}!help@{help}}
+\index{help@{help}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{help()}{help()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const std\+::string \& argparse\+::\+Argument\+::help (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Brief description about the argument (default=\char`\"{}\char`\"{}). \mbox{\Hypertarget{structargparse_1_1_argument_a70211d729954ec30d908ef23df9d22d7}\label{structargparse_1_1_argument_a70211d729954ec30d908ef23df9d22d7}} 
+\index{argparse::Argument@{argparse::Argument}!help@{help}}
+\index{help@{help}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{help()}{help()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& argparse\+::\+Argument\+::help (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{\+\_\+description }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Sets the brief description about the argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+description} & New value for the brief description about the argument. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\} Reference to the current object for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}\label{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}} 
+\index{argparse::Argument@{argparse::Argument}!name@{name}}
+\index{name@{name}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const std\+::string \& argparse\+::\+Argument\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+The name of the argument to display. \mbox{\Hypertarget{structargparse_1_1_argument_a88f8c5a4fd6ee9783f67f6f8d4ea1459}\label{structargparse_1_1_argument_a88f8c5a4fd6ee9783f67f6f8d4ea1459}} 
+\index{argparse::Argument@{argparse::Argument}!name@{name}}
+\index{name@{name}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& argparse\+::\+Argument\+::name (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the name of the argument to display. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+name} & New value for the name of the argument to display. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\} Reference to the current object for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1_argument_ace25829c581cf63b33bb2feb58677ae6}\label{structargparse_1_1_argument_ace25829c581cf63b33bb2feb58677ae6}} 
+\index{argparse::Argument@{argparse::Argument}!parse\_args@{parse\_args}}
+\index{parse\_args@{parse\_args}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{parse\_args()}{parse\_args()}}
+{\footnotesize\ttfamily virtual range\+::iterator argparse\+::\+Argument\+::parse\+\_\+args (\begin{DoxyParamCaption}\item[{range\+::iterator}]{begin,  }\item[{range\+::iterator}]{end,  }\item[{\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types\+::result\+\_\+map}} \&}]{values }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em begin} & iterator pointing to the beginning of the argument value range. \\
+\hline
+{\em end} & iterator pointing to the end of the argument value range. \\
+\hline
+{\em values} & map (hash table) to store parsed valued for the argument.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{range\+::iterator\} iterator pointing to the next argument value unused by the current argument. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{structargparse_1_1_optional_a38e849efe9321499c66b4792ab41c490}{argparse\+::\+Optional}}, \mbox{\hyperlink{structargparse_1_1_positional_ac1c4eab0669b9b23f40c3c4e07d2cabf}{argparse\+::\+Positional}}, \mbox{\hyperlink{structargparse_1_1_switch_a603415fc3a5c46238b517995a7ba8711}{argparse\+::\+Switch}}, and \mbox{\hyperlink{classargparse_1_1_subparser_set_a42621882fb54334f38233144f61215b3}{argparse\+::\+Subparser\+Set}}.
+
+\mbox{\Hypertarget{structargparse_1_1_argument_abbf7fa57b13cb71ca6c6f0b2cd6a67b6}\label{structargparse_1_1_argument_abbf7fa57b13cb71ca6c6f0b2cd6a67b6}} 
+\index{argparse::Argument@{argparse::Argument}!positional@{positional}}
+\index{positional@{positional}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{positional()}{positional()}}
+{\footnotesize\ttfamily bool argparse\+::\+Argument\+::positional (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Whether the argument is a positional argument. \mbox{\Hypertarget{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}\label{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}} 
+\index{argparse::Argument@{argparse::Argument}!required@{required}}
+\index{required@{required}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{required()}{required()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool argparse\+::\+Argument\+::required (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Whether the argument is to be enforced as required. \mbox{\Hypertarget{structargparse_1_1_argument_a8b5c3e89cad741ba813cb956b61e56da}\label{structargparse_1_1_argument_a8b5c3e89cad741ba813cb956b61e56da}} 
+\index{argparse::Argument@{argparse::Argument}!required@{required}}
+\index{required@{required}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{required()}{required()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& argparse\+::\+Argument\+::required (\begin{DoxyParamCaption}\item[{bool}]{\+\_\+required }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Sets whether the argument is to be enforced as required. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+required} & New value for whether the argument is to be enforced as required. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\} Reference to the current object for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}\label{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}} 
+\index{argparse::Argument@{argparse::Argument}!transform@{transform}}
+\index{transform@{transform}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{transform()}{transform()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily const auto \& argparse\+::\+Argument\+::transform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Transformation to apply over argument values. \mbox{\Hypertarget{structargparse_1_1_argument_a895bf42ebd577a99597abecaa362de54}\label{structargparse_1_1_argument_a895bf42ebd577a99597abecaa362de54}} 
+\index{argparse::Argument@{argparse::Argument}!transform@{transform}}
+\index{transform@{transform}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{transform()}{transform()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} \& argparse\+::\+Argument\+::transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Transform\+::value\+\_\+type}} \&}]{\+\_\+transform }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Sets the transformation to apply over argument values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+transform} & New value for the transformation to apply over argument values. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\} Reference to the current object for chaining operations. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1_argument_a72fa41e32edbaa04f7ac3f4076a8c600}\label{structargparse_1_1_argument_a72fa41e32edbaa04f7ac3f4076a8c600}} 
+\index{argparse::Argument@{argparse::Argument}!usage@{usage}}
+\index{usage@{usage}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{usage()}{usage()}}
+{\footnotesize\ttfamily virtual std\+::string argparse\+::\+Argument\+::usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Describes the usage of the argument through a returned string. 
+
+
+
+Implemented in \mbox{\hyperlink{structargparse_1_1_optional_a6cb5739f6a55d98f407b712add630c9e}{argparse\+::\+Optional}}, \mbox{\hyperlink{structargparse_1_1_positional_ae5864240613752148966c9c9bf9bb262}{argparse\+::\+Positional}}, \mbox{\hyperlink{structargparse_1_1_switch_add2887233ad2ec5402d81173be364d19}{argparse\+::\+Switch}}, and \mbox{\hyperlink{classargparse_1_1_subparser_set_aef6da4333e3dc829e0bc289e2306da57}{argparse\+::\+Subparser\+Set}}.
+
+\mbox{\Hypertarget{structargparse_1_1_argument_aa2eb8e91cf7c6faf1330dd992d6aee5c}\label{structargparse_1_1_argument_aa2eb8e91cf7c6faf1330dd992d6aee5c}} 
+\index{argparse::Argument@{argparse::Argument}!write\_description@{write\_description}}
+\index{write\_description@{write\_description}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{write\_description()}{write\_description()}}
+{\footnotesize\ttfamily std\+::ostream \& argparse\+::\+Argument\+::write\+\_\+description (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{std\+::string\+\_\+view}]{description,  }\item[{unsigned}]{tty\+\_\+columns = {\ttfamily 60},  }\item[{std\+::string\+::size\+\_\+type}]{consumed = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Writes a formatted description to the given output stream. 
+
+This function is for internal formatting of argument descriptions (such as when generating the argument help).
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & The output stream to write the description to. \\
+\hline
+{\em description} & The description to write. \\
+\hline
+{\em tty\+\_\+columns} & Maximum number of terminal columns/characters to span per line. \\
+\hline
+{\em consumed} & Number of characters assumed to be present on the first line (consumed character count). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::ostream\& Reference to the output stream for cascading operations. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}\label{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}} 
+\index{argparse::Argument@{argparse::Argument}!\_alias@{\_alias}}
+\index{\_alias@{\_alias}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_alias}{\_alias}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Argument\+::\+\_\+alias\hspace{0.3cm}{\ttfamily [protected]}}
+
+Alias for the argument (default=\char`\"{}\char`\"{}). \mbox{\Hypertarget{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}\label{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}} 
+\index{argparse::Argument@{argparse::Argument}!\_arity@{\_arity}}
+\index{\_arity@{\_arity}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_arity}{\_arity}}
+{\footnotesize\ttfamily int argparse\+::\+Argument\+::\+\_\+arity = 0\hspace{0.3cm}{\ttfamily [protected]}}
+
+Number of values to be stored for the argument (default=1). \mbox{\Hypertarget{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}\label{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}} 
+\index{argparse::Argument@{argparse::Argument}!\_choices@{\_choices}}
+\index{\_choices@{\_choices}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_choices}{\_choices}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Choices\+::value\+\_\+type}} argparse\+::\+Argument\+::\+\_\+choices\hspace{0.3cm}{\ttfamily [protected]}}
+
+Possible choices for the argument\textquotesingle{}s values. \mbox{\Hypertarget{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}\label{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}} 
+\index{argparse::Argument@{argparse::Argument}!\_defaults@{\_defaults}}
+\index{\_defaults@{\_defaults}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_defaults}{\_defaults}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Default\+Value\+::value\+\_\+type}} argparse\+::\+Argument\+::\+\_\+defaults\hspace{0.3cm}{\ttfamily [protected]}}
+
+Default value for the argument. \mbox{\Hypertarget{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}\label{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}} 
+\index{argparse::Argument@{argparse::Argument}!\_description@{\_description}}
+\index{\_description@{\_description}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_description}{\_description}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Argument\+::\+\_\+description\hspace{0.3cm}{\ttfamily [protected]}}
+
+Brief description about the argument (default=\char`\"{}\char`\"{}). \mbox{\Hypertarget{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}\label{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}} 
+\index{argparse::Argument@{argparse::Argument}!\_destination@{\_destination}}
+\index{\_destination@{\_destination}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_destination}{\_destination}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Argument\+::\+\_\+destination\hspace{0.3cm}{\ttfamily [protected]}}
+
+Destination name for the argument in the parsed table (default=name). \mbox{\Hypertarget{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}\label{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}} 
+\index{argparse::Argument@{argparse::Argument}!\_name@{\_name}}
+\index{\_name@{\_name}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_name}{\_name}}
+{\footnotesize\ttfamily std\+::string argparse\+::\+Argument\+::\+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}
+
+The name of the argument to display. \mbox{\Hypertarget{structargparse_1_1_argument_a7999e2b65a8db4149ca4818a08ada1a1}\label{structargparse_1_1_argument_a7999e2b65a8db4149ca4818a08ada1a1}} 
+\index{argparse::Argument@{argparse::Argument}!\_positional@{\_positional}}
+\index{\_positional@{\_positional}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_positional}{\_positional}}
+{\footnotesize\ttfamily bool argparse\+::\+Argument\+::\+\_\+positional = false\hspace{0.3cm}{\ttfamily [protected]}}
+
+Whether the argument is a positional argument. \mbox{\Hypertarget{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}\label{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}} 
+\index{argparse::Argument@{argparse::Argument}!\_required@{\_required}}
+\index{\_required@{\_required}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_required}{\_required}}
+{\footnotesize\ttfamily bool argparse\+::\+Argument\+::\+\_\+required\hspace{0.3cm}{\ttfamily [protected]}}
+
+Whether the argument is to be enforced as required. \mbox{\Hypertarget{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}\label{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}} 
+\index{argparse::Argument@{argparse::Argument}!\_transform@{\_transform}}
+\index{\_transform@{\_transform}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{\_transform}{\_transform}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types\+::\+Transform\+::value\+\_\+type}} argparse\+::\+Argument\+::\+\_\+transform\hspace{0.3cm}{\ttfamily [protected]}}
+
+Transformation to apply over argument values. \mbox{\Hypertarget{structargparse_1_1_argument_a84e1070e0cd82b79abfe6e94134446a5}\label{structargparse_1_1_argument_a84e1070e0cd82b79abfe6e94134446a5}} 
+\index{argparse::Argument@{argparse::Argument}!ONE\_OR\_MORE@{ONE\_OR\_MORE}}
+\index{ONE\_OR\_MORE@{ONE\_OR\_MORE}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{ONE\_OR\_MORE}{ONE\_OR\_MORE}}
+{\footnotesize\ttfamily const int argparse\+::\+Argument\+::\+ONE\+\_\+\+OR\+\_\+\+MORE = -\/2\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Special arity value\+: allows reading 1 or more values. \mbox{\Hypertarget{structargparse_1_1_argument_ac8e932b78791fd44a5303073807b1a6c}\label{structargparse_1_1_argument_ac8e932b78791fd44a5303073807b1a6c}} 
+\index{argparse::Argument@{argparse::Argument}!ZERO\_OR\_MORE@{ZERO\_OR\_MORE}}
+\index{ZERO\_OR\_MORE@{ZERO\_OR\_MORE}!argparse::Argument@{argparse::Argument}}
+\doxysubsubsection{\texorpdfstring{ZERO\_OR\_MORE}{ZERO\_OR\_MORE}}
+{\footnotesize\ttfamily const int argparse\+::\+Argument\+::\+ZERO\+\_\+\+OR\+\_\+\+MORE = -\/1\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Special arity value\+: allows reading 0 or more values. 
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/argparse/arguments/\mbox{\hyperlink{argument_8hpp}{argument.\+hpp}}\item 
+src/argparse/arguments/argument.\+cpp\end{DoxyCompactItemize}

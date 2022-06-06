@@ -1,0 +1,126 @@
+.TH "NamedType< ValueType, Descriptor >" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+NamedType< ValueType, Descriptor > \- Generates Named Types for use in arguments of functions to better elaborate the context\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <utilities\&.hpp>\fP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBArgument\fP"
+.br
+.RI "Type for representing variables usable for named arguments in functions\&. "
+.in -1c
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBvalue_type\fP = ValueType"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "constexpr \fBNamedType\fP (ValueType const &value)"
+.br
+.RI "Creates a named type object from value of the underlying type\&. "
+.ti -1c
+.RI "template<typename VT  = ValueType, typename  = std::enable_if_t<!std::is_reference_v<VT>, std::nullptr_t>> constexpr \fBNamedType\fP (ValueType &&value)"
+.br
+.RI "Creates a named type object from a forwarded reference to a value of the underlying type\&. "
+.ti -1c
+.RI "constexpr ValueType & \fBget\fP ()"
+.br
+.RI "Returns a mutable reference to the held value\&. "
+.ti -1c
+.RI "constexpr const ValueType & \fBget\fP () const"
+.br
+.RI "Returns a non-mutable reference to the held value\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<typename ValueType, typename Descriptor>
+.br
+class NamedType< ValueType, Descriptor >"Generates Named Types for use in arguments of functions to better elaborate the context\&. 
+
+For motivation and explanation, refer 
+.PP
+\fBSee also\fP
+.RS 4
+\fCthe corresponding blog post on FluentCpp\fP
+.RE
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIValueType\fP The type being wrapped internally\&. 
+.br
+\fIDescriptor\fP A unique type to disambiguate the type from other types\&. 
+.RE
+.PP
+
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<typename ValueType , typename Descriptor > using \fBNamedType\fP< ValueType, Descriptor >::value_type =  ValueType"
+Alias for the type of the value being represented\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename ValueType , typename Descriptor > constexpr \fBNamedType\fP< ValueType, Descriptor >\fB::NamedType\fP (ValueType const & value)\fC [inline]\fP, \fC [explicit]\fP, \fC [constexpr]\fP"
+
+.PP
+Creates a named type object from value of the underlying type\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP Value to hold\&. 
+.RE
+.PP
+
+.SS "template<typename ValueType , typename Descriptor > template<typename VT  = ValueType, typename  = std::enable_if_t<!std::is_reference_v<VT>, std::nullptr_t>> constexpr \fBNamedType\fP< ValueType, Descriptor >\fB::NamedType\fP (ValueType && value)\fC [inline]\fP, \fC [explicit]\fP, \fC [constexpr]\fP"
+
+.PP
+Creates a named type object from a forwarded reference to a value of the underlying type\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIVT\fP Alias to the value type (indicates lvalue or rvalue) 
+.br
+\fItypename\fP Checks if the value is a proper rvalue reference\&.
+.RE
+.PP
+Creates a named type object from a forwarded reference to a value of the underlying type\&. This constructor expects pnly an rvalue reference\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename ValueType , typename Descriptor > constexpr ValueType & \fBNamedType\fP< ValueType, Descriptor >::get ()\fC [inline]\fP, \fC [constexpr]\fP"
+
+.PP
+Returns a mutable reference to the held value\&. 
+.PP
+\fBReturns\fP
+.RS 4
+constexpr ValueType& Lvalue reference to the underlying value\&. 
+.RE
+.PP
+
+.SS "template<typename ValueType , typename Descriptor > constexpr const ValueType & \fBNamedType\fP< ValueType, Descriptor >::get () const\fC [inline]\fP, \fC [constexpr]\fP"
+
+.PP
+Returns a non-mutable reference to the held value\&. 
+.PP
+\fBReturns\fP
+.RS 4
+constexpr const ValueType& constant Lvalue reference to the underlying value\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

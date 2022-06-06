@@ -1,3 +1,13 @@
+/**
+ * @file fsop_cli.hpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Defines functions for use with the CLI.
+ * @version 1.0
+ * @date 2022-06-03
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #ifndef FSOP_CLI_HPP_INCLUDED
 #define FSOP_CLI_HPP_INCLUDED
 

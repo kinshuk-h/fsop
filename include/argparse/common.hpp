@@ -46,85 +46,130 @@ namespace argparse
      */
     struct parse_error : public std::exception
     {
+        /**
+         * @brief Construct a new parse error object
+         *
+         * @param message Message explaining the reason of failure.
+         * @param usage Usage string from the parser.
+         */
         parse_error(std::string_view message, std::string_view usage)
         : std::exception(), _parser_usage(usage), _message(message) {}
 
+        /**
+         * @brief Returns the parser usage associated with the parser which raised the error.
+         *
+         * @return const std::string& String describing the usage.
+         */
         const std::string& parser_usage() const noexcept { return _parser_usage; }
 
+        /**
+         * @brief Explains the reason for failure.
+         *
+         * @return const char* The reason fo failure.
+         */
         virtual const char* what() const noexcept override { return _message.c_str(); }
     private:
         std::string _parser_usage, _message;
     };
 
-    /** @brief Aliases for strong types for arguments. */
+    /**
+     * @brief Aliases for strong types for arguments.
+     *
+     * This namespace defines type aliases for strong types to be used for parameters of the
+     * argparse classes' constructors.
+    */
     namespace types
     {
-        // General type for untransformed argument values.
+        /** General type for untransformed argument values. */
         using argument_value_type = std::variant<bool, std::string, std::vector<std::string>>;
-        // General type for the argument value transformation functions.
+        /** General type for the argument value transformation functions. */
         using transform_function  = std::function<std::any(const argument_value_type&)>;
-        // Type of the map holding the parsed argument values.
+        /** Type of the map holding the parsed argument values. */
         using result_map          = std::unordered_map<std::string, std::any>;
 
+        /** Type for name of the program and argument. */
         using Name         = NamedType<std::string_view,                             struct NameTag>;
+        /** Type for help description of the arguments. */
         using Help         = NamedType<std::string_view,                             struct HelpTag>;
+        /** Type for alias name of the arguments. */
         using Alias        = NamedType<std::string_view,                             struct AliasTag>;
+        /** Type for destination name for the argument. */
         using Destination  = NamedType<std::string_view,                             struct DestinationTag>;
+        /** Type for arity of the argument (numeric value). */
         using Arity        = NamedType<int,                                          struct ArityTag>;
+        /** Type for default value of the argument (either a bool, string or vector). */
         using DefaultValue = NamedType<std::optional<argument_value_type>,           struct DefaultValueTag>;
+        /** Type for possible choices for the argument. */
         using Choices      = NamedType<std::optional<std::vector<std::string_view>>, struct ChoicesTag>;
+        /** Type for transformation function for the argument. */
         using Transform    = NamedType<std::optional<transform_function>,            struct TransformTag>;
+        /** Type for the required status for the argument. */
         using Required     = NamedType<bool,                                         struct RequiredTag>;
+        /** Type for the negated status for the argument. */
         using Negated      = NamedType<bool,                                         struct NegatedTag>;
+        /** Type for description of the parser/program. */
         using Description  = NamedType<std::string_view,                             struct DescriptionTag>;
+        /** Type for epilog description of the parser/program. */
         using Epilog       = NamedType<std::string_view,                             struct EpilogTag>;
+        /** Type for output stream of the parser/program. */
         using OutputStream = NamedType<std::ostream&,                                struct OutputStreamTag>;
     }
 
     /** @brief Argument variables for use as named arguments. */
     inline namespace arguments
     {
-        // Name to display.
+        /** Name to display. */
         inline types::Name::Argument name;
-        // Help description for argument.
+        /** Help description for argument. */
         inline types::Help::Argument help;
-        // Alias(es) for the argument.
+        /** Alias(es) for the argument. */
         inline types::Alias::Argument alias;
-        // Destination name for the argument in the parsed table.
+        /** Destination name for the argument in the parsed table. */
         inline types::Destination::Argument dest;
-        // Default value for the argument.
+        /** Default value for the argument. */
         inline types::DefaultValue::Argument default_value;
-        // Arity for the argument (number of values to store).
+        /** Arity for the argument (number of values to store). */
         inline types::Arity::Argument arity;
-        // Domain of possible choices for the argument.
+        /** Domain of possible choices for the argument. */
         inline types::Choices::Argument choices;
-        // Transformation function to apply over argument values.
+        /** Transformation function to apply over argument values. */
         inline types::Transform::Argument transform;
-        // Whether the argument is to be marked as required.
+        /** Whether the argument is to be marked as required. */
         inline types::Required::Argument required;
-        // Whether to treat flag presence as falsy.
+        /** Whether to treat flag presence as falsy. */
         inline types::Negated::Argument negated;
-        // Text to display before the argument help.
+        /** Text to display before the argument help. */
         inline types::Description::Argument description;
-        // Text to display after the argument help.
+        /** Text to display after the argument help. */
         inline types::Epilog::Argument epilog;
-        // Stream to display help and usage information in.
+        /** Stream to display help and usage information in. */
         inline types::OutputStream::Argument output_stream;
 
         /** Default values for arguments. */
         namespace defaults
         {
+            /** Default value for the name argument. */
             inline constexpr auto default_name        = types::Name("");
+            /** Default value for the help argument. */
             inline constexpr auto default_help        = types::Help("");
+            /** Default value for the alias argument. */
             inline constexpr auto default_alias       = types::Alias("");
+            /** Default value for the destination argument. */
             inline constexpr auto default_dest        = types::Destination("");
+            /** Default value for the arity argument. */
             inline constexpr auto default_arity       = types::Arity(1);
+            /** Default value for the negated argument. */
             inline constexpr auto default_negated     = types::Negated(false);
+            /** Default value for the description argument. */
             inline constexpr auto default_description = types::Description("");
+            /** Default value for the epilog argument. */
             inline constexpr auto default_epilog      = types::Epilog("");
 
+            /** Default value for the transform argument. */
             inline auto default_transform = types::Transform(std::nullopt);
+            /** Default value for the choices argument. */
             inline auto default_choices   = types::Choices(std::nullopt);
+            /** Default value for the default value argument. */
             inline auto default_value     = types::DefaultValue(std::nullopt);
         }
     }

@@ -1,0 +1,93 @@
+\hypertarget{namespaceargparse_1_1utils}{}\doxysection{argparse\+::utils Namespace Reference}
+\label{namespaceargparse_1_1utils}\index{argparse::utils@{argparse::utils}}
+
+
+Utility functions for use across the module.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Range $>$ }\\std\+::string \mbox{\hyperlink{namespaceargparse_1_1utils_a6423049ee04bc49b72bd41fa2ba3d976}{join}} (const Range \&range, std\+::string\+\_\+view glue=\char`\"{} \char`\"{})
+\begin{DoxyCompactList}\small\item\em Joins elements of a collection together to a single range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Range , typename Transform\+Function $>$ }\\std\+::string \mbox{\hyperlink{namespaceargparse_1_1utils_ae30113d42b3f62ef6b9e8e199da759d3}{join}} (const Range \&range, std\+::string\+\_\+view glue, Transform\+Function \mbox{\hyperlink{namespaceargparse_1_1arguments_a765fc1cfec0cdcb9cdb5f9ce69ecfc3e}{transform}})
+\begin{DoxyCompactList}\small\item\em Joins elements of a collection together to a single range. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceargparse_1_1utils_a162e82e2b353157512b891a78a4dd5fb}{is\+\_\+numeric}} (std\+::string\+\_\+view value)
+\begin{DoxyCompactList}\small\item\em Checks if a given string encapsulates a numeric integral value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Utility functions for use across the module. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceargparse_1_1utils_a162e82e2b353157512b891a78a4dd5fb}\label{namespaceargparse_1_1utils_a162e82e2b353157512b891a78a4dd5fb}} 
+\index{argparse::utils@{argparse::utils}!is\_numeric@{is\_numeric}}
+\index{is\_numeric@{is\_numeric}!argparse::utils@{argparse::utils}}
+\doxysubsubsection{\texorpdfstring{is\_numeric()}{is\_numeric()}}
+{\footnotesize\ttfamily bool argparse\+::utils\+::is\+\_\+numeric (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a given string encapsulates a numeric integral value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to check. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespaceargparse_1_1utils_ae30113d42b3f62ef6b9e8e199da759d3}\label{namespaceargparse_1_1utils_ae30113d42b3f62ef6b9e8e199da759d3}} 
+\index{argparse::utils@{argparse::utils}!join@{join}}
+\index{join@{join}!argparse::utils@{argparse::utils}}
+\doxysubsubsection{\texorpdfstring{join()}{join()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Range , typename Transform\+Function $>$ \\
+std\+::string argparse\+::utils\+::join (\begin{DoxyParamCaption}\item[{const Range \&}]{range,  }\item[{std\+::string\+\_\+view}]{glue,  }\item[{Transform\+Function}]{transform }\end{DoxyParamCaption})}
+
+
+
+Joins elements of a collection together to a single range. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Range} & Type of the range. Must provide access to begin and end iterators. \\
+\hline
+{\em Transform\+Function} & Transformation function for mapping range elements.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em range} & The range/collection of elements to join. Elements must be writable to streams (provide and overload for operator\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}) \\
+\hline
+{\em glue} & The string to use to join the content. \\
+\hline
+{\em transform} & Unary operation to apply over elements prior to join. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{std\+::string\} The concatenated string. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespaceargparse_1_1utils_a6423049ee04bc49b72bd41fa2ba3d976}\label{namespaceargparse_1_1utils_a6423049ee04bc49b72bd41fa2ba3d976}} 
+\index{argparse::utils@{argparse::utils}!join@{join}}
+\index{join@{join}!argparse::utils@{argparse::utils}}
+\doxysubsubsection{\texorpdfstring{join()}{join()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Range $>$ \\
+std\+::string argparse\+::utils\+::join (\begin{DoxyParamCaption}\item[{const Range \&}]{range,  }\item[{std\+::string\+\_\+view}]{glue = {\ttfamily \char`\"{}~\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Joins elements of a collection together to a single range. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Range} & Type of the range. Must provide access to begin and end iterators. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em range} & The range/collection of elements to join. Elements must be writable to streams (provide and overload for operator\texorpdfstring{$<$}{<}\texorpdfstring{$<$}{<}) \\
+\hline
+{\em glue} & The string to use to join the content. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{std\+::string\} The concatenated string. 
+\end{DoxyReturn}
