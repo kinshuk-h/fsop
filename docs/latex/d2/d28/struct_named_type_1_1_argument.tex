@@ -1,0 +1,96 @@
+\hypertarget{struct_named_type_1_1_argument}{}\doxysection{Named\+Type\texorpdfstring{$<$}{<} Value\+Type, Descriptor \texorpdfstring{$>$}{>}\+::Argument Struct Reference}
+\label{struct_named_type_1_1_argument}\index{NamedType$<$ ValueType, Descriptor $>$::Argument@{NamedType$<$ ValueType, Descriptor $>$::Argument}}
+
+
+Type for representing variables usable for named arguments in functions.  
+
+
+
+
+{\ttfamily \#include $<$utilities.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct_named_type_1_1_argument_ac23cd9672bfaa9a3cd6c388863fe1de5}\label{struct_named_type_1_1_argument_ac23cd9672bfaa9a3cd6c388863fe1de5}} 
+{\bfseries Argument} ()=default
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_named_type_1_1_argument_a4775c76afcf57aaeea013f69e33ae1cc}\label{struct_named_type_1_1_argument_a4775c76afcf57aaeea013f69e33ae1cc}} 
+{\bfseries Argument} (const \mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Disallow creation via copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct_named_type_1_1_argument_a469db9591805f0043328d7de4fcc8d88}\label{struct_named_type_1_1_argument_a469db9591805f0043328d7de4fcc8d88}} 
+{\bfseries Argument} (\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \&\&)=delete
+\begin{DoxyCompactList}\small\item\em Disallow creation via move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \& \mbox{\hyperlink{struct_named_type_1_1_argument_acad5a88d0a2bc620762b160c32fcd887}{operator=}} (const \mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \&)=delete
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \& \mbox{\hyperlink{struct_named_type_1_1_argument_ad1f5b2d88dd087fad36e34b105df8afe}{operator=}} (\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \&\&)=delete
+\item 
+{\footnotesize template$<$typename Underlying\+Type $>$ }\\\mbox{\hyperlink{class_named_type}{Named\+Type}} \mbox{\hyperlink{struct_named_type_1_1_argument_a3e2e9a2f729ea8814dd2c032776d5ec2}{operator=}} (Underlying\+Type \&\&value) const
+\begin{DoxyCompactList}\small\item\em Return a \mbox{\hyperlink{class_named_type}{Named\+Type}} object encapsulating the assigned underlying value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type, typename Descriptor$>$\newline
+struct Named\+Type$<$ Value\+Type, Descriptor $>$\+::\+Argument}
+Type for representing variables usable for named arguments in functions. 
+
+Variables of this type upon assignment returns a {\ttfamily \mbox{\hyperlink{class_named_type}{Named\+Type}}} object, which allows for syntax similar to the following\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{using }Size = \mbox{\hyperlink{class_named_type}{NamedType<int, struct SizeTag>}};}
+\DoxyCodeLine{Size::Argument size;}
+\DoxyCodeLine{\textcolor{keywordtype}{void} init\_window(Size size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{...}
+\DoxyCodeLine{}
+\DoxyCodeLine{init\_window(size = 100);}
+
+\end{DoxyCode}
+ 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{struct_named_type_1_1_argument_ad1f5b2d88dd087fad36e34b105df8afe}\label{struct_named_type_1_1_argument_ad1f5b2d88dd087fad36e34b105df8afe}} 
+\index{NamedType$<$ ValueType, Descriptor $>$::Argument@{NamedType$<$ ValueType, Descriptor $>$::Argument}!operator=@{operator=}}
+\index{operator=@{operator=}!NamedType$<$ ValueType, Descriptor $>$::Argument@{NamedType$<$ ValueType, Descriptor $>$::Argument}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Descriptor $>$ \\
+\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \& \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ Value\+Type, Descriptor $>$\+::\+Argument\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Disallow move assignment of objects. \mbox{\Hypertarget{struct_named_type_1_1_argument_acad5a88d0a2bc620762b160c32fcd887}\label{struct_named_type_1_1_argument_acad5a88d0a2bc620762b160c32fcd887}} 
+\index{NamedType$<$ ValueType, Descriptor $>$::Argument@{NamedType$<$ ValueType, Descriptor $>$::Argument}!operator=@{operator=}}
+\index{operator=@{operator=}!NamedType$<$ ValueType, Descriptor $>$::Argument@{NamedType$<$ ValueType, Descriptor $>$::Argument}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Descriptor $>$ \\
+\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \& \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ Value\+Type, Descriptor $>$\+::\+Argument\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Disallow copy assignment of objects. \mbox{\Hypertarget{struct_named_type_1_1_argument_a3e2e9a2f729ea8814dd2c032776d5ec2}\label{struct_named_type_1_1_argument_a3e2e9a2f729ea8814dd2c032776d5ec2}} 
+\index{NamedType$<$ ValueType, Descriptor $>$::Argument@{NamedType$<$ ValueType, Descriptor $>$::Argument}!operator=@{operator=}}
+\index{operator=@{operator=}!NamedType$<$ ValueType, Descriptor $>$::Argument@{NamedType$<$ ValueType, Descriptor $>$::Argument}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Descriptor $>$ \\
+template$<$typename Underlying\+Type $>$ \\
+\mbox{\hyperlink{class_named_type}{Named\+Type}} \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ Value\+Type, Descriptor $>$\+::\+Argument\+::operator= (\begin{DoxyParamCaption}\item[{Underlying\+Type \&\&}]{value }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Return a \mbox{\hyperlink{class_named_type}{Named\+Type}} object encapsulating the assigned underlying value. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Underlying\+Type} & Type of the raw value being assigned. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to encapsulate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{class_named_type}{Named\+Type}} Object wrapping the value as a strong typed argument. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/argparse/\mbox{\hyperlink{argparse_2utilities_8hpp}{utilities.\+hpp}}\end{DoxyCompactItemize}

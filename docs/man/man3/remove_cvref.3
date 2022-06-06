@@ -1,0 +1,41 @@
+.TH "remove_cvref< T >" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+remove_cvref< T > \- Removes const-volatile and reference specifiers from a type\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <utilities\&.hpp>\fP
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "typedef std::remove_cv_t< std::remove_reference_t< T > > \fBtype\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.SS "template<class T>
+.br
+struct remove_cvref< T >"Removes const-volatile and reference specifiers from a type\&. 
+
+
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIT\fP Type to remove const, volatile and reference from\&. 
+.RE
+.PP
+
+.SH "Member Typedef Documentation"
+.PP 
+.SS "template<class T > typedef std::remove_cv_t<std::remove_reference_t<T> > \fBremove_cvref\fP< T >::type"
+CV-reference removed type\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

@@ -1,0 +1,133 @@
+\hypertarget{class_named_type}{}\doxysection{Named\+Type\texorpdfstring{$<$}{<} Value\+Type, Descriptor \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_named_type}\index{NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}}
+
+
+Generates Named Types for use in arguments of functions to better elaborate the context.  
+
+
+
+
+{\ttfamily \#include $<$utilities.\+hpp$>$}
+
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}}
+\begin{DoxyCompactList}\small\item\em Type for representing variables usable for named arguments in functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{value\+\_\+type}} = Value\+Type
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr \mbox{\hyperlink{class_named_type_a84f9776213ddcae1f2c7ab1a961d3095}{Named\+Type}} (Value\+Type const \&value)
+\begin{DoxyCompactList}\small\item\em Creates a named type object from value of the underlying type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename VT  = Value\+Type, typename  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+reference\+\_\+v$<$\+VT$>$, std\+::nullptr\+\_\+t$>$$>$ }\\constexpr \mbox{\hyperlink{class_named_type_a7cd990063026f06703b63b01ce9b23b3}{Named\+Type}} (Value\+Type \&\&value)
+\begin{DoxyCompactList}\small\item\em Creates a named type object from a forwarded reference to a value of the underlying type. \end{DoxyCompactList}\item 
+constexpr Value\+Type \& \mbox{\hyperlink{class_named_type_a12e192cd9356503aee74512f14da1235}{get}} ()
+\begin{DoxyCompactList}\small\item\em Returns a mutable reference to the held value. \end{DoxyCompactList}\item 
+constexpr const Value\+Type \& \mbox{\hyperlink{class_named_type_ab88693242ab0a8975cf9bd910ef0b082}{get}} () const
+\begin{DoxyCompactList}\small\item\em Returns a non-\/mutable reference to the held value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Value\+Type, typename Descriptor$>$\newline
+class Named\+Type$<$ Value\+Type, Descriptor $>$}
+Generates Named Types for use in arguments of functions to better elaborate the context. 
+
+For motivation and explanation, refer \begin{DoxySeeAlso}{See also}
+\href{https://www.fluentcpp.com/2016/12/08/strong-types-for-strong-interfaces/}{\texttt{ the corresponding blog post on Fluent\+Cpp}}
+\end{DoxySeeAlso}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Value\+Type} & The type being wrapped internally. \\
+\hline
+{\em Descriptor} & A unique type to disambiguate the type from other types. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Typedef Documentation}
+\mbox{\Hypertarget{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}\label{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}} 
+\index{NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Descriptor $>$ \\
+using \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ Value\+Type, Descriptor $>$\+::value\+\_\+type =  Value\+Type}
+
+Alias for the type of the value being represented. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_named_type_a84f9776213ddcae1f2c7ab1a961d3095}\label{class_named_type_a84f9776213ddcae1f2c7ab1a961d3095}} 
+\index{NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}!NamedType@{NamedType}}
+\index{NamedType@{NamedType}!NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}}
+\doxysubsubsection{\texorpdfstring{NamedType()}{NamedType()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Descriptor $>$ \\
+constexpr \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ Value\+Type, Descriptor $>$\mbox{\hyperlink{class_named_type}{\+::\+Named\+Type}} (\begin{DoxyParamCaption}\item[{Value\+Type const \&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [constexpr]}}
+
+
+
+Creates a named type object from value of the underlying type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to hold. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_named_type_a7cd990063026f06703b63b01ce9b23b3}\label{class_named_type_a7cd990063026f06703b63b01ce9b23b3}} 
+\index{NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}!NamedType@{NamedType}}
+\index{NamedType@{NamedType}!NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}}
+\doxysubsubsection{\texorpdfstring{NamedType()}{NamedType()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Descriptor $>$ \\
+template$<$typename VT  = Value\+Type, typename  = std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+reference\+\_\+v$<$\+VT$>$, std\+::nullptr\+\_\+t$>$$>$ \\
+constexpr \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ Value\+Type, Descriptor $>$\mbox{\hyperlink{class_named_type}{\+::\+Named\+Type}} (\begin{DoxyParamCaption}\item[{Value\+Type \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [constexpr]}}
+
+
+
+Creates a named type object from a forwarded reference to a value of the underlying type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em VT} & Alias to the value type (indicates lvalue or rvalue) \\
+\hline
+{\em typename} & Checks if the value is a proper rvalue reference.\\
+\hline
+\end{DoxyTemplParams}
+Creates a named type object from a forwarded reference to a value of the underlying type. This constructor expects pnly an rvalue reference. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_named_type_a12e192cd9356503aee74512f14da1235}\label{class_named_type_a12e192cd9356503aee74512f14da1235}} 
+\index{NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}!get@{get}}
+\index{get@{get}!NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Descriptor $>$ \\
+constexpr Value\+Type \& \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ Value\+Type, Descriptor $>$\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Returns a mutable reference to the held value. 
+
+\begin{DoxyReturn}{Returns}
+constexpr Value\+Type\& Lvalue reference to the underlying value. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_named_type_ab88693242ab0a8975cf9bd910ef0b082}\label{class_named_type_ab88693242ab0a8975cf9bd910ef0b082}} 
+\index{NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}!get@{get}}
+\index{get@{get}!NamedType$<$ ValueType, Descriptor $>$@{NamedType$<$ ValueType, Descriptor $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Value\+Type , typename Descriptor $>$ \\
+constexpr const Value\+Type \& \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ Value\+Type, Descriptor $>$\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Returns a non-\/mutable reference to the held value. 
+
+\begin{DoxyReturn}{Returns}
+constexpr const Value\+Type\& constant Lvalue reference to the underlying value. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/argparse/\mbox{\hyperlink{argparse_2utilities_8hpp}{utilities.\+hpp}}\end{DoxyCompactItemize}

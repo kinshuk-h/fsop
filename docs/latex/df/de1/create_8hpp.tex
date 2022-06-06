@@ -1,0 +1,88 @@
+\hypertarget{create_8hpp}{}\doxysection{include/fsop/create.hpp File Reference}
+\label{create_8hpp}\index{include/fsop/create.hpp@{include/fsop/create.hpp}}
+
+
+Defines functions for abstracting system calls for creating files and pipes.  
+
+
+{\ttfamily \#include $<$string\+\_\+view$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{create_8hpp_a143407609bf1ab0f902fbe5ef56bafd2}{fsop\+::create\+\_\+file}} (std\+::string\+\_\+view path, mode\+\_\+t permissions, bool overwrite=false)
+\begin{DoxyCompactList}\small\item\em Creates a new regular file in the filesystem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{create_8hpp_aa04c1c3489327c823e86ad7fb7af8d95}{fsop\+::create\+\_\+pipe}} (std\+::string\+\_\+view path, mode\+\_\+t permissions, bool overwrite=false)
+\begin{DoxyCompactList}\small\item\em Creates a new named pipe (FIFO file) in the filesystem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines functions for abstracting system calls for creating files and pipes. 
+
+\begin{DoxyAuthor}{Author}
+Kinshuk Vasisht (\href{mailto:kinshuk.mcs21@cs.du.ac.in}{\texttt{ kinshuk.\+mcs21@cs.\+du.\+ac.\+in}}, RN\+: 19) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/05-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{create_8hpp_a143407609bf1ab0f902fbe5ef56bafd2}\label{create_8hpp_a143407609bf1ab0f902fbe5ef56bafd2}} 
+\index{create.hpp@{create.hpp}!create\_file@{create\_file}}
+\index{create\_file@{create\_file}!create.hpp@{create.hpp}}
+\doxysubsubsection{\texorpdfstring{create\_file()}{create\_file()}}
+{\footnotesize\ttfamily void fsop\+::create\+\_\+file (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{path,  }\item[{mode\+\_\+t}]{permissions,  }\item[{bool}]{overwrite = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Creates a new regular file in the filesystem. 
+
+For successful operation, ensure that the file does not previously exist, all directories along the path exist, there is ample resources for inode and/or disk block allocation and appropriate permissions along all directory components of the path are available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path at which the file must be created. \\
+\hline
+{\em permissions} & The permissions to associate with the file. \\
+\hline
+{\em overwrite} & If true, recreates the file, effectively truncating previous content.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{std\+::system\+\_\+error\}} & reason for failure of operation. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{create_8hpp_aa04c1c3489327c823e86ad7fb7af8d95}\label{create_8hpp_aa04c1c3489327c823e86ad7fb7af8d95}} 
+\index{create.hpp@{create.hpp}!create\_pipe@{create\_pipe}}
+\index{create\_pipe@{create\_pipe}!create.hpp@{create.hpp}}
+\doxysubsubsection{\texorpdfstring{create\_pipe()}{create\_pipe()}}
+{\footnotesize\ttfamily void fsop\+::create\+\_\+pipe (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{path,  }\item[{mode\+\_\+t}]{permissions,  }\item[{bool}]{overwrite = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Creates a new named pipe (FIFO file) in the filesystem. 
+
+For successful operation, ensure that the file does not previously exist, all directories along the path exist, there is ample resources for inode and/or disk block allocation and appropriate permissions along all directory components of the path are available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path at which the file must be created. \\
+\hline
+{\em permissions} & The permissions to associate with the file. \\
+\hline
+{\em overwrite} & If true, recreates the file, effectively truncating previous content.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{std\+::system\+\_\+error\}} & reason for failure of operation. \\
+\hline
+\end{DoxyExceptions}

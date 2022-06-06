@@ -1,0 +1,236 @@
+\hypertarget{argument_8hpp_source}{}\doxysection{argument.\+hpp}
+\label{argument_8hpp_source}\index{include/argparse/arguments/argument.hpp@{include/argparse/arguments/argument.hpp}}
+\mbox{\hyperlink{argument_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef ARGPARSE\_ARGUMENT\_HPP\_INCLUDED}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define ARGPARSE\_ARGUMENT\_HPP\_INCLUDED}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <stdexcept>} \textcolor{comment}{// std::invalid\_argument}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}../common.hpp"{}}}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceargparse}{argparse}}}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{27     \textcolor{keyword}{struct }\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}}
+\DoxyCodeLine{28     \{}
+\DoxyCodeLine{30         \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{structargparse_1_1_argument_ac8e932b78791fd44a5303073807b1a6c}{ZERO\_OR\_MORE}} = -\/1;}
+\DoxyCodeLine{32         \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{structargparse_1_1_argument_a84e1070e0cd82b79abfe6e94134446a5}{ONE\_OR\_MORE}}  = -\/2;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{35         \textcolor{keyword}{using }\mbox{\hyperlink{structargparse_1_1_argument_abb828c53c1c354f50d80ad2b622eab41}{value\_type}} = \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{types::argument\_value\_type}};}
+\DoxyCodeLine{37         \textcolor{keyword}{using }\mbox{\hyperlink{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}{range}} = std::vector<std::string\_view>;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{51         \textcolor{keyword}{static} std::ostream\& \mbox{\hyperlink{structargparse_1_1_argument_aa2eb8e91cf7c6faf1330dd992d6aee5c}{write\_description}}(}
+\DoxyCodeLine{52             std::ostream\& os,}
+\DoxyCodeLine{53             std::string\_view \mbox{\hyperlink{namespaceargparse_1_1arguments_a8c46810bbdb6b399f602f6a40113e98d}{description}},}
+\DoxyCodeLine{54             \textcolor{keywordtype}{unsigned} tty\_columns = 60,}
+\DoxyCodeLine{55             std::string::size\_type consumed = 0}
+\DoxyCodeLine{56         );}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{81         \textcolor{keyword}{template}<}
+\DoxyCodeLine{82             \textcolor{keyword}{typename} NameType = std::nullptr\_t,}
+\DoxyCodeLine{83             \textcolor{keyword}{typename} AliasType = std::nullptr\_t,}
+\DoxyCodeLine{84             \textcolor{keyword}{typename} DestinationType = std::nullptr\_t,}
+\DoxyCodeLine{85             \textcolor{keyword}{typename} DefaultValueType = std::nullptr\_t,}
+\DoxyCodeLine{86             \textcolor{keyword}{typename} DescriptionType = std::nullptr\_t,}
+\DoxyCodeLine{87             \textcolor{keyword}{typename} ArityType = std::nullptr\_t,}
+\DoxyCodeLine{88             \textcolor{keyword}{typename} ChoicesType = std::nullptr\_t,}
+\DoxyCodeLine{89             \textcolor{keyword}{typename} TransformType = std::nullptr\_t,}
+\DoxyCodeLine{90             \textcolor{keyword}{typename} RequiredType = std::nullptr\_t}
+\DoxyCodeLine{91         >}
+\DoxyCodeLine{92         \mbox{\hyperlink{structargparse_1_1_argument_ac8d6d16755ae0418976c985525b84b99}{Argument}}(}
+\DoxyCodeLine{93             NameType \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{94             AliasType \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{95             DestinationType \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{96             DefaultValueType defaults = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{97             DescriptionType \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{98             ArityType \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{99             ChoicesType \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{100             TransformType \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{101             RequiredType \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}} = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{102         )}
+\DoxyCodeLine{103         \{}
+\DoxyCodeLine{104             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}} ( pick\_if<types::Name>(}
+\DoxyCodeLine{105                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a39b500a5ce93009124a948b71ad4c09b}{arguments::defaults::default\_name}},}
+\DoxyCodeLine{106                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}}, \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}}
+\DoxyCodeLine{107             ).get() );}
+\DoxyCodeLine{108             \mbox{\hyperlink{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}{\_alias}} = pick\_if<types::Alias>(}
+\DoxyCodeLine{109                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a1143361c79e64bfa605d4492a452bbcb}{arguments::defaults::default\_alias}},}
+\DoxyCodeLine{110                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}},}
+\DoxyCodeLine{111                 \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}, \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}}
+\DoxyCodeLine{112             ).get();}
+\DoxyCodeLine{113             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a2805c8b70fb219ebc6d35c47d913b9c0}{destination}} ( pick\_if<types::Destination>(}
+\DoxyCodeLine{114                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a270a03f92de274cbb857faff659f5654}{arguments::defaults::default\_dest}},}
+\DoxyCodeLine{115                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}},}
+\DoxyCodeLine{116                 \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}, \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}}
+\DoxyCodeLine{117             ).get() );}
+\DoxyCodeLine{118             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a97be0735c02849e53c7617d577c0c646}{default\_value}} ( pick\_if<types::DefaultValue>(}
+\DoxyCodeLine{119                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_aab4566b8a7b2c43a3a16313798fd8c50}{arguments::defaults::default\_value}},}
+\DoxyCodeLine{120                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}},}
+\DoxyCodeLine{121                 \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}, \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}}
+\DoxyCodeLine{122             ).get() );}
+\DoxyCodeLine{123             \mbox{\hyperlink{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}{\_description}} = pick\_if<types::Help>(}
+\DoxyCodeLine{124                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_af21bd29af5757ea814955fbd405353cc}{arguments::defaults::default\_help}},}
+\DoxyCodeLine{125                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}},}
+\DoxyCodeLine{126                 \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}, \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}}
+\DoxyCodeLine{127             ).get();}
+\DoxyCodeLine{128             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}} ( pick\_if<types::Arity>(}
+\DoxyCodeLine{129                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a5e1c3f0fdd99bb4f0761252696971254}{arguments::defaults::default\_arity}},}
+\DoxyCodeLine{130                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}},}
+\DoxyCodeLine{131                 \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}, \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}}
+\DoxyCodeLine{132             ).get() );}
+\DoxyCodeLine{133             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}( pick\_if<types::Choices>(}
+\DoxyCodeLine{134                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a020944ad396aaf453442d8e6ae548b2b}{arguments::defaults::default\_choices}},}
+\DoxyCodeLine{135                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}},}
+\DoxyCodeLine{136                 \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}, \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}}
+\DoxyCodeLine{137             ).get() );}
+\DoxyCodeLine{138 }
+\DoxyCodeLine{139             \textcolor{keywordflow}{if}(\mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}}.has\_value() and \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.has\_value())}
+\DoxyCodeLine{140             \{}
+\DoxyCodeLine{141                 \textcolor{keyword}{const} \textcolor{keyword}{auto}\& \_\_choices = \mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}}.value();}
+\DoxyCodeLine{142                 \textcolor{keywordflow}{if}(std::holds\_alternative<std::string>(\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.value()))}
+\DoxyCodeLine{143                 \{}
+\DoxyCodeLine{144                     \textcolor{keyword}{auto} \_\_default = std::get<std::string>(\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.value());}
+\DoxyCodeLine{145                     \textcolor{keywordflow}{if}(not std::binary\_search(\_\_choices.begin(), \_\_choices.end(), \_\_default))}
+\DoxyCodeLine{146                         \textcolor{keywordflow}{throw} std::invalid\_argument}
+\DoxyCodeLine{147                         (}
+\DoxyCodeLine{148                             \textcolor{stringliteral}{"{}Argument::Argument(): invalid default value for "{}}}
+\DoxyCodeLine{149                             \textcolor{stringliteral}{"{}argument, must be one of given choices"{}}}
+\DoxyCodeLine{150                         );}
+\DoxyCodeLine{151                 \}}
+\DoxyCodeLine{152                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(std::holds\_alternative<std::vector<std::string>>(\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.value()))}
+\DoxyCodeLine{153                 \{}
+\DoxyCodeLine{154                     \textcolor{keyword}{auto}\& \_\_defaults = std::get<std::vector<std::string>>(\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.value());}
+\DoxyCodeLine{155                     \textcolor{keywordflow}{if}(not std::includes(\_\_choices.begin(), \_\_choices.end(), \_\_defaults.begin(), \_\_defaults.end()))}
+\DoxyCodeLine{156                         \textcolor{keywordflow}{throw} std::invalid\_argument}
+\DoxyCodeLine{157                         (}
+\DoxyCodeLine{158                             \textcolor{stringliteral}{"{}Argument::Argument(): invalid default value for "{}}}
+\DoxyCodeLine{159                             \textcolor{stringliteral}{"{}argument, must be one of given choices"{}}}
+\DoxyCodeLine{160                         );}
+\DoxyCodeLine{161                 \}}
+\DoxyCodeLine{162 }
+\DoxyCodeLine{163             \}}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165             \mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\_transform}} = pick\_if<types::Transform>(}
+\DoxyCodeLine{166                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a93f759d0c17e0d2fb1d38f1babc08920}{arguments::defaults::default\_transform}},}
+\DoxyCodeLine{167                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}},}
+\DoxyCodeLine{168                 \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}, \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}}
+\DoxyCodeLine{169             ).get();}
+\DoxyCodeLine{170         \}}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{175         \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{structargparse_1_1_argument_a72fa41e32edbaa04f7ac3f4076a8c600}{usage}}() const noexcept = 0;}
+\DoxyCodeLine{179         virtual std::\textcolor{keywordtype}{string} \mbox{\hyperlink{structargparse_1_1_argument_af6797371a2a13c03dd0ffcc316d9b392}{descriptor}}(\textcolor{keywordtype}{unsigned} tty\_columns = 60) const noexcept = 0;}
+\DoxyCodeLine{183         virtual std::unique\_ptr<\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}> \mbox{\hyperlink{structargparse_1_1_argument_aaf88c843fcd0d01a798cfab5727c5df7}{clone}}() const = 0;}
+\DoxyCodeLine{195         virtual \mbox{\hyperlink{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}{range}}::iterator \mbox{\hyperlink{structargparse_1_1_argument_ace25829c581cf63b33bb2feb58677ae6}{parse\_args}}(}
+\DoxyCodeLine{196             \mbox{\hyperlink{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}{range}}::iterator begin, \mbox{\hyperlink{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}{range}}::iterator end,}
+\DoxyCodeLine{197             types::\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{result\_map}}\& values}
+\DoxyCodeLine{198         ) const = 0;}
+\DoxyCodeLine{199 }
+\DoxyCodeLine{200         virtual \string~\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}() \{\}}
+\DoxyCodeLine{201 }
+\DoxyCodeLine{203         \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}         () const noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}{\_name}} ; \}}
+\DoxyCodeLine{205         \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}        () const noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}{\_alias}}; \}}
+\DoxyCodeLine{207         \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}}         () const noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}{\_description}}; \}}
+\DoxyCodeLine{209         \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structargparse_1_1_argument_a2805c8b70fb219ebc6d35c47d913b9c0}{destination}}  () const noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}{\_destination}}.empty() ? \mbox{\hyperlink{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}{\_name}} : \mbox{\hyperlink{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}{\_destination}}; \}}
+\DoxyCodeLine{211         \textcolor{keywordtype}{int}                \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}        () const noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}}; \}}
+\DoxyCodeLine{213         std::any           \mbox{\hyperlink{structargparse_1_1_argument_a97be0735c02849e53c7617d577c0c646}{default\_value}}()\textcolor{keyword}{ const}}
+\DoxyCodeLine{214 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{215             \textcolor{keywordflow}{if}(\mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\_transform}}.has\_value())}
+\DoxyCodeLine{216                 \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\_transform}}.value()(\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.value());}
+\DoxyCodeLine{217             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{218             \{}
+\DoxyCodeLine{219                 \textcolor{keywordflow}{return} std::visit}
+\DoxyCodeLine{220                 (}
+\DoxyCodeLine{221                     [](\textcolor{keyword}{const} \textcolor{keyword}{auto}\& value) -\/> std::any \{ \textcolor{keywordflow}{return} value; \},}
+\DoxyCodeLine{222                     \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.value()}
+\DoxyCodeLine{223                 );}
+\DoxyCodeLine{224             \}}
+\DoxyCodeLine{225         \}}
+\DoxyCodeLine{227         \textcolor{keywordtype}{bool}               \mbox{\hyperlink{structargparse_1_1_argument_abbf7fa57b13cb71ca6c6f0b2cd6a67b6}{positional}}   () const noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_a7999e2b65a8db4149ca4818a08ada1a1}{\_positional}}; \}}
+\DoxyCodeLine{229         \textcolor{keywordtype}{bool}               \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}     () const noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\_required}}; \}}
+\DoxyCodeLine{231         \textcolor{keyword}{const} \textcolor{keyword}{auto}\&        \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}      () const noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}}; \}}
+\DoxyCodeLine{233         \textcolor{keyword}{const} \textcolor{keyword}{auto}\&        \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}    () const noexcept \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\_transform}}; \}}
+\DoxyCodeLine{234 }
+\DoxyCodeLine{241         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_a88f8c5a4fd6ee9783f67f6f8d4ea1459}{name}}         (std::string\_view   \mbox{\hyperlink{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}{\_name}}       )}
+\DoxyCodeLine{242         \{}
+\DoxyCodeLine{243             this-\/>\_name.assign(\mbox{\hyperlink{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}{\_name}}.data(), \mbox{\hyperlink{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}{\_name}}.size());}
+\DoxyCodeLine{244             \textcolor{keywordflow}{if}(this-\/>\_name.empty())}
+\DoxyCodeLine{245                 \textcolor{keywordflow}{throw} std::invalid\_argument(\textcolor{stringliteral}{"{}Argument::Argument(): missing value for name"{}});}
+\DoxyCodeLine{246             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{247         \}}
+\DoxyCodeLine{254         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_a2e9d37ac6687d476b6d0cc9927d5846a}{alias}}        (std::string\_view   \mbox{\hyperlink{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}{\_alias}}      ) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{255         \{ this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}{\_alias}}.assign(\mbox{\hyperlink{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}{\_alias}}.data(), \mbox{\hyperlink{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}{\_alias}}.size()); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{262         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_a70211d729954ec30d908ef23df9d22d7}{help}}         (std::string\_view   \mbox{\hyperlink{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}{\_description}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{263         \{ this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}{\_description}}.assign(\mbox{\hyperlink{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}{\_description}}.data(), \mbox{\hyperlink{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}{\_description}}.size()); \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{270         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_a6fe70055c03ec9cb5647246ab2df7815}{destination}}  (std::string\_view   \mbox{\hyperlink{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}{\_destination}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{271         \{}
+\DoxyCodeLine{272             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}{\_destination}}.assign(\mbox{\hyperlink{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}{\_destination}}.data(), \mbox{\hyperlink{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}{\_destination}}.size());}
+\DoxyCodeLine{273             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{274         \}}
+\DoxyCodeLine{281         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_ad88b7350acb9ef36eead3ebc11fa53d8}{arity}}        (\textcolor{keywordtype}{int}                \mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}}      ) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{282         \{}
+\DoxyCodeLine{283             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}} = \mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}};}
+\DoxyCodeLine{284             \textcolor{keywordflow}{if}(\mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}} == 0) this-\/>\mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{285             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{286         \}}
+\DoxyCodeLine{293         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_ab206ac3204f55942d67a85fc1855ef38}{default\_value}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types::DefaultValue::value\_type}}\&  \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}   ) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{294         \{}
+\DoxyCodeLine{295             \textcolor{keywordflow}{if}(\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.has\_value())}
+\DoxyCodeLine{296             \{}
+\DoxyCodeLine{297                 this-\/>\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}} = \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.value();}
+\DoxyCodeLine{298                 \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\_required}} = \textcolor{keyword}{false};}
+\DoxyCodeLine{299                 \textcolor{keywordflow}{if}(\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.value().index() == 2)}
+\DoxyCodeLine{300                 \{}
+\DoxyCodeLine{301                     \textcolor{keyword}{auto}\& \_\_defaults = std::get<2>(this-\/>\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.value());}
+\DoxyCodeLine{302                     std::sort(\_\_defaults.begin(), \_\_defaults.end());}
+\DoxyCodeLine{303                 \}}
+\DoxyCodeLine{304             \}}
+\DoxyCodeLine{305             \textcolor{keywordflow}{else} this-\/>\mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}} = std::nullopt;}
+\DoxyCodeLine{306             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{307         \}}
+\DoxyCodeLine{314         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_a8b5c3e89cad741ba813cb956b61e56da}{required}}     (\textcolor{keywordtype}{bool}               \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\_required}}   ) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{315         \{}
+\DoxyCodeLine{316             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\_required}} = \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\_required}};}
+\DoxyCodeLine{317             \textcolor{keywordflow}{if}(not \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\_required}} and not \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}.has\_value())}
+\DoxyCodeLine{318             \{}
+\DoxyCodeLine{319                 \textcolor{keywordflow}{if}(\mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}} == 1) \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}} = std::string();}
+\DoxyCodeLine{320                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}} > 1)}
+\DoxyCodeLine{321                     \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}} = std::vector<std::string>(\mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}});}
+\DoxyCodeLine{322                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}} < 0)}
+\DoxyCodeLine{323                     \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}} = std::vector<std::string>(-\/\mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}}-\/1);}
+\DoxyCodeLine{324             \}}
+\DoxyCodeLine{325             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{326         \}}
+\DoxyCodeLine{333         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_ab9f08ae9e44a4e48c430b23aa5bb4af3}{choices}}      (\textcolor{keyword}{const} \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types::Choices::value\_type}}\& \mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{334         \{}
+\DoxyCodeLine{335             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}} = \mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}};}
+\DoxyCodeLine{336             \textcolor{keywordflow}{if}(this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}}.has\_value())}
+\DoxyCodeLine{337             \{}
+\DoxyCodeLine{338                 \textcolor{keyword}{auto}\& \_\_choices = this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}}.value();}
+\DoxyCodeLine{339                 std::sort(\_\_choices.begin(), \_\_choices.end());}
+\DoxyCodeLine{340             \}}
+\DoxyCodeLine{341             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{342         \}}
+\DoxyCodeLine{349         \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\& \mbox{\hyperlink{structargparse_1_1_argument_a895bf42ebd577a99597abecaa362de54}{transform}}    (\textcolor{keyword}{const} \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types::Transform::value\_type}}\& \mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\_transform}}) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{350         \{ this-\/>\mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\_transform}} = \mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\_transform}}; \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{351 }
+\DoxyCodeLine{352     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{353         std::string \mbox{\hyperlink{structargparse_1_1_argument_ad1dee97a4ad6bbe14e6d8ea285b6c486}{\_name}}, }
+\DoxyCodeLine{354                 \mbox{\hyperlink{structargparse_1_1_argument_a1282cc8fe1d8ac84b375d32d352f5bd6}{\_alias}}, }
+\DoxyCodeLine{355                 \mbox{\hyperlink{structargparse_1_1_argument_a302e4c80f75dd687dc1bff610b0eda2e}{\_description}}, }
+\DoxyCodeLine{356                 \mbox{\hyperlink{structargparse_1_1_argument_a9ec7f96000928bd24f312fdfb623ee53}{\_destination}}; }
+\DoxyCodeLine{357         \textcolor{keywordtype}{int} \mbox{\hyperlink{structargparse_1_1_argument_a1eb5f9d8a00915bfc688b47b14ab6b21}{\_arity}} = 0; }
+\DoxyCodeLine{358         \textcolor{keywordtype}{bool} \mbox{\hyperlink{structargparse_1_1_argument_ac3832967a81ef1f0d824eb409fec756e}{\_required}}, }
+\DoxyCodeLine{359             \mbox{\hyperlink{structargparse_1_1_argument_a7999e2b65a8db4149ca4818a08ada1a1}{\_positional}} = \textcolor{keyword}{false}; }
+\DoxyCodeLine{360         \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types::DefaultValue::value\_type}} \mbox{\hyperlink{structargparse_1_1_argument_ab678aa66d27f206f3553c7775def7117}{\_defaults}}; }
+\DoxyCodeLine{361         \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types::Choices::value\_type}} \mbox{\hyperlink{structargparse_1_1_argument_a80070b3045ede4baf5f9a25930cb0b12}{\_choices}}; }
+\DoxyCodeLine{362         \mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{types::Transform::value\_type}} \mbox{\hyperlink{structargparse_1_1_argument_a15b3fee314945841f57f175b7a3ddd54}{\_transform}}; }
+\DoxyCodeLine{363     \};}
+\DoxyCodeLine{364 }
+\DoxyCodeLine{365     \textcolor{keyword}{inline} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{structargparse_1_1_argument_ac8e932b78791fd44a5303073807b1a6c}{Argument::ZERO\_OR\_MORE}};}
+\DoxyCodeLine{366     \textcolor{keyword}{inline} \textcolor{keyword}{const} \textcolor{keywordtype}{int} \mbox{\hyperlink{structargparse_1_1_argument_a84e1070e0cd82b79abfe6e94134446a5}{Argument::ONE\_OR\_MORE}} ;}
+\DoxyCodeLine{367 \}}
+\DoxyCodeLine{368 }
+\DoxyCodeLine{369 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ARGPARSE\_ARGUMENT\_HPP\_INCLUDED}}
+
+\end{DoxyCode}

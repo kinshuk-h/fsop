@@ -1,0 +1,484 @@
+.TH "argparse::Argument" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+argparse::Argument \- Represents a base type to store argument description and parsing information\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <argument\&.hpp>\fP
+.PP
+Inherited by \fBargparse::Optional\fP, \fBargparse::Positional\fP, \fBargparse::SubparserSet\fP, and \fBargparse::Switch\fP\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBvalue_type\fP = \fBtypes::argument_value_type\fP"
+.br
+.ti -1c
+.RI "using \fBrange\fP = std::vector< std::string_view >"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename NameType  = std::nullptr_t, typename AliasType  = std::nullptr_t, typename DestinationType  = std::nullptr_t, typename DefaultValueType  = std::nullptr_t, typename DescriptionType  = std::nullptr_t, typename ArityType  = std::nullptr_t, typename ChoicesType  = std::nullptr_t, typename TransformType  = std::nullptr_t, typename RequiredType  = std::nullptr_t> \fBArgument\fP (NameType \fBname\fP=nullptr, AliasType \fBalias\fP=nullptr, DestinationType \fBdest\fP=nullptr, DefaultValueType defaults=nullptr, DescriptionType \fBhelp\fP=nullptr, ArityType \fBarity\fP=nullptr, ChoicesType \fBchoices\fP=nullptr, TransformType \fBtransform\fP=nullptr, RequiredType \fBrequired\fP=nullptr)"
+.br
+.RI "Construct a new \fBArgument\fP object\&. "
+.ti -1c
+.RI "virtual std::string \fBusage\fP () const noexcept=0"
+.br
+.RI "Describes the usage of the argument through a returned string\&. "
+.ti -1c
+.RI "virtual std::string \fBdescriptor\fP (unsigned tty_columns=60) const noexcept=0"
+.br
+.RI "Describes the argument along with the provided explanation\&. "
+.ti -1c
+.RI "virtual std::unique_ptr< \fBArgument\fP > \fBclone\fP () const =0"
+.br
+.RI "Creates a copy of the argument as a unique_ptr for polymorphic usage\&. "
+.ti -1c
+.RI "virtual range::iterator \fBparse_args\fP (range::iterator begin, range::iterator end, \fBtypes::result_map\fP &values) const =0"
+.br
+.RI "Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators\&. "
+.ti -1c
+.RI "const std::string & \fBname\fP () const noexcept"
+.br
+.ti -1c
+.RI "const std::string & \fBalias\fP () const noexcept"
+.br
+.ti -1c
+.RI "const std::string & \fBhelp\fP () const noexcept"
+.br
+.ti -1c
+.RI "const std::string & \fBdestination\fP () const noexcept"
+.br
+.ti -1c
+.RI "int \fBarity\fP () const noexcept"
+.br
+.ti -1c
+.RI "std::any \fBdefault_value\fP () const"
+.br
+.ti -1c
+.RI "bool \fBpositional\fP () const noexcept"
+.br
+.ti -1c
+.RI "bool \fBrequired\fP () const noexcept"
+.br
+.ti -1c
+.RI "const auto & \fBchoices\fP () const noexcept"
+.br
+.ti -1c
+.RI "const auto & \fBtransform\fP () const noexcept"
+.br
+.ti -1c
+.RI "\fBArgument\fP & \fBname\fP (std::string_view \fB_name\fP)"
+.br
+.RI "Sets the name of the argument to display\&. "
+.ti -1c
+.RI "\fBArgument\fP & \fBalias\fP (std::string_view \fB_alias\fP) noexcept"
+.br
+.RI "Sets the alias for the argument\&. "
+.ti -1c
+.RI "\fBArgument\fP & \fBhelp\fP (std::string_view \fB_description\fP) noexcept"
+.br
+.RI "Sets the brief description about the argument\&. "
+.ti -1c
+.RI "\fBArgument\fP & \fBdestination\fP (std::string_view \fB_destination\fP) noexcept"
+.br
+.RI "Sets the destination name for the argument in the parsed table\&. "
+.ti -1c
+.RI "\fBArgument\fP & \fBarity\fP (int \fB_arity\fP) noexcept"
+.br
+.RI "Sets the number of values to be stored for the argument\&. "
+.ti -1c
+.RI "\fBArgument\fP & \fBdefault_value\fP (const \fBtypes::DefaultValue::value_type\fP &\fB_defaults\fP) noexcept"
+.br
+.RI "Sets the default value for the argument\&. "
+.ti -1c
+.RI "\fBArgument\fP & \fBrequired\fP (bool \fB_required\fP) noexcept"
+.br
+.RI "Sets whether the argument is to be enforced as required\&. "
+.ti -1c
+.RI "\fBArgument\fP & \fBchoices\fP (const \fBtypes::Choices::value_type\fP &\fB_choices\fP) noexcept"
+.br
+.RI "Sets the possible choices for the argument's values\&. "
+.ti -1c
+.RI "\fBArgument\fP & \fBtransform\fP (const \fBtypes::Transform::value_type\fP &\fB_transform\fP) noexcept"
+.br
+.RI "Sets the transformation to apply over argument values\&. "
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static std::ostream & \fBwrite_description\fP (std::ostream &os, std::string_view \fBdescription\fP, unsigned tty_columns=60, std::string::size_type consumed=0)"
+.br
+.RI "Writes a formatted description to the given output stream\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static const int \fBZERO_OR_MORE\fP = \-1"
+.br
+.ti -1c
+.RI "static const int \fBONE_OR_MORE\fP = \-2"
+.br
+.in -1c
+.SS "Protected Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::string \fB_name\fP"
+.br
+.ti -1c
+.RI "std::string \fB_alias\fP"
+.br
+.ti -1c
+.RI "std::string \fB_description\fP"
+.br
+.ti -1c
+.RI "std::string \fB_destination\fP"
+.br
+.ti -1c
+.RI "int \fB_arity\fP = 0"
+.br
+.ti -1c
+.RI "bool \fB_required\fP"
+.br
+.ti -1c
+.RI "bool \fB_positional\fP = false"
+.br
+.ti -1c
+.RI "\fBtypes::DefaultValue::value_type\fP \fB_defaults\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Choices::value_type\fP \fB_choices\fP"
+.br
+.ti -1c
+.RI "\fBtypes::Transform::value_type\fP \fB_transform\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents a base type to store argument description and parsing information\&. 
+
+\fBArgument\fP objects maintain information about command-line arguments for effective parsing\&. Further, the provided data aids in providing a concise description to the user\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "using \fBargparse::Argument::range\fP =  std::vector<std::string_view>"
+Type of the collection used for storing unparsed and unprocessed arguments\&. 
+.SS "using \fBargparse::Argument::value_type\fP =  \fBtypes::argument_value_type\fP"
+Type of the argument values, as a variant over common argument value types\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "template<typename NameType  = std::nullptr_t, typename AliasType  = std::nullptr_t, typename DestinationType  = std::nullptr_t, typename DefaultValueType  = std::nullptr_t, typename DescriptionType  = std::nullptr_t, typename ArityType  = std::nullptr_t, typename ChoicesType  = std::nullptr_t, typename TransformType  = std::nullptr_t, typename RequiredType  = std::nullptr_t> argparse::Argument::Argument (NameType name = \fCnullptr\fP, AliasType alias = \fCnullptr\fP, DestinationType dest = \fCnullptr\fP, DefaultValueType defaults = \fCnullptr\fP, DescriptionType help = \fCnullptr\fP, ArityType arity = \fCnullptr\fP, ChoicesType choices = \fCnullptr\fP, TransformType transform = \fCnullptr\fP, RequiredType required = \fCnullptr\fP)\fC [inline]\fP"
+
+.PP
+Construct a new \fBArgument\fP object\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fINameType\fP Placeholder type for named arguments\&. 
+.br
+\fIAliasType\fP Placeholder type for named arguments\&. 
+.br
+\fIDestinationType\fP Placeholder type for named arguments\&. 
+.br
+\fIDefaultValueType\fP Placeholder type for named arguments\&. 
+.br
+\fIDescriptionType\fP Placeholder type for named arguments\&. 
+.br
+\fIArityType\fP Placeholder type for named arguments\&. 
+.br
+\fIChoicesType\fP Placeholder type for named arguments\&. 
+.br
+\fITransformType\fP Placeholder type for named arguments\&. 
+.br
+\fIRequiredType\fP Placeholder type for named arguments\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIname\fP The name of the argument to display\&. 
+.br
+\fIalias\fP Alias for the argument (default='')\&. 
+.br
+\fIdest\fP Destination name for the argument in the parsed table (default=name)\&. 
+.br
+\fIdefaults\fP Default value for the argument\&. 
+.br
+\fIhelp\fP Brief description about the argument (default='')\&. 
+.br
+\fIarity\fP Number of values to be stored for the argument (default=1)\&. 
+.br
+\fIchoices\fP Possible choices for the argument's values\&. 
+.br
+\fItransform\fP Transformation to apply over argument values\&. 
+.br
+\fIrequired\fP Whether the option is to be enforced as required\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const std::string & argparse::Argument::alias () const\fC [inline]\fP, \fC [noexcept]\fP"
+Alias for the argument (default='')\&. 
+.SS "\fBArgument\fP & argparse::Argument::alias (std::string_view _alias)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Sets the alias for the argument\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_alias\fP New value for the alias for the argument\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBArgument\fP&} Reference to the current object for chaining operations\&. 
+.RE
+.PP
+
+.SS "int argparse::Argument::arity () const\fC [inline]\fP, \fC [noexcept]\fP"
+Number of values to be stored for the argument (default=1)\&. 
+.SS "\fBArgument\fP & argparse::Argument::arity (int _arity)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Sets the number of values to be stored for the argument\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_arity\fP New value for the number of values to be stored for the argument\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBArgument\fP&} Reference to the current object for chaining operations\&. 
+.RE
+.PP
+
+.SS "const auto & argparse::Argument::choices () const\fC [inline]\fP, \fC [noexcept]\fP"
+Possible choices for the argument's values\&. 
+.SS "\fBArgument\fP & argparse::Argument::choices (const \fBtypes::Choices::value_type\fP & _choices)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Sets the possible choices for the argument's values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_choices\fP New value for the possible choices for the argument's values\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBArgument\fP&} Reference to the current object for chaining operations\&. 
+.RE
+.PP
+
+.SS "virtual std::unique_ptr< \fBArgument\fP > argparse::Argument::clone () const\fC [pure virtual]\fP"
+
+.PP
+Creates a copy of the argument as a unique_ptr for polymorphic usage\&. 
+.PP
+Implemented in \fBargparse::Optional\fP, \fBargparse::Positional\fP, \fBargparse::Switch\fP, and \fBargparse::SubparserSet\fP\&.
+.SS "std::any argparse::Argument::default_value () const\fC [inline]\fP"
+Default value for the argument\&. 
+.SS "\fBArgument\fP & argparse::Argument::default_value (const \fBtypes::DefaultValue::value_type\fP & _defaults)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Sets the default value for the argument\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_defaults\fP New value for the default value for the argument\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBArgument\fP&} Reference to the current object for chaining operations\&. 
+.RE
+.PP
+
+.SS "virtual std::string argparse::Argument::descriptor (unsigned tty_columns = \fC60\fP) const\fC [pure virtual]\fP, \fC [noexcept]\fP"
+
+.PP
+Describes the argument along with the provided explanation\&. 
+.PP
+Implemented in \fBargparse::Optional\fP, \fBargparse::Positional\fP, \fBargparse::Switch\fP, and \fBargparse::SubparserSet\fP\&.
+.SS "const std::string & argparse::Argument::destination () const\fC [inline]\fP, \fC [noexcept]\fP"
+Destination name for the argument in the parsed table (default=name)\&. 
+.SS "\fBArgument\fP & argparse::Argument::destination (std::string_view _destination)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Sets the destination name for the argument in the parsed table\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_destination\fP New value for the destination name for the argument in the parsed table\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBArgument\fP&} Reference to the current object for chaining operations\&. 
+.RE
+.PP
+
+.SS "const std::string & argparse::Argument::help () const\fC [inline]\fP, \fC [noexcept]\fP"
+Brief description about the argument (default='')\&. 
+.SS "\fBArgument\fP & argparse::Argument::help (std::string_view _description)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Sets the brief description about the argument\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_description\fP New value for the brief description about the argument\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBArgument\fP&} Reference to the current object for chaining operations\&. 
+.RE
+.PP
+
+.SS "const std::string & argparse::Argument::name () const\fC [inline]\fP, \fC [noexcept]\fP"
+The name of the argument to display\&. 
+.SS "\fBArgument\fP & argparse::Argument::name (std::string_view _name)\fC [inline]\fP"
+
+.PP
+Sets the name of the argument to display\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_name\fP New value for the name of the argument to display\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBArgument\fP&} Reference to the current object for chaining operations\&. 
+.RE
+.PP
+
+.SS "virtual range::iterator argparse::Argument::parse_args (range::iterator begin, range::iterator end, \fBtypes::result_map\fP & values) const\fC [pure virtual]\fP"
+
+.PP
+Parses arguments according to the argument specification from a range of argument values referred by their beginning and end iterators\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIbegin\fP iterator pointing to the beginning of the argument value range\&. 
+.br
+\fIend\fP iterator pointing to the end of the argument value range\&. 
+.br
+\fIvalues\fP map (hash table) to store parsed valued for the argument\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{range::iterator} iterator pointing to the next argument value unused by the current argument\&. 
+.RE
+.PP
+
+.PP
+Implemented in \fBargparse::Optional\fP, \fBargparse::Positional\fP, \fBargparse::Switch\fP, and \fBargparse::SubparserSet\fP\&.
+.SS "bool argparse::Argument::positional () const\fC [inline]\fP, \fC [noexcept]\fP"
+Whether the argument is a positional argument\&. 
+.SS "bool argparse::Argument::required () const\fC [inline]\fP, \fC [noexcept]\fP"
+Whether the argument is to be enforced as required\&. 
+.SS "\fBArgument\fP & argparse::Argument::required (bool _required)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Sets whether the argument is to be enforced as required\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_required\fP New value for whether the argument is to be enforced as required\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBArgument\fP&} Reference to the current object for chaining operations\&. 
+.RE
+.PP
+
+.SS "const auto & argparse::Argument::transform () const\fC [inline]\fP, \fC [noexcept]\fP"
+Transformation to apply over argument values\&. 
+.SS "\fBArgument\fP & argparse::Argument::transform (const \fBtypes::Transform::value_type\fP & _transform)\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Sets the transformation to apply over argument values\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fI_transform\fP New value for the transformation to apply over argument values\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBArgument\fP&} Reference to the current object for chaining operations\&. 
+.RE
+.PP
+
+.SS "virtual std::string argparse::Argument::usage () const\fC [pure virtual]\fP, \fC [noexcept]\fP"
+
+.PP
+Describes the usage of the argument through a returned string\&. 
+.PP
+Implemented in \fBargparse::Optional\fP, \fBargparse::Positional\fP, \fBargparse::Switch\fP, and \fBargparse::SubparserSet\fP\&.
+.SS "std::ostream & argparse::Argument::write_description (std::ostream & os, std::string_view description, unsigned tty_columns = \fC60\fP, std::string::size_type consumed = \fC0\fP)\fC [static]\fP"
+
+.PP
+Writes a formatted description to the given output stream\&. This function is for internal formatting of argument descriptions (such as when generating the argument help)\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIos\fP The output stream to write the description to\&. 
+.br
+\fIdescription\fP The description to write\&. 
+.br
+\fItty_columns\fP Maximum number of terminal columns/characters to span per line\&. 
+.br
+\fIconsumed\fP Number of characters assumed to be present on the first line (consumed character count)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+std::ostream& Reference to the output stream for cascading operations\&. 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "std::string argparse::Argument::_alias\fC [protected]\fP"
+Alias for the argument (default='')\&. 
+.SS "int argparse::Argument::_arity = 0\fC [protected]\fP"
+Number of values to be stored for the argument (default=1)\&. 
+.SS "\fBtypes::Choices::value_type\fP argparse::Argument::_choices\fC [protected]\fP"
+Possible choices for the argument's values\&. 
+.SS "\fBtypes::DefaultValue::value_type\fP argparse::Argument::_defaults\fC [protected]\fP"
+Default value for the argument\&. 
+.SS "std::string argparse::Argument::_description\fC [protected]\fP"
+Brief description about the argument (default='')\&. 
+.SS "std::string argparse::Argument::_destination\fC [protected]\fP"
+Destination name for the argument in the parsed table (default=name)\&. 
+.SS "std::string argparse::Argument::_name\fC [protected]\fP"
+The name of the argument to display\&. 
+.SS "bool argparse::Argument::_positional = false\fC [protected]\fP"
+Whether the argument is a positional argument\&. 
+.SS "bool argparse::Argument::_required\fC [protected]\fP"
+Whether the argument is to be enforced as required\&. 
+.SS "\fBtypes::Transform::value_type\fP argparse::Argument::_transform\fC [protected]\fP"
+Transformation to apply over argument values\&. 
+.SS "const int argparse::Argument::ONE_OR_MORE = \-2\fC [inline]\fP, \fC [static]\fP"
+Special arity value: allows reading 1 or more values\&. 
+.SS "const int argparse::Argument::ZERO_OR_MORE = \-1\fC [inline]\fP, \fC [static]\fP"
+Special arity value: allows reading 0 or more values\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

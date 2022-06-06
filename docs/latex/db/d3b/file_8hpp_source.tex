@@ -1,0 +1,71 @@
+\hypertarget{file_8hpp_source}{}\doxysection{file.\+hpp}
+\label{file_8hpp_source}\index{include/fsop/file.hpp@{include/fsop/file.hpp}}
+\mbox{\hyperlink{file_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef FSOP\_FILE\_HPP\_INCLUDED}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define FSOP\_FILE\_HPP\_INCLUDED}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <cstddef>}     \textcolor{comment}{// std::size\_t}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <string>}      \textcolor{comment}{// std::string}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <utility>}     \textcolor{comment}{// std::pair}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <string\_view>} \textcolor{comment}{// std::string\_view}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <fcntl.h>}     \textcolor{comment}{// O\_* constants}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <sys/stat.h>}  \textcolor{comment}{// stat64}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <sys/types.h>} \textcolor{comment}{// off64\_t}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{namespace }fsop}
+\DoxyCodeLine{25 \{}
+\DoxyCodeLine{34     \textcolor{keyword}{struct }\mbox{\hyperlink{structfsop_1_1_file}{File}}}
+\DoxyCodeLine{35     \{}
+\DoxyCodeLine{37         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int}    \mbox{\hyperlink{structfsop_1_1_file_aaabcc9dc7dd27b6e198d67d807cc90e8}{invalid\_descriptor}} = -\/1;}
+\DoxyCodeLine{39         \textcolor{keyword}{static} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structfsop_1_1_file_a34f642bd3fbec1a98dba4e9a086eb357}{bytes\_till\_end}}     = -\/1ULL;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{47         \mbox{\hyperlink{structfsop_1_1_file_aec51f74577294b3d78746b22d3a9f1b5}{File}}(\textcolor{keywordtype}{int} descriptor) : \_descriptor(descriptor) \{\}}
+\DoxyCodeLine{55         \mbox{\hyperlink{structfsop_1_1_file_af1f94b8eaef073fa7ad4aabad484116b}{File}}(\textcolor{keywordtype}{int} descriptor, \textcolor{keyword}{struct} stat64 inode\_info)}
+\DoxyCodeLine{56         : \_descriptor(descriptor), \_info(inode\_info), \_info\_set(true) \{\}}
+\DoxyCodeLine{64         \mbox{\hyperlink{structfsop_1_1_file_aec51f74577294b3d78746b22d3a9f1b5}{File}}(\textcolor{keyword}{const} \mbox{\hyperlink{structfsop_1_1_file}{File}}\& file\_ref);}
+\DoxyCodeLine{72         \mbox{\hyperlink{structfsop_1_1_file_a223ab9134e7ec5fb2669eeb0e0e11fee}{File}}(\mbox{\hyperlink{structfsop_1_1_file}{File}}\&\& tmp\_file)}
+\DoxyCodeLine{73         : \_descriptor(tmp\_file.\_descriptor), \_info(tmp\_file.\_info),}
+\DoxyCodeLine{74           \_info\_set(tmp\_file.\_info\_set)}
+\DoxyCodeLine{75         \{}
+\DoxyCodeLine{76             tmp\_file.\_descriptor = \mbox{\hyperlink{structfsop_1_1_file_aaabcc9dc7dd27b6e198d67d807cc90e8}{invalid\_descriptor}};}
+\DoxyCodeLine{77             tmp\_file.\_info\_set = \textcolor{keyword}{false};}
+\DoxyCodeLine{78         \}}
+\DoxyCodeLine{82         \mbox{\hyperlink{structfsop_1_1_file_a3bea866e8f4b9f72871a3b2a32b13405}{\string~File}}()}
+\DoxyCodeLine{83         \{}
+\DoxyCodeLine{84             this-\/>\mbox{\hyperlink{structfsop_1_1_file_a947769028786f20e1798d2e242de237b}{close}}();}
+\DoxyCodeLine{85         \}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{95         \mbox{\hyperlink{structfsop_1_1_file}{File}}\& \mbox{\hyperlink{structfsop_1_1_file_add5d9942c1c56fc53acf29d4042b3f30}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{structfsop_1_1_file}{File}}\& file\_ref);}
+\DoxyCodeLine{104         \mbox{\hyperlink{structfsop_1_1_file}{File}}\& \mbox{\hyperlink{structfsop_1_1_file_add5d9942c1c56fc53acf29d4042b3f30}{operator=}}(\mbox{\hyperlink{structfsop_1_1_file}{File}}\&\& tmp\_file);}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{118         std::string \mbox{\hyperlink{structfsop_1_1_file_ac4f8944bacec9af4421204de531fa6ff}{read}}(\textcolor{keywordtype}{size\_t} nbytes = \mbox{\hyperlink{structfsop_1_1_file_a34f642bd3fbec1a98dba4e9a086eb357}{bytes\_till\_end}}, off64\_t offset = 0, \textcolor{keywordtype}{int} whence = SEEK\_CUR);}
+\DoxyCodeLine{129         \textcolor{keywordtype}{size\_t}      \mbox{\hyperlink{structfsop_1_1_file_a0abe39049b5181802881572ae9024b84}{write}}(std::string\_view data, off64\_t offset = 0, \textcolor{keywordtype}{int} whence = SEEK\_CUR);}
+\DoxyCodeLine{130 }
+\DoxyCodeLine{136         \textcolor{keywordtype}{void} \mbox{\hyperlink{structfsop_1_1_file_a947769028786f20e1798d2e242de237b}{close}}() noexcept;}
+\DoxyCodeLine{137 }
+\DoxyCodeLine{144         struct stat64 \mbox{\hyperlink{structfsop_1_1_file_a54d1b7e96f21454727eb3d813a8b4db4}{stat}}();}
+\DoxyCodeLine{145 }
+\DoxyCodeLine{149         \textcolor{keywordtype}{void} \mbox{\hyperlink{structfsop_1_1_file_a1a154c896749437712907731355b28f3}{invalidate\_cache}}() \{ \_info\_set = \textcolor{keyword}{false}; \}}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{158         \textcolor{keyword}{static} \mbox{\hyperlink{structfsop_1_1_file}{File}} \mbox{\hyperlink{structfsop_1_1_file_a1da083bab6718fd938060d5e83b603c2}{open\_file}}(std::string\_view path, \textcolor{keywordtype}{int} open\_options = O\_RDONLY);}
+\DoxyCodeLine{159 }
+\DoxyCodeLine{169         \textcolor{keyword}{static} std::pair<File, File> \mbox{\hyperlink{structfsop_1_1_file_a17a4edb41321b1d6ad51c587bb06fa66}{create\_unnamed\_pipe}}();}
+\DoxyCodeLine{170 }
+\DoxyCodeLine{172         \textcolor{keyword}{operator} bool() \{ \textcolor{keywordflow}{return} \_descriptor != \mbox{\hyperlink{structfsop_1_1_file_aaabcc9dc7dd27b6e198d67d807cc90e8}{invalid\_descriptor}}; \}}
+\DoxyCodeLine{173     \textcolor{keyword}{private}:}
+\DoxyCodeLine{175         \textcolor{keywordtype}{int} \_descriptor = -\/1;}
+\DoxyCodeLine{177         \textcolor{keyword}{struct }stat64 \_info;}
+\DoxyCodeLine{179         \textcolor{keywordtype}{bool} \_info\_set = \textcolor{keyword}{false};}
+\DoxyCodeLine{180     \};}
+\DoxyCodeLine{181 }
+\DoxyCodeLine{182     \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{int} \mbox{\hyperlink{structfsop_1_1_file_aaabcc9dc7dd27b6e198d67d807cc90e8}{File::invalid\_descriptor}};}
+\DoxyCodeLine{183     \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structfsop_1_1_file_a34f642bd3fbec1a98dba4e9a086eb357}{File::bytes\_till\_end}};}
+\DoxyCodeLine{184 \}}
+\DoxyCodeLine{185 }
+\DoxyCodeLine{186 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// FSOP\_FILE\_HPP\_INCLUDED}}
+
+\end{DoxyCode}

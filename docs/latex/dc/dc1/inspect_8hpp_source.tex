@@ -1,0 +1,35 @@
+\hypertarget{inspect_8hpp_source}{}\doxysection{inspect.\+hpp}
+\label{inspect_8hpp_source}\index{include/fsop/inspect.hpp@{include/fsop/inspect.hpp}}
+\mbox{\hyperlink{inspect_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#ifndef FSOP\_INSPECT\_HPP\_INCLUDED}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#define FSOP\_INSPECT\_HPP\_INCLUDED}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <variant>}      \textcolor{comment}{// std::variant}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <iomanip>}      \textcolor{comment}{// std::put\_time}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <iostream>}     \textcolor{comment}{// std::ostream, std::cout}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <string\_view>}  \textcolor{comment}{// std::string\_view}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <system\_error>} \textcolor{comment}{// std::system\_error}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <cerrno>}       \textcolor{comment}{// errno, errno macros}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <cstring>}      \textcolor{comment}{// std::strerror}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <pwd.h>}           \textcolor{comment}{// getpwuid}}
+\DoxyCodeLine{25 \textcolor{comment}{//\#include <group.h>         // getgrgid}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <sys/stat.h>}      \textcolor{comment}{// stat, struct stat}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include <sys/types.h>}     \textcolor{comment}{// }}
+\DoxyCodeLine{28 \textcolor{comment}{// \#include <sys/sysmacros.h> // major, minor}}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{namespace }fsop}
+\DoxyCodeLine{31 \{}
+\DoxyCodeLine{37     \textcolor{keyword}{using }\mbox{\hyperlink{inspect_8hpp_a604b8c2e98860f3d8f83e6eb77347da1}{stat\_info}} = std::variant<struct stat, struct stat64>;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{49     \mbox{\hyperlink{inspect_8hpp_a604b8c2e98860f3d8f83e6eb77347da1}{stat\_info}} \mbox{\hyperlink{inspect_8hpp_a90a9ddb257701d70b5aa41cde328ce1d}{inspect\_file}}(std::string\_view path);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{60     std::ostream\& \mbox{\hyperlink{inspect_8hpp_a544dbd1a0a6e99e73f914bc4f01ce6e6}{print\_stat\_info}}(std::ostream\& os, \textcolor{keyword}{const} \mbox{\hyperlink{inspect_8hpp_a604b8c2e98860f3d8f83e6eb77347da1}{stat\_info}}\& info);}
+\DoxyCodeLine{61 \}}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// FSOP\_INSPECT\_HPP\_INCLUDED}}
+
+\end{DoxyCode}

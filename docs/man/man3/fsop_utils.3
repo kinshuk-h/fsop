@@ -1,0 +1,177 @@
+.TH "fsop::utils" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+fsop::utils \- Defines common utilities for use with filesystem operations\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "mode_t \fBparse_permissions\fP (std::string_view perms)"
+.br
+.RI "Parses a given permission string into an integral value with bits set as per given permissions\&. "
+.ti -1c
+.RI "std::string \fBto_permissions\fP (mode_t permissions)"
+.br
+.RI "Returns a parseable string representation of a given numerical permissions entry\&. "
+.ti -1c
+.RI "int \fBparse_seek_whence\fP (std::string_view whence)"
+.br
+.RI "Parses the value of whence for offset movement\&. "
+.ti -1c
+.RI "std::string \fBto_type\fP (mode_t type)"
+.br
+.RI "Returns the name of the file type corresponding to the file type number stored in the inode\&. "
+.ti -1c
+.RI "template<typename Integral , typename  = std::enable_if_t<std::is_integral_v<Integral>, std::nullptr_t>> auto \fBto_human_readable_size\fP (Integral byte_size)"
+.br
+.RI "Converts a given file size in bytes to a human readable form\&. "
+.ti -1c
+.RI "std::string \fBcurrent_directory\fP ()"
+.br
+.RI "Returns the current working directory of the process\&. Internally invokes the \fCgetcwd()\fP syscall\&. "
+.ti -1c
+.RI "void \fBchange_directory\fP (std::string_view path)"
+.br
+.RI "Sets the current working directory to the path indicated by the given argument\&. Internally invokes the \fCchdir\fP syscall\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines common utilities for use with filesystem operations\&. 
+.SH "Function Documentation"
+.PP 
+.SS "void fsop::utils::change_directory (std::string_view path)"
+
+.PP
+Sets the current working directory to the path indicated by the given argument\&. Internally invokes the \fCchdir\fP syscall\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP New path to use as the current working directories\&. 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{std::system_error}\fP Describes the reason for failure\&. 
+.RE
+.PP
+
+.SS "std::string fsop::utils::current_directory ()"
+
+.PP
+Returns the current working directory of the process\&. Internally invokes the \fCgetcwd()\fP syscall\&. 
+.PP
+\fBReturns\fP
+.RS 4
+{std::string} The current working directory\&. 
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{std::system_error}\fP Describes the reason for failure\&. 
+.RE
+.PP
+
+.SS "mode_t fsop::utils::parse_permissions (std::string_view perms)"
+
+.PP
+Parses a given permission string into an integral value with bits set as per given permissions\&. 
+.PP
+.nf
+ This function allows parsing strings of the following forms:
+ - Octal 3-digit number beginning with 0 and digits indicating set bits\&.
+ - Combination of letters indicating permission groups (u,g,o for user, group and others), with 
+ letters r,w & x for permissions, separated by +\&.
+ - 9 letter string containing r,w,x or - values denoting read, write and execute permissions\&.
+
+.fi
+.PP
+ 
+.PP
+\fBParameters\fP
+.RS 4
+\fIperms\fP The string containing permissions to be parsed\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+mode_t The permission bits indicating requested permissions\&. 
+.RE
+.PP
+
+.SS "int fsop::utils::parse_seek_whence (std::string_view whence)"
+
+.PP
+Parses the value of whence for offset movement\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIwhence\fP String containing the relative offset base\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int Numeric constant corresponding to the given whence\&. 
+.RE
+.PP
+
+.SS "template<typename Integral , typename  = std::enable_if_t<std::is_integral_v<Integral>, std::nullptr_t>> auto fsop::utils::to_human_readable_size (Integral byte_size)"
+
+.PP
+Converts a given file size in bytes to a human readable form\&. This function performs successive division of the file size until a normal value is obtained, and returns a tuple of the reduced size, the rounded off fractional size component and the unit prefix to use\&.
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIIntegral\fP Type representing an integral value\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIbyte_size\fP Integral file size, in bytes\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{auto} tuple of 3 values: the reduced size, the rounded off fractional component and the unit prefix\&. 
+.RE
+.PP
+
+.SS "std::string fsop::utils::to_permissions (mode_t permissions)"
+
+.PP
+Returns a parseable string representation of a given numerical permissions entry\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpermissions\fP The numeric permissions (as a mode_t variable)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{std::string} The 9-letter string representation of the permissions\&. 
+.RE
+.PP
+
+.SS "std::string fsop::utils::to_type (mode_t type)"
+
+.PP
+Returns the name of the file type corresponding to the file type number stored in the inode\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItype\fP Type number of the file, from the inode\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{std::string} Name of the type\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

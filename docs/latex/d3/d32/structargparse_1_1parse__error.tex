@@ -1,0 +1,83 @@
+\hypertarget{structargparse_1_1parse__error}{}\doxysection{argparse\+::parse\+\_\+error Struct Reference}
+\label{structargparse_1_1parse__error}\index{argparse::parse\_error@{argparse::parse\_error}}
+
+
+Exception subtype to convey parse errors.  
+
+
+
+
+{\ttfamily \#include $<$common.\+hpp$>$}
+
+Inheritance diagram for argparse\+::parse\+\_\+error\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d3/d32/structargparse_1_1parse__error}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structargparse_1_1parse__error_a572d43786f004eaf7cc82a3533567570}{parse\+\_\+error}} (std\+::string\+\_\+view message, std\+::string\+\_\+view usage)
+\begin{DoxyCompactList}\small\item\em Construct a new parse error object. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{structargparse_1_1parse__error_a823b2eaf89429559a717983df7143d9b}{parser\+\_\+usage}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the parser usage associated with the parser which raised the error. \end{DoxyCompactList}\item 
+virtual const char $\ast$ \mbox{\hyperlink{structargparse_1_1parse__error_a8ae0a05dfe2cf00af1c8d43c0980063e}{what}} () const noexcept override
+\begin{DoxyCompactList}\small\item\em Explains the reason for failure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Exception subtype to convey parse errors. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{structargparse_1_1parse__error_a572d43786f004eaf7cc82a3533567570}\label{structargparse_1_1parse__error_a572d43786f004eaf7cc82a3533567570}} 
+\index{argparse::parse\_error@{argparse::parse\_error}!parse\_error@{parse\_error}}
+\index{parse\_error@{parse\_error}!argparse::parse\_error@{argparse::parse\_error}}
+\doxysubsubsection{\texorpdfstring{parse\_error()}{parse\_error()}}
+{\footnotesize\ttfamily argparse\+::parse\+\_\+error\+::parse\+\_\+error (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{message,  }\item[{std\+::string\+\_\+view}]{usage }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new parse error object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message explaining the reason of failure. \\
+\hline
+{\em usage} & Usage string from the parser. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structargparse_1_1parse__error_a823b2eaf89429559a717983df7143d9b}\label{structargparse_1_1parse__error_a823b2eaf89429559a717983df7143d9b}} 
+\index{argparse::parse\_error@{argparse::parse\_error}!parser\_usage@{parser\_usage}}
+\index{parser\_usage@{parser\_usage}!argparse::parse\_error@{argparse::parse\_error}}
+\doxysubsubsection{\texorpdfstring{parser\_usage()}{parser\_usage()}}
+{\footnotesize\ttfamily const std\+::string \& argparse\+::parse\+\_\+error\+::parser\+\_\+usage (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the parser usage associated with the parser which raised the error. 
+
+\begin{DoxyReturn}{Returns}
+const std\+::string\& String describing the usage. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structargparse_1_1parse__error_a8ae0a05dfe2cf00af1c8d43c0980063e}\label{structargparse_1_1parse__error_a8ae0a05dfe2cf00af1c8d43c0980063e}} 
+\index{argparse::parse\_error@{argparse::parse\_error}!what@{what}}
+\index{what@{what}!argparse::parse\_error@{argparse::parse\_error}}
+\doxysubsubsection{\texorpdfstring{what()}{what()}}
+{\footnotesize\ttfamily virtual const char $\ast$ argparse\+::parse\+\_\+error\+::what (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}, {\ttfamily [noexcept]}}
+
+
+
+Explains the reason for failure. 
+
+\begin{DoxyReturn}{Returns}
+const char$\ast$ The reason fo failure. 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/argparse/\mbox{\hyperlink{common_8hpp}{common.\+hpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,95 @@
+\hypertarget{argparse_2utilities_8hpp}{}\doxysection{include/argparse/utilities.hpp File Reference}
+\label{argparse_2utilities_8hpp}\index{include/argparse/utilities.hpp@{include/argparse/utilities.hpp}}
+
+
+Defines common utility classes and functions, such as those for named arguments.  
+
+
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_named_type}{Named\+Type$<$ Value\+Type, Descriptor $>$}}
+\begin{DoxyCompactList}\small\item\em Generates Named Types for use in arguments of functions to better elaborate the context. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{struct_named_type_1_1_argument}{Named\+Type$<$ Value\+Type, Descriptor $>$\+::\+Argument}}
+\begin{DoxyCompactList}\small\item\em Type for representing variables usable for named arguments in functions. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structremove__cvref}{remove\+\_\+cvref$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Removes const-\/volatile and reference specifiers from a type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T $>$ }\\using \mbox{\hyperlink{argparse_2utilities_8hpp_a3c0600da43d6867a247432fcc43ce84f}{remove\+\_\+cvref\+\_\+t}} = typename \mbox{\hyperlink{structremove__cvref}{remove\+\_\+cvref}}$<$ T $>$\+::type
+\begin{DoxyCompactList}\small\item\em Alias over \mbox{\hyperlink{structremove__cvref_a058479e4500f3d2616b56f4bd91f7d08}{remove\+\_\+cvref$<$\+T$>$\+::type}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Type\+To\+Pick , typename... Types$>$ }\\constexpr Type\+To\+Pick \mbox{\hyperlink{argparse_2utilities_8hpp_a689a70812560ee92f5110ffca3e87d17}{pick\+\_\+if}} (const Type\+To\+Pick \&default\+\_\+value, Types \&\&... args)
+\begin{DoxyCompactList}\small\item\em Selects the first argument from a set of variadic arguments which matches a given strong type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines common utility classes and functions, such as those for named arguments. 
+
+\begin{DoxyAuthor}{Author}
+Kinshuk Vasisht (\href{mailto:kinshuk.mcs21@cs.du.ac.in}{\texttt{ kinshuk.\+mcs21@cs.\+du.\+ac.\+in}}, RN\+: 19) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/05-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{argparse_2utilities_8hpp_a3c0600da43d6867a247432fcc43ce84f}\label{argparse_2utilities_8hpp_a3c0600da43d6867a247432fcc43ce84f}} 
+\index{utilities.hpp@{utilities.hpp}!remove\_cvref\_t@{remove\_cvref\_t}}
+\index{remove\_cvref\_t@{remove\_cvref\_t}!utilities.hpp@{utilities.hpp}}
+\doxysubsubsection{\texorpdfstring{remove\_cvref\_t}{remove\_cvref\_t}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+using \mbox{\hyperlink{argparse_2utilities_8hpp_a3c0600da43d6867a247432fcc43ce84f}{remove\+\_\+cvref\+\_\+t}} =  typename \mbox{\hyperlink{structremove__cvref}{remove\+\_\+cvref}}$<$T$>$\+::type}
+
+
+
+Alias over \mbox{\hyperlink{structremove__cvref_a058479e4500f3d2616b56f4bd91f7d08}{remove\+\_\+cvref$<$\+T$>$\+::type}}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type to remove const, volatile and reference from. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{argparse_2utilities_8hpp_a689a70812560ee92f5110ffca3e87d17}\label{argparse_2utilities_8hpp_a689a70812560ee92f5110ffca3e87d17}} 
+\index{utilities.hpp@{utilities.hpp}!pick\_if@{pick\_if}}
+\index{pick\_if@{pick\_if}!utilities.hpp@{utilities.hpp}}
+\doxysubsubsection{\texorpdfstring{pick\_if()}{pick\_if()}}
+{\footnotesize\ttfamily template$<$typename Type\+To\+Pick , typename... Types$>$ \\
+constexpr Type\+To\+Pick pick\+\_\+if (\begin{DoxyParamCaption}\item[{const Type\+To\+Pick \&}]{default\+\_\+value,  }\item[{Types \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Selects the first argument from a set of variadic arguments which matches a given strong type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type\+To\+Pick} & The type of the variable to choose. \\
+\hline
+{\em Types} & The Types to select from, usually deduced from the parameters.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em default\+\_\+value} & The default value to use when no value could be selected. \\
+\hline
+{\em args} & The arguments to choose from.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{Type\+To\+Pick\} The variable from the arguments whose type matches or the default value. 
+\end{DoxyReturn}

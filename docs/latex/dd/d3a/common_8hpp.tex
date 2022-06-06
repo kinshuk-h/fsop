@@ -1,0 +1,157 @@
+\hypertarget{common_8hpp}{}\doxysection{include/argparse/common.hpp File Reference}
+\label{common_8hpp}\index{include/argparse/common.hpp@{include/argparse/common.hpp}}
+
+
+Defines common constants and header includes for use throughout the argparse module.  
+
+
+{\ttfamily \#include \char`\"{}utilities.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$cctype$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$any$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$variant$>$}\newline
+{\ttfamily \#include $<$optional$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$string\+\_\+view$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structargparse_1_1parse__error}{argparse\+::parse\+\_\+error}}
+\begin{DoxyCompactList}\small\item\em Exception subtype to convey parse errors. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceargparse}{argparse}}
+\begin{DoxyCompactList}\small\item\em Exposes components for parsing command-\/line arguments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1types}{argparse\+::types}}
+\begin{DoxyCompactList}\small\item\em Aliases for strong types for arguments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1arguments}{argparse\+::arguments}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} variables for use as named arguments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults}{argparse\+::arguments\+::defaults}}
+\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1transforms}{argparse\+::transforms}}
+\begin{DoxyCompactList}\small\item\em Transformation functions for common types. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1utils}{argparse\+::utils}}
+\begin{DoxyCompactList}\small\item\em Utility functions for use across the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{argparse\+::types\+::argument\+\_\+value\+\_\+type}} = std\+::variant$<$ bool, std\+::string, std\+::vector$<$ std\+::string $>$ $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a892875e14bbb8c80984510f5f579aacd}{argparse\+::types\+::transform\+\_\+function}} = std\+::function$<$ std\+::any(const argument\+\_\+value\+\_\+type \&)$>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::any $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a79afff9c34809873fbb13a0f9b8ea095}{argparse\+::types\+::\+Name}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Name\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a4093a3b8887fc439a90434e20925d4bd}{argparse\+::types\+::\+Help}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Help\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a58dea8bf1bfa19396f64621b2ea6c79c}{argparse\+::types\+::\+Alias}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Alias\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_ab1147a04755a2f49185254397f3c967c}{argparse\+::types\+::\+Destination}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Destination\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_aeb28d30eb4ff6a3932da54a0c41b7645}{argparse\+::types\+::\+Arity}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ int, struct Arity\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_adb08a560dd849029c63898c2df9ee475}{argparse\+::types\+::\+Default\+Value}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::optional$<$ argument\+\_\+value\+\_\+type $>$, struct Default\+Value\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a59f06339bc81be4ecac74366949fe7c9}{argparse\+::types\+::\+Choices}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::optional$<$ std\+::vector$<$ std\+::string\+\_\+view $>$ $>$, struct Choices\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a4e8a452b22a1a7138dc9be9493a00157}{argparse\+::types\+::\+Transform}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::optional$<$ transform\+\_\+function $>$, struct Transform\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a2375df8a14a530e3c32dc3eccba1f2f5}{argparse\+::types\+::\+Required}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ bool, struct Required\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_ac4b2994c935bb89413ec3cc77cc2fde1}{argparse\+::types\+::\+Negated}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ bool, struct Negated\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a876bc791019e38003c47c077004b6b8e}{argparse\+::types\+::\+Description}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Description\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a34a8936564d3304d5f59904c5ac8bac3}{argparse\+::types\+::\+Epilog}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Epilog\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a2bb97537aade681834bc01f3510f655c}{argparse\+::types\+::\+Output\+Stream}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::ostream \&, struct Output\+Stream\+Tag $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Integral , typename  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+integral\+\_\+v$<$\+Integral$>$, std\+::nullptr\+\_\+t$>$$>$ }\\std\+::vector$<$ Integral $>$ \mbox{\hyperlink{namespaceargparse_1_1transforms_a8d1939740f039bc7af67feb17e373590}{argparse\+::transforms\+::to\+\_\+integral}} (const types\+::argument\+\_\+value\+\_\+type \&value)
+\begin{DoxyCompactList}\small\item\em Maps the variant value to an integral type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Range $>$ }\\std\+::string \mbox{\hyperlink{namespaceargparse_1_1utils_a6423049ee04bc49b72bd41fa2ba3d976}{argparse\+::utils\+::join}} (const Range \&range, std\+::string\+\_\+view glue=\char`\"{} \char`\"{})
+\begin{DoxyCompactList}\small\item\em Joins elements of a collection together to a single range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Range , typename Transform\+Function $>$ }\\std\+::string \mbox{\hyperlink{namespaceargparse_1_1utils_ae30113d42b3f62ef6b9e8e199da759d3}{argparse\+::utils\+::join}} (const Range \&range, std\+::string\+\_\+view glue, Transform\+Function transform)
+\begin{DoxyCompactList}\small\item\em Joins elements of a collection together to a single range. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceargparse_1_1utils_a162e82e2b353157512b891a78a4dd5fb}{argparse\+::utils\+::is\+\_\+numeric}} (std\+::string\+\_\+view value)
+\begin{DoxyCompactList}\small\item\em Checks if a given string encapsulates a numeric integral value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+types\+::\+Name\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a1475e47d220b4a783be691910a33203e}{argparse\+::arguments\+::name}}
+\item 
+types\+::\+Help\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a3be1cc16d8b11efc04c0acf360e149eb}{argparse\+::arguments\+::help}}
+\item 
+types\+::\+Alias\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a9109a2575f351c5b7101b0b1861fb20b}{argparse\+::arguments\+::alias}}
+\item 
+types\+::\+Destination\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{argparse\+::arguments\+::dest}}
+\item 
+types\+::\+Default\+Value\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a81f951d3031af686fd64828c8f2461a6}{argparse\+::arguments\+::default\+\_\+value}}
+\item 
+types\+::\+Arity\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a5247c21b54d4f570986f2588021b9a80}{argparse\+::arguments\+::arity}}
+\item 
+types\+::\+Choices\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_aa95f3c769ba1f0bfa965dff22055ecd8}{argparse\+::arguments\+::choices}}
+\item 
+types\+::\+Transform\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a765fc1cfec0cdcb9cdb5f9ce69ecfc3e}{argparse\+::arguments\+::transform}}
+\item 
+types\+::\+Required\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a7e0a7175547e76e148a33104e53852b9}{argparse\+::arguments\+::required}}
+\item 
+types\+::\+Negated\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_af06ab33095e2b84e1dbec367bd9deddd}{argparse\+::arguments\+::negated}}
+\item 
+types\+::\+Description\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a8c46810bbdb6b399f602f6a40113e98d}{argparse\+::arguments\+::description}}
+\item 
+types\+::\+Epilog\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a1b7cfe3821e729dc5a0c34b4897e04c7}{argparse\+::arguments\+::epilog}}
+\item 
+types\+::\+Output\+Stream\+::\+Argument \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{argparse\+::arguments\+::output\+\_\+stream}}
+\item 
+constexpr auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a39b500a5ce93009124a948b71ad4c09b}{argparse\+::arguments\+::defaults\+::default\+\_\+name}} = types\+::\+Name(\char`\"{}\char`\"{})
+\item 
+constexpr auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_af21bd29af5757ea814955fbd405353cc}{argparse\+::arguments\+::defaults\+::default\+\_\+help}} = types\+::\+Help(\char`\"{}\char`\"{})
+\item 
+constexpr auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a1143361c79e64bfa605d4492a452bbcb}{argparse\+::arguments\+::defaults\+::default\+\_\+alias}} = types\+::\+Alias(\char`\"{}\char`\"{})
+\item 
+constexpr auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a270a03f92de274cbb857faff659f5654}{argparse\+::arguments\+::defaults\+::default\+\_\+dest}} = types\+::\+Destination(\char`\"{}\char`\"{})
+\item 
+constexpr auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a5e1c3f0fdd99bb4f0761252696971254}{argparse\+::arguments\+::defaults\+::default\+\_\+arity}} = types\+::\+Arity(1)
+\item 
+constexpr auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_ad128e323fdb2755a28bece955e27dc0a}{argparse\+::arguments\+::defaults\+::default\+\_\+negated}} = types\+::\+Negated(false)
+\item 
+constexpr auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a2ad0b36b45c92ef834455c6f93f57189}{argparse\+::arguments\+::defaults\+::default\+\_\+description}} = types\+::\+Description(\char`\"{}\char`\"{})
+\item 
+constexpr auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a5624825da330c1c8056e8d77e1b5e9f5}{argparse\+::arguments\+::defaults\+::default\+\_\+epilog}} = types\+::\+Epilog(\char`\"{}\char`\"{})
+\item 
+auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a93f759d0c17e0d2fb1d38f1babc08920}{argparse\+::arguments\+::defaults\+::default\+\_\+transform}} = types\+::\+Transform(std\+::nullopt)
+\item 
+auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a020944ad396aaf453442d8e6ae548b2b}{argparse\+::arguments\+::defaults\+::default\+\_\+choices}} = types\+::\+Choices(std\+::nullopt)
+\item 
+auto \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_aab4566b8a7b2c43a3a16313798fd8c50}{argparse\+::arguments\+::defaults\+::default\+\_\+value}} = types\+::\+Default\+Value(std\+::nullopt)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines common constants and header includes for use throughout the argparse module. 
+
+\begin{DoxyAuthor}{Author}
+Kinshuk Vasisht (\href{mailto:kinshuk.mcs21@cs.du.ac.in}{\texttt{ kinshuk.\+mcs21@cs.\+du.\+ac.\+in}}, RN\+: 19) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/05-\/28
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}

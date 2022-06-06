@@ -1,0 +1,175 @@
+\hypertarget{common_8hpp_source}{}\doxysection{common.\+hpp}
+\label{common_8hpp_source}\index{include/argparse/common.hpp@{include/argparse/common.hpp}}
+\mbox{\hyperlink{common_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef ARGPARSE\_COMMON\_HPP\_INCLUDED}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define ARGPARSE\_COMMON\_HPP\_INCLUDED}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{fsop_2utilities_8hpp}{utilities.hpp}}"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{comment}{// Standardized C-\/Header Units}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <cctype>}       \textcolor{comment}{// std::isalpha, std::toupper}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <cstdlib>}      \textcolor{comment}{// std::exit}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{comment}{// C++ Header Units}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <any>}           \textcolor{comment}{// std::any}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <string>}        \textcolor{comment}{// std::string}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <vector>}        \textcolor{comment}{// std::vector}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include <memory>}        \textcolor{comment}{// std::unique\_ptr}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include <ostream>}       \textcolor{comment}{// std::ostream}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <sstream>}       \textcolor{comment}{// std::stringstream}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include <iomanip>}       \textcolor{comment}{// std::setw}}
+\DoxyCodeLine{28 \textcolor{preprocessor}{\#include <variant>}       \textcolor{comment}{// std::variant}}
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#include <optional>}      \textcolor{comment}{// std::optional}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#include <algorithm>}     \textcolor{comment}{// std::min, std::swap, std::transform}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <functional>}    \textcolor{comment}{// std::function}}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#include <string\_view>}   \textcolor{comment}{// std::string\_view}}
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#include <unordered\_map>} \textcolor{comment}{// std::unordered\_map}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{42 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceargparse}{argparse}}}
+\DoxyCodeLine{43 \{}
+\DoxyCodeLine{47     \textcolor{keyword}{struct }\mbox{\hyperlink{structargparse_1_1parse__error}{parse\_error}} : \textcolor{keyword}{public} std::exception}
+\DoxyCodeLine{48     \{}
+\DoxyCodeLine{55         \mbox{\hyperlink{structargparse_1_1parse__error_a572d43786f004eaf7cc82a3533567570}{parse\_error}}(std::string\_view message, std::string\_view usage)}
+\DoxyCodeLine{56         : std::exception(), \_parser\_usage(usage), \_message(message) \{\}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{63         \textcolor{keyword}{const} std::string\& \mbox{\hyperlink{structargparse_1_1parse__error_a823b2eaf89429559a717983df7143d9b}{parser\_usage}}() const noexcept \{ \textcolor{keywordflow}{return} \_parser\_usage; \}}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{70         \textcolor{keyword}{virtual} \textcolor{keyword}{const} \textcolor{keywordtype}{char}* \mbox{\hyperlink{structargparse_1_1parse__error_a8ae0a05dfe2cf00af1c8d43c0980063e}{what}}() const noexcept\textcolor{keyword}{ override }\{ \textcolor{keywordflow}{return} \_message.c\_str(); \}}
+\DoxyCodeLine{71     \textcolor{keyword}{private}:}
+\DoxyCodeLine{72         std::string \_parser\_usage, \_message;}
+\DoxyCodeLine{73     \};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{81     \textcolor{keyword}{namespace }types}
+\DoxyCodeLine{82     \{}
+\DoxyCodeLine{84         \textcolor{keyword}{using }\mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{argument\_value\_type}} = std::variant<bool, std::string, std::vector<std::string>>;}
+\DoxyCodeLine{86         \textcolor{keyword}{using }\mbox{\hyperlink{namespaceargparse_1_1types_a892875e14bbb8c80984510f5f579aacd}{transform\_function}}  = std::function<std::any(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{argument\_value\_type}}\&)>;}
+\DoxyCodeLine{88         \textcolor{keyword}{using }\mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{result\_map}}          = std::unordered\_map<std::string, std::any>;}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{91         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Name}}         = \mbox{\hyperlink{class_named_type}{NamedType<std::string\_view,                             struct NameTag>}};}
+\DoxyCodeLine{93         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Help}}         = \mbox{\hyperlink{class_named_type}{NamedType<std::string\_view,                             struct HelpTag>}};}
+\DoxyCodeLine{95         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Alias}}        = \mbox{\hyperlink{class_named_type}{NamedType<std::string\_view,                             struct AliasTag>}};}
+\DoxyCodeLine{97         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Destination}}  = \mbox{\hyperlink{class_named_type}{NamedType<std::string\_view,                             struct DestinationTag>}};}
+\DoxyCodeLine{99         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Arity}}        = \mbox{\hyperlink{class_named_type}{NamedType<int,                                          struct ArityTag>}};}
+\DoxyCodeLine{101         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{DefaultValue}} = \mbox{\hyperlink{class_named_type}{NamedType<std::optional<argument\_value\_type>}},           \textcolor{keyword}{struct }DefaultValueTag>;}
+\DoxyCodeLine{103         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Choices}}      = \mbox{\hyperlink{class_named_type}{NamedType<std::optional<std::vector<std::string\_view>}}>, \textcolor{keyword}{struct }ChoicesTag>;}
+\DoxyCodeLine{105         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Transform}}    = \mbox{\hyperlink{class_named_type}{NamedType<std::optional<transform\_function>}},            \textcolor{keyword}{struct }TransformTag>;}
+\DoxyCodeLine{107         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Required}}     = \mbox{\hyperlink{class_named_type}{NamedType<bool,                                         struct RequiredTag>}};}
+\DoxyCodeLine{109         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Negated}}      = \mbox{\hyperlink{class_named_type}{NamedType<bool,                                         struct NegatedTag>}};}
+\DoxyCodeLine{111         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Description}}  = \mbox{\hyperlink{class_named_type}{NamedType<std::string\_view,                             struct DescriptionTag>}};}
+\DoxyCodeLine{113         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{Epilog}}       = \mbox{\hyperlink{class_named_type}{NamedType<std::string\_view,                             struct EpilogTag>}};}
+\DoxyCodeLine{115         \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type}{OutputStream}} = \mbox{\hyperlink{class_named_type}{NamedType<std::ostream\&,                                struct OutputStreamTag>}};}
+\DoxyCodeLine{116     \}}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{119     \textcolor{keyword}{inline} \textcolor{keyword}{namespace }arguments}
+\DoxyCodeLine{120     \{}
+\DoxyCodeLine{122         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Name::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a1475e47d220b4a783be691910a33203e}{name}};}
+\DoxyCodeLine{124         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Help::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a3be1cc16d8b11efc04c0acf360e149eb}{help}};}
+\DoxyCodeLine{126         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Alias::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a9109a2575f351c5b7101b0b1861fb20b}{alias}};}
+\DoxyCodeLine{128         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Destination::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}};}
+\DoxyCodeLine{130         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::DefaultValue::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a81f951d3031af686fd64828c8f2461a6}{default\_value}};}
+\DoxyCodeLine{132         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Arity::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a5247c21b54d4f570986f2588021b9a80}{arity}};}
+\DoxyCodeLine{134         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Choices::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_aa95f3c769ba1f0bfa965dff22055ecd8}{choices}};}
+\DoxyCodeLine{136         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Transform::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a765fc1cfec0cdcb9cdb5f9ce69ecfc3e}{transform}};}
+\DoxyCodeLine{138         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Required::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a7e0a7175547e76e148a33104e53852b9}{required}};}
+\DoxyCodeLine{140         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Negated::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_af06ab33095e2b84e1dbec367bd9deddd}{negated}};}
+\DoxyCodeLine{142         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Description::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a8c46810bbdb6b399f602f6a40113e98d}{description}};}
+\DoxyCodeLine{144         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::Epilog::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a1b7cfe3821e729dc5a0c34b4897e04c7}{epilog}};}
+\DoxyCodeLine{146         \textcolor{keyword}{inline} \mbox{\hyperlink{struct_named_type_1_1_argument}{types::OutputStream::Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}};}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{149         \textcolor{keyword}{namespace }defaults}
+\DoxyCodeLine{150         \{}
+\DoxyCodeLine{152             \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a39b500a5ce93009124a948b71ad4c09b}{default\_name}}        = \mbox{\hyperlink{namespaceargparse_1_1types_a79afff9c34809873fbb13a0f9b8ea095}{types::Name}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{154             \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_af21bd29af5757ea814955fbd405353cc}{default\_help}}        = \mbox{\hyperlink{namespaceargparse_1_1types_a4093a3b8887fc439a90434e20925d4bd}{types::Help}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{156             \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a1143361c79e64bfa605d4492a452bbcb}{default\_alias}}       = \mbox{\hyperlink{namespaceargparse_1_1types_a58dea8bf1bfa19396f64621b2ea6c79c}{types::Alias}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{158             \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a270a03f92de274cbb857faff659f5654}{default\_dest}}        = \mbox{\hyperlink{namespaceargparse_1_1types_ab1147a04755a2f49185254397f3c967c}{types::Destination}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{160             \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a5e1c3f0fdd99bb4f0761252696971254}{default\_arity}}       = \mbox{\hyperlink{namespaceargparse_1_1types_aeb28d30eb4ff6a3932da54a0c41b7645}{types::Arity}}(1);}
+\DoxyCodeLine{162             \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_ad128e323fdb2755a28bece955e27dc0a}{default\_negated}}     = \mbox{\hyperlink{namespaceargparse_1_1types_ac4b2994c935bb89413ec3cc77cc2fde1}{types::Negated}}(\textcolor{keyword}{false});}
+\DoxyCodeLine{164             \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a2ad0b36b45c92ef834455c6f93f57189}{default\_description}} = \mbox{\hyperlink{namespaceargparse_1_1types_a876bc791019e38003c47c077004b6b8e}{types::Description}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{166             \textcolor{keyword}{inline} \textcolor{keyword}{constexpr} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a5624825da330c1c8056e8d77e1b5e9f5}{default\_epilog}}      = \mbox{\hyperlink{namespaceargparse_1_1types_a34a8936564d3304d5f59904c5ac8bac3}{types::Epilog}}(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{169             \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a93f759d0c17e0d2fb1d38f1babc08920}{default\_transform}} = \mbox{\hyperlink{namespaceargparse_1_1types_a4e8a452b22a1a7138dc9be9493a00157}{types::Transform}}(std::nullopt);}
+\DoxyCodeLine{171             \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a020944ad396aaf453442d8e6ae548b2b}{default\_choices}}   = \mbox{\hyperlink{namespaceargparse_1_1types_a59f06339bc81be4ecac74366949fe7c9}{types::Choices}}(std::nullopt);}
+\DoxyCodeLine{173             \textcolor{keyword}{inline} \textcolor{keyword}{auto} \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_aab4566b8a7b2c43a3a16313798fd8c50}{default\_value}}     = \mbox{\hyperlink{namespaceargparse_1_1types_adb08a560dd849029c63898c2df9ee475}{types::DefaultValue}}(std::nullopt);}
+\DoxyCodeLine{174         \}}
+\DoxyCodeLine{175     \}}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{178     \textcolor{keyword}{inline} \textcolor{keyword}{namespace }transforms}
+\DoxyCodeLine{179     \{}
+\DoxyCodeLine{187         \textcolor{keyword}{template}<\textcolor{keyword}{typename} Integral, \textcolor{keyword}{typename} = std::enable\_if\_t<std::is\_\textcolor{keywordtype}{int}egral\_v<Integral>, std::\textcolor{keywordtype}{nullptr}\_t>>}
+\DoxyCodeLine{188         std::vector<Integral> \mbox{\hyperlink{namespaceargparse_1_1transforms_a8d1939740f039bc7af67feb17e373590}{to\_integral}}(\textcolor{keyword}{const} \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{types::argument\_value\_type}}\& value)}
+\DoxyCodeLine{189         \{}
+\DoxyCodeLine{190             std::vector<Integral> numvals;}
+\DoxyCodeLine{191             \textcolor{keywordflow}{switch} (value.index())}
+\DoxyCodeLine{192             \{}
+\DoxyCodeLine{193             \textcolor{keywordflow}{case} 1:}
+\DoxyCodeLine{194                 \textcolor{keywordflow}{if} \textcolor{keyword}{constexpr} (std::is\_signed\_v<Integral>)}
+\DoxyCodeLine{195                 \{}
+\DoxyCodeLine{196                     \textcolor{keyword}{auto} numval = std::stoll(std::get<1>(value));}
+\DoxyCodeLine{197                     numvals.push\_back(\textcolor{keyword}{static\_cast<}Integral\textcolor{keyword}{>}(numval));}
+\DoxyCodeLine{198                 \}}
+\DoxyCodeLine{199                 \textcolor{keywordflow}{else}}
+\DoxyCodeLine{200                 \{}
+\DoxyCodeLine{201                     \textcolor{keyword}{auto} numval = std::stoull(std::get<1>(value));}
+\DoxyCodeLine{202                     numvals.push\_back(\textcolor{keyword}{static\_cast<}Integral\textcolor{keyword}{>}(numval));}
+\DoxyCodeLine{203                 \}}
+\DoxyCodeLine{204                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{205             \textcolor{keywordflow}{case} 2:}
+\DoxyCodeLine{206                 \textcolor{keyword}{const} \textcolor{keyword}{auto}\& strvals = std::get<2>(value);}
+\DoxyCodeLine{207                 numvals.reserve(strvals.size());}
+\DoxyCodeLine{208                 \textcolor{keywordflow}{for}(\textcolor{keyword}{const} \textcolor{keyword}{auto}\& strval : strvals)}
+\DoxyCodeLine{209                 \{}
+\DoxyCodeLine{210                     \textcolor{keywordflow}{if} \textcolor{keyword}{constexpr} (std::is\_signed\_v<Integral>)}
+\DoxyCodeLine{211                     \{}
+\DoxyCodeLine{212                         \textcolor{keyword}{auto} numval = std::stoll(strval);}
+\DoxyCodeLine{213                         numvals.push\_back(\textcolor{keyword}{static\_cast<}Integral\textcolor{keyword}{>}(numval));}
+\DoxyCodeLine{214                     \}}
+\DoxyCodeLine{215                     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{216                     \{}
+\DoxyCodeLine{217                         \textcolor{keyword}{auto} numval = std::stoull(strval);}
+\DoxyCodeLine{218                         numvals.push\_back(\textcolor{keyword}{static\_cast<}Integral\textcolor{keyword}{>}(numval));}
+\DoxyCodeLine{219                     \}}
+\DoxyCodeLine{220                 \}}
+\DoxyCodeLine{221             \}}
+\DoxyCodeLine{222             \textcolor{keywordflow}{return} numvals;}
+\DoxyCodeLine{223         \}}
+\DoxyCodeLine{224     \}}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{227     \textcolor{keyword}{inline} \textcolor{keyword}{namespace }utils}
+\DoxyCodeLine{228     \{}
+\DoxyCodeLine{238         \textcolor{keyword}{template}<\textcolor{keyword}{typename} Range>}
+\DoxyCodeLine{239         std::string \mbox{\hyperlink{namespaceargparse_1_1utils_a6423049ee04bc49b72bd41fa2ba3d976}{join}}(\textcolor{keyword}{const} Range\& range, std::string\_view glue = \textcolor{stringliteral}{"{} "{}})}
+\DoxyCodeLine{240         \{}
+\DoxyCodeLine{241             std::ostringstream oss; \textcolor{keyword}{auto} it = std::begin(range);}
+\DoxyCodeLine{242             \textcolor{keywordflow}{if}(it != std::end(range))}
+\DoxyCodeLine{243                 \{ oss << *it; it = std::next(it); \}}
+\DoxyCodeLine{244             \textcolor{keywordflow}{for}(; it != std::end(range); it = std::next(it))}
+\DoxyCodeLine{245                 oss << glue << *it;}
+\DoxyCodeLine{246             \textcolor{keywordflow}{return} oss.str();}
+\DoxyCodeLine{247         \}}
+\DoxyCodeLine{248 }
+\DoxyCodeLine{261         \textcolor{keyword}{template}<\textcolor{keyword}{typename} Range, \textcolor{keyword}{typename} TransformFunction>}
+\DoxyCodeLine{262         std::string \mbox{\hyperlink{namespaceargparse_1_1utils_a6423049ee04bc49b72bd41fa2ba3d976}{join}}(\textcolor{keyword}{const} Range\& range, std::string\_view glue, TransformFunction \mbox{\hyperlink{namespaceargparse_1_1arguments_a765fc1cfec0cdcb9cdb5f9ce69ecfc3e}{transform}})}
+\DoxyCodeLine{263         \{}
+\DoxyCodeLine{264             std::ostringstream oss; \textcolor{keyword}{auto} it = std::begin(range);}
+\DoxyCodeLine{265             \textcolor{keywordflow}{if}(it != std::end(range))}
+\DoxyCodeLine{266                 \{ oss << \mbox{\hyperlink{namespaceargparse_1_1arguments_a765fc1cfec0cdcb9cdb5f9ce69ecfc3e}{transform}}(*it); it = std::next(it); \}}
+\DoxyCodeLine{267             \textcolor{keywordflow}{for}(; it != std::end(range); it = std::next(it))}
+\DoxyCodeLine{268                 oss << glue << \mbox{\hyperlink{namespaceargparse_1_1arguments_a765fc1cfec0cdcb9cdb5f9ce69ecfc3e}{transform}}(*it);}
+\DoxyCodeLine{269             \textcolor{keywordflow}{return} oss.str();}
+\DoxyCodeLine{270         \}}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{277         \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} \mbox{\hyperlink{namespaceargparse_1_1utils_a162e82e2b353157512b891a78a4dd5fb}{is\_numeric}}(std::string\_view value)}
+\DoxyCodeLine{278         \{}
+\DoxyCodeLine{279             \textcolor{keywordflow}{return} value.empty() or (}
+\DoxyCodeLine{280                 (value[0] == \textcolor{charliteral}{'-\/'} or value[0] == \textcolor{charliteral}{'+'} or std::isdigit(value[0])) and}
+\DoxyCodeLine{281                 std::all\_of(std::next(value.begin()), value.end(), ::isdigit)}
+\DoxyCodeLine{282             );}
+\DoxyCodeLine{283         \}}
+\DoxyCodeLine{284     \}}
+\DoxyCodeLine{285 \}}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ARGPARSE\_COMMON\_HPP\_INCLUDED}}
+
+\end{DoxyCode}

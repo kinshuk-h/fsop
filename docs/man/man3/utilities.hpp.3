@@ -1,0 +1,86 @@
+.TH "include/fsop/utilities.hpp" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/fsop/utilities.hpp \- Defines utility functions for use with the fsop module's functions\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <tuple>\fP
+.br
+\fC#include <string>\fP
+.br
+\fC#include <string_view>\fP
+.br
+
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fBfsop::utils\fP"
+.br
+.RI "Defines common utilities for use with filesystem operations\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "mode_t \fBfsop::utils::parse_permissions\fP (std::string_view perms)"
+.br
+.RI "Parses a given permission string into an integral value with bits set as per given permissions\&. "
+.ti -1c
+.RI "std::string \fBfsop::utils::to_permissions\fP (mode_t permissions)"
+.br
+.RI "Returns a parseable string representation of a given numerical permissions entry\&. "
+.ti -1c
+.RI "int \fBfsop::utils::parse_seek_whence\fP (std::string_view whence)"
+.br
+.RI "Parses the value of whence for offset movement\&. "
+.ti -1c
+.RI "std::string \fBfsop::utils::to_type\fP (mode_t type)"
+.br
+.RI "Returns the name of the file type corresponding to the file type number stored in the inode\&. "
+.ti -1c
+.RI "template<typename Integral , typename  = std::enable_if_t<std::is_integral_v<Integral>, std::nullptr_t>> auto \fBfsop::utils::to_human_readable_size\fP (Integral byte_size)"
+.br
+.RI "Converts a given file size in bytes to a human readable form\&. "
+.ti -1c
+.RI "std::string \fBfsop::utils::current_directory\fP ()"
+.br
+.RI "Returns the current working directory of the process\&. Internally invokes the \fCgetcwd()\fP syscall\&. "
+.ti -1c
+.RI "void \fBfsop::utils::change_directory\fP (std::string_view path)"
+.br
+.RI "Sets the current working directory to the path indicated by the given argument\&. Internally invokes the \fCchdir\fP syscall\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines utility functions for use with the fsop module's functions\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19) 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+1\&.0 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2022-05-28
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2022 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

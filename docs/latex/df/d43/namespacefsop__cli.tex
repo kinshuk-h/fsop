@@ -1,0 +1,126 @@
+\hypertarget{namespacefsop__cli}{}\doxysection{fsop\+\_\+cli Namespace Reference}
+\label{namespacefsop__cli}\index{fsop\_cli@{fsop\_cli}}
+
+
+Defines functions performing operations offered by the CLI application.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespacefsop__cli_af6d04c054297a4f56486db252060b533}{create}} (const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&args, std\+::string\+\_\+view program\+\_\+name=\char`\"{}program\char`\"{})
+\begin{DoxyCompactList}\small\item\em Implements the create subcommand for the CLI application. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacefsop__cli_ae4e3388293880547e65dfd109d7c77a8}{pipe\+\_\+io}} (const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&args, std\+::string\+\_\+view program\+\_\+name=\char`\"{}program\char`\"{})
+\begin{DoxyCompactList}\small\item\em Implements the pipe\+\_\+io subcommand for the CLI application (redirected to internally by read and write). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacefsop__cli_a5581e07358a14e270e65c6b056eef826}{read}} (const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&args, std\+::string\+\_\+view program\+\_\+name=\char`\"{}program\char`\"{})
+\begin{DoxyCompactList}\small\item\em Implements the read subcommand for the CLI application. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacefsop__cli_ac6a5d02bae60735e7529e55de8b0b0d4}{write}} (const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&args, std\+::string\+\_\+view program\+\_\+name=\char`\"{}program\char`\"{})
+\begin{DoxyCompactList}\small\item\em Implements the write subcommand for the CLI application. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{namespacefsop__cli_a656cf087e76f0d2a1392bf841dbc9236}{inspect}} (const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&args, std\+::string\+\_\+view program\+\_\+name=\char`\"{}program\char`\"{})
+\begin{DoxyCompactList}\small\item\em Implements the inspect subcommand for the CLI application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines functions performing operations offered by the CLI application. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacefsop__cli_af6d04c054297a4f56486db252060b533}\label{namespacefsop__cli_af6d04c054297a4f56486db252060b533}} 
+\index{fsop\_cli@{fsop\_cli}!create@{create}}
+\index{create@{create}!fsop\_cli@{fsop\_cli}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily int fsop\+\_\+cli\+::create (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&}]{args,  }\item[{std\+::string\+\_\+view}]{program\+\_\+name = {\ttfamily \char`\"{}program\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Implements the create subcommand for the CLI application. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parsed map of arguments. \\
+\hline
+{\em program\+\_\+name} & Name of the CLI program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{int\} Exit code for the program. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefsop__cli_a656cf087e76f0d2a1392bf841dbc9236}\label{namespacefsop__cli_a656cf087e76f0d2a1392bf841dbc9236}} 
+\index{fsop\_cli@{fsop\_cli}!inspect@{inspect}}
+\index{inspect@{inspect}!fsop\_cli@{fsop\_cli}}
+\doxysubsubsection{\texorpdfstring{inspect()}{inspect()}}
+{\footnotesize\ttfamily int fsop\+\_\+cli\+::inspect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&}]{args,  }\item[{std\+::string\+\_\+view}]{program\+\_\+name = {\ttfamily \char`\"{}program\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Implements the inspect subcommand for the CLI application. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parsed map of arguments. \\
+\hline
+{\em program\+\_\+name} & Name of the CLI program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{int\} Exit code for the program. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefsop__cli_ae4e3388293880547e65dfd109d7c77a8}\label{namespacefsop__cli_ae4e3388293880547e65dfd109d7c77a8}} 
+\index{fsop\_cli@{fsop\_cli}!pipe\_io@{pipe\_io}}
+\index{pipe\_io@{pipe\_io}!fsop\_cli@{fsop\_cli}}
+\doxysubsubsection{\texorpdfstring{pipe\_io()}{pipe\_io()}}
+{\footnotesize\ttfamily int fsop\+\_\+cli\+::pipe\+\_\+io (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&}]{args,  }\item[{std\+::string\+\_\+view}]{program\+\_\+name = {\ttfamily \char`\"{}program\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Implements the pipe\+\_\+io subcommand for the CLI application (redirected to internally by read and write). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parsed map of arguments. \\
+\hline
+{\em program\+\_\+name} & Name of the CLI program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{int\} Exit code for the program. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefsop__cli_a5581e07358a14e270e65c6b056eef826}\label{namespacefsop__cli_a5581e07358a14e270e65c6b056eef826}} 
+\index{fsop\_cli@{fsop\_cli}!read@{read}}
+\index{read@{read}!fsop\_cli@{fsop\_cli}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily int fsop\+\_\+cli\+::read (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&}]{args,  }\item[{std\+::string\+\_\+view}]{program\+\_\+name = {\ttfamily \char`\"{}program\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Implements the read subcommand for the CLI application. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parsed map of arguments. \\
+\hline
+{\em program\+\_\+name} & Name of the CLI program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{int\} Exit code for the program. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefsop__cli_ac6a5d02bae60735e7529e55de8b0b0d4}\label{namespacefsop__cli_ac6a5d02bae60735e7529e55de8b0b0d4}} 
+\index{fsop\_cli@{fsop\_cli}!write@{write}}
+\index{write@{write}!fsop\_cli@{fsop\_cli}}
+\doxysubsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily int fsop\+\_\+cli\+::write (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} \&}]{args,  }\item[{std\+::string\+\_\+view}]{program\+\_\+name = {\ttfamily \char`\"{}program\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Implements the write subcommand for the CLI application. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Parsed map of arguments. \\
+\hline
+{\em program\+\_\+name} & Name of the CLI program. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{int\} Exit code for the program. 
+\end{DoxyReturn}

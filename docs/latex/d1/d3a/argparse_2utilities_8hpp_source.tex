@@ -1,0 +1,64 @@
+\hypertarget{argparse_2utilities_8hpp_source}{}\doxysection{utilities.\+hpp}
+\label{argparse_2utilities_8hpp_source}\index{include/argparse/utilities.hpp@{include/argparse/utilities.hpp}}
+\mbox{\hyperlink{argparse_2utilities_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef ARGPARSE\_UTILITIES\_HPP\_INCLUDED}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define ARGPARSE\_UTILITIES\_HPP\_INCLUDED}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <tuple>}       \textcolor{comment}{// std::make\_tuple, std::get}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <type\_traits>} \textcolor{comment}{// std::is\_disjunction\_v}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{26 \textcolor{keyword}{template} <\textcolor{keyword}{typename} ValueType, \textcolor{keyword}{typename} Descriptor>}
+\DoxyCodeLine{27 \textcolor{keyword}{class }\mbox{\hyperlink{class_named_type}{NamedType}}}
+\DoxyCodeLine{28 \{}
+\DoxyCodeLine{29     ValueType value\_;}
+\DoxyCodeLine{30 \textcolor{keyword}{public}:}
+\DoxyCodeLine{32     \textcolor{keyword}{using }\mbox{\hyperlink{class_named_type_a44a4714d80c95e2e397b7c933d774e9e}{value\_type}} = ValueType;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{39     \textcolor{keyword}{constexpr} \textcolor{keyword}{explicit} \mbox{\hyperlink{class_named_type_a84f9776213ddcae1f2c7ab1a961d3095}{NamedType}}(ValueType \textcolor{keyword}{const}\& value) : value\_(value) \{\}}
+\DoxyCodeLine{46     \textcolor{keyword}{template}<\textcolor{keyword}{typename} VT = ValueType, \textcolor{keyword}{typename} = std::enable\_if\_t<!std::is\_reference\_v<VT>, std::\textcolor{keywordtype}{nullptr}\_t>>}
+\DoxyCodeLine{52     \textcolor{keyword}{constexpr} \textcolor{keyword}{explicit} \mbox{\hyperlink{class_named_type_a7cd990063026f06703b63b01ce9b23b3}{NamedType}}(ValueType\&\& value) : value\_(std::move(value)) \{\}}
+\DoxyCodeLine{58     \textcolor{keyword}{constexpr} ValueType\&       \mbox{\hyperlink{class_named_type_a12e192cd9356503aee74512f14da1235}{get}}()       \{ \textcolor{keywordflow}{return} value\_; \}}
+\DoxyCodeLine{64     \textcolor{keyword}{constexpr} \textcolor{keyword}{const} ValueType\& \mbox{\hyperlink{class_named_type_ab88693242ab0a8975cf9bd910ef0b082}{get}}()\textcolor{keyword}{ const }\{ \textcolor{keywordflow}{return} value\_; \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{82     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}}}
+\DoxyCodeLine{83     \{}
+\DoxyCodeLine{88         \mbox{\hyperlink{struct_named_type_1_1_argument_ac23cd9672bfaa9a3cd6c388863fe1de5}{Argument}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{93         \mbox{\hyperlink{struct_named_type_1_1_argument_a4775c76afcf57aaeea013f69e33ae1cc}{Argument}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{98         \mbox{\hyperlink{struct_named_type_1_1_argument_a469db9591805f0043328d7de4fcc8d88}{Argument}}(\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}}\&\&)      = \textcolor{keyword}{delete};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{101         \mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}}\& \mbox{\hyperlink{struct_named_type_1_1_argument_acad5a88d0a2bc620762b160c32fcd887}{operator=}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}}\&) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{103         \mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}}\& \mbox{\hyperlink{struct_named_type_1_1_argument_ad1f5b2d88dd087fad36e34b105df8afe}{operator=}}(\mbox{\hyperlink{struct_named_type_1_1_argument}{Argument}}\&\&)      = \textcolor{keyword}{delete};}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{112         \textcolor{keyword}{template}<\textcolor{keyword}{typename} UnderlyingType>}
+\DoxyCodeLine{113         \mbox{\hyperlink{class_named_type}{NamedType}} \mbox{\hyperlink{struct_named_type_1_1_argument_a3e2e9a2f729ea8814dd2c032776d5ec2}{operator=}}(UnderlyingType\&\& value)\textcolor{keyword}{ const}}
+\DoxyCodeLine{114 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{115             \textcolor{keywordflow}{return} \mbox{\hyperlink{class_named_type_a84f9776213ddcae1f2c7ab1a961d3095}{NamedType}}(std::forward<UnderlyingType>(value));}
+\DoxyCodeLine{116         \}}
+\DoxyCodeLine{117     \};}
+\DoxyCodeLine{118 \};}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120 \textcolor{preprocessor}{\#if \_\_cplusplus < 202000}}
+\DoxyCodeLine{126     \textcolor{keyword}{template}< \textcolor{keyword}{class} T >}
+\DoxyCodeLine{127     \textcolor{keyword}{struct }\mbox{\hyperlink{structremove__cvref}{remove\_cvref}} \{}
+\DoxyCodeLine{129         \textcolor{keyword}{typedef} std::remove\_cv\_t<std::remove\_reference\_t<T>> \mbox{\hyperlink{structremove__cvref_a058479e4500f3d2616b56f4bd91f7d08}{type}};}
+\DoxyCodeLine{130     \};}
+\DoxyCodeLine{136     \textcolor{keyword}{template}< \textcolor{keyword}{class} T >}
+\DoxyCodeLine{137     \textcolor{keyword}{using }\mbox{\hyperlink{argparse_2utilities_8hpp_a3c0600da43d6867a247432fcc43ce84f}{remove\_cvref\_t}} = \textcolor{keyword}{typename} \mbox{\hyperlink{structremove__cvref_a058479e4500f3d2616b56f4bd91f7d08}{remove\_cvref<T>::type}};}
+\DoxyCodeLine{138 \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{144     \textcolor{keyword}{template}< \textcolor{keyword}{class} T >}
+\DoxyCodeLine{145     \textcolor{keyword}{using }\mbox{\hyperlink{argparse_2utilities_8hpp_a3c0600da43d6867a247432fcc43ce84f}{remove\_cvref\_t}} = std::remove\_cvref\_t<T>;}
+\DoxyCodeLine{146 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{147 }
+\DoxyCodeLine{160 \textcolor{keyword}{template}<\textcolor{keyword}{typename} TypeToPick, \textcolor{keyword}{typename}... Types>}
+\DoxyCodeLine{161 \textcolor{keyword}{constexpr} TypeToPick \mbox{\hyperlink{argparse_2utilities_8hpp_a689a70812560ee92f5110ffca3e87d17}{pick\_if}}(\textcolor{keyword}{const} TypeToPick\& \mbox{\hyperlink{namespaceargparse_1_1arguments_a81f951d3031af686fd64828c8f2461a6}{default\_value}}, Types\&\&... args)}
+\DoxyCodeLine{162 \{}
+\DoxyCodeLine{163     \textcolor{keywordflow}{if} \textcolor{keyword}{constexpr}(std::disjunction\_v<std::is\_same<TypeToPick, remove\_cvref\_t<Types>>...>)}
+\DoxyCodeLine{164         \textcolor{keywordflow}{return} std::get<TypeToPick>(std::make\_tuple(std::forward<Types>(args)...));}
+\DoxyCodeLine{165     \textcolor{keywordflow}{return} \mbox{\hyperlink{namespaceargparse_1_1arguments_a81f951d3031af686fd64828c8f2461a6}{default\_value}};}
+\DoxyCodeLine{166 \}}
+\DoxyCodeLine{167 }
+\DoxyCodeLine{168 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ARGPARSE\_UTILITIES\_HPP\_INCLUDED}}
+
+\end{DoxyCode}

@@ -1,0 +1,147 @@
+\hypertarget{namespaceargparse_1_1types}{}\doxysection{argparse\+::types Namespace Reference}
+\label{namespaceargparse_1_1types}\index{argparse::types@{argparse::types}}
+
+
+Aliases for strong types for arguments.  
+
+
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{argument\+\_\+value\+\_\+type}} = std\+::variant$<$ bool, std\+::string, std\+::vector$<$ std\+::string $>$ $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a892875e14bbb8c80984510f5f579aacd}{transform\+\_\+function}} = std\+::function$<$ std\+::any(const \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{argument\+\_\+value\+\_\+type}} \&)$>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{result\+\_\+map}} = std\+::unordered\+\_\+map$<$ std\+::string, std\+::any $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a79afff9c34809873fbb13a0f9b8ea095}{Name}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Name\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a4093a3b8887fc439a90434e20925d4bd}{Help}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Help\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a58dea8bf1bfa19396f64621b2ea6c79c}{Alias}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Alias\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_ab1147a04755a2f49185254397f3c967c}{Destination}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Destination\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_aeb28d30eb4ff6a3932da54a0c41b7645}{Arity}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ int, struct Arity\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_adb08a560dd849029c63898c2df9ee475}{Default\+Value}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::optional$<$ \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{argument\+\_\+value\+\_\+type}} $>$, struct Default\+Value\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a59f06339bc81be4ecac74366949fe7c9}{Choices}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::optional$<$ std\+::vector$<$ std\+::string\+\_\+view $>$ $>$, struct Choices\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a4e8a452b22a1a7138dc9be9493a00157}{Transform}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::optional$<$ \mbox{\hyperlink{namespaceargparse_1_1types_a892875e14bbb8c80984510f5f579aacd}{transform\+\_\+function}} $>$, struct Transform\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a2375df8a14a530e3c32dc3eccba1f2f5}{Required}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ bool, struct Required\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_ac4b2994c935bb89413ec3cc77cc2fde1}{Negated}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ bool, struct Negated\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a876bc791019e38003c47c077004b6b8e}{Description}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Description\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a34a8936564d3304d5f59904c5ac8bac3}{Epilog}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::string\+\_\+view, struct Epilog\+Tag $>$
+\item 
+using \mbox{\hyperlink{namespaceargparse_1_1types_a2bb97537aade681834bc01f3510f655c}{Output\+Stream}} = \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$ std\+::ostream \&, struct Output\+Stream\+Tag $>$
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Aliases for strong types for arguments. 
+
+This namespace defines type aliases for strong types to be used for parameters of the argparse classes\textquotesingle{} constructors. 
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespaceargparse_1_1types_a58dea8bf1bfa19396f64621b2ea6c79c}\label{namespaceargparse_1_1types_a58dea8bf1bfa19396f64621b2ea6c79c}} 
+\index{argparse::types@{argparse::types}!Alias@{Alias}}
+\index{Alias@{Alias}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Alias}{Alias}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a58dea8bf1bfa19396f64621b2ea6c79c}{argparse\+::types\+::\+Alias}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::string\+\_\+view, struct Alias\+Tag$>$}
+
+Type for alias name of the arguments. \mbox{\Hypertarget{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}\label{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}} 
+\index{argparse::types@{argparse::types}!argument\_value\_type@{argument\_value\_type}}
+\index{argument\_value\_type@{argument\_value\_type}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{argument\_value\_type}{argument\_value\_type}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{argparse\+::types\+::argument\+\_\+value\+\_\+type}} = typedef std\+::variant$<$bool, std\+::string, std\+::vector$<$std\+::string$>$ $>$}
+
+General type for untransformed argument values. \mbox{\Hypertarget{namespaceargparse_1_1types_aeb28d30eb4ff6a3932da54a0c41b7645}\label{namespaceargparse_1_1types_aeb28d30eb4ff6a3932da54a0c41b7645}} 
+\index{argparse::types@{argparse::types}!Arity@{Arity}}
+\index{Arity@{Arity}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Arity}{Arity}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_aeb28d30eb4ff6a3932da54a0c41b7645}{argparse\+::types\+::\+Arity}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$int, struct Arity\+Tag$>$}
+
+Type for arity of the argument (numeric value). \mbox{\Hypertarget{namespaceargparse_1_1types_a59f06339bc81be4ecac74366949fe7c9}\label{namespaceargparse_1_1types_a59f06339bc81be4ecac74366949fe7c9}} 
+\index{argparse::types@{argparse::types}!Choices@{Choices}}
+\index{Choices@{Choices}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Choices}{Choices}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a59f06339bc81be4ecac74366949fe7c9}{argparse\+::types\+::\+Choices}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::optional$<$std\+::vector$<$std\+::string\+\_\+view$>$ $>$, struct Choices\+Tag$>$}
+
+Type for possible choices for the argument. \mbox{\Hypertarget{namespaceargparse_1_1types_adb08a560dd849029c63898c2df9ee475}\label{namespaceargparse_1_1types_adb08a560dd849029c63898c2df9ee475}} 
+\index{argparse::types@{argparse::types}!DefaultValue@{DefaultValue}}
+\index{DefaultValue@{DefaultValue}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{DefaultValue}{DefaultValue}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_adb08a560dd849029c63898c2df9ee475}{argparse\+::types\+::\+Default\+Value}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::optional$<$\mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{argument\+\_\+value\+\_\+type}}$>$, struct Default\+Value\+Tag$>$}
+
+Type for default value of the argument (either a bool, string or vector). \mbox{\Hypertarget{namespaceargparse_1_1types_a876bc791019e38003c47c077004b6b8e}\label{namespaceargparse_1_1types_a876bc791019e38003c47c077004b6b8e}} 
+\index{argparse::types@{argparse::types}!Description@{Description}}
+\index{Description@{Description}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Description}{Description}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a876bc791019e38003c47c077004b6b8e}{argparse\+::types\+::\+Description}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::string\+\_\+view, struct Description\+Tag$>$}
+
+Type for description of the parser/program. \mbox{\Hypertarget{namespaceargparse_1_1types_ab1147a04755a2f49185254397f3c967c}\label{namespaceargparse_1_1types_ab1147a04755a2f49185254397f3c967c}} 
+\index{argparse::types@{argparse::types}!Destination@{Destination}}
+\index{Destination@{Destination}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Destination}{Destination}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_ab1147a04755a2f49185254397f3c967c}{argparse\+::types\+::\+Destination}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::string\+\_\+view, struct Destination\+Tag$>$}
+
+Type for destination name for the argument. \mbox{\Hypertarget{namespaceargparse_1_1types_a34a8936564d3304d5f59904c5ac8bac3}\label{namespaceargparse_1_1types_a34a8936564d3304d5f59904c5ac8bac3}} 
+\index{argparse::types@{argparse::types}!Epilog@{Epilog}}
+\index{Epilog@{Epilog}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Epilog}{Epilog}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a34a8936564d3304d5f59904c5ac8bac3}{argparse\+::types\+::\+Epilog}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::string\+\_\+view, struct Epilog\+Tag$>$}
+
+Type for epilog description of the parser/program. \mbox{\Hypertarget{namespaceargparse_1_1types_a4093a3b8887fc439a90434e20925d4bd}\label{namespaceargparse_1_1types_a4093a3b8887fc439a90434e20925d4bd}} 
+\index{argparse::types@{argparse::types}!Help@{Help}}
+\index{Help@{Help}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Help}{Help}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a4093a3b8887fc439a90434e20925d4bd}{argparse\+::types\+::\+Help}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::string\+\_\+view, struct Help\+Tag$>$}
+
+Type for help description of the arguments. \mbox{\Hypertarget{namespaceargparse_1_1types_a79afff9c34809873fbb13a0f9b8ea095}\label{namespaceargparse_1_1types_a79afff9c34809873fbb13a0f9b8ea095}} 
+\index{argparse::types@{argparse::types}!Name@{Name}}
+\index{Name@{Name}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Name}{Name}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a79afff9c34809873fbb13a0f9b8ea095}{argparse\+::types\+::\+Name}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::string\+\_\+view, struct Name\+Tag$>$}
+
+Type for name of the program and argument. \mbox{\Hypertarget{namespaceargparse_1_1types_ac4b2994c935bb89413ec3cc77cc2fde1}\label{namespaceargparse_1_1types_ac4b2994c935bb89413ec3cc77cc2fde1}} 
+\index{argparse::types@{argparse::types}!Negated@{Negated}}
+\index{Negated@{Negated}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Negated}{Negated}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_ac4b2994c935bb89413ec3cc77cc2fde1}{argparse\+::types\+::\+Negated}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$bool, struct Negated\+Tag$>$}
+
+Type for the negated status for the argument. \mbox{\Hypertarget{namespaceargparse_1_1types_a2bb97537aade681834bc01f3510f655c}\label{namespaceargparse_1_1types_a2bb97537aade681834bc01f3510f655c}} 
+\index{argparse::types@{argparse::types}!OutputStream@{OutputStream}}
+\index{OutputStream@{OutputStream}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{OutputStream}{OutputStream}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a2bb97537aade681834bc01f3510f655c}{argparse\+::types\+::\+Output\+Stream}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::ostream\&, struct Output\+Stream\+Tag$>$}
+
+Type for output stream of the parser/program. \mbox{\Hypertarget{namespaceargparse_1_1types_a2375df8a14a530e3c32dc3eccba1f2f5}\label{namespaceargparse_1_1types_a2375df8a14a530e3c32dc3eccba1f2f5}} 
+\index{argparse::types@{argparse::types}!Required@{Required}}
+\index{Required@{Required}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Required}{Required}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a2375df8a14a530e3c32dc3eccba1f2f5}{argparse\+::types\+::\+Required}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$bool, struct Required\+Tag$>$}
+
+Type for the required status for the argument. \mbox{\Hypertarget{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}\label{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}} 
+\index{argparse::types@{argparse::types}!result\_map@{result\_map}}
+\index{result\_map@{result\_map}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{result\_map}{result\_map}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{argparse\+::types\+::result\+\_\+map}} = typedef std\+::unordered\+\_\+map$<$std\+::string, std\+::any$>$}
+
+Type of the map holding the parsed argument values. \mbox{\Hypertarget{namespaceargparse_1_1types_a4e8a452b22a1a7138dc9be9493a00157}\label{namespaceargparse_1_1types_a4e8a452b22a1a7138dc9be9493a00157}} 
+\index{argparse::types@{argparse::types}!Transform@{Transform}}
+\index{Transform@{Transform}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{Transform}{Transform}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a4e8a452b22a1a7138dc9be9493a00157}{argparse\+::types\+::\+Transform}} = typedef \mbox{\hyperlink{class_named_type}{Named\+Type}}$<$std\+::optional$<$\mbox{\hyperlink{namespaceargparse_1_1types_a892875e14bbb8c80984510f5f579aacd}{transform\+\_\+function}}$>$, struct Transform\+Tag$>$}
+
+Type for transformation function for the argument. \mbox{\Hypertarget{namespaceargparse_1_1types_a892875e14bbb8c80984510f5f579aacd}\label{namespaceargparse_1_1types_a892875e14bbb8c80984510f5f579aacd}} 
+\index{argparse::types@{argparse::types}!transform\_function@{transform\_function}}
+\index{transform\_function@{transform\_function}!argparse::types@{argparse::types}}
+\doxysubsubsection{\texorpdfstring{transform\_function}{transform\_function}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespaceargparse_1_1types_a892875e14bbb8c80984510f5f579aacd}{argparse\+::types\+::transform\+\_\+function}} = typedef std\+::function$<$std\+::any(const \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{argument\+\_\+value\+\_\+type}}\&)$>$}
+
+General type for the argument value transformation functions. 

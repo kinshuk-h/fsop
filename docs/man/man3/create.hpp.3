@@ -1,0 +1,98 @@
+.TH "include/fsop/create.hpp" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/fsop/create.hpp \- Defines functions for abstracting system calls for creating files and pipes\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <string_view>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBfsop::create_file\fP (std::string_view path, mode_t permissions, bool overwrite=false)"
+.br
+.RI "Creates a new regular file in the filesystem\&. "
+.ti -1c
+.RI "void \fBfsop::create_pipe\fP (std::string_view path, mode_t permissions, bool overwrite=false)"
+.br
+.RI "Creates a new named pipe (FIFO file) in the filesystem\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines functions for abstracting system calls for creating files and pipes\&. 
+
+
+.PP
+\fBAuthor\fP
+.RS 4
+Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19) 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+1\&.0 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2022-05-28
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2022 
+.RE
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "void fsop::create_file (std::string_view path, mode_t permissions, bool overwrite = \fCfalse\fP)"
+
+.PP
+Creates a new regular file in the filesystem\&. For successful operation, ensure that the file does not previously exist, all directories along the path exist, there is ample resources for inode and/or disk block allocation and appropriate permissions along all directory components of the path are available\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path at which the file must be created\&. 
+.br
+\fIpermissions\fP The permissions to associate with the file\&. 
+.br
+\fIoverwrite\fP If true, recreates the file, effectively truncating previous content\&.
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{std::system_error}\fP reason for failure of operation\&. 
+.RE
+.PP
+
+.SS "void fsop::create_pipe (std::string_view path, mode_t permissions, bool overwrite = \fCfalse\fP)"
+
+.PP
+Creates a new named pipe (FIFO file) in the filesystem\&. For successful operation, ensure that the file does not previously exist, all directories along the path exist, there is ample resources for inode and/or disk block allocation and appropriate permissions along all directory components of the path are available\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path at which the file must be created\&. 
+.br
+\fIpermissions\fP The permissions to associate with the file\&. 
+.br
+\fIoverwrite\fP If true, recreates the file, effectively truncating previous content\&.
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{std::system_error}\fP reason for failure of operation\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

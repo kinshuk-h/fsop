@@ -1,0 +1,131 @@
+.TH "fsop_cli" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+fsop_cli \- Defines functions performing operations offered by the CLI application\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBcreate\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the create subcommand for the CLI application\&. "
+.ti -1c
+.RI "int \fBpipe_io\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the pipe_io subcommand for the CLI application (redirected to internally by read and write)\&. "
+.ti -1c
+.RI "int \fBread\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the read subcommand for the CLI application\&. "
+.ti -1c
+.RI "int \fBwrite\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the write subcommand for the CLI application\&. "
+.ti -1c
+.RI "int \fBinspect\fP (const \fBargparse::types::result_map\fP &args, std::string_view program_name='program')"
+.br
+.RI "Implements the inspect subcommand for the CLI application\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines functions performing operations offered by the CLI application\&. 
+.SH "Function Documentation"
+.PP 
+.SS "int fsop_cli::create (const \fBargparse::types::result_map\fP & args, std::string_view program_name = \fC'program'\fP)"
+
+.PP
+Implements the create subcommand for the CLI application\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargs\fP Parsed map of arguments\&. 
+.br
+\fIprogram_name\fP Name of the CLI program\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{int} Exit code for the program\&. 
+.RE
+.PP
+
+.SS "int fsop_cli::inspect (const \fBargparse::types::result_map\fP & args, std::string_view program_name = \fC'program'\fP)"
+
+.PP
+Implements the inspect subcommand for the CLI application\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargs\fP Parsed map of arguments\&. 
+.br
+\fIprogram_name\fP Name of the CLI program\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{int} Exit code for the program\&. 
+.RE
+.PP
+
+.SS "int fsop_cli::pipe_io (const \fBargparse::types::result_map\fP & args, std::string_view program_name = \fC'program'\fP)"
+
+.PP
+Implements the pipe_io subcommand for the CLI application (redirected to internally by read and write)\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargs\fP Parsed map of arguments\&. 
+.br
+\fIprogram_name\fP Name of the CLI program\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{int} Exit code for the program\&. 
+.RE
+.PP
+
+.SS "int fsop_cli::read (const \fBargparse::types::result_map\fP & args, std::string_view program_name = \fC'program'\fP)"
+
+.PP
+Implements the read subcommand for the CLI application\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargs\fP Parsed map of arguments\&. 
+.br
+\fIprogram_name\fP Name of the CLI program\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{int} Exit code for the program\&. 
+.RE
+.PP
+
+.SS "int fsop_cli::write (const \fBargparse::types::result_map\fP & args, std::string_view program_name = \fC'program'\fP)"
+
+.PP
+Implements the write subcommand for the CLI application\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIargs\fP Parsed map of arguments\&. 
+.br
+\fIprogram_name\fP Name of the CLI program\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{int} Exit code for the program\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

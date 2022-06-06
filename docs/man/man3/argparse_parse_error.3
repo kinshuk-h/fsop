@@ -1,0 +1,75 @@
+.TH "argparse::parse_error" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+argparse::parse_error \- Exception subtype to convey parse errors\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <common\&.hpp>\fP
+.PP
+Inherits std::exception\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBparse_error\fP (std::string_view message, std::string_view usage)"
+.br
+.RI "Construct a new parse error object\&. "
+.ti -1c
+.RI "const std::string & \fBparser_usage\fP () const noexcept"
+.br
+.RI "Returns the parser usage associated with the parser which raised the error\&. "
+.ti -1c
+.RI "virtual const char * \fBwhat\fP () const noexcept override"
+.br
+.RI "Explains the reason for failure\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Exception subtype to convey parse errors\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "argparse::parse_error::parse_error (std::string_view message, std::string_view usage)\fC [inline]\fP"
+
+.PP
+Construct a new parse error object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImessage\fP Message explaining the reason of failure\&. 
+.br
+\fIusage\fP Usage string from the parser\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "const std::string & argparse::parse_error::parser_usage () const\fC [inline]\fP, \fC [noexcept]\fP"
+
+.PP
+Returns the parser usage associated with the parser which raised the error\&. 
+.PP
+\fBReturns\fP
+.RS 4
+const std::string& String describing the usage\&. 
+.RE
+.PP
+
+.SS "virtual const char * argparse::parse_error::what () const\fC [inline]\fP, \fC [override]\fP, \fC [virtual]\fP, \fC [noexcept]\fP"
+
+.PP
+Explains the reason for failure\&. 
+.PP
+\fBReturns\fP
+.RS 4
+const char* The reason fo failure\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

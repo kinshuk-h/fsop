@@ -1,0 +1,65 @@
+\hypertarget{positional_8hpp_source}{}\doxysection{positional.\+hpp}
+\label{positional_8hpp_source}\index{include/argparse/arguments/positional.hpp@{include/argparse/arguments/positional.hpp}}
+\mbox{\hyperlink{positional_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef ARGPARSE\_POSITIONAL\_HPP\_INCLUDED}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define ARGPARSE\_POSITIONAL\_HPP\_INCLUDED}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{argument_8hpp}{argparse/arguments/argument.hpp}}"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{namespace }\mbox{\hyperlink{namespaceargparse}{argparse}}}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{23     \textcolor{keyword}{struct }\mbox{\hyperlink{structargparse_1_1_positional}{Positional}} : \textcolor{keyword}{public} \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}}
+\DoxyCodeLine{24     \{}
+\DoxyCodeLine{48         \textcolor{keyword}{template}<}
+\DoxyCodeLine{49             \textcolor{keyword}{typename} NameType = std::nullptr\_t,}
+\DoxyCodeLine{50             \textcolor{keyword}{typename} AliasType = std::nullptr\_t,}
+\DoxyCodeLine{51             \textcolor{keyword}{typename} DestinationType = std::nullptr\_t,}
+\DoxyCodeLine{52             \textcolor{keyword}{typename} DefaultValueType = std::nullptr\_t,}
+\DoxyCodeLine{53             \textcolor{keyword}{typename} DescriptionType = std::nullptr\_t,}
+\DoxyCodeLine{54             \textcolor{keyword}{typename} ArityType = std::nullptr\_t,}
+\DoxyCodeLine{55             \textcolor{keyword}{typename} ChoicesType = std::nullptr\_t,}
+\DoxyCodeLine{56             \textcolor{keyword}{typename} TransformType = std::nullptr\_t,}
+\DoxyCodeLine{57             \textcolor{keyword}{typename} RequiredType = std::nullptr\_t}
+\DoxyCodeLine{58         >}
+\DoxyCodeLine{59         \mbox{\hyperlink{structargparse_1_1_positional_ad10f45f1d2f962eb40b9d6e04b112491}{Positional}}(}
+\DoxyCodeLine{60             NameType \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{61             AliasType \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{62             DestinationType \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{63             DefaultValueType defaults = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{64             DescriptionType \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{65             ArityType \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{66             ChoicesType \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{67             TransformType \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{68             RequiredType \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}} = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{69         )}
+\DoxyCodeLine{70         : \mbox{\hyperlink{namespaceargparse}{argparse}}::\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}(}
+\DoxyCodeLine{71             \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}},}
+\DoxyCodeLine{72             \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}, \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}}
+\DoxyCodeLine{73         )}
+\DoxyCodeLine{74         \{}
+\DoxyCodeLine{75             \mbox{\hyperlink{structargparse_1_1_argument_a7999e2b65a8db4149ca4818a08ada1a1}{\_positional}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{76             this-\/>\mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}} ( pick\_if<types::Required>(}
+\DoxyCodeLine{77                 \mbox{\hyperlink{class_named_type}{types::Required}}(\textcolor{keyword}{true}),}
+\DoxyCodeLine{78                 \mbox{\hyperlink{structargparse_1_1_argument_af369b8ef7d6c426ab8576650a94a2446}{name}}, \mbox{\hyperlink{structargparse_1_1_argument_a68bc3af2276e0770b5ccb2f40b3202a5}{alias}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, defaults, \mbox{\hyperlink{structargparse_1_1_argument_acc37797af7c6c44f6c05bd2d9e0df6fa}{help}},}
+\DoxyCodeLine{79                 \mbox{\hyperlink{structargparse_1_1_argument_a82e02fec0d32f5338987999502da1534}{arity}}, \mbox{\hyperlink{structargparse_1_1_argument_a3cb9f655e8e08213da7fd6c184da6d41}{choices}}, \mbox{\hyperlink{structargparse_1_1_argument_ab27d0634826134f5183a439aa52dfc94}{transform}}, \mbox{\hyperlink{structargparse_1_1_argument_af1d665bcf0095156eb7a7f969e1d0d82}{required}}}
+\DoxyCodeLine{80             ).get() );}
+\DoxyCodeLine{81         \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83         std::string \mbox{\hyperlink{structargparse_1_1_positional_ae5864240613752148966c9c9bf9bb262}{usage}}() const noexcept override;}
+\DoxyCodeLine{84         std::\textcolor{keywordtype}{string} \mbox{\hyperlink{structargparse_1_1_positional_abfabaf32ce199803b0d9f614160c0e0e}{descriptor}}(\textcolor{keywordtype}{unsigned} tty\_columns = 60) const noexcept override;}
+\DoxyCodeLine{88         std::unique\_ptr<\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}> \mbox{\hyperlink{structargparse_1_1_positional_a307489f777a2986e84e6f44c1b90a989}{clone}}()\textcolor{keyword}{ const override}}
+\DoxyCodeLine{89 \textcolor{keyword}{        }\{}
+\DoxyCodeLine{90             \textcolor{keywordflow}{return} std::make\_unique<Positional>(*\textcolor{keyword}{this});}
+\DoxyCodeLine{91         \}}
+\DoxyCodeLine{92         range::iterator \mbox{\hyperlink{structargparse_1_1_positional_ac1c4eab0669b9b23f40c3c4e07d2cabf}{parse\_args}}(}
+\DoxyCodeLine{93             range::iterator begin, range::iterator end,}
+\DoxyCodeLine{94             \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}}\& values}
+\DoxyCodeLine{95         ) \textcolor{keyword}{const override};}
+\DoxyCodeLine{96     \};}
+\DoxyCodeLine{97 \}}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ARGPARSE\_POSITIONAL\_HPP\_INCLUDED}}
+
+\end{DoxyCode}

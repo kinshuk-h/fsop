@@ -1,0 +1,94 @@
+.TH "argparse::utils" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+argparse::utils \- Utility functions for use across the module\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "template<typename Range > std::string \fBjoin\fP (const Range &range, std::string_view glue=' ')"
+.br
+.RI "Joins elements of a collection together to a single range\&. "
+.ti -1c
+.RI "template<typename Range , typename TransformFunction > std::string \fBjoin\fP (const Range &range, std::string_view glue, TransformFunction \fBtransform\fP)"
+.br
+.RI "Joins elements of a collection together to a single range\&. "
+.ti -1c
+.RI "bool \fBis_numeric\fP (std::string_view value)"
+.br
+.RI "Checks if a given string encapsulates a numeric integral value\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Utility functions for use across the module\&. 
+.SH "Function Documentation"
+.PP 
+.SS "bool argparse::utils::is_numeric (std::string_view value)\fC [inline]\fP"
+
+.PP
+Checks if a given string encapsulates a numeric integral value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP The string to check\&. 
+.RE
+.PP
+
+.SS "template<typename Range , typename TransformFunction > std::string argparse::utils::join (const Range & range, std::string_view glue, TransformFunction transform)"
+
+.PP
+Joins elements of a collection together to a single range\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIRange\fP Type of the range\&. Must provide access to begin and end iterators\&. 
+.br
+\fITransformFunction\fP Transformation function for mapping range elements\&.
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIrange\fP The range/collection of elements to join\&. Elements must be writable to streams (provide and overload for operator<<) 
+.br
+\fIglue\fP The string to use to join the content\&. 
+.br
+\fItransform\fP Unary operation to apply over elements prior to join\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{std::string} The concatenated string\&. 
+.RE
+.PP
+
+.SS "template<typename Range > std::string argparse::utils::join (const Range & range, std::string_view glue = \fC' '\fP)"
+
+.PP
+Joins elements of a collection together to a single range\&. 
+.PP
+\fBTemplate Parameters\fP
+.RS 4
+\fIRange\fP Type of the range\&. Must provide access to begin and end iterators\&. 
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIrange\fP The range/collection of elements to join\&. Elements must be writable to streams (provide and overload for operator<<) 
+.br
+\fIglue\fP The string to use to join the content\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{std::string} The concatenated string\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

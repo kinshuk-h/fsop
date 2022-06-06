@@ -1,0 +1,83 @@
+\hypertarget{namespaceargparse}{}\doxysection{argparse Namespace Reference}
+\label{namespaceargparse}\index{argparse@{argparse}}
+
+
+Exposes components for parsing command-\/line arguments.  
+
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1arguments}{arguments}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{structargparse_1_1_argument}{Argument}} variables for use as named arguments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults}{defaults}}
+\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1transforms}{transforms}}
+\begin{DoxyCompactList}\small\item\em Transformation functions for common types. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1types}{types}}
+\begin{DoxyCompactList}\small\item\em Aliases for strong types for arguments. \end{DoxyCompactList}\item 
+namespace \mbox{\hyperlink{namespaceargparse_1_1utils}{utils}}
+\begin{DoxyCompactList}\small\item\em Utility functions for use across the module. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structargparse_1_1_argument}{Argument}}
+\begin{DoxyCompactList}\small\item\em Represents a base type to store argument description and parsing information. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structargparse_1_1_optional}{Optional}}
+\begin{DoxyCompactList}\small\item\em Represents an optional argument, which can have arbitrary arity and is specified with a flag. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structargparse_1_1parse__error}{parse\+\_\+error}}
+\begin{DoxyCompactList}\small\item\em Exception subtype to convey parse errors. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}
+\begin{DoxyCompactList}\small\item\em Represents an argument parser, which can parse argument values from arbitrary ranges using provided argument objects describing parsing information. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structargparse_1_1_positional}{Positional}}
+\begin{DoxyCompactList}\small\item\em Represents a positional argument, which must be specified in the exact position it is declared in. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classargparse_1_1_subparser_set}{Subparser\+Set}}
+\begin{DoxyCompactList}\small\item\em Creates an argument type to hold subparsers as a mutually exclusive group. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structargparse_1_1_switch}{Switch}}
+\begin{DoxyCompactList}\small\item\em Represents a switch/flag argument, which has no arity and is used to store a boolean or a constant upon presence or absence. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Integral , typename  = std\+::enable\+\_\+if\+\_\+t$<$std\+::is\+\_\+integral\+\_\+v$<$\+Integral$>$, std\+::nullptr\+\_\+t$>$$>$ }\\std\+::vector$<$ Integral $>$ \mbox{\hyperlink{namespaceargparse_1_1transforms_a8d1939740f039bc7af67feb17e373590}{to\+\_\+integral}} (const \mbox{\hyperlink{namespaceargparse_1_1types_aec5776f54e5fc1f068bde90758648ef8}{types\+::argument\+\_\+value\+\_\+type}} \&value)
+\begin{DoxyCompactList}\small\item\em Maps the variant value to an integral type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Range $>$ }\\std\+::string \mbox{\hyperlink{namespaceargparse_1_1utils_a6423049ee04bc49b72bd41fa2ba3d976}{join}} (const Range \&range, std\+::string\+\_\+view glue=\char`\"{} \char`\"{})
+\begin{DoxyCompactList}\small\item\em Joins elements of a collection together to a single range. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Range , typename Transform\+Function $>$ }\\std\+::string \mbox{\hyperlink{namespaceargparse_1_1utils_ae30113d42b3f62ef6b9e8e199da759d3}{join}} (const Range \&range, std\+::string\+\_\+view glue, Transform\+Function \mbox{\hyperlink{namespaceargparse_1_1arguments_a765fc1cfec0cdcb9cdb5f9ce69ecfc3e}{transform}})
+\begin{DoxyCompactList}\small\item\em Joins elements of a collection together to a single range. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceargparse_1_1utils_a162e82e2b353157512b891a78a4dd5fb}{is\+\_\+numeric}} (std\+::string\+\_\+view value)
+\begin{DoxyCompactList}\small\item\em Checks if a given string encapsulates a numeric integral value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Name\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a1475e47d220b4a783be691910a33203e}{name}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Help\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a3be1cc16d8b11efc04c0acf360e149eb}{help}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Alias\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a9109a2575f351c5b7101b0b1861fb20b}{alias}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Destination\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Default\+Value\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a81f951d3031af686fd64828c8f2461a6}{default\+\_\+value}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Arity\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a5247c21b54d4f570986f2588021b9a80}{arity}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Choices\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_aa95f3c769ba1f0bfa965dff22055ecd8}{choices}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Transform\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a765fc1cfec0cdcb9cdb5f9ce69ecfc3e}{transform}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Required\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a7e0a7175547e76e148a33104e53852b9}{required}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Negated\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_af06ab33095e2b84e1dbec367bd9deddd}{negated}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Description\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a8c46810bbdb6b399f602f6a40113e98d}{description}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Epilog\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a1b7cfe3821e729dc5a0c34b4897e04c7}{epilog}}
+\item 
+\mbox{\hyperlink{struct_named_type_1_1_argument}{types\+::\+Output\+Stream\+::\+Argument}} \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\+\_\+stream}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Exposes components for parsing command-\/line arguments. 
+
+This namespace exposes classes for the parser and arguments and their subtypes. Further it provides constants for emulating named arguments across the constructors of the respective classes. 

@@ -1,0 +1,267 @@
+.TH "fsop::File" 3 "Mon Jun 6 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+fsop::File \- Defines a structure for abstracting I/O operations via system calls\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <file\&.hpp>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBFile\fP (int descriptor)"
+.br
+.RI "Construct a new \fBFile\fP object\&. "
+.ti -1c
+.RI "\fBFile\fP (int descriptor, struct stat64 inode_info)"
+.br
+.RI "Construct a new \fBFile\fP object\&. "
+.ti -1c
+.RI "\fBFile\fP (const \fBFile\fP &file_ref)"
+.br
+.RI "Construct a new \fBFile\fP object\&. "
+.ti -1c
+.RI "\fBFile\fP (\fBFile\fP &&tmp_file)"
+.br
+.RI "Construct a new \fBFile\fP object\&. "
+.ti -1c
+.RI "\fB~File\fP ()"
+.br
+.RI "Destroy the \fBFile\fP object, after closing the associated file descriptor\&. "
+.ti -1c
+.RI "\fBFile\fP & \fBoperator=\fP (const \fBFile\fP &file_ref)"
+.br
+.RI "Copy assignment: Copies (dupes) the file object's descriptor to the current object\&. "
+.ti -1c
+.RI "\fBFile\fP & \fBoperator=\fP (\fBFile\fP &&tmp_file)"
+.br
+.RI "Move assignment: Moves the file descriptor, effectively transferring ownership\&. "
+.ti -1c
+.RI "std::string \fBread\fP (size_t nbytes=\fBbytes_till_end\fP, off64_t offset=0, int whence=SEEK_CUR)"
+.br
+.RI "Reads data as a sequence of characters from the file referenced by the object\&. Bytes are read as-is, so some bytes may not be valid printable characters, depending on the nature of the file content\&. "
+.ti -1c
+.RI "size_t \fBwrite\fP (std::string_view data, off64_t offset=0, int whence=SEEK_CUR)"
+.br
+.RI "Writes byte data to the file referenced by the object, optionally at the specified offset location\&. "
+.ti -1c
+.RI "void \fBclose\fP () noexcept"
+.br
+.RI "Closes the file referenced by the internal descriptor, thereby moving it to an invalid state for future read and write operations\&. "
+.ti -1c
+.RI "struct stat64 \fBstat\fP ()"
+.br
+.RI "Returns information about the file as available in the file's inode\&. Internally calls fstat and caches the result\&. "
+.ti -1c
+.RI "void \fBinvalidate_cache\fP ()"
+.br
+.RI "Invalidates the cached file information, forcing a stat call\&. "
+.ti -1c
+.RI "\fBoperator bool\fP ()"
+.br
+.in -1c
+.SS "Static Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "static \fBFile\fP \fBopen_file\fP (std::string_view path, int open_options=O_RDONLY)"
+.br
+.RI "Opens a file for performing I/O\&. "
+.ti -1c
+.RI "static std::pair< \fBFile\fP, \fBFile\fP > \fBcreate_unnamed_pipe\fP ()"
+.br
+.RI "Creates a temporary, process-specific, unnamed pipe for performing I/O\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "static constexpr int \fBinvalid_descriptor\fP = \-1"
+.br
+.ti -1c
+.RI "static constexpr size_t \fBbytes_till_end\fP = \-1ULL"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Defines a structure for abstracting I/O operations via system calls\&. 
+
+\fBFile\fP objects work over a file descriptor referencing a global file table entry maintaining I/O mode and offset\&. They follow the RAII idiom and perform auto-closing of the file table entry when the corresponding object runs out of scope\&. Descriptor ownership can however be transferred to other objects through move construction or move assignment\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "fsop::File::File (int descriptor)\fC [inline]\fP"
+
+.PP
+Construct a new \fBFile\fP object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdescriptor\fP \fBFile\fP descriptor to maintain to refer a global file table entry corresponding to an open file\&. 
+.RE
+.PP
+
+.SS "fsop::File::File (int descriptor, struct stat64 inode_info)\fC [inline]\fP"
+
+.PP
+Construct a new \fBFile\fP object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdescriptor\fP \fBFile\fP descriptor to maintain to refer a global file table entry corresponding to an open file\&. 
+.br
+\fIinode_info\fP \fBFile\fP data as available from a call to stat\&. 
+.RE
+.PP
+
+.SS "fsop::File::File (const \fBFile\fP & file_ref)"
+
+.PP
+Construct a new \fBFile\fP object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfile_ref\fP \fBFile\fP object reference maintaining a file descriptor\&. The descriptor is duped to increase the effective reference count of the global file table entry\&. 
+.RE
+.PP
+
+.SS "fsop::File::File (\fBFile\fP && tmp_file)\fC [inline]\fP"
+
+.PP
+Construct a new \fBFile\fP object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItmp_file\fP Temporary file object holding an active file descriptor\&. State is transferred to the current object without affecting reference counts of the file table entry\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "std::pair< \fBfsop::File\fP, \fBfsop::File\fP > fsop::File::create_unnamed_pipe ()\fC [static]\fP"
+
+.PP
+Creates a temporary, process-specific, unnamed pipe for performing I/O\&. Unnamed pipes allow for sequential streaming of data in a first-in, first-out manner, from a writer to a reader\&. This is useful for communication between processes\&.
+.PP
+\fBReturns\fP
+.RS 4
+{std::pair<File, File>} Pair of \fBFile\fP instances corresponding to the reader and writer respectively\&. 
+.RE
+.PP
+
+.SS "\fBfsop::File\fP fsop::File::open_file (std::string_view path, int open_options = \fCO_RDONLY\fP)\fC [static]\fP"
+
+.PP
+Opens a file for performing I/O\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP Path to the file to open\&. 
+.br
+\fIopen_options\fP Options to specify how to open the file\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBFile\fP} The reference to the file descriptor, wrapped in an auto-closeable \fBFile\fP object\&. 
+.RE
+.PP
+
+.SS "fsop::File::operator bool ()\fC [inline]\fP"
+Implicit casting operator: determines truthness based on the descriptor\&. 
+.SS "\fBfsop::File\fP & fsop::File::operator= (const \fBFile\fP & file_ref)"
+
+.PP
+Copy assignment: Copies (dupes) the file object's descriptor to the current object\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIfile_ref\fP \fBFile\fP object reference maintaining a file descriptor\&. The descriptor is duped to increase the effective reference count of the global file table entry\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBFile\fP&} Reference to the current object, for chaining operations\&. 
+.RE
+.PP
+
+.SS "\fBfsop::File\fP & fsop::File::operator= (\fBFile\fP && tmp_file)"
+
+.PP
+Move assignment: Moves the file descriptor, effectively transferring ownership\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fItmp_file\fP Temporary file object holding an active file descriptor\&. State is transferred to the current object without affecting reference counts of the file table entry\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{\fBFile\fP&} Reference to the current object, for chaining operations\&. 
+.RE
+.PP
+
+.SS "std::string fsop::File::read (size_t nbytes = \fC\fBbytes_till_end\fP\fP, off64_t offset = \fC0\fP, int whence = \fCSEEK_CUR\fP)"
+
+.PP
+Reads data as a sequence of characters from the file referenced by the object\&. Bytes are read as-is, so some bytes may not be valid printable characters, depending on the nature of the file content\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInbytes\fP Number of bytes to read, defaulting to the index of the last byte of the file\&. 
+.br
+\fIoffset\fP Byte offset to begin reading content from (default=0)\&. 
+.br
+\fIwhence\fP Offset base for movement reference along the file, can be one of SEEK_SET, SEEK_CUR or SEEK_END (default=SEEK_CUR)\&.
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{std::string} A string containing the read content\&. 
+.RE
+.PP
+
+.SS "struct stat64 fsop::File::stat ()"
+
+.PP
+Returns information about the file as available in the file's inode\&. Internally calls fstat and caches the result\&. 
+.PP
+\fBReturns\fP
+.RS 4
+{struct stat64} Object describing the file information, possibly cached\&. 
+.RE
+.PP
+
+.SS "size_t fsop::File::write (std::string_view data, off64_t offset = \fC0\fP, int whence = \fCSEEK_CUR\fP)"
+
+.PP
+Writes byte data to the file referenced by the object, optionally at the specified offset location\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP Data to write, can be a std::string or a c-string (any type convertible to std::string_view)\&. 
+.br
+\fIoffset\fP Byte offset to begin writing content to (default=0)\&. 
+.br
+\fIwhence\fP Offset base for movement reference along the file, can be one of SEEK_SET, SEEK_CUR or SEEK_END (default=SEEK_CUR)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{size_t} Number of bytes actually written to the file\&. 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "constexpr size_t fsop::File::bytes_till_end = \-1ULL\fC [inline]\fP, \fC [static]\fP, \fC [constexpr]\fP"
+Constant to specify infinite byte count (read until end of file) 
+.SS "constexpr int fsop::File::invalid_descriptor = \-1\fC [inline]\fP, \fC [static]\fP, \fC [constexpr]\fP"
+Constant to represent an invalid file descriptor\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.
