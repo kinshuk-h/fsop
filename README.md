@@ -32,7 +32,14 @@
 ```bash
     ./fsop.out read myfile.txt
 ```
-- 
+- Write input provided on STDIN to offset 40 from the beginning to the file `myfile.txt` (provided file exists):
+```bash
+    ./fsop.out write myfile.txt --offset 40 --offset-base SET
+```
+- Inspect all files under the folder `/dev`:
+```bash
+    ./fsop.out inspect /dev/*
+```
 
 ## System Call Usage
 
