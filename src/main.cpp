@@ -26,6 +26,10 @@ int main(int argc, const char** argv)
         description = (
             "demonstrate filesystem operations "
             "by using various system calls"
+        ),
+        epilog = (
+            "to view information about how to use "
+            "actions, use <action> --help"
         )
     };
 

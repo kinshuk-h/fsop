@@ -1,6 +1,9 @@
+// TODO: Add docs, reduce use of cin and cout
+
 #include "fsop_cli.hpp"         // Base header containing function declaration for 'write'
 
 #include <iostream>             // std::cout, std::cerr
+#include <iterator>             // std::istreambuf_iterator
 #include <algorithm>            // std::max
 
 #include <signal.h>             // signal, SIG* constants
@@ -107,7 +110,12 @@ int fsop_cli::write(const argparse::types::result_map& args, std::string_view pr
 
                     std::string content;
                     if (lbuf) getline(std::cin, content);
-                    else getline(std::cin, content, {});
+                    else
+                        content.append
+                        (
+                            std::istreambuf_iterator<char>(std::cin),
+                            std::istreambuf_iterator<char>()
+                        );
 
                     try
                     {
