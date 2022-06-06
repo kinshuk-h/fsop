@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.4"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>fsop - FileSystem OPerations: Main Page</title>
+<title>fsop - FileSystem OPerations: # fsop - FileSystem OPerations</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,10 +62,89 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">fsop - FileSystem OPerations Documentation</div></div>
+<div><div class="header">
+  <div class="headertitle"><div class="title"># fsop - FileSystem OPerations </div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><p ><a class="anchor" id="md_README"></a></p>
+<p ><code>fsop</code> is a command-line utility program for demonstrating various system calls for files in action. <code>fsop</code> allows the user to create, read, write and inspect regular, unnamed and named pipes in their target platform's filesystem.</p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Execution &amp; Usage</h1>
+<ul>
+<li>For execution, ensure that either the executable provided alongside the copy of the program (see notes) or one built manually for your target architecture (see building) is available.</li>
+<li>### Usage <div class="fragment"><div class="line">./fsop.out [-d DIRECTORY] [-q] [-h] {create,read,write,inspect} ...</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">./fsop.out create [-h] [-p PERMS] [-t {pipe,regular}] [-o] path</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">./fsop.out read [-h] [-p] [-b OFFSET...] [-B {CUR,END,SET}...] [-c BYTE-COUNT...] [path]</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">./fsop.out write [--lbuf] [-h] [-A] [-t] [-b OFFSET...] [-B {CUR,END,SET}...] [-p] [path]</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">./fsop.out inspect [-h] path...</div>
+</div><!-- fragment --></li>
+<li>Information about usage, flags and options can also be accessed by executing <code>./fsop --help</code> on a terminal.</li>
+<li>More information about actions can be accessed using the <code>--help</code> flag alongside the specific action, for example <code>./fsop.out create --help</code> to view help on how to use create.</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Examples</h1>
+<ul>
+<li>Create a new regular file, named <code>file.txt</code>, with permissions <code>rwx</code> for all users (simple creation, no data written): <div class="fragment"><div class="line">./fsop.out create file.txt --type regular --perms ugo+rwx</div>
+</div><!-- fragment --></li>
+<li>Read the complete contents of the file <code>myfile.txt</code> (provided it exists): <div class="fragment"><div class="line">./fsop.out read myfile.txt</div>
+</div><!-- fragment --></li>
+<li>Write input provided on STDIN to offset 40 from the beginning to the file <code>myfile.txt</code> (provided file exists): <div class="fragment"><div class="line">./fsop.out write myfile.txt --offset 40 --offset-base SET</div>
+</div><!-- fragment --></li>
+<li>Inspect all files under the folder <code>/dev</code>: <div class="fragment"><div class="line">./fsop.out inspect /dev/*</div>
+</div><!-- fragment --></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md2"></a>
+System Call Usage</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Task   </th><th class="markdownTableHeadNone">System Call(s) Used    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Create New Files   </td><td class="markdownTableBodyNone"><code>creat</code>, <code>mknod</code>    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Access Existing Files   </td><td class="markdownTableBodyNone"><code>open</code>, <code>read</code>, <code>write</code>, <code>lseek</code> (<code>lseek64</code>), <code>close</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Manipulate the Inode   </td><td class="markdownTableBodyNone"><code>chdir</code>, <code>chmod</code>, <code>stat</code> (<code>fstat</code>, <code>lstat</code>, <code>stat64</code>)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Advanced System Calls   </td><td class="markdownTableBodyNone"><code>dup</code>, <code>pipe</code>, <code>unlink</code>   </td></tr>
+</table>
+<h1><a class="anchor" id="autotoc_md3"></a>
+Building</h1>
+<ul>
+<li>### Prerequisites The following software is required prior compilation of the source:<ul>
+<li>GNU C++ Compiler (g++) version 7 or newer, or any equivalent C++ compiler with support for C++17.</li>
+<li>GNU Make or equivalent to execute commands from makefiles (optional, recommended). See notes for a workaround for compilation without Make.</li>
+</ul>
+</li>
+<li>### Compilation<ul>
+<li>Prior to compilation, clean up any remaining object and executable files from previously incomplete builds, by running <code>make clean</code>.</li>
+<li>To generate object files and executables, run the default make recipe, using <code>make</code>.</li>
+</ul>
+</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Notes</h1>
+<ul>
+<li>The executable provided alongside the project has been compiled on a 64-bit (arch: x86_64) Windows machine running the Windows Subsystem for Linux (WSL) (kernel version: 5.10.102.1-microsoft-standard-WSL2), using the GNU C++ Compiler v9.3.0.</li>
+<li>If GNU make is not installed on the target machine being used for compilation, then either it may be installed via <code>sudo apt install make</code> (recommended), or the <code>make.bash</code> script supplied alongside the source may be utilized to execute the equivalent Make recipes. To use the script, in the compilation steps replace the usage of <code>make</code> with <code>./make.bash</code> (e.g.: <code>make clean</code> -&gt; <code>./make.bash clean</code>).</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
+About</h1>
+<p >Created by: Kinshuk Vasisht <br  />
+ Roll Number: 19 <br  />
+ M.Sc. Computer Science <br  />
+ Department of Computer Science, University of Delhi</p>
+<h1><a class="anchor" id="autotoc_md6"></a>
+Bibliography</h1>
+<ul>
+<li>The Design of the UNIX Operating System, Maurice J. Bach</li>
+<li>Linux Manual Pages for System Calls and Functions: <a href="https://www.man7.org/linux/man-pages/index.html">man7</a>, <a href="https://linux.die.net/man/">linux.die.net</a></li>
+</ul>
+<h1><a class="anchor" id="autotoc_md7"></a>
+Reference</h1>
+<ul>
+<li><a href="https://github.com/kinshuk-h/fsop">GitHub</a> </li>
+</ul>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
