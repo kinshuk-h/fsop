@@ -14,18 +14,28 @@ void fsop::create_file(std::string_view path, mode_t permissions, bool overwrite
     // Check if file previously exists
     struct stat inode_data;
     int status = stat(path.data(), &inode_data);
-    if(status != -1 and not overwrite)
+    if(status != -1)
     {
-         throw std::system_error
-         (
-              EEXIST, std::generic_category(),
-              "create_file(): failed to create new regular file '" +
-              std::string(path.data(), path.size()) + "'"
-         );
+        if(not overwrite)
+        {
+            throw std::system_error
+            (
+                EEXIST, std::generic_category(),
+                "create_file(): failed to create new regular file '" +
+                std::string(path.data(), path.size()) + "'"
+            );
+        }
+        else if((inode_data.st_mode & S_IFMT) != S_IFREG)
+            if(unlink(path.data()) == -1)
+                throw std::system_error
+                (
+                    errno, std::generic_category(),
+                    "create_file(): unable to unlink previously existing file for overwrite"
+                );
     }
     // Aliter: open(path.data(), O_CREAT | O_WRONLY | O_TRUNC, permissions);
     int fd = creat(path.data(), permissions);
-    if(fd == -1)
+    if(fd == -1 and (not overwrite or errno != EEXIST))
     {
         std::string error_desc = "create_file(): ";
         switch(errno)
@@ -94,17 +104,27 @@ void fsop::create_pipe(std::string_view path, mode_t permissions, bool overwrite
     // Check if file previously exists
     struct stat inode_data;
     int status = stat(path.data(), &inode_data);
-    if(status != -1 and not overwrite)
+    if(status != -1)
     {
-         throw std::system_error
-         (
-              EEXIST, std::generic_category(),
-              "create_file(): failed to create new named pipe '" +
-              std::string(path.data(), path.size()) + "'"
-         );
+        if(not overwrite)
+        {
+            throw std::system_error
+            (
+                EEXIST, std::generic_category(),
+                "create_pipe(): failed to create new named pipe '" +
+                std::string(path.data(), path.size()) + "'"
+            );
+        }
+        else if((inode_data.st_mode & S_IFMT) != S_IFIFO)
+            if(unlink(path.data()) == -1)
+                throw std::system_error
+                (
+                    errno, std::generic_category(),
+                    "create_pipe(): unable to unlink previously existing file for overwrite"
+                );
     }
     status = mknod(path.data(), S_IFIFO | permissions, 0);
-    if(status == -1)
+    if(status == -1 and (not overwrite or errno != EEXIST))
     {
         std::string error_desc = "create_pipe(): ";
         switch(errno)
