@@ -1,0 +1,111 @@
+\label{index_md_README}%
+\Hypertarget{index_md_README}%
+
+
+{\ttfamily fsop} is a command-\/line utility program for demonstrating various system calls for files in action. {\ttfamily fsop} allows the user to create, read, write and inspect regular, unnamed and named pipes in their target platform\textquotesingle{}s filesystem.\hypertarget{index_autotoc_md0}{}\doxysection{Execution \& Usage}\label{index_autotoc_md0}
+
+\begin{DoxyItemize}
+\item For execution, ensure that either the executable provided alongside the copy of the program (see notes) or one built manually for your target architecture (see building) is available.
+\item \#\#\# Usage 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./fsop.out [-\/d DIRECTORY] [-\/q] [-\/h] \{create,read,write,inspect\} ...}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./fsop.out create [-\/h] [-\/p PERMS] [-\/t \{pipe,regular\}] [-\/o] path}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./fsop.out read [-\/h] [-\/p] [-\/b OFFSET...] [-\/B \{CUR,END,SET\}...] [-\/c BYTE-\/COUNT...] [path]}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./fsop.out write [-\/-\/lbuf] [-\/h] [-\/A] [-\/t] [-\/b OFFSET...] [-\/B \{CUR,END,SET\}...] [-\/p] [path]}
+
+\end{DoxyCode}
+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./fsop.out inspect [-\/h] path...}
+
+\end{DoxyCode}
+
+\item Information about usage, flags and options can also be accessed by executing {\ttfamily ./fsop -\/-\/help} on a terminal.
+\item More information about actions can be accessed using the {\ttfamily -\/-\/help} flag alongside the specific action, for example {\ttfamily ./fsop.out create -\/-\/help} to view help on how to use create.
+\end{DoxyItemize}\hypertarget{index_autotoc_md1}{}\doxysection{Examples}\label{index_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Create a new regular file, named {\ttfamily file.\+txt}, with permissions {\ttfamily rwx} for all users (simple creation, no data written)\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./fsop.out create file.txt -\/-\/type regular -\/-\/perms ugo+rwx}
+
+\end{DoxyCode}
+
+\item Read the complete contents of the file {\ttfamily myfile.\+txt} (provided it exists)\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./fsop.out read myfile.txt}
+
+\end{DoxyCode}
+
+\item Write input provided on STDIN to offset 40 from the beginning to the file {\ttfamily myfile.\+txt} (provided file exists)\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./fsop.out write myfile.txt -\/-\/offset 40 -\/-\/offset-\/base SET}
+
+\end{DoxyCode}
+
+\item Inspect all files under the folder {\ttfamily /dev}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./fsop.out inspect /dev/*}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}\hypertarget{index_autotoc_md2}{}\doxysection{System Call Usage}\label{index_autotoc_md2}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Task   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ System Call(s) Used    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Task   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ System Call(s) Used    }\\\cline{1-2}
+\endhead
+Create New Files   &{\ttfamily creat}, {\ttfamily mknod}    \\\cline{1-2}
+Access Existing Files   &{\ttfamily open}, {\ttfamily read}, {\ttfamily write}, {\ttfamily lseek} ({\ttfamily lseek64}), {\ttfamily close}    \\\cline{1-2}
+Manipulate the Inode   &{\ttfamily chdir}, {\ttfamily chmod}, {\ttfamily stat} ({\ttfamily fstat}, {\ttfamily lstat}, {\ttfamily stat64})    \\\cline{1-2}
+Advanced System Calls   &{\ttfamily dup}, {\ttfamily pipe}, {\ttfamily unlink}   \\\cline{1-2}
+\end{longtabu}
+\hypertarget{index_autotoc_md3}{}\doxysection{Building}\label{index_autotoc_md3}
+
+\begin{DoxyItemize}
+\item \#\#\# Prerequisites The following software is required prior compilation of the source\+:
+\begin{DoxyItemize}
+\item GNU C++ Compiler (g++) version 7 or newer, or any equivalent C++ compiler with support for C++17.
+\item GNU Make or equivalent to execute commands from makefiles (optional, recommended). See notes for a workaround for compilation without Make.
+\end{DoxyItemize}
+\item \#\#\# Compilation
+\begin{DoxyItemize}
+\item Prior to compilation, clean up any remaining object and executable files from previously incomplete builds, by running {\ttfamily make clean}.
+\item To generate object files and executables, run the default make recipe, using {\ttfamily make}.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{index_autotoc_md4}{}\doxysection{Notes}\label{index_autotoc_md4}
+
+\begin{DoxyItemize}
+\item The executable provided alongside the project has been compiled on a 64-\/bit (arch\+: x86\+\_\+64) Windows machine running the Windows Subsystem for Linux (WSL) (kernel version\+: 5.\+10.\+102.\+1-\/microsoft-\/standard-\/\+WSL2), using the GNU C++ Compiler v9.\+3.\+0.
+\item If GNU make is not installed on the target machine being used for compilation, then either it may be installed via {\ttfamily sudo apt install make} (recommended), or the {\ttfamily make.\+bash} script supplied alongside the source may be utilized to execute the equivalent Make recipes. To use the script, in the compilation steps replace the usage of {\ttfamily make} with {\ttfamily ./make.bash} (e.\+g.\+: {\ttfamily make clean} -\/\texorpdfstring{$>$}{>} {\ttfamily ./make.bash clean}).
+\end{DoxyItemize}\hypertarget{index_autotoc_md5}{}\doxysection{About}\label{index_autotoc_md5}
+Created by\+: Kinshuk Vasisht ~\newline
+ Roll Number\+: 19 ~\newline
+ M.\+Sc. Computer Science ~\newline
+ Department of Computer Science, University of Delhi\hypertarget{index_autotoc_md6}{}\doxysection{Bibliography}\label{index_autotoc_md6}
+
+\begin{DoxyItemize}
+\item The Design of the UNIX Operating System, Maurice J. Bach
+\item Linux Manual Pages for System Calls and Functions\+: \href{https://www.man7.org/linux/man-pages/index.html}{\texttt{ man7}}, \href{https://linux.die.net/man/}{\texttt{ linux.\+die.\+net}}
+\end{DoxyItemize}\hypertarget{index_autotoc_md7}{}\doxysection{Reference}\label{index_autotoc_md7}
+
+\begin{DoxyItemize}
+\item \href{https://github.com/kinshuk-h/fsop}{\texttt{ Git\+Hub}} 
+\end{DoxyItemize}

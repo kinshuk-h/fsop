@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7efile_0',['~File',['../df/d4d/structfsop_1_1_file.html#a3bea866e8f4b9f72871a3b2a32b13405',1,'fsop::File']]]
+  ['zero_5for_5fmore_0',['ZERO_OR_MORE',['../dc/d72/structargparse_1_1_argument.html#ac8e932b78791fd44a5303073807b1a6c',1,'argparse::Argument']]]
 ];
