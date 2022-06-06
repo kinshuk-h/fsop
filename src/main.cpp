@@ -50,7 +50,12 @@ int main(int argc, const char** argv)
     // Parser to handle the create subcommand.
     argparse::Parser create_parser {
         name = "create",
-        description = "create regular files or named pipes"
+        description = "create regular files or named pipes",
+        epilog = (
+            "create allows creation of regular files and named pipes\n\n"
+            "permissions can be either as an octal number, a 9-letter stribg containing the letters r, w, x or - for indicating read, write, execute or no permission for the corresponding permission group, or the string separating permission group letters (u, g and o) with permissions (r, w or x) with a + symbol (e.g.: ug+rw to grant read and write permission to user and the group)\n\n"
+            "the overwrite mode works by unlinking the file and recreating it, so hard links might be lost as a result"
+        )
     };
     create_parser.add_arguments(
         argparse::Positional
@@ -85,7 +90,10 @@ int main(int argc, const char** argv)
     // Parser to handle the read subcommand.
     argparse::Parser read_parser {
         name = "read",
-        description = "read content off regular files or pipes (named/unnamed)"
+        description = "read content off regular files or pipes (named/unnamed)",
+        epilog = (
+            "read allows reading arbitrary bytes of data from "
+        )
     };
     read_parser.add_arguments(
         argparse::Positional
