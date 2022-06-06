@@ -5,7 +5,7 @@
 
 ## Execution & Usage
 
-- For execution, ensure that either the executable provided alongside the copy of the program (see notes) or one built manually for your target architecture (see [building](#Building)) is available.
+- For execution, ensure that either the executable provided alongside the copy of the program (see [notes](#Notes)) or one built manually for your target architecture (see [building](#Building)) is available.
 
 - ### Usage
   ```bash
@@ -63,7 +63,7 @@
 ## Notes
 
 - The executable provided alongside the project has been compiled on a 64-bit (arch: x86_64) Windows machine running the Windows Subsystem for Linux (WSL) (kernel version: ), using the GNU C++ Compiler v9.3.0.
-- If GNU make is not installed on the target machine being used for compilation, then the `make.bash` script supplied alongside the source may be utilized to execute the equivalent Make recipes. To use the script, in the compilation steps replace the usage of `make` with `./make.bash` (e.g.: `make clean` -> `./make.bash clean`).
+- If GNU make is not installed on the target machine being used for compilation, then either it may be installed via `sudo apt install make` (recommended), or the `make.bash` script supplied alongside the source may be utilized to execute the equivalent Make recipes. To use the script, in the compilation steps replace the usage of `make` with `./make.bash` (e.g.: `make clean` -> `./make.bash clean`).
 
 ## About
 
@@ -76,4 +76,4 @@ Created by:
 ## Bibliography
 
 - The Design of the UNIX Operating System, Maurice J. Bach
-- [Linux Manual Pages for System Calls and Functions](https://www.man7.org/linux/man-pages/index.html)
+- Linux Manual Pages for System Calls and Functions [man7](https://www.man7.org/linux/man-pages/index.html) [linux.die.net](https://linux.die.net/man/)
