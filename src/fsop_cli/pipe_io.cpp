@@ -80,7 +80,7 @@ int fsop_cli::pipe_io(const argparse::types::result_map& args, std::string_view 
     {
         writer.close(); // Explicitly close writer end.
 
-        while(not (buffer = std::move(reader.read())).empty())
+        while(not (buffer = reader.read()).empty())
         {
             try
             {
