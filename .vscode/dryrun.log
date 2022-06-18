@@ -1,0 +1,52 @@
+make.exe --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/h/All C++ Files/DUCS Programs/Advanced Operating Systems/fsop - Filesystem Operations'
+ 
+F:/msys64/usr/bin/mkdir.exe -p lib/argparse/arguments
+F:/msys64/usr/bin/mkdir.exe -p deps/argparse/arguments
+echo -n "[>] "
+g++ -MMD -MP -MF deps/argparse/arguments/argument.d -std=c++17 -Wall -Wextra -g -Iinclude -c src/argparse/arguments/argument.cpp -o lib/argparse/arguments/argument.o
+ 
+F:/msys64/usr/bin/mkdir.exe -p lib/argparse/arguments
+F:/msys64/usr/bin/mkdir.exe -p deps/argparse/arguments
+ 
+echo -n "[>] "
+g++ -MMD -MP -MF deps/argparse/arguments/optional.d -std=c++17 -Wall -Wextra -g -Iinclude -c src/argparse/arguments/optional.cpp -o lib/argparse/arguments/optional.o
+ 
+F:/msys64/usr/bin/mkdir.exe -p lib/argparse/arguments
+F:/msys64/usr/bin/mkdir.exe -p deps/argparse/arguments
+echo -n "[>] "
+g++ -MMD -MP -MF deps/argparse/arguments/positional.d -std=c++17 -Wall -Wextra -g -Iinclude -c src/argparse/arguments/positional.cpp -o lib/argparse/arguments/positional.o
+F:/msys64/usr/bin/mkdir.exe -p lib/argparse/arguments
+F:/msys64/usr/bin/mkdir.exe -p deps/argparse/arguments
+echo -n "[>] "
+g++ -MMD -MP -MF deps/argparse/arguments/switch.d -std=c++17 -Wall -Wextra -g -Iinclude -c src/argparse/arguments/switch.cpp -o lib/argparse/arguments/switch.o
+F:/msys64/usr/bin/mkdir.exe -p lib/argparse
+F:/msys64/usr/bin/mkdir.exe -p deps/argparse
+echo -n "[>] "
+g++ -MMD -MP -MF deps/argparse/parser.d -std=c++17 -Wall -Wextra -g -Iinclude -c src/argparse/parser.cpp -o lib/argparse/parser.o
+ 
+F:/msys64/usr/bin/mkdir.exe -p lib/fsop
+F:/msys64/usr/bin/mkdir.exe -p deps/fsop
+echo -n "[>] "
+g++ -MMD -MP -MF deps/fsop/create.d -std=c++17 -Wall -Wextra -g -Iinclude -c src/fsop/create.cpp -o lib/fsop/create.o
+ 
+F:/msys64/usr/bin/mkdir.exe -p lib/fsop
+F:/msys64/usr/bin/mkdir.exe -p deps/fsop
+echo -n "[>] "
+g++ -MMD -MP -MF deps/fsop/inspect.d -std=c++17 -Wall -Wextra -g -Iinclude -c src/fsop/inspect.cpp -o lib/fsop/inspect.o
+ 
+F:/msys64/usr/bin/mkdir.exe -p lib/fsop
+F:/msys64/usr/bin/mkdir.exe -p deps/fsop
+ 
+echo -n "[>] "
+g++ -MMD -MP -MF deps/fsop/utilities.d -std=c++17 -Wall -Wextra -g -Iinclude -c src/fsop/utilities.cpp -o lib/fsop/utilities.o
+ 
+F:/msys64/usr/bin/mkdir.exe -p lib
+F:/msys64/usr/bin/mkdir.exe -p deps
+echo -n "[>] "
+g++ -MMD -MP -MF deps/main.d -std=c++17 -Wall -Wextra -g -Iinclude -c src/main.cpp -o lib/main.o
+echo -n "[>] "
+ 
+g++ -Llib  lib/argparse/arguments/argument.o lib/argparse/arguments/optional.o lib/argparse/arguments/positional.o lib/argparse/arguments/switch.o lib/argparse/parser.o lib/fsop/create.o lib/fsop/inspect.o lib/fsop/utilities.o lib/main.o -o fsop.out
+make: Leaving directory '/h/All C++ Files/DUCS Programs/Advanced Operating Systems/fsop - Filesystem Operations'
+ 

@@ -76,7 +76,7 @@ Execution &amp; Usage</h1>
 </div><!-- fragment --> <div class="fragment"><div class="line">./fsop.out create [-h] [-p PERMS] [-t {pipe,regular}] [-o] path</div>
 </div><!-- fragment --> <div class="fragment"><div class="line">./fsop.out read [-h] [-p] [-b OFFSET...] [-B {CUR,END,SET}...] [-c BYTE-COUNT...] [path]</div>
 </div><!-- fragment --> <div class="fragment"><div class="line">./fsop.out write [--lbuf] [-h] [-A] [-t] [-b OFFSET...] [-B {CUR,END,SET}...] [-p] [path]</div>
-</div><!-- fragment --> <div class="fragment"><div class="line">./fsop.out inspect [-h] path...</div>
+</div><!-- fragment --> <div class="fragment"><div class="line">./fsop.out inspect [-h] [-l] path...</div>
 </div><!-- fragment --></li>
 <li>Information about usage, flags and options can also be accessed by executing <code>./fsop --help</code> on a terminal.</li>
 <li>More information about actions can be accessed using the <code>--help</code> flag alongside the specific action, for example <code>./fsop.out create --help</code> to view help on how to use create.</li>
@@ -103,9 +103,11 @@ System Call Usage</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Access Existing Files   </td><td class="markdownTableBodyNone"><code>open</code>, <code>read</code>, <code>write</code>, <code>lseek</code> (<code>lseek64</code>), <code>close</code>    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Manipulate the Inode   </td><td class="markdownTableBodyNone"><code>chdir</code>, <code>chmod</code>, <code>stat</code> (<code>fstat</code>, <code>lstat</code>, <code>stat64</code>)    </td></tr>
+<td class="markdownTableBodyNone">Manipulate the Inode   </td><td class="markdownTableBodyNone"><code>chdir</code>, <code>chmod</code>, <code>stat</code> (<code>fstat</code>, <code>lstat</code>, <code>stat64</code>, ...)    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Advanced System Calls   </td><td class="markdownTableBodyNone"><code>dup</code>, <code>pipe</code>, <code>unlink</code>   </td></tr>
+<td class="markdownTableBodyNone">Advanced System Calls   </td><td class="markdownTableBodyNone"><code>dup</code>, <code>pipe</code>, <code>unlink</code>    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Miscellaneous (non-fs)   </td><td class="markdownTableBodyNone"><code>fork</code>, <code>getpid</code>, <code>signal</code>, <code>exit</code>, <code>getpwuid</code>, <code>getgrgid</code>   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Building</h1>

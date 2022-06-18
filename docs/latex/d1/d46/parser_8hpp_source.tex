@@ -52,117 +52,123 @@
 \DoxyCodeLine{93 }
 \DoxyCodeLine{94         \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}* \_parent = \textcolor{keyword}{nullptr}; }
 \DoxyCodeLine{96     \textcolor{keyword}{public}:}
-\DoxyCodeLine{110         \textcolor{keyword}{template}<}
-\DoxyCodeLine{111             \textcolor{keyword}{typename} NameType = std::nullptr\_t,}
-\DoxyCodeLine{112             \textcolor{keyword}{typename} DescriptionType = std::nullptr\_t,}
-\DoxyCodeLine{113             \textcolor{keyword}{typename} EpilogType = std::nullptr\_t,}
-\DoxyCodeLine{114             \textcolor{keyword}{typename} OutputStreamType = std::nullptr\_t}
-\DoxyCodeLine{115         >}
-\DoxyCodeLine{116         \mbox{\hyperlink{classargparse_1_1_parser_ab7304d4049c806610e182e7cff8bbc04}{Parser}}(}
-\DoxyCodeLine{117             NameType \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}} = \textcolor{keyword}{nullptr},}
-\DoxyCodeLine{118             DescriptionType \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}} = \textcolor{keyword}{nullptr},}
-\DoxyCodeLine{119             EpilogType \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}} = \textcolor{keyword}{nullptr},}
-\DoxyCodeLine{120             OutputStreamType \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}} = \textcolor{keyword}{nullptr}}
-\DoxyCodeLine{121         ) : \_out\_stream(}
-\DoxyCodeLine{122             \mbox{\hyperlink{argparse_2utilities_8hpp_a689a70812560ee92f5110ffca3e87d17}{pick\_if}}<types::\mbox{\hyperlink{namespaceargparse_1_1types_a2bb97537aade681834bc01f3510f655c}{OutputStream}}>(}
-\DoxyCodeLine{123                 types::\mbox{\hyperlink{namespaceargparse_1_1types_a2bb97537aade681834bc01f3510f655c}{OutputStream}}(std::cout),}
-\DoxyCodeLine{124                 \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}, \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}}}
-\DoxyCodeLine{125             ).get()}
-\DoxyCodeLine{126         )}
-\DoxyCodeLine{127         \{}
-\DoxyCodeLine{128             \_name        = pick\_if<types::Name>(}
-\DoxyCodeLine{129                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a39b500a5ce93009124a948b71ad4c09b}{arguments::defaults::default\_name}},}
-\DoxyCodeLine{130                 \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}, \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}}}
-\DoxyCodeLine{131             ).get();}
-\DoxyCodeLine{132             \textcolor{keywordflow}{if}(\_name.empty()) \_name = \textcolor{stringliteral}{"{}program"{}};}
-\DoxyCodeLine{133             \_description = pick\_if<types::Description>(}
-\DoxyCodeLine{134                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a2ad0b36b45c92ef834455c6f93f57189}{arguments::defaults::default\_description}},}
-\DoxyCodeLine{135                 \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}, \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}}}
-\DoxyCodeLine{136             ).get();}
-\DoxyCodeLine{137             \_epilog      = pick\_if<types::Epilog>(}
-\DoxyCodeLine{138                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a5624825da330c1c8056e8d77e1b5e9f5}{arguments::defaults::default\_epilog}},}
-\DoxyCodeLine{139                 \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}, \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}}}
-\DoxyCodeLine{140             ).get();}
-\DoxyCodeLine{141 }
-\DoxyCodeLine{142             \mbox{\hyperlink{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}{add\_argument}}(}
-\DoxyCodeLine{143                 \mbox{\hyperlink{structargparse_1_1_switch}{Switch}} \{}
-\DoxyCodeLine{144                     \mbox{\hyperlink{namespaceargparse_1_1arguments_a1475e47d220b4a783be691910a33203e}{arguments::name}} = \textcolor{stringliteral}{"{}help"{}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a9109a2575f351c5b7101b0b1861fb20b}{arguments::alias}} = \textcolor{stringliteral}{"{}h"{}},}
-\DoxyCodeLine{145                     \mbox{\hyperlink{namespaceargparse_1_1arguments_a3be1cc16d8b11efc04c0acf360e149eb}{arguments::help}} = \textcolor{stringliteral}{"{}show this help message and exit"{}}}
-\DoxyCodeLine{146                 \}}
-\DoxyCodeLine{147             );}
-\DoxyCodeLine{148         \}}
-\DoxyCodeLine{149 }
-\DoxyCodeLine{158         \mbox{\hyperlink{classargparse_1_1_parser_aa8da38f154db3563e8b3000afbbcd479}{Parser}}(\mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\&\& parser) = \textcolor{keywordflow}{default};}
-\DoxyCodeLine{159 }
-\DoxyCodeLine{168         \mbox{\hyperlink{classargparse_1_1_parser_a3ade6aa7970b5a07d48e745e5327f417}{Parser}}(\textcolor{keyword}{const} \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& parser)}
-\DoxyCodeLine{169         : \_name(parser.\_name), \_description(parser.\_description),}
-\DoxyCodeLine{170           \_epilog(parser.\_epilog), \_out\_stream(parser.\_out\_stream),}
-\DoxyCodeLine{171           \_parent(parser.\_parent)}
-\DoxyCodeLine{172         \{}
-\DoxyCodeLine{173             \textcolor{keywordflow}{for}(\textcolor{keyword}{const} \textcolor{keyword}{auto}\& positional : parser.\_positionals)}
-\DoxyCodeLine{174                 \_positionals.push\_back(positional-\/>clone());}
-\DoxyCodeLine{175             \textcolor{keywordflow}{for}(\textcolor{keyword}{const} \textcolor{keyword}{auto}\& [ \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, option ] : parser.\_optionals)}
-\DoxyCodeLine{176                 \_optionals.emplace(\mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, option-\/>clone());}
-\DoxyCodeLine{177         \}}
-\DoxyCodeLine{178 }
-\DoxyCodeLine{188         \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \mbox{\hyperlink{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}{add\_argument}}(\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\& argument);}
-\DoxyCodeLine{189 }
-\DoxyCodeLine{197         \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Arguments>}
-\DoxyCodeLine{198         \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \mbox{\hyperlink{classargparse_1_1_parser_ae91d0284b0868d1bc0430129273b8af8}{add\_arguments}}(Arguments\&\&... arguments)}
-\DoxyCodeLine{199         \{}
-\DoxyCodeLine{200             (\mbox{\hyperlink{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}{add\_argument}}(std::forward<Arguments>(arguments)), ...);}
-\DoxyCodeLine{201             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
-\DoxyCodeLine{202         \}}
-\DoxyCodeLine{203 }
-\DoxyCodeLine{215         \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Parsers>}
-\DoxyCodeLine{216         \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \mbox{\hyperlink{classargparse_1_1_parser_a5713730520dfe2725d1a03eed03ffde3}{add\_subparsers}}(std::string \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, Parsers\&\&... parsers)}
-\DoxyCodeLine{217         \{}
-\DoxyCodeLine{218             \mbox{\hyperlink{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}{add\_argument}}(}
-\DoxyCodeLine{219                 \mbox{\hyperlink{classargparse_1_1_subparser_set}{SubparserSet}}\{ *\textcolor{keyword}{this}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, std::forward<Parsers>(parsers)... \}}
-\DoxyCodeLine{220             );}
-\DoxyCodeLine{221             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
-\DoxyCodeLine{222         \}}
-\DoxyCodeLine{223 }
-\DoxyCodeLine{244         Argument::range::iterator \mbox{\hyperlink{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}{parse\_args}}(}
-\DoxyCodeLine{245             Argument::range::iterator begin, Argument::range::iterator end,}
-\DoxyCodeLine{246             \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}}\& values}
-\DoxyCodeLine{247         );}
-\DoxyCodeLine{268         \textcolor{keyword}{template}<\textcolor{keyword}{typename} InputIter>}
-\DoxyCodeLine{269         \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}} \mbox{\hyperlink{classargparse_1_1_parser_aa826b287cbc4475fe787d25daba10972}{parse\_args}}(InputIter begin, InputIter end)}
-\DoxyCodeLine{270         \{}
-\DoxyCodeLine{271             \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}} values;}
-\DoxyCodeLine{272             \mbox{\hyperlink{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}{Argument::range}} argv \{ begin, end \};}
-\DoxyCodeLine{273             \mbox{\hyperlink{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}{parse\_args}}(argv.begin(), argv.end(), values);}
-\DoxyCodeLine{274             \textcolor{keywordflow}{return} values;}
-\DoxyCodeLine{275         \}}
-\DoxyCodeLine{291         \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}} \mbox{\hyperlink{classargparse_1_1_parser_a0c2521f21dcf5765d5bf380eed466aae}{parse\_args}}(\textcolor{keywordtype}{int} argc, \textcolor{keyword}{const} \textcolor{keywordtype}{char}** argv)}
-\DoxyCodeLine{292         \{}
-\DoxyCodeLine{293             \textcolor{keywordflow}{return} \mbox{\hyperlink{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}{parse\_args}}(argv+1, argv+argc);}
-\DoxyCodeLine{294         \}}
-\DoxyCodeLine{310         \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}} \mbox{\hyperlink{classargparse_1_1_parser_a20de3dcec529713f4ae764b25985b5c9}{parse\_args}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv)}
-\DoxyCodeLine{311         \{}
-\DoxyCodeLine{312             \textcolor{keywordflow}{return} \mbox{\hyperlink{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}{parse\_args}}(argv+1, argv+argc);}
-\DoxyCodeLine{313         \}}
-\DoxyCodeLine{314 }
-\DoxyCodeLine{322         std::string \mbox{\hyperlink{classargparse_1_1_parser_a891dbd3d2d08bb4f3a36a90be080206b}{help}}(\textcolor{keywordtype}{unsigned} tty\_columns = 60) const noexcept;}
-\DoxyCodeLine{330         std::\textcolor{keywordtype}{string} \mbox{\hyperlink{classargparse_1_1_parser_aa713e74712cd45c2b728121c0470afd2}{usage}}(\textcolor{keywordtype}{unsigned} tty\_columns = 60) const noexcept;}
+\DoxyCodeLine{108         \textcolor{keyword}{static} std::ostream\& \mbox{\hyperlink{classargparse_1_1_parser_acccd856f96c285d1a9f5f3ebfde1f7e4}{write\_description}}(}
+\DoxyCodeLine{109             std::ostream\& os,}
+\DoxyCodeLine{110             std::string\_view \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}},}
+\DoxyCodeLine{111             \textcolor{keywordtype}{unsigned} tty\_columns = 60}
+\DoxyCodeLine{112         );}
+\DoxyCodeLine{113 }
+\DoxyCodeLine{127         \textcolor{keyword}{template}<}
+\DoxyCodeLine{128             \textcolor{keyword}{typename} NameType = std::nullptr\_t,}
+\DoxyCodeLine{129             \textcolor{keyword}{typename} DescriptionType = std::nullptr\_t,}
+\DoxyCodeLine{130             \textcolor{keyword}{typename} EpilogType = std::nullptr\_t,}
+\DoxyCodeLine{131             \textcolor{keyword}{typename} OutputStreamType = std::nullptr\_t}
+\DoxyCodeLine{132         >}
+\DoxyCodeLine{133         \mbox{\hyperlink{classargparse_1_1_parser_ab7304d4049c806610e182e7cff8bbc04}{Parser}}(}
+\DoxyCodeLine{134             NameType \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{135             DescriptionType \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{136             EpilogType \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}} = \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{137             OutputStreamType \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}} = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{138         ) : \_out\_stream(}
+\DoxyCodeLine{139             \mbox{\hyperlink{argparse_2utilities_8hpp_a689a70812560ee92f5110ffca3e87d17}{pick\_if}}<types::\mbox{\hyperlink{namespaceargparse_1_1types_a2bb97537aade681834bc01f3510f655c}{OutputStream}}>(}
+\DoxyCodeLine{140                 types::\mbox{\hyperlink{namespaceargparse_1_1types_a2bb97537aade681834bc01f3510f655c}{OutputStream}}(std::cout),}
+\DoxyCodeLine{141                 \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}, \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}}}
+\DoxyCodeLine{142             ).get()}
+\DoxyCodeLine{143         )}
+\DoxyCodeLine{144         \{}
+\DoxyCodeLine{145             \_name        = pick\_if<types::Name>(}
+\DoxyCodeLine{146                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a39b500a5ce93009124a948b71ad4c09b}{arguments::defaults::default\_name}},}
+\DoxyCodeLine{147                 \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}, \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}}}
+\DoxyCodeLine{148             ).get();}
+\DoxyCodeLine{149             \textcolor{keywordflow}{if}(\_name.empty()) \_name = \textcolor{stringliteral}{"{}program"{}};}
+\DoxyCodeLine{150             \_description = pick\_if<types::Description>(}
+\DoxyCodeLine{151                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a2ad0b36b45c92ef834455c6f93f57189}{arguments::defaults::default\_description}},}
+\DoxyCodeLine{152                 \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}, \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}}}
+\DoxyCodeLine{153             ).get();}
+\DoxyCodeLine{154             \_epilog      = pick\_if<types::Epilog>(}
+\DoxyCodeLine{155                 \mbox{\hyperlink{namespaceargparse_1_1arguments_1_1defaults_a5624825da330c1c8056e8d77e1b5e9f5}{arguments::defaults::default\_epilog}},}
+\DoxyCodeLine{156                 \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}, \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a172b7a15fb4f159185f67933af4f9150}{output\_stream}}}
+\DoxyCodeLine{157             ).get();}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159             \mbox{\hyperlink{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}{add\_argument}}(}
+\DoxyCodeLine{160                 \mbox{\hyperlink{structargparse_1_1_switch}{Switch}} \{}
+\DoxyCodeLine{161                     \mbox{\hyperlink{namespaceargparse_1_1arguments_a1475e47d220b4a783be691910a33203e}{arguments::name}} = \textcolor{stringliteral}{"{}help"{}}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a9109a2575f351c5b7101b0b1861fb20b}{arguments::alias}} = \textcolor{stringliteral}{"{}h"{}},}
+\DoxyCodeLine{162                     \mbox{\hyperlink{namespaceargparse_1_1arguments_a3be1cc16d8b11efc04c0acf360e149eb}{arguments::help}} = \textcolor{stringliteral}{"{}show this help message and exit"{}}}
+\DoxyCodeLine{163                 \}}
+\DoxyCodeLine{164             );}
+\DoxyCodeLine{165         \}}
+\DoxyCodeLine{166 }
+\DoxyCodeLine{175         \mbox{\hyperlink{classargparse_1_1_parser_aa8da38f154db3563e8b3000afbbcd479}{Parser}}(\mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\&\& parser) = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{176 }
+\DoxyCodeLine{185         \mbox{\hyperlink{classargparse_1_1_parser_a3ade6aa7970b5a07d48e745e5327f417}{Parser}}(\textcolor{keyword}{const} \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& parser)}
+\DoxyCodeLine{186         : \_name(parser.\_name), \_description(parser.\_description),}
+\DoxyCodeLine{187           \_epilog(parser.\_epilog), \_out\_stream(parser.\_out\_stream),}
+\DoxyCodeLine{188           \_parent(parser.\_parent)}
+\DoxyCodeLine{189         \{}
+\DoxyCodeLine{190             \textcolor{keywordflow}{for}(\textcolor{keyword}{const} \textcolor{keyword}{auto}\& positional : parser.\_positionals)}
+\DoxyCodeLine{191                 \_positionals.push\_back(positional-\/>clone());}
+\DoxyCodeLine{192             \textcolor{keywordflow}{for}(\textcolor{keyword}{const} \textcolor{keyword}{auto}\& [ \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, option ] : parser.\_optionals)}
+\DoxyCodeLine{193                 \_optionals.emplace(\mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}, option-\/>clone());}
+\DoxyCodeLine{194         \}}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{205         \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \mbox{\hyperlink{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}{add\_argument}}(\mbox{\hyperlink{structargparse_1_1_argument}{Argument}}\&\& argument);}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{214         \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Arguments>}
+\DoxyCodeLine{215         \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \mbox{\hyperlink{classargparse_1_1_parser_ae91d0284b0868d1bc0430129273b8af8}{add\_arguments}}(Arguments\&\&... arguments)}
+\DoxyCodeLine{216         \{}
+\DoxyCodeLine{217             (\mbox{\hyperlink{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}{add\_argument}}(std::forward<Arguments>(arguments)), ...);}
+\DoxyCodeLine{218             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{219         \}}
+\DoxyCodeLine{220 }
+\DoxyCodeLine{232         \textcolor{keyword}{template}<\textcolor{keyword}{typename}... Parsers>}
+\DoxyCodeLine{233         \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \mbox{\hyperlink{classargparse_1_1_parser_a5713730520dfe2725d1a03eed03ffde3}{add\_subparsers}}(std::string \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, Parsers\&\&... parsers)}
+\DoxyCodeLine{234         \{}
+\DoxyCodeLine{235             \mbox{\hyperlink{classargparse_1_1_parser_a6449cb4c3860e5ee2ea3a962bd25513b}{add\_argument}}(}
+\DoxyCodeLine{236                 \mbox{\hyperlink{classargparse_1_1_subparser_set}{SubparserSet}}\{ *\textcolor{keyword}{this}, \mbox{\hyperlink{namespaceargparse_1_1arguments_a5e242c047b0fb61af2304701bae41ab5}{dest}}, std::forward<Parsers>(parsers)... \}}
+\DoxyCodeLine{237             );}
+\DoxyCodeLine{238             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{239         \}}
+\DoxyCodeLine{240 }
+\DoxyCodeLine{261         Argument::range::iterator \mbox{\hyperlink{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}{parse\_args}}(}
+\DoxyCodeLine{262             Argument::range::iterator begin, Argument::range::iterator end,}
+\DoxyCodeLine{263             \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}}\& values}
+\DoxyCodeLine{264         );}
+\DoxyCodeLine{285         \textcolor{keyword}{template}<\textcolor{keyword}{typename} InputIter>}
+\DoxyCodeLine{286         \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}} \mbox{\hyperlink{classargparse_1_1_parser_aa826b287cbc4475fe787d25daba10972}{parse\_args}}(InputIter begin, InputIter end)}
+\DoxyCodeLine{287         \{}
+\DoxyCodeLine{288             \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}} values;}
+\DoxyCodeLine{289             \mbox{\hyperlink{structargparse_1_1_argument_aa10eebd2e7ab98934eaad140903ba841}{Argument::range}} argv \{ begin, end \};}
+\DoxyCodeLine{290             \mbox{\hyperlink{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}{parse\_args}}(argv.begin(), argv.end(), values);}
+\DoxyCodeLine{291             \textcolor{keywordflow}{return} values;}
+\DoxyCodeLine{292         \}}
+\DoxyCodeLine{308         \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}} \mbox{\hyperlink{classargparse_1_1_parser_a0c2521f21dcf5765d5bf380eed466aae}{parse\_args}}(\textcolor{keywordtype}{int} argc, \textcolor{keyword}{const} \textcolor{keywordtype}{char}** argv)}
+\DoxyCodeLine{309         \{}
+\DoxyCodeLine{310             \textcolor{keywordflow}{return} \mbox{\hyperlink{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}{parse\_args}}(argv+1, argv+argc);}
+\DoxyCodeLine{311         \}}
+\DoxyCodeLine{327         \mbox{\hyperlink{namespaceargparse_1_1types_af53fd3bcc3f295abaf96eb0f43bfb162}{types::result\_map}} \mbox{\hyperlink{classargparse_1_1_parser_a20de3dcec529713f4ae764b25985b5c9}{parse\_args}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char}** argv)}
+\DoxyCodeLine{328         \{}
+\DoxyCodeLine{329             \textcolor{keywordflow}{return} \mbox{\hyperlink{classargparse_1_1_parser_a9dbc94bf6571953aa523456a343e7346}{parse\_args}}(argv+1, argv+argc);}
+\DoxyCodeLine{330         \}}
 \DoxyCodeLine{331 }
-\DoxyCodeLine{333         const std::\textcolor{keywordtype}{string}\&  \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}       () const noexcept \{ \textcolor{keywordflow}{return} \_name; \}}
-\DoxyCodeLine{335         \textcolor{keyword}{const} std::string\&  \mbox{\hyperlink{classargparse_1_1_parser_af97fbb2257d687e2dc64c23323d0a7ba}{prog}}       () const noexcept \{ \textcolor{keywordflow}{return} \_name; \}}
-\DoxyCodeLine{337         \textcolor{keyword}{const} std::string\&  \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}() const noexcept \{ \textcolor{keywordflow}{return} \_description; \}}
-\DoxyCodeLine{339         \textcolor{keyword}{const} std::string\&  \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}     () const noexcept \{ \textcolor{keywordflow}{return} \_epilog; \}}
-\DoxyCodeLine{341         std::ostream\&       \mbox{\hyperlink{classargparse_1_1_parser_a8cd8d80a2474196cd2c4eceab69b1a4c}{ostream}}    () const noexcept \{ \textcolor{keywordflow}{return} \_parent != \textcolor{keyword}{nullptr} ? \_parent-\/>\mbox{\hyperlink{classargparse_1_1_parser_a8cd8d80a2474196cd2c4eceab69b1a4c}{ostream}}() :  \_out\_stream; \}}
-\DoxyCodeLine{343         std::string         \mbox{\hyperlink{classargparse_1_1_parser_a57cfcee5165736f6dad20bbb9359dee2}{identifier}} () const noexcept}
-\DoxyCodeLine{344         \{}
-\DoxyCodeLine{345             \textcolor{keywordflow}{return} (\_parent != \textcolor{keyword}{nullptr} ? (\_parent-\/>\mbox{\hyperlink{classargparse_1_1_parser_a57cfcee5165736f6dad20bbb9359dee2}{identifier}}() + \textcolor{stringliteral}{"{} "{}}).c\_str() : \textcolor{stringliteral}{"{}"{}}) + \_name;}
-\DoxyCodeLine{346         \}}
-\DoxyCodeLine{348         \textcolor{keyword}{auto}                \mbox{\hyperlink{classargparse_1_1_parser_a392a5b9ba09e0acdf09cc7cc4b78f75c}{parent}}     () const noexcept \{ \textcolor{keywordflow}{return} \_parent; \}}
-\DoxyCodeLine{349 }
-\DoxyCodeLine{351         \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \mbox{\hyperlink{classargparse_1_1_parser_a8915fdcdf1880d3a85e4272797d0f4eb}{parent}}(\mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \_parent) \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{352         \{ this-\/>\_parent = \&\_parent; \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
-\DoxyCodeLine{353     \};}
-\DoxyCodeLine{354 \}}
-\DoxyCodeLine{355 }
-\DoxyCodeLine{356 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ARGPARSE\_PARSER\_HPP\_DEFINED}}
+\DoxyCodeLine{339         std::string \mbox{\hyperlink{classargparse_1_1_parser_a891dbd3d2d08bb4f3a36a90be080206b}{help}}(\textcolor{keywordtype}{unsigned} tty\_columns = 60) const noexcept;}
+\DoxyCodeLine{347         std::\textcolor{keywordtype}{string} \mbox{\hyperlink{classargparse_1_1_parser_aa713e74712cd45c2b728121c0470afd2}{usage}}(\textcolor{keywordtype}{unsigned} tty\_columns = 60) const noexcept;}
+\DoxyCodeLine{348 }
+\DoxyCodeLine{350         const std::\textcolor{keywordtype}{string}\&  \mbox{\hyperlink{classargparse_1_1_parser_a13cf1722a48452d30bbf85c78ac8aad1}{name}}       () const noexcept \{ \textcolor{keywordflow}{return} \_name; \}}
+\DoxyCodeLine{352         \textcolor{keyword}{const} std::string\&  \mbox{\hyperlink{classargparse_1_1_parser_af97fbb2257d687e2dc64c23323d0a7ba}{prog}}       () const noexcept \{ \textcolor{keywordflow}{return} \_name; \}}
+\DoxyCodeLine{354         \textcolor{keyword}{const} std::string\&  \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}() const noexcept \{ \textcolor{keywordflow}{return} \_description; \}}
+\DoxyCodeLine{356         \textcolor{keyword}{const} std::string\&  \mbox{\hyperlink{classargparse_1_1_parser_af4364831bdf36b665467000855436532}{epilog}}     () const noexcept \{ \textcolor{keywordflow}{return} \_epilog; \}}
+\DoxyCodeLine{358         std::ostream\&       \mbox{\hyperlink{classargparse_1_1_parser_a8cd8d80a2474196cd2c4eceab69b1a4c}{ostream}}    () const noexcept \{ \textcolor{keywordflow}{return} \_parent != \textcolor{keyword}{nullptr} ? \_parent-\/>\mbox{\hyperlink{classargparse_1_1_parser_a8cd8d80a2474196cd2c4eceab69b1a4c}{ostream}}() :  \_out\_stream; \}}
+\DoxyCodeLine{360         std::string         \mbox{\hyperlink{classargparse_1_1_parser_a57cfcee5165736f6dad20bbb9359dee2}{identifier}} () const noexcept}
+\DoxyCodeLine{361         \{}
+\DoxyCodeLine{362             \textcolor{keywordflow}{return} (\_parent != \textcolor{keyword}{nullptr} ? (\_parent-\/>\mbox{\hyperlink{classargparse_1_1_parser_a57cfcee5165736f6dad20bbb9359dee2}{identifier}}() + \textcolor{stringliteral}{"{} "{}}).c\_str() : \textcolor{stringliteral}{"{}"{}}) + \_name;}
+\DoxyCodeLine{363         \}}
+\DoxyCodeLine{365         \textcolor{keyword}{auto}                \mbox{\hyperlink{classargparse_1_1_parser_a392a5b9ba09e0acdf09cc7cc4b78f75c}{parent}}     () const noexcept \{ \textcolor{keywordflow}{return} \_parent; \}}
+\DoxyCodeLine{366 }
+\DoxyCodeLine{368         \mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \mbox{\hyperlink{classargparse_1_1_parser_a8915fdcdf1880d3a85e4272797d0f4eb}{parent}}(\mbox{\hyperlink{classargparse_1_1_parser}{Parser}}\& \_parent) \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{369         \{ this-\/>\_parent = \&\_parent; \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{370     \};}
+\DoxyCodeLine{371 \}}
+\DoxyCodeLine{372 }
+\DoxyCodeLine{373 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// ARGPARSE\_PARSER\_HPP\_DEFINED}}
 
 \end{DoxyCode}

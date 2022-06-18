@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zero_5for_5fmore_0',['ZERO_OR_MORE',['../dc/d72/structargparse_1_1_argument.html#ac8e932b78791fd44a5303073807b1a6c',1,'argparse::Argument']]]
+  ['transform_0',['transform',['../d5/d38/namespaceargparse_1_1arguments.html#a765fc1cfec0cdcb9cdb5f9ce69ecfc3e',1,'argparse::transform()'],['../d5/d38/namespaceargparse_1_1arguments.html#a765fc1cfec0cdcb9cdb5f9ce69ecfc3e',1,'argparse::arguments::transform()']]]
 ];

@@ -1,4 +1,4 @@
-.TH "include/fsop/inspect.hpp" 3 "Tue Jun 7 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.TH "include/fsop/inspect.hpp" 3 "Sat Jun 18 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -40,7 +40,7 @@ include/fsop/inspect.hpp \- Defines functions for abstracting system calls for v
 
 .in +1c
 .ti -1c
-.RI "stat_info \fBfsop::inspect_file\fP (std::string_view path)"
+.RI "stat_info \fBfsop::inspect_file\fP (std::string_view path, bool follow_symlinks=false)"
 .br
 .RI "Inspect the inode of a file, via the stat system call\&. "
 .ti -1c
@@ -77,7 +77,7 @@ Copyright (c) 2022
 
 .SH "Function Documentation"
 .PP 
-.SS "auto fsop::inspect_file (std::string_view path)"
+.SS "auto fsop::inspect_file (std::string_view path, bool follow_symlinks = \fCfalse\fP)"
 
 .PP
 Inspect the inode of a file, via the stat system call\&. This function summarizes available data in the inode, as returned by the stat system call and returns the data as a stat object\&.
@@ -85,6 +85,8 @@ Inspect the inode of a file, via the stat system call\&. This function summarize
 \fBParameters\fP
 .RS 4
 \fIpath\fP Path to the file to inspect\&. 
+.br
+\fIfollow_symlinks\fP If true, uses stat instead of lstat to resolve symbolic links\&. 
 .RE
 .PP
 \fBReturns\fP

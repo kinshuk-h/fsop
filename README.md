@@ -21,7 +21,7 @@
   ./fsop.out write [--lbuf] [-h] [-A] [-t] [-b OFFSET...] [-B {CUR,END,SET}...] [-p] [path]
   ```
   ```bash
-  ./fsop.out inspect [-h] path...
+  ./fsop.out inspect [-h] [-l] path...
   ```
 - Information about usage, flags and options can also be accessed by executing `./fsop --help` on a terminal.
 - More information about actions can be accessed using the `--help` flag alongside the specific action, for example `./fsop.out create --help` to view help on how to use create.
@@ -51,8 +51,9 @@
 |---|---|
 | Create New Files | `creat`, `mknod` |
 | Access Existing Files | `open`, `read`, `write`, `lseek` (`lseek64`), `close` |
-| Manipulate the Inode | `chdir`, `chmod`, `stat` (`fstat`, `lstat`, `stat64`) |
+| Manipulate the Inode | `chdir`, `chmod`, `stat` (`fstat`, `lstat`, `stat64`, ...) |
 | Advanced System Calls | `dup`, `pipe`, `unlink` |
+| Miscellaneous (non-fs) | `fork`, `getpid`, `signal`, `exit`, `getpwuid`, `getgrgid` |
 
 ## Building
 

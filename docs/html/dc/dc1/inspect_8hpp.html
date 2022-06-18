@@ -98,9 +98,9 @@ using&#160;</td><td class="memItemRight" valign="bottom"><b>fsop::stat_info</b> 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a90a9ddb257701d70b5aa41cde328ce1d"><td class="memItemLeft" align="right" valign="top">stat_info&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/dc1/inspect_8hpp.html#a90a9ddb257701d70b5aa41cde328ce1d">fsop::inspect_file</a> (std::string_view path)</td></tr>
-<tr class="memdesc:a90a9ddb257701d70b5aa41cde328ce1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inspect the inode of a file, via the stat system call.  <a href="../../dc/dc1/inspect_8hpp.html#a90a9ddb257701d70b5aa41cde328ce1d">More...</a><br /></td></tr>
-<tr class="separator:a90a9ddb257701d70b5aa41cde328ce1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c0dda70ad52aeed345e6c59a0c1d77c"><td class="memItemLeft" align="right" valign="top">stat_info&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/dc1/inspect_8hpp.html#a8c0dda70ad52aeed345e6c59a0c1d77c">fsop::inspect_file</a> (std::string_view path, bool follow_symlinks=false)</td></tr>
+<tr class="memdesc:a8c0dda70ad52aeed345e6c59a0c1d77c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inspect the inode of a file, via the stat system call.  <a href="../../dc/dc1/inspect_8hpp.html#a8c0dda70ad52aeed345e6c59a0c1d77c">More...</a><br /></td></tr>
+<tr class="separator:a8c0dda70ad52aeed345e6c59a0c1d77c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a544dbd1a0a6e99e73f914bc4f01ce6e6"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/dc1/inspect_8hpp.html#a544dbd1a0a6e99e73f914bc4f01ce6e6">fsop::print_stat_info</a> (std::ostream &amp;os, const stat_info &amp;info)</td></tr>
 <tr class="memdesc:a544dbd1a0a6e99e73f914bc4f01ce6e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints information received by a call to {inspect_file} to a given output stream. Displayed information is presented in a user friendly manner.  <a href="../../dc/dc1/inspect_8hpp.html#a544dbd1a0a6e99e73f914bc4f01ce6e6">More...</a><br /></td></tr>
 <tr class="separator:a544dbd1a0a6e99e73f914bc4f01ce6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -112,8 +112,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2022-05-28</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2022 </dd></dl>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a id="a90a9ddb257701d70b5aa41cde328ce1d" name="a90a9ddb257701d70b5aa41cde328ce1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90a9ddb257701d70b5aa41cde328ce1d">&#9670;&nbsp;</a></span>inspect_file()</h2>
+<a id="a8c0dda70ad52aeed345e6c59a0c1d77c" name="a8c0dda70ad52aeed345e6c59a0c1d77c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c0dda70ad52aeed345e6c59a0c1d77c">&#9670;&nbsp;</a></span>inspect_file()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -122,8 +122,18 @@ Functions</h2></td></tr>
           <td class="memname">auto fsop::inspect_file </td>
           <td>(</td>
           <td class="paramtype">std::string_view&#160;</td>
-          <td class="paramname"><em>path</em></td><td>)</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>follow_symlinks</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -133,6 +143,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>Path to the file to inspect. </td></tr>
+    <tr><td class="paramname">follow_symlinks</td><td>If true, uses stat instead of lstat to resolve symbolic links. </td></tr>
   </table>
   </dd>
 </dl>

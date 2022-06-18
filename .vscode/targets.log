@@ -1,0 +1,645 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
+# GNU Make 4.3
+# Built for x86_64-pc-msys
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+ 
+
+# Make data base, printed on Thu Jun  2 23:32:25 2022
+
+# Variables
+
+# environment
+FPS_BROWSER_APP_PROFILE_STRING = Internet Explorer
+ 
+# environment
+SYSTEMDRIVE = C:
+# environment
+JAVA_HOME = C:\Program Files (x86)\Java\jdk1.8.0_202
+# makefile (from 'Makefile', line 16)
+LIBDIR := lib
+# environment
+LC_ALL = C
+# environment
+USERPROFILE = C:\Users\kinsh
+# environment
+VBOX_MSI_INSTALL_PATH = F:\Program Files\VirtualBox\
+# environment
+CMD_PROGRAMS = H:/All C++ Files/Others/Command Line Compatible
+# environment
+LOCALAPPDATA = C:\Users\kinsh\AppData\Local
+# environment
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-d5ac39ab-7dac-4f87-82a6-dc1f799da0b9-sock
+# environment
+VSCODE_CWD = F:\Program Files\Microsoft VS Code
+# environment
+PYTHON = F:\msys64\mingw64\bin\python3.exe
+# environment
+CHOCOLATEYINSTALL = F:\Chocolatey
+# environment
+SYSTEMROOT = C:\WINDOWS
+# environment
+PROCESSOR_LEVEL = 6
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\WINDOWS\system32\WindowsPowerShell\v1.0\Modules
+# environment
+GNUPLOT_LIB = F:\Program Files\gnuplot\demo;F:\Program Files\gnuplot\demo\games;F:\Program Files\gnuplot\share
+# default
+MAKE_COMMAND := make
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_15920_UVSOTEKCSXZEJKOU
+# environment
+FPS_BROWSER_USER_PROFILE_STRING = Default
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+ 
+.VARIABLES := 
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+VSCODE_LOG_STACK = false
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = F:\Program Files\Microsoft VS Code\data\user-data\CachedData\c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+# environment
+LANG = C
+# default
+.LOADED := 
+# environment
+TMP = /c/Users/kinsh/AppData/Local/Temp
+# default
+.INCLUDE_DIRS = /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# environment
+ONEDRIVE = C:\Users\kinsh\OneDrive
+# environment
+POWERSHELL_DISTRIBUTION_CHANNEL = MSI:Windows 10 Pro
+# makefile
+CURDIR := /h/All C++ Files/DUCS Programs/Advanced Operating Systems/fsop - Filesystem Operations
+ 
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+PROGRAMFILES = C:\Program Files
+# environment
+MFLAGS = -pqrR
+# default
+.SHELLFLAGS := -c
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# makefile (from 'deps/main.d', line 1)
+MAKEFILE_LIST := Makefile deps/argparse/arguments/argument.d deps/argparse/arguments/optional.d deps/argparse/arguments/positional.d deps/argparse/arguments/switch.d deps/argparse/parser.d deps/fsop/create.d deps/fsop/inspect.d deps/fsop/utilities.d deps/main.d
+# automatic
+@F = $(notdir $@)
+# environment
+REQUESTS_CA_BUNDLE = F:\msys64\mingw64\ssl\cert.pem
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# environment
+ 
+VSCODE_PID = 15920
+# environment
+CUDA_PATH = F:\Program Files\NVIDIA GPU Computing Toolkit\CUDA
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from 'Makefile', line 2)
+FIND = F:/msys64/usr/bin/find.exe
+# automatic
+*F = $(notdir $*)
+# environment
+TESSDATA_PREFIX = F:/tessdata
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+ANDROID_SDK_ROOT = F:\Android\android-sdk
+# environment
+JD2_HOME = F:\Program Files\JDownloader
+# environment
+ONEDRIVECONSUMER = C:\Users\kinsh\OneDrive
+# default
+MAKE_HOST := x86_64-pc-msys
+# environment
+PROGRAMDATA = C:\ProgramData
+# default
+SHELL := /bin/sh
+# environment
+HOMEPATH = \Users\kinsh
+# default
+MAKECMDGOALS := all
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+COMSPEC = C:\WINDOWS\system32\cmd.exe
+# environment
+WINDIR = C:\WINDOWS
+ 
+# environment
+MAKELEVEL := 0
+# environment
+SYS64 = C:\WINDOWS\SysWOW64
+# makefile (from 'Makefile', line 3)
+MKDIR = F:/msys64/usr/bin/mkdir.exe
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+PATH = /c/WINDOWS:/c/WINDOWS/System32:/c/WINDOWS:/c/WINDOWS/system32:/c/Program Files/Common Files/Oracle/Java/javapath:/f/Program Files/NVIDIA GPU Computing Toolkit/CUDA/bin:/f/Program Files/NVIDIA GPU Computing Toolkit/CUDA/libnvvp:/f/bin:/f/xampp/php:/f/xampp/mysql/bin:/f/xampp/apache/bin:/f/platform-tools:/f/node_modules:/f/Chocolatey/bin:/f/MinGWTools/bin:/f/Programs/Scrcpy:/:/usr/bin:/mingw64/bin:/f/node_modules/bin:/f/Program Files/PuTTY:/f/Program Files/nodejs:/f/Program Files/RClone:/f/Program Files/Git/cmd:/f/Program Files/CMake/bin:/f/Program Files/heroku/bin:/f/Program Files/gnuplot/bin:/f/Program Files/PowerShell/7:/f/Program Files/R/R-4.0.5/bin/x64:/f/Program Files/MiKTeX 2.9/miktex/bin/x64:/f/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools:/f/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/VC/Tools/MSVC/14.26.28801/bin/Hostx64/x64:/h/All C++ Files/Others/Command Line Compatible:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/OpenSSH:/c/WINDOWS/System32/WindowsPowerShell/v1.0:/c/Program Files (x86)/Java/jdk1.8.0_202/bin:/f/Libraries/apache-ant-1.10.10/bin:/c/ProgramData/ComposerSetup/bin:/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/c/Program Files/Intel/Intel(R) Management Engine Components/iCLS:/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/iCLS:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/c/Users/kinsh/AppData/L:/c/Users/kinsh/AppData/Local/Microsoft/WindowsApps:/c/Program Files/NVIDIA Corporation/Nsight Compute 2020.1.1:/c/Program Files/dotnet:/f/Program Files/swipl/bin:/f/Program Files/wkhtmltopdf/bin:/h/All Python Files/Scripts:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0:/c/WINDOWS/System32/OpenSSH:/f/Program Files/nodejs:/f/Program Files/WinMerge:/c/Program Files/platform-tools:/c/Users/kinsh/.windows-build-tools/python27:/f/Program Files/nodejs/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/c/Users/kinsh/AppData/Roaming/npm/node_modules/windows-build-tools/node_modules/.bin:/c/Users/kinsh/AppData/Roaming/npm/node_modules/.bin:/f/adb:/:/mingw64/bin:/f/Program Files/gnuplot/bin:/f/Program Files/Microsoft VS Code/bin:/f/Program Files/Git/cmd:/f/Program Files/CMake/bin:/f/Program Files/R-3.6.1/bin/x64:/f/Softwares/Scrcpy:/f/MinGWTools/bin:/f/Program Files/nodejs:/f/Program Files/RClone:/f/xampp/php:/c/WINDOWS:/c/WINDOWS/system32:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/OpenSSH:/c/WINDOWS/System32/WindowsPowerShell/v1.0:/c/Windows:/c/Windows/system32:/c/Windows/System32/Wbem:/c/Windows/System32/OpenSSH:/c/Windows/System32/WindowsPowerShell/v1.0:/c/Program Files/Java/jdk-12/bin:/c/Program Fil:/f/Exercism:/c/Users/kinsh/AppData/Local/Microsoft/WindowsApps:/f/Program Files/heroku/bin:/c/Users/kinsh/AppData/Roaming/npm:/f/Program Files/IPFS Desktop/resources/app.asar.unpacked/src/ipfs-on-path/scripts/bin-win:/mingw64/lib:/usr/lib:/c/Users/kinsh/spicetify-cli:%USERPROFILE%/AppData/Local/Microsoft/WindowsApps
+# environment
+COMPUTERNAME = PH315-IRAB6HQ
+# default
+MAKEFILES := 
+# automatic
+^F = $(notdir $^)
+# environment
+PROMPT = $P$G
+# environment
+CHOCOLATEYLASTPATHUPDATE = 132364477404879341
+# environment
+NVTOOLSEXT_PATH = C:\Program Files\NVIDIA Corporation\NvToolsExt\
+ 
+# environment
+LOGONSERVER = \\PH315-IRAB6HQ
+# environment
+VSCODE_LOG_NATIVE = false
+# environment
+USERNAME = kinsh
+# environment
+ANDROID_SDK_HOME = F:\Android
+# environment
+COMMONPROGRAMFILES = C:\Program Files\Common Files
+# automatic
+?F = $(notdir $?)
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+# environment
+R_LIBS_USER = F:/Program Files/R Libs
+# makefile (from 'Makefile', line 12)
+INCLUDEDIR := include
+# automatic
++F = $(notdir $+)
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# makefile (from 'Makefile', line 23)
+OBJECTS := lib/argparse/arguments/argument.o lib/argparse/arguments/optional.o lib/argparse/arguments/positional.o lib/argparse/arguments/switch.o lib/argparse/parser.o lib/fsop/create.o lib/fsop/inspect.o lib/fsop/utilities.o lib/main.o
+# environment
+USERDOMAIN = PH315-IRAB6HQ
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+VS140COMNTOOLS = C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\Tools\
+# environment
+OS = Windows_NT
+# environment
+SYS32 = C:\WINDOWS\System32
+# makefile (from 'Makefile', line 29)
+CPPFLAGS = -MMD -MP -MF $(@:$(LIBDIR)/%.o=$(DEPDIR)/%.d)
+ 
+# environment
+GYP_MSVS_VERSION = 2015
+# environment
+VSCODE_PORTABLE = F:\Program Files\Microsoft VS Code\data
+# makefile
+.DEFAULT_GOAL := fsop.out
+# default
+MAKE_VERSION := 4.3
+# 'override' directive
+.SHELLSTATUS := 0
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# environment
+NVCUDASAMPLES_ROOT = F:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\Samples
+# environment
+USERDOMAIN_ROAMINGPROFILE = PH315-IRAB6HQ
+# environment
+CUDA_PATH_V11_0 = F:\Program Files\NVIDIA GPU Computing Toolkit\CUDA
+# environment
+NUMBER_OF_PROCESSORS = 8
+# environment
+PUBLIC = C:\Users\Public
+# environment
+APPDATA = C:\Users\kinsh\AppData\Roaming
+# environment
+HOMEDRIVE = C:
+# environment
+PROCESSOR_ARCHITECTURE = AMD64
+# environment
+NODE_PATH = F:\node_modules\node_modules
+# environment
+RTOOLS40_HOME = C:\rtools40
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/kinsh
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+ANT_HOME = F:\Libraries\apache-ant-1.10.10
+# environment
+KAGGLE_CONFIG_DIR = F:\Access Keys & Private Configuration Files
+# environment
+TEMP = /c/Users/kinsh/AppData/Local/Temp
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\02fec80380ff16856128e05059379667-1.67.2-main-sock
+# environment
+TERM = xterm-256color
+# makefile (from 'Makefile', line 10)
+SRCDIR := src
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# makefile (from 'Makefile', line 25)
+ 
+DEPS := deps/argparse/arguments/argument.d deps/argparse/arguments/optional.d deps/argparse/arguments/positional.d deps/argparse/arguments/switch.d deps/argparse/parser.d deps/fsop/create.d deps/fsop/inspect.d deps/fsop/utilities.d deps/main.d
+# makefile (from 'Makefile', line 14)
+DEPDIR := deps
+# default
+SUFFIXES := 
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# makefile (from 'Makefile', line 19)
+TARGET := fsop.out
+# environment
+SESSIONNAME = Console
+# makefile (from 'Makefile', line 27)
+CXXFLAGS := -std=c++17 -Wall -Wextra -g
+# environment
+PROG27B48B2C054 = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# environment
+PROCESSOR_REVISION = 9e0a
+# makefile (from 'Makefile', line 31)
+CXX := g++
+# makefile (from 'Makefile', line 21)
+SOURCES := src/argparse/arguments/argument.cpp src/argparse/arguments/optional.cpp src/argparse/arguments/positional.cpp src/argparse/arguments/switch.cpp src/argparse/parser.cpp src/fsop/create.cpp src/fsop/inspect.cpp src/fsop/utilities.cpp src/main.cpp
+# environment
+NVCUDASAMPLES11_0_ROOT = F:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\Samples
+# environment
+!H: = h:\All C++ Files\DUCS Programs\Advanced Operating Systems\fsop - Filesystem Operations
+# environment
+PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+# variable set hash-table stats:
+ 
+# Load=140/1024=14%, Rehash=0, Collisions=22/205=11%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+ 
+
+# Directories
+
+# src (device 283708764, inode 4503599627457407): No files, no impossibilities so far.
+# . (device 283708764, inode 4785074604166940): 13 files, no impossibilities.
+
+# 13 files, no impossibilities in 2 directories.
+
+# Implicit Rules
+
+lib/%.o: src/%.cpp
+#  recipe to execute (from 'Makefile', line 41):
+	@$(MKDIR) -p $(@D)
+	@$(MKDIR) -p $(@D:$(LIBDIR)%=$(DEPDIR)%)
+	@echo -n "[>] "
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(INCLUDEDIR:%=-I%) -c $< -o $@
+
+# 1 implicit rules, 0 (0.0%) terminal.
+# Files
+
+# Not a target:
+deps/fsop/utilities.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-02 18:13:02.9819115
+#  File has been updated.
+#  Successfully updated.
+
+include/argparse/utilities.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-30 21:12:51.1013854
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/main.d:
+#  Implicit rule search has been done.
+ 
+#  Last modified 2022-06-02 23:15:33.0318175
+#  File has been updated.
+#  Successfully updated.
+
+fsop.out: lib/argparse/arguments/argument.o lib/argparse/arguments/optional.o lib/argparse/arguments/positional.o lib/argparse/arguments/switch.o lib/argparse/parser.o lib/fsop/create.o lib/fsop/inspect.o lib/fsop/utilities.o lib/main.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 35):
+	@echo -n "[>] "
+	$(CXX) $(LIBDIR:%=-L%) $(LDFLAGS) $^ -o $@
+
+# Not a target:
+src/fsop/create.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/argparse/parser.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-02 22:20:51.1063262
+#  File has been updated.
+#  Successfully updated.
+
+include/argparse/arguments/switch.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/argparse/common.hpp:
+#  Implicit rule search has not been done.
+ 
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/main.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 57):
+	@echo -n "[>] Removing $(TARGET) ... "
+	@rm -f $(TARGET)
+	@echo "done"
+	@echo -n "[>] Removing intermediate object files in ($(LIBDIR)) ... "
+	@rm -rf $(LIBDIR)
+	@echo "done"
+	@echo -n "[>] Removing old dependency files in ($(DEPDIR)) ... "
+	@rm -rf $(DEPDIR)
+	@echo "done"
+
+lib/fsop/create.o: src/fsop/create.cpp include/fsop/create.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+lib/argparse/arguments/optional.o: src/argparse/arguments/optional.cpp include/argparse/arguments/optional.hpp include/argparse/arguments/argument.hpp include/argparse/arguments/../common.hpp include/argparse/arguments/../utilities.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/argparse/arguments/argument.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/argparse/arguments/optional.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/argparse/arguments/../common.hpp:
+#  Implicit rule search has not been done.
+ 
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/fsop/inspect.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/argparse/arguments/switch.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-02 22:20:48.9320548
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+deps/fsop/create.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-01 21:20:42.838093
+#  File has been updated.
+#  Successfully updated.
+
+lib/fsop/inspect.o: src/fsop/inspect.cpp include/fsop/inspect.hpp include/fsop/utilities.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/fsop/create.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+ 
+#  File has not been updated.
+
+include/argparse/parser.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+run: fsop.out
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 52):
+	@$(TARGET) $(args)
+
+# Not a target:
+src/argparse/arguments/positional.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/argparse/arguments/argument.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-02 22:20:43.2518686
+#  File has been updated.
+#  Successfully updated.
+
+lib/argparse/arguments/switch.o: src/argparse/arguments/switch.cpp include/argparse/arguments/switch.hpp include/argparse/common.hpp include/argparse/utilities.hpp include/argparse/arguments/argument.hpp include/argparse/arguments/../common.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/fsop/inspect.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-02 18:13:02.0689661
+#  File has been updated.
+#  Successfully updated.
+
+lib/main.o: src/main.cpp include/argparse.hpp include/argparse/common.hpp include/argparse/utilities.hpp include/argparse/arguments/argument.hpp include/argparse/arguments/../common.hpp include/argparse/arguments/switch.hpp include/argparse/common.hpp include/argparse/arguments/argument.hpp include/argparse/arguments/optional.hpp include/argparse/arguments/positional.hpp include/argparse/parser.hpp include/argparse/common.hpp include/argparse/arguments/argument.hpp include/argparse/arguments/switch.hpp include/fsop/create.hpp include/fsop/inspect.hpp include/fsop/utilities.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+ 
+#  File has not been updated.
+
+include/argparse/arguments/positional.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+lib/argparse/parser.o: src/argparse/parser.cpp include/argparse/parser.hpp include/argparse/common.hpp include/argparse/utilities.hpp include/argparse/arguments/argument.hpp include/argparse/arguments/../common.hpp include/argparse/arguments/switch.hpp include/argparse/common.hpp include/argparse/arguments/argument.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/fsop/utilities.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/argparse/arguments/optional.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-02 22:20:45.171905
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/argparse/arguments/switch.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.SECONDEXPANSION:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+lib/argparse/arguments/positional.o: src/argparse/arguments/positional.cpp include/argparse/arguments/positional.hpp include/argparse/arguments/argument.hpp include/argparse/arguments/../common.hpp include/argparse/arguments/../utilities.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/fsop/inspect.hpp:
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+lib/argparse/arguments/argument.o: src/argparse/arguments/argument.cpp include/argparse/arguments/argument.hpp include/argparse/arguments/../common.hpp include/argparse/arguments/../utilities.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/argparse/arguments/../utilities.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/argparse/arguments/optional.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+.PHONY: run clean
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/argparse.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+deps/argparse/arguments/positional.d:
+#  Implicit rule search has been done.
+#  Last modified 2022-06-02 22:20:47.1105605
+#  File has been updated.
+#  Successfully updated.
+
+ 
+lib/fsop/utilities.o: src/fsop/utilities.cpp include/fsop/utilities.hpp
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/argparse/parser.cpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/fsop/utilities.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+include/argparse/arguments/argument.hpp:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=49/1024=5%, Rehash=0, Collisions=2/192=1%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 63 / storage = 1311 B / avg = 20 B
+ 
+# current buf: size = 8162 B / used = 1311 B / count = 63 / avg = 20 B
+
+# strcache performance: lookups = 228 / hit rate = 72%
+# hash-table stats:
+# Load=63/8192=1%, Rehash=0, Collisions=0/228=0%
+# Finished Make data base on Thu Jun  2 23:32:25 2022
+
+ 

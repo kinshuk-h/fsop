@@ -28,7 +28,7 @@
 \end{DoxyCode}
  
 \begin{DoxyCode}{0}
-\DoxyCodeLine{./fsop.out inspect [-\/h] path...}
+\DoxyCodeLine{./fsop.out inspect [-\/h] [-\/l] path...}
 
 \end{DoxyCode}
 
@@ -74,8 +74,9 @@
 \endhead
 Create New Files   &{\ttfamily creat}, {\ttfamily mknod}    \\\cline{1-2}
 Access Existing Files   &{\ttfamily open}, {\ttfamily read}, {\ttfamily write}, {\ttfamily lseek} ({\ttfamily lseek64}), {\ttfamily close}    \\\cline{1-2}
-Manipulate the Inode   &{\ttfamily chdir}, {\ttfamily chmod}, {\ttfamily stat} ({\ttfamily fstat}, {\ttfamily lstat}, {\ttfamily stat64})    \\\cline{1-2}
-Advanced System Calls   &{\ttfamily dup}, {\ttfamily pipe}, {\ttfamily unlink}   \\\cline{1-2}
+Manipulate the Inode   &{\ttfamily chdir}, {\ttfamily chmod}, {\ttfamily stat} ({\ttfamily fstat}, {\ttfamily lstat}, {\ttfamily stat64}, ...)    \\\cline{1-2}
+Advanced System Calls   &{\ttfamily dup}, {\ttfamily pipe}, {\ttfamily unlink}    \\\cline{1-2}
+Miscellaneous (non-\/fs)   &{\ttfamily fork}, {\ttfamily getpid}, {\ttfamily signal}, {\ttfamily exit}, {\ttfamily getpwuid}, {\ttfamily getgrgid}   \\\cline{1-2}
 \end{longtabu}
 \hypertarget{index_autotoc_md3}{}\doxysection{Building}\label{index_autotoc_md3}
 

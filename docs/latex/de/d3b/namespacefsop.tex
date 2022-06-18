@@ -1,0 +1,136 @@
+\hypertarget{namespacefsop}{}\doxysection{fsop Namespace Reference}
+\label{namespacefsop}\index{fsop@{fsop}}
+
+
+Exposes abstractions over system calls related to the filesystem.  
+
+
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespacefsop_1_1utils}{utils}}
+\begin{DoxyCompactList}\small\item\em Defines common utilities for use with filesystem operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfsop_1_1_file}{File}}
+\begin{DoxyCompactList}\small\item\em Defines a structure for abstracting I/O operations via system calls. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacefsop_a604b8c2e98860f3d8f83e6eb77347da1}\label{namespacefsop_a604b8c2e98860f3d8f83e6eb77347da1}} 
+using {\bfseries stat\+\_\+info} = std\+::variant$<$ struct stat, struct stat64 $>$
+\begin{DoxyCompactList}\small\item\em A variant over stat structures to hold inode information depending on the size requirement. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{namespacefsop_a143407609bf1ab0f902fbe5ef56bafd2}{create\+\_\+file}} (std\+::string\+\_\+view path, mode\+\_\+t permissions, bool overwrite=false)
+\begin{DoxyCompactList}\small\item\em Creates a new regular file in the filesystem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacefsop_aa04c1c3489327c823e86ad7fb7af8d95}{create\+\_\+pipe}} (std\+::string\+\_\+view path, mode\+\_\+t permissions, bool overwrite=false)
+\begin{DoxyCompactList}\small\item\em Creates a new named pipe (FIFO file) in the filesystem. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefsop_a604b8c2e98860f3d8f83e6eb77347da1}{stat\+\_\+info}} \mbox{\hyperlink{namespacefsop_a8c0dda70ad52aeed345e6c59a0c1d77c}{inspect\+\_\+file}} (std\+::string\+\_\+view path, bool follow\+\_\+symlinks=false)
+\begin{DoxyCompactList}\small\item\em Inspect the inode of a file, via the stat system call. \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{namespacefsop_a544dbd1a0a6e99e73f914bc4f01ce6e6}{print\+\_\+stat\+\_\+info}} (std\+::ostream \&os, const \mbox{\hyperlink{namespacefsop_a604b8c2e98860f3d8f83e6eb77347da1}{stat\+\_\+info}} \&info)
+\begin{DoxyCompactList}\small\item\em Prints information received by a call to \{inspect\+\_\+file\} to a given output stream. Displayed information is presented in a user friendly manner. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Exposes abstractions over system calls related to the filesystem. 
+
+This namespace exposes classes for \mbox{\hyperlink{structfsop_1_1_file}{File}} I/O as well as functions for performing actions corresponding to various system calls such as opening files and pipes, inspecting files (via stat), chaninging directories as well as utility functions for mapping arguments to types accepted by the system calls. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacefsop_a143407609bf1ab0f902fbe5ef56bafd2}\label{namespacefsop_a143407609bf1ab0f902fbe5ef56bafd2}} 
+\index{fsop@{fsop}!create\_file@{create\_file}}
+\index{create\_file@{create\_file}!fsop@{fsop}}
+\doxysubsubsection{\texorpdfstring{create\_file()}{create\_file()}}
+{\footnotesize\ttfamily void fsop\+::create\+\_\+file (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{path,  }\item[{mode\+\_\+t}]{permissions,  }\item[{bool}]{overwrite = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Creates a new regular file in the filesystem. 
+
+For successful operation, ensure that the file does not previously exist, all directories along the path exist, there is ample resources for inode and/or disk block allocation and appropriate permissions along all directory components of the path are available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path at which the file must be created. \\
+\hline
+{\em permissions} & The permissions to associate with the file. \\
+\hline
+{\em overwrite} & If true, recreates the file, effectively truncating previous content.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{std\+::system\+\_\+error\}} & reason for failure of operation. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{namespacefsop_aa04c1c3489327c823e86ad7fb7af8d95}\label{namespacefsop_aa04c1c3489327c823e86ad7fb7af8d95}} 
+\index{fsop@{fsop}!create\_pipe@{create\_pipe}}
+\index{create\_pipe@{create\_pipe}!fsop@{fsop}}
+\doxysubsubsection{\texorpdfstring{create\_pipe()}{create\_pipe()}}
+{\footnotesize\ttfamily void fsop\+::create\+\_\+pipe (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{path,  }\item[{mode\+\_\+t}]{permissions,  }\item[{bool}]{overwrite = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Creates a new named pipe (FIFO file) in the filesystem. 
+
+For successful operation, ensure that the file does not previously exist, all directories along the path exist, there is ample resources for inode and/or disk block allocation and appropriate permissions along all directory components of the path are available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path at which the file must be created. \\
+\hline
+{\em permissions} & The permissions to associate with the file. \\
+\hline
+{\em overwrite} & If true, recreates the file, effectively truncating previous content.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \{std\+::system\+\_\+error\}} & reason for failure of operation. \\
+\hline
+\end{DoxyExceptions}
+\mbox{\Hypertarget{namespacefsop_a8c0dda70ad52aeed345e6c59a0c1d77c}\label{namespacefsop_a8c0dda70ad52aeed345e6c59a0c1d77c}} 
+\index{fsop@{fsop}!inspect\_file@{inspect\_file}}
+\index{inspect\_file@{inspect\_file}!fsop@{fsop}}
+\doxysubsubsection{\texorpdfstring{inspect\_file()}{inspect\_file()}}
+{\footnotesize\ttfamily auto fsop\+::inspect\+\_\+file (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{path,  }\item[{bool}]{follow\+\_\+symlinks = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+
+Inspect the inode of a file, via the stat system call. 
+
+This function summarizes available data in the inode, as returned by the stat system call and returns the data as a stat object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the file to inspect. \\
+\hline
+{\em follow\+\_\+symlinks} & If true, uses stat instead of lstat to resolve symbolic links. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{stat\+\_\+info\} Information related to the file, in a structure large enough to hold it. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefsop_a544dbd1a0a6e99e73f914bc4f01ce6e6}\label{namespacefsop_a544dbd1a0a6e99e73f914bc4f01ce6e6}} 
+\index{fsop@{fsop}!print\_stat\_info@{print\_stat\_info}}
+\index{print\_stat\_info@{print\_stat\_info}!fsop@{fsop}}
+\doxysubsubsection{\texorpdfstring{print\_stat\_info()}{print\_stat\_info()}}
+{\footnotesize\ttfamily std\+::ostream \& fsop\+::print\+\_\+stat\+\_\+info (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{namespacefsop_a604b8c2e98860f3d8f83e6eb77347da1}{stat\+\_\+info}} \&}]{info }\end{DoxyParamCaption})}
+
+
+
+Prints information received by a call to \{inspect\+\_\+file\} to a given output stream. Displayed information is presented in a user friendly manner. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & The output stream to write content to. \\
+\hline
+{\em info} & The structure object containing information to display. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{std\+::ostream\&\} Reference to the output stream for cascading operations. 
+\end{DoxyReturn}
