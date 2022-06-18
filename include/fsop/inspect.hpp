@@ -43,10 +43,11 @@ namespace fsop
      * stat system call and returns the data as a stat object.
      *
      * @param path Path to the file to inspect.
+     * @param follow_symlinks If true, uses stat instead of lstat to resolve symbolic links.
      * @return {stat_info} Information related to the file,
      *                     in a structure large enough to hold it.
      */
-    stat_info inspect_file(std::string_view path);
+    stat_info inspect_file(std::string_view path, bool follow_symlinks = false);
 
     /**
      * @brief Prints information received by a call to {inspect_file}

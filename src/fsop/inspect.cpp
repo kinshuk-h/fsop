@@ -15,19 +15,33 @@
 #include <grp.h>           // struct group, getgrgid
 #include <sys/sysmacros.h> // major, minor
 
-auto fsop::inspect_file(std::string_view path) -> fsop::stat_info
+auto fsop::inspect_file(std::string_view path, bool follow_symlinks) -> fsop::stat_info
 {
-    stat_info inode_data;
+    stat_info inode_data; int status = 0;
 
-    // Use lstat*() instead of stat(0 to prevent resolution of symbolic links.
-    int status = lstat(path.data(), &std::get<struct stat>(inode_data));
+    if(follow_symlinks)
+    {
+        status = stat(path.data(), &std::get<struct stat>(inode_data));
+    }
+    else
+    {
+        // Use lstat*() instead of stat(0 to prevent resolution of symbolic links.
+        status = lstat(path.data(), &std::get<struct stat>(inode_data));
+    }
     if(status == 0) return inode_data;
 
     // If the failure was due to overflow on the buffer provided to hold the data ...
     if(errno == EOVERFLOW)
     {
         // ... retry using a call to a stat function which returns data in a larger structure.
-        status = lstat64(path.data(), &std::get<struct stat64>(inode_data));
+        if(follow_symlinks)
+        {
+            status = stat64(path.data(), &std::get<struct stat64>(inode_data));
+        }
+        else
+        {
+            status = lstat64(path.data(), &std::get<struct stat64>(inode_data));
+        }
         if(status == 0) return inode_data;
     }
 

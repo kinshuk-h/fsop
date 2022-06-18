@@ -1,12 +1,19 @@
-#include <iostream>
+/**
+ * @file main.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Driver source code for the CLI application.
+ * @version 1.0
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ */
+
+#include <iostream>     // std::cout, std::cin
 
 #include "argparse.hpp" // Module for argument parsing.
 #include "fsop_cli.hpp" // Functions implementing CLI actions.
 
-#include "fsop/file.hpp"
-#include "fsop/create.hpp"
-#include "fsop/inspect.hpp"
-#include "fsop/utilities.hpp"
+#include "fsop/utilities.hpp"   // fsop::utils::*
 
 using namespace std::string_literals;
 using namespace argparse::arguments;
@@ -53,7 +60,10 @@ int main(int argc, const char** argv)
         description = "create regular files or named pipes",
         epilog = (
             "create allows creation of regular files and named pipes\n\n"
-            "permissions can be either as an octal number, a 9-letter stribg containing the letters r, w, x or - for indicating read, write, execute or no permission for the corresponding permission group, or the string separating permission group letters (u, g and o) with permissions (r, w or x) with a + symbol (e.g.: ug+rw to grant read and write permission to user and the group)\n\n"
+            "permissions can be either as an octal number, a 9-letter stribg containing the letters r, w, x or - for "
+            "indicating read, write, execute or no permission for the corresponding permission group, or the string "
+            "separating permission group letters (u, g and o) with permissions (r, w or x) with a + symbol (e.g.: "
+            "ug+rw to grant read and write permission to user and the group)\n\n"
             "the overwrite mode works by unlinking the file and recreating it, so hard links might be lost as a result"
         )
     };
@@ -93,7 +103,8 @@ int main(int argc, const char** argv)
         description = "read content off regular files or pipes (named/unnamed)",
         epilog = (
             "read allows reading arbitrary bytes of data from a regular file or named pipe\n\n"
-            "read performs read operations in batches, where each batch can include a start offset, a whence value and bytes to be read\n\n"
+            "read performs read operations in batches, where each batch can include a start offset, a whence "
+            "value and bytes to be read\n\n"
             "bytes to read can be -1 to specify reading till the end of the file."
         )
     };
@@ -136,8 +147,10 @@ int main(int argc, const char** argv)
         description = "write content to regular files or pipes (named/unnamed)",
         epilog = (
             "write allows writing arbitrary bytes of data to a regular file or named pipe\n\n"
-            "write performs write operations in batches, where each batch can include a start offset and a whence value\n\n"
-            "Data to be written is read from STDIN, and can be entered in line-buffered (--lbuf) or EOF (normal) mode."
+            "write performs write operations in batches, where each batch can include a start offset and a "
+            "whence value\n\n"
+            "Data to be written is read from STDIN, and can be entered in "
+            "line-buffered (--lbuf) or EOF (normal) mode."
         )
     };
     write_parser.add_arguments(
@@ -191,6 +204,11 @@ int main(int argc, const char** argv)
         {
             name = "path", arity = argparse::Argument::ONE_OR_MORE,
             help = "paths of files to inspect"
+        },
+        argparse::Switch
+        {
+            name = "follow-symlinks", alias = "l",
+            help = "resolve symbolic links and inspect the resolved path instead"
         }
     );
 
