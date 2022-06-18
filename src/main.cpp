@@ -60,7 +60,7 @@ int main(int argc, const char** argv)
         description = "create regular files or named pipes",
         epilog = (
             "create allows creation of regular files and named pipes\n\n"
-            "permissions can be either as an octal number, a 9-letter stribg containing the letters r, w, x or - for "
+            "permissions can be either as an octal number, a 9-letter string containing the letters r, w, x or - for "
             "indicating read, write, execute or no permission for the corresponding permission group, or the string "
             "separating permission group letters (u, g and o) with permissions (r, w or x) with a + symbol (e.g.: "
             "ug+rw to grant read and write permission to user and the group)\n\n"

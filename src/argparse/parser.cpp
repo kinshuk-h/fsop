@@ -1,6 +1,16 @@
+/**
+ * @file parser.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file implementing the methods defined in argparse/parser.hpp
+ * @version 1.0
+ * @date 2022-05-30
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "argparse/parser.hpp"
 
-// Selects the first element of a pair object.
+/** Selects the first element of a pair object. */
 constexpr auto select_first = [](const auto& x) -> auto& { return x.first; };
 
 std::string argparse::SubparserSet::usage() const noexcept
@@ -44,6 +54,38 @@ argparse::Argument::range::iterator argparse::SubparserSet::parse_args(
             " (choose from " + utils::join(_parsers, ",", select_first) + ")"
         );
     }
+}
+
+std::ostream& argparse::Parser::write_description(
+    std::ostream& os, std::string_view description, unsigned tty_columns
+)
+{
+    std::string_view::size_type pos, prev_pos = description.find_first_not_of("\n", 0),
+                                start, end, text_w = tty_columns;
+    while(prev_pos != std::string_view::npos)
+    {
+        pos = description.find('\n', prev_pos+1);
+
+        auto sub_description = description.substr(prev_pos, pos-prev_pos);
+
+        start = 0; end = std::min(text_w, sub_description.size());
+        while(start < sub_description.size())
+        {
+            if(start > 0) os << '\n';
+
+            // Ensure line break would not break a word midway.
+            if(end < sub_description.size())
+                while(not std::isspace(sub_description[end]) and sub_description[end] != '-') end--;
+
+            for(auto i=start; i<end; ++i) os.put(sub_description[i]);
+            start = end+1; end = std::min(end + text_w, sub_description.size());
+        }
+
+        prev_pos = description.find_first_not_of("\n", pos);
+        if(prev_pos != std::string_view::npos) os << "\n\n";
+    }
+
+    return os;
 }
 
 argparse::Parser& argparse::Parser::add_argument(Argument&& argument)
@@ -291,11 +333,11 @@ std::string argparse::Parser::help(unsigned tty_columns) const noexcept
         }
     }
 
-    content << (not _description.empty() ? "\n\n" : "")
-            << _description
-            << positional_args << optional_args
-            << (not _epilog.empty() ? "\n\n" : "")
-            << _epilog;
+    content << (not _description.empty() ? "\n\n" : "");
+    this->write_description(content, _description, tty_columns)
+        << positional_args << optional_args
+        << (not _epilog.empty() ? "\n\n" : "");
+    this->write_description(content, _epilog, tty_columns);
 
     return content.str();
 }

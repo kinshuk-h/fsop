@@ -95,6 +95,23 @@ namespace argparse
 
     public:
         /**
+         * @brief Writes a formatted description to the given output stream.
+         *
+         * This function is for internal formatting of parser descriptions
+         * (such as when generating the argument help).
+         *
+         * @param os The output stream to write the description to.
+         * @param description The description to write.
+         * @param tty_columns Maximum number of terminal columns/characters to span per line.
+         * @return std::ostream& Reference to the output stream for cascading operations.
+         */
+        static std::ostream& write_description(
+            std::ostream& os,
+            std::string_view description,
+            unsigned tty_columns = 60
+		);
+
+        /**
          * @brief Construct a new Parser object
          *
          * @tparam NameType Placeholder type for a named argument.
