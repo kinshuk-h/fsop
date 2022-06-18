@@ -18,6 +18,13 @@
 using namespace std::string_literals;
 using namespace argparse::arguments;
 
+/**
+ * @brief Driver function for the CLI application.
+ *
+ * @param argc The number of command line arguments as received.
+ * @param argv The vector of command line arguments.
+ * @return int The exit status code for the program (to be notified to the parent).
+ */
 int main(int argc, const char** argv)
 {
     auto to_seek_whences = [](const argparse::Optional::value_type& value) {

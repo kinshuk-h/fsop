@@ -1,3 +1,14 @@
+/**
+ * @file create.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file containing implementation of the create
+ *        function declared in 'fsop_cli.hpp'.
+ * @version 1.0
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "fsop_cli.hpp"       // Base header containing function declaration for 'create'
 
 #include <iostream>           // std::cout, std::cerr

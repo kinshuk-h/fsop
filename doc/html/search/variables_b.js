@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['transform_0',['transform',['../d5/d38/namespaceargparse_1_1arguments.html#a765fc1cfec0cdcb9cdb5f9ce69ecfc3e',1,'argparse::transform()'],['../d5/d38/namespaceargparse_1_1arguments.html#a765fc1cfec0cdcb9cdb5f9ce69ecfc3e',1,'argparse::arguments::transform()']]]
+  ['select_5ffirst_0',['select_first',['../dc/ddd/parser_8cpp.html#a6a92da6b53b2033faf2b67838bc6df7c',1,'parser.cpp']]]
 ];

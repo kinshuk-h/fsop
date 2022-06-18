@@ -1,4 +1,13 @@
-// TODO: Add docs, reduce use of cin and cout
+/**
+ * @file write.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file containing implementation of the write
+ *        function declared in 'fsop_cli.hpp'.
+ * @version 1.0
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ */
 
 #include "fsop_cli.hpp"         // Base header containing function declaration for 'write'
 
@@ -38,8 +47,10 @@ int fsop_cli::write(const argparse::types::result_map& args, std::string_view pr
         }
         else // Write to a regular file or named pipe.
         {
+            bool append_mode = std::any_cast<bool>(args.at("append"));
+
             int open_options = O_WRONLY;
-            if(std::any_cast<bool>(args.at("append")))
+            if(append_mode)
                 open_options |= O_APPEND;
             if(std::any_cast<bool>(args.at("truncate")))
                 open_options |= O_TRUNC;
@@ -68,7 +79,7 @@ int fsop_cli::write(const argparse::types::result_map& args, std::string_view pr
                     offsets     .push_back(0);
                     offset_bases.push_back(SEEK_CUR);
                 }
-                else if(std::any_cast<bool>(args.at("append")))
+                else if(append_mode)
                 {
                     std::cerr << program_name << ": warning: --append flag is set, so values with --offset and "
                               << "--offset-base will have no effect\n\n";
@@ -88,9 +99,9 @@ int fsop_cli::write(const argparse::types::result_map& args, std::string_view pr
                     if(not quiet)
                     {
                         std::cout << program_name << ": write batch #" << batch_index
-                                  << ": write from offset " << offset
+                                  << ": write from offset " << (append_mode ? 0 : offset)
                                   << " relative to the ";
-                        switch(offset_base)
+                        switch(append_mode ? SEEK_END : offset_base)
                         {
                             case SEEK_SET: std::cout << "beginning\n"; break;
                             case SEEK_CUR: std::cout << "current position\n"; break;

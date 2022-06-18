@@ -1,3 +1,13 @@
+/**
+ * @file open.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file for implementation of static functions for opening files and pipes defined in fsop/file.hpp
+ * @version 1.0
+ * @date 2022-05-28
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "fsop/file.hpp"
 
 #include <cerrno>       // errno, errno macros

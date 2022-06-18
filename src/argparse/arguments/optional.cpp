@@ -1,3 +1,13 @@
+/**
+ * @file optional.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file implementing the methods defined in argparse/arguments/optional.hpp
+ * @version 1.0
+ * @date 2022-05-30
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "argparse/arguments/optional.hpp"
 
 std::string argparse::Optional::usage() const noexcept

@@ -1,3 +1,13 @@
+/**
+ * @file positional.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file implementing the methods defined in argparse/arguments/positional.hpp
+ * @version 1.0
+ * @date 2022-05-30
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "argparse/arguments/positional.hpp"
 
 std::string argparse::Positional::usage() const noexcept

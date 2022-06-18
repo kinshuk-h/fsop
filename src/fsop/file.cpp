@@ -1,3 +1,13 @@
+/**
+ * @file file.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file implementing the methods defined in fsop/file.hpp
+ * @version 1.0
+ * @date 2022-05-30
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "fsop/file.hpp"
 
 #include <cerrno>       // errno, errno macros

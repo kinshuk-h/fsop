@@ -52,6 +52,11 @@ auto \mbox{\hyperlink{classargparse_1_1_parser_a392a5b9ba09e0acdf09cc7cc4b78f75c
 \item 
 \mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \& \mbox{\hyperlink{classargparse_1_1_parser_a8915fdcdf1880d3a85e4272797d0f4eb}{parent}} (\mbox{\hyperlink{classargparse_1_1_parser}{Parser}} \&\+\_\+parent) noexcept
 \end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::ostream \& \mbox{\hyperlink{classargparse_1_1_parser_acccd856f96c285d1a9f5f3ebfde1f7e4}{write\+\_\+description}} (std\+::ostream \&os, std\+::string\+\_\+view \mbox{\hyperlink{classargparse_1_1_parser_a8bba9d766262949bf89bcc887318f511}{description}}, unsigned tty\+\_\+columns=60)
+\begin{DoxyCompactList}\small\item\em Writes a formatted description to the given output stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -406,9 +411,33 @@ Returns a concise help created using argument descriptors.
 \begin{DoxyReturn}{Returns}
 \{std\+::string\} The generated help. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{classargparse_1_1_parser_acccd856f96c285d1a9f5f3ebfde1f7e4}\label{classargparse_1_1_parser_acccd856f96c285d1a9f5f3ebfde1f7e4}} 
+\index{argparse::Parser@{argparse::Parser}!write\_description@{write\_description}}
+\index{write\_description@{write\_description}!argparse::Parser@{argparse::Parser}}
+\doxysubsubsection{\texorpdfstring{write\_description()}{write\_description()}}
+{\footnotesize\ttfamily std\+::ostream \& argparse\+::\+Parser\+::write\+\_\+description (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{std\+::string\+\_\+view}]{description,  }\item[{unsigned}]{tty\+\_\+columns = {\ttfamily 60} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Writes a formatted description to the given output stream. 
+
+This function is for internal formatting of parser descriptions (such as when generating the argument help).
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & The output stream to write the description to. \\
+\hline
+{\em description} & The description to write. \\
+\hline
+{\em tty\+\_\+columns} & Maximum number of terminal columns/characters to span per line. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::ostream\& Reference to the output stream for cascading operations. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
 include/argparse/\mbox{\hyperlink{parser_8hpp}{parser.\+hpp}}\item 
-src/argparse/parser.\+cpp\end{DoxyCompactItemize}
+src/argparse/\mbox{\hyperlink{parser_8cpp}{parser.\+cpp}}\end{DoxyCompactItemize}

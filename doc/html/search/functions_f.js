@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['usage_0',['usage',['../dc/d72/structargparse_1_1_argument.html#a72fa41e32edbaa04f7ac3f4076a8c600',1,'argparse::Argument::usage()'],['../d8/d70/structargparse_1_1_optional.html#a6cb5739f6a55d98f407b712add630c9e',1,'argparse::Optional::usage()'],['../df/d02/structargparse_1_1_positional.html#ae5864240613752148966c9c9bf9bb262',1,'argparse::Positional::usage()'],['../d6/d57/structargparse_1_1_switch.html#add2887233ad2ec5402d81173be364d19',1,'argparse::Switch::usage()'],['../d0/d25/classargparse_1_1_subparser_set.html#aef6da4333e3dc829e0bc289e2306da57',1,'argparse::SubparserSet::usage()'],['../d9/d62/classargparse_1_1_parser.html#aa713e74712cd45c2b728121c0470afd2',1,'argparse::Parser::usage()']]]
+  ['to_5fhuman_5freadable_5fsize_0',['to_human_readable_size',['../db/dc2/namespacefsop_1_1utils.html#a1999ccb2c6acd6c8b5ff9c52817bf0d1',1,'fsop::utils']]],
+  ['to_5fintegral_1',['to_integral',['../de/d1b/namespaceargparse_1_1transforms.html#a8d1939740f039bc7af67feb17e373590',1,'argparse::to_integral()'],['../de/d1b/namespaceargparse_1_1transforms.html#a8d1939740f039bc7af67feb17e373590',1,'argparse::transforms::to_integral()']]],
+  ['to_5fpermissions_2',['to_permissions',['../db/dc2/namespacefsop_1_1utils.html#a37dc160d5e6abecfafff4f0678b5aa78',1,'fsop::utils']]],
+  ['to_5ftype_3',['to_type',['../db/dc2/namespacefsop_1_1utils.html#a4d4690b2e165af406b18438aef8201af',1,'fsop::utils']]],
+  ['transform_4',['transform',['../dc/d72/structargparse_1_1_argument.html#ab27d0634826134f5183a439aa52dfc94',1,'argparse::Argument::transform() const noexcept'],['../dc/d72/structargparse_1_1_argument.html#a895bf42ebd577a99597abecaa362de54',1,'argparse::Argument::transform(const types::Transform::value_type &amp;_transform) noexcept']]]
 ];

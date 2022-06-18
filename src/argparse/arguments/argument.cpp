@@ -1,3 +1,13 @@
+/**
+ * @file argument.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file implementing the methods defined in argparse/arguments/argument.hpp
+ * @version 1.0
+ * @date 2022-05-30
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "argparse/arguments/argument.hpp"
 
 std::ostream& argparse::Argument::write_description(

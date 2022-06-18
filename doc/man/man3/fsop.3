@@ -1,0 +1,139 @@
+.TH "fsop" 3 "Sat Jun 18 2022" "fsop - FileSystem OPerations" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+fsop \- Exposes abstractions over system calls related to the filesystem\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI "namespace \fButils\fP"
+.br
+.RI "Defines common utilities for use with filesystem operations\&. "
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBFile\fP"
+.br
+.RI "Defines a structure for abstracting I/O operations via system calls\&. "
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBstat_info\fP = std::variant< struct stat, struct stat64 >"
+.br
+.RI "A variant over stat structures to hold inode information depending on the size requirement\&. "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBcreate_file\fP (std::string_view path, mode_t permissions, bool overwrite=false)"
+.br
+.RI "Creates a new regular file in the filesystem\&. "
+.ti -1c
+.RI "void \fBcreate_pipe\fP (std::string_view path, mode_t permissions, bool overwrite=false)"
+.br
+.RI "Creates a new named pipe (FIFO file) in the filesystem\&. "
+.ti -1c
+.RI "\fBstat_info\fP \fBinspect_file\fP (std::string_view path, bool follow_symlinks=false)"
+.br
+.RI "Inspect the inode of a file, via the stat system call\&. "
+.ti -1c
+.RI "std::ostream & \fBprint_stat_info\fP (std::ostream &os, const \fBstat_info\fP &info)"
+.br
+.RI "Prints information received by a call to {inspect_file} to a given output stream\&. Displayed information is presented in a user friendly manner\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Exposes abstractions over system calls related to the filesystem\&. 
+
+This namespace exposes classes for \fBFile\fP I/O as well as functions for performing actions corresponding to various system calls such as opening files and pipes, inspecting files (via stat), chaninging directories as well as utility functions for mapping arguments to types accepted by the system calls\&. 
+.SH "Function Documentation"
+.PP 
+.SS "void fsop::create_file (std::string_view path, mode_t permissions, bool overwrite = \fCfalse\fP)"
+
+.PP
+Creates a new regular file in the filesystem\&. For successful operation, ensure that the file does not previously exist, all directories along the path exist, there is ample resources for inode and/or disk block allocation and appropriate permissions along all directory components of the path are available\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path at which the file must be created\&. 
+.br
+\fIpermissions\fP The permissions to associate with the file\&. 
+.br
+\fIoverwrite\fP If true, recreates the file, effectively truncating previous content\&.
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{std::system_error}\fP reason for failure of operation\&. 
+.RE
+.PP
+
+.SS "void fsop::create_pipe (std::string_view path, mode_t permissions, bool overwrite = \fCfalse\fP)"
+
+.PP
+Creates a new named pipe (FIFO file) in the filesystem\&. For successful operation, ensure that the file does not previously exist, all directories along the path exist, there is ample resources for inode and/or disk block allocation and appropriate permissions along all directory components of the path are available\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path at which the file must be created\&. 
+.br
+\fIpermissions\fP The permissions to associate with the file\&. 
+.br
+\fIoverwrite\fP If true, recreates the file, effectively truncating previous content\&.
+.RE
+.PP
+\fBExceptions\fP
+.RS 4
+\fI{std::system_error}\fP reason for failure of operation\&. 
+.RE
+.PP
+
+.SS "auto fsop::inspect_file (std::string_view path, bool follow_symlinks = \fCfalse\fP)"
+
+.PP
+Inspect the inode of a file, via the stat system call\&. This function summarizes available data in the inode, as returned by the stat system call and returns the data as a stat object\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP Path to the file to inspect\&. 
+.br
+\fIfollow_symlinks\fP If true, uses stat instead of lstat to resolve symbolic links\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{stat_info} Information related to the file, in a structure large enough to hold it\&. 
+.RE
+.PP
+
+.SS "std::ostream & fsop::print_stat_info (std::ostream & os, const \fBstat_info\fP & info)"
+
+.PP
+Prints information received by a call to {inspect_file} to a given output stream\&. Displayed information is presented in a user friendly manner\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIos\fP The output stream to write content to\&. 
+.br
+\fIinfo\fP The structure object containing information to display\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{std::ostream&} Reference to the output stream for cascading operations\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for fsop - FileSystem OPerations from the source code\&.

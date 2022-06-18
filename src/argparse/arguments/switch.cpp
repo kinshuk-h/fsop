@@ -1,3 +1,13 @@
+/**
+ * @file switch.cpp
+ * @author Kinshuk Vasisht (kinshuk.mcs21@cs.du.ac.in, RN: 19)
+ * @brief Source file implementing the methods defined in argparse/arguments/switch.hpp
+ * @version 1.0
+ * @date 2022-05-30
+ *
+ * @copyright Copyright (c) 2022
+ */
+
 #include "argparse/arguments/switch.hpp"
 
 std::string argparse::Switch::usage() const noexcept
