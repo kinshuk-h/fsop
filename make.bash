@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Directory containing source files.
 SRCDIR=src
 # Directory containing header files.
@@ -10,15 +12,14 @@ LIBDIR=lib
 # Target executable to generate.
 TARGET=fsop.out
 # Source files to be compiled.
-SOURCES=$(find $SRCDIR -type f -name "*.cpp")
-# Compiled object files corresponding to source files.
-#OBJECTS="${SOURCES/$(SRCDIR)/%.cpp/$(LIBDIR)/%.o}"
-# Dependency files containing header dependencies (compiler generated).
-#DEPS="$(SOURCES:$(SRCDIR)/%.cpp=$(DEPDIR)/%.d)"
+SOURCES=( )
+while IFS= read -r -d $'\0'; do
+    SOURCES+=("$REPLY")
+done < <(find $SRCDIR -type f -name "*.cpp" -print0)
 # C++ flags to use during compilation.
-#CXXFLAGS="-std=c++17 -Wall -Wextra -g"
+CXXFLAGS="-std=c++17 -Wall -Wextra -g"
 # Preprocessor flags to use during compilation.
-CPPFLAGS="-MMD -MP -MF" #$(@:$(LIBDIR)/%.o=$(DEPDIR)/%.d)
+CPPFLAGS="-MMD -MP -MF <depfile>"
 # C++ compiler to use.
 CXX=g++
 
@@ -53,17 +54,26 @@ make_clean()
 
 make_target()
 {
-    echo $SOURCES
-    # Base rule: Generate target using object files.
-#    echo -n "[>] "
-#    $(CXX) $(LIBDIR:%=-L%) $(LDFLAGS) $^ -o $@
+    OBJECTS=()
+    for source in "${SOURCES[@]}"; do
+        eval "object=\${source/$SRCDIR/$LIBDIR}"
+        object="${object/%.cpp/.o}"
+        eval "depend=\${source/$SRCDIR/$DEPDIR}"
+        depend="${depend/%.cpp/.d}"
+        eval "cppflags=\${CPPFLAGS/<depfile>/$depend}"
 
-# Substitution rule: generate object files using sources.
-#   $(LIBDIR)/%.o: $(SRCDIR)/%.cpp
-#    @$(MKDIR) -p $(@D)
-#    @$(MKDIR) -p $(@D:$(LIBDIR)%=$(DEPDIR)%)
-#    @echo -n "[>] "
-#    $(CXX) $(CPPFLAGS) $(CXXFLAGS) $(INCLUDEDIR:%=-I%) -c $< -o $@
+        mkdir -p "$(dirname $object)"
+        mkdir -p "$(dirname $depend)"
+
+        OBJECTS+=("$object")
+        cmd="$CXX $CXXFLAGS $cppflags ${INCLUDEDIR//include/-Iinclude} -c $source -o $object"
+        echo "[>] $cmd"
+        eval "\$($cmd)"
+    done
+
+    cmd="$CXX ${LIBDIR//lib/-Llib} $LDFLAGS ${OBJECTS[@]} -o $TARGET"
+    echo "[>] $cmd"
+    eval "\$($cmd)"
 }
 
 case "${1:-all}" in
